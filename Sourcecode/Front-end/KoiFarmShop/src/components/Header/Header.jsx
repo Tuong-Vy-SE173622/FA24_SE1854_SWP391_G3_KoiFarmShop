@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./Header.scss";
+import React, { useEffect, useState } from "react";
+import "./Header.css";
 import { FiSearch } from "react-icons/fi";
 import { TiShoppingCart } from "react-icons/ti";
 import { IoSearch } from "react-icons/io5";
@@ -10,6 +10,7 @@ function Header() {
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
   const [openKeys, setOpenKeys] = useState(["introduction", "koi", "food"]);
   const createMenuItems = (label, key, children = []) => ({
     key,
@@ -35,6 +36,8 @@ function Header() {
   const onOpenChange = (keys) => {
     setOpenKeys(keys);
   };
+
+  // y
 
   const IntroductionList = [
     {
@@ -198,62 +201,6 @@ function Header() {
             </div>
           </div>
         </div>
-        {/* {isSideBarOpen && ( */}
-        {/* <div className="sidebar">
-        <div className="header-search">
-          <div className={`search ${isInputVisible ? "show-input" : ""}`}>
-            <input
-              type="text"
-              placeholder="Tìm kiếm"
-              className={`${isInputVisible ? "visible" : "hidden"}`}
-            />
-            <span className="search-icon" onClick={toggleInputVisibility}>
-              <IoSearch size={"18px"} />
-            </span>
-          </div>
-        </div> */}
-
-        {/* <div className="header-items">
-          <div className="header-item">
-            Giới thiệu
-            <ul className="dropdown">
-              {IntroductionList.map((item) => (
-                <li key={item.lable} className="dropdown-item">
-                  {item.lable}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="header-item">
-            Cá Koi Nhật
-            <ul className="dropdown">
-              {KoiList.map((item) => (
-                <li key={item.lable} className="dropdown-item">
-                  {item.lable}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="header-item">
-            Thức ăn cá Koi
-            <ul className="dropdown">
-              {FoodKoiList.map((item) => (
-                <li key={item.lable} className="dropdown-item">
-                  {item.lable}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div> */}
-        {/* <Menu
-          mode="inline"
-          openKeys={openKeys}
-          onOpenChange={onOpenChange}
-          style={{ width: 256 }}
-          items={menuItems}
-        />
-      </div> */}
-        {/* )} */}
       </header>
     </>
   );

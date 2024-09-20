@@ -2,4 +2,5 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box; /* Đảm bảo rằng padding và border không làm tăng kích thước phần tử */
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
 }

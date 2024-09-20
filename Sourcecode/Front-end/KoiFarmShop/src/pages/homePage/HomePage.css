@@ -1,0 +1,93 @@
+.about-us {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 4rem auto;
+  height: calc(100vh - 100px);
+  /* background-color: lightblue; */
+}
+.about-us > .about-us-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.about-us > .about-us-title > h2 {
+  font-family: "Handlee", Arial, Helvetica, sans-serif;
+  font-size: 28px;
+  font-style: italic;
+}
+.about-us-title > h1 {
+  font-weight: 600;
+  font-size: 34px;
+  margin-top: -10px;
+}
+.about-us-title > img {
+  height: 45px;
+  width: 150px;
+  margin-top: -5px;
+}
+.about-us-title > p {
+  font-size: 14px;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  width: 850px;
+  color: rgb(139, 139, 153);
+  text-align: center;
+  margin-top: 15px;
+}
+.about-us-info {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin-top: 30px;
+}
+.about-us-info > .info-item {
+  width: 22%;
+}
+.info-item > span {
+  /* width: 80%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.info-item > span > img {
+  width: 50%;
+  padding: 30px 0;
+  padding-top: 10px;
+  transition: transform 0.8s;
+}
+.info-item > span > img:hover {
+  transform: scale(1.2);
+}
+.info-item > .item-title {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 25px;
+  position: relative;
+}
+.info-item > .item-title::before {
+  content: "";
+  width: 40px;
+  height: 2px;
+  background-color: #0080ff;
+  position: absolute;
+  bottom: -13px;
+  transform: translateX(-50%);
+  left: calc(50% - 1.5px);
+}
+.info-item > .item-title::after {
+  content: "";
+  width: 2px;
+  height: 2px;
+  background-color: #0080ff;
+  position: absolute;
+  bottom: -13px;
+  transform: translateX(-50%);
+  left: calc(50% + 23px);
+}
+.info-item > .item-info {
+  color: rgb(139, 139, 153);
+  font-size: 14px;
+  text-align: center;
+}

@@ -1,0 +1,58 @@
+.koi-card-container {
+  width: 240px;
+  height: 320px;
+  border: 1px solid gray;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+.koi-card-container > img {
+  width: 100%;
+  height: 240px;
+  cursor: pointer;
+}
+.koi-card-container > .koi-title {
+  font-size: 18px;
+  font-weight: 600;
+  /* background-color: lightcoral; */
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.koi-card-select {
+  position: absolute;
+  background-color: white;
+  top: 240px;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  width: 160px;
+  left: 40px;
+  justify-content: space-around;
+  border-radius: 50px;
+  padding: 5px;
+  border: 1px solid grey;
+  visibility: hidden;
+}
+.select-item-icon {
+  text-align: center;
+  /* padding: auto 5px; */
+  /* border-right: 1px solid grey; */
+  width: 25%;
+  /* height: 100%; */
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.select-item-icon:hover {
+  background-color: lightblue;
+  color: #0080ff;
+}
+.koi-card-container:hover {
+  box-shadow: 0 2px 4px rgba(0, 128, 255, 0.2);
+  transform: scale(1.02);
+}
+.koi-card-container:hover > .koi-card-select {
+  visibility: visible;
+  transform: translateY(-15px);
+}

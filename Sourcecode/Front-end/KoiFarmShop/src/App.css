@@ -4,3 +4,21 @@
   box-sizing: border-box; /* Đảm bảo rằng padding và border không làm tăng kích thước phần tử */
   font-family: "Poppins", Arial, Helvetica, sans-serif;
 }
+html {
+  max-width: 100vw;
+}
+
+.carousel__button {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  top: 40%;
+  width: 90%;
+  left: 5%;
+}
+
+/* Tùy chỉnh thanh cuộn cho Firefox */
+/* body {
+  scrollbar-width: thin;
+  scrollbar-color: darkgrey transparent;
+} */

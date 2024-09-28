@@ -5,6 +5,7 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import KoiDetailPage from "../pages/KoiDetailPage/KoiDetailPage";
 import HomePage from "../pages/homePage/HomePage";
+import SearchPage from "../pages/SearchPage/SearchPage";
 
 export const router = createBrowserRouter([
   {
@@ -25,14 +26,18 @@ export const router = createBrowserRouter([
         path: "/koi-detail/:id",
         element: <KoiDetailPage />,
       },
+      {
+        path: "/search",
+        element: <SearchPage />,
+      },
     ],
   },
   {
-    path: "/sign-in",
+    path: "/login",
     element: <LoginPage />,
   },
   {
-    path: "/sign-up",
+    path: "/register",
     element: <RegisterPage />,
   },
 ]);

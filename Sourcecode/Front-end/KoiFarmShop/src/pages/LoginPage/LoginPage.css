@@ -1,0 +1,116 @@
+/* .login-container {
+  background: url("https://cdn.leonardo.ai/users/5eab0e6c-cc52-41ac-895f-234e7d172cfc/generations/f68d6404-be58-4955-bdc4-a7c4546ced15/Leonardo_Phoenix_a_surreal_and_vibrant_cinematic_photo_of_a_hi_3.jpg");
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100vh;
+  clip-path: polygon(60% 0%, 100% 0%, 100% 100%, 40% 100%);
+  background-color: white;
+  z-index: 1;
+} */
+
+.login-container {
+  background: url("https://cdn.leonardo.ai/users/5eab0e6c-cc52-41ac-895f-234e7d172cfc/generations/f67e8fa6-03dd-4bf5-8cbe-518231092ce1/Leonardo_Phoenix_a_surreal_and_vibrant_cinematic_photo_of_a_hi_0.jpg");
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: flex;
+}
+
+/* .sign-up-page {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  clip-path: polygon(12.2% 0%, 100% 0%, 100% 100%, 71% 100%);
+  background-color: white;
+  z-index: 1;
+} */
+
+.login {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  clip-path: polygon(0% 0%, 60% 0%, 44% 100%, 0% 100%);
+  background-color: white;
+  z-index: 1;
+  /* display: flex; */
+}
+
+.login__form {
+  width: 50%;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .form-wrapper {
+  width: 500px;
+  background-color: lightblue;
+} */
+
+.form-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form {
+  width: 300px;
+}
+
+.form > h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+.form > span {
+  display: flex;
+  justify-content: space-between;
+}
+.form > span > p {
+  color: gray;
+  font-size: 14px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.form > span > p:hover {
+  color: red;
+  text-decoration: underline;
+}
+.form > span > p {
+  opacity: 0.7;
+}
+.form-nav {
+  text-align: center;
+  color: gray;
+}
+.form-nav > span {
+  color: red;
+  cursor: pointer;
+}
+.form-nav > span:hover {
+  text-decoration: underline;
+}
+.form-nav > span:active {
+  opacity: 0.7;
+}

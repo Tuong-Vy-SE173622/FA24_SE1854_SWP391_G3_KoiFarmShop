@@ -1,0 +1,21 @@
+.register {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  clip-path: polygon(60% 0%, 100% 0%, 100% 100%, 44% 100%);
+  background-color: white;
+  z-index: 5;
+}
+.register-form {
+  width: 50%;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

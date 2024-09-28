@@ -1,33 +1,33 @@
-.about-us {
+.item-home {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 4rem auto;
+  /* margin: 2rem auto; */
   height: calc(100vh - 100px);
   /* background-color: lightblue; */
 }
-.about-us > .about-us-title {
+.item-home > .item-home-title {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.about-us > .about-us-title > h2 {
+.item-home > .item-home-title > h2 {
   font-family: "Handlee", Arial, Helvetica, sans-serif;
   font-size: 28px;
   font-style: italic;
 }
-.about-us-title > h1 {
+.item-home-title > h1 {
   font-weight: 600;
   font-size: 34px;
   margin-top: -10px;
 }
-.about-us-title > img {
+.item-home-title > img {
   height: 45px;
   width: 150px;
   margin-top: -5px;
 }
-.about-us-title > p {
+.item-home-title > p {
   font-size: 14px;
   font-family: "Poppins", Arial, Helvetica, sans-serif;
   width: 850px;
@@ -90,4 +90,88 @@
   color: rgb(139, 139, 153);
   font-size: 14px;
   text-align: center;
+}
+
+.introduction-koi {
+  height: calc(100vh - 100px);
+  width: 100%;
+  /* margin: 2rem auto; */
+  padding: 2rem 5rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("https://thumb.ac-illust.com/0c/0cbb5141beb4f97c7e7e0bb58af14edc_t.jpeg");
+}
+.introduntion-koi-wrapper {
+  width: 90%;
+  margin-left: 2%;
+}
+.koi-introduction-cart-container {
+  position: relative;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.koi-introduction-cart-container > img {
+  /* height: 0%; */
+  width: 88%;
+  object-fit: cover;
+  display: block;
+  transition: 200ms ease-in-out;
+  /* aspect-ratio: 1/1; */
+}
+.koi-introduction-cart-container > .content-koi {
+  position: absolute;
+  /* inset: 1; */
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 100%;
+  font-size: 1.2rem;
+  padding: 1rem;
+  /* color: #0080ff; */
+  background: rgba(255, 255, 255, 0.3);
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  font-weight: 600;
+  /* color: aliceblue; */
+  transition: opacity 200ms ease-in-out;
+  /* width: 100%; */
+}
+.koi-introduction-cart-container > img,
+.koi-introduction-cart-container > .content-koi {
+  transition: 200ms ease-in-out;
+}
+.koi-introduction-cart-container:hover > img {
+  filter: grayscale(1);
+  transform: scale(1.2);
+}
+.koi-introduction-cart-container:hover > .content-koi {
+  opacity: 1;
+}
+.koi-feature-container {
+  height: fit-content;
+  margin: 2rem auto;
+}
+
+.koi-card-list {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  row-gap: 20px;
+  column-gap: 25px;
+  width: 70%;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  margin-left: 15px;
+  /* background-color: lightblue; */
+}
+
+.testimonial-container {
+  height: auto;
+  margin: 2.5rem auto;
+  padding-top: 40px;
+  background: url("https://thumb.ac-illust.com/0c/0cbb5141beb4f97c7e7e0bb58af14edc_t.jpeg");
 }

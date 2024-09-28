@@ -4,7 +4,8 @@ import { FiSearch } from "react-icons/fi";
 import { TiShoppingCart } from "react-icons/ti";
 import { IoSearch } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Menu } from "antd";
+// import { Menu } from "antd";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const [isInputVisible, setIsInputVisible] = useState(false);
@@ -12,11 +13,15 @@ function Header() {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [openKeys, setOpenKeys] = useState(["introduction", "koi", "food"]);
+  const navigate = useNavigate();
   const createMenuItems = (label, key, children = []) => ({
     key,
     label,
     children,
   });
+
+  const navigateResearchPage = () => navigate("/search");
+  const navigateHome = () => navigate("/");
 
   const handleMouseEnter = (item) => {
     setHoveredItem(item);
@@ -118,6 +123,17 @@ function Header() {
     ),
   ];
 
+  const taskList = [
+    {
+      lable: "Login",
+      link: "",
+    },
+    {
+      lable: "Register",
+      link: "",
+    },
+  ];
+
   return (
     <>
       <header>
@@ -126,7 +142,7 @@ function Header() {
             <GiHamburgerMenu size={"30px"} onClick={handleSideBar} />
           </div>
           <div className="header-logo">
-            <img src="/logo-web/logo.png" alt="logo" />
+            <img src="/logo-web/logo.png" alt="logo" onClick={navigateHome} />
           </div>
           <div className="middle-section">
             <div className="header-items">
@@ -183,8 +199,8 @@ function Header() {
                   placeholder="Tìm kiếm"
                   // className={`${isInputVisible ? "visible" : "hidden"}`}
                 />
-                <span className="search-icon" onClick={toggleInputVisibility}>
-                  <IoSearch size={"18px"} />
+                <span className="search-icon">
+                  <IoSearch size={"18px"} onClick={navigateResearchPage} />
                 </span>
               </div>
             </div>
@@ -193,11 +209,22 @@ function Header() {
             <div className="cart-icon">
               <TiShoppingCart size={"30px"} />
             </div>
-            <div className="header-avatar">
+            <div
+              className="header-item header-avatar"
+              onMouseEnter={() => handleMouseEnter("user")}
+              onMouseLeave={handleMouseLeave}
+            >
               <img
                 src="https://i.pinimg.com/736x/d6/46/02/d64602a7b954a8b2f09bac97a7911bf8.jpg"
                 alt="avatar"
               />
+              {hoveredItem === "user" && (
+                <ul className="dropdown">
+                  {taskList.map((item) => {
+                    return <li className="dropdown-item">{item.lable}</li>;
+                  })}
+                </ul>
+              )}
             </div>
           </div>
         </div>

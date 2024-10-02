@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "7pu3ebWctTqy1dsYQnGYo46oyEhyBqyHWwPsNVIFTPs=",
+  "Source": "KoiFarmShop.APIService",
+  "BasePath": "_content/KoiFarmShop.APIService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

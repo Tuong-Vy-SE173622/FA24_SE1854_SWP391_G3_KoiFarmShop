@@ -18,7 +18,7 @@
 } */
 
 .login-container {
-  background: url("https://cdn.leonardo.ai/users/5eab0e6c-cc52-41ac-895f-234e7d172cfc/generations/f67e8fa6-03dd-4bf5-8cbe-518231092ce1/Leonardo_Phoenix_a_surreal_and_vibrant_cinematic_photo_of_a_hi_0.jpg");
+  background: url("../../../public/login-register.jpg");
   width: 100vw;
   height: 100vh;
   background-repeat: no-repeat;

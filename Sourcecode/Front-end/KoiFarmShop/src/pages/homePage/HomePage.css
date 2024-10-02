@@ -1,10 +1,10 @@
 .item-home {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   flex-direction: column;
-  /* margin: 2rem auto; */
-  height: calc(100vh - 100px);
+  margin: 3rem auto;
+  /* height: calc(100vh - 100px); */
   /* background-color: lightblue; */
 }
 .item-home > .item-home-title {
@@ -40,6 +40,7 @@
   justify-content: space-between;
   width: 70%;
   margin-top: 30px;
+  /* height: calc(100vh - 100px); */
 }
 .about-us-info > .info-item {
   width: 22%;
@@ -101,7 +102,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("https://thumb.ac-illust.com/0c/0cbb5141beb4f97c7e7e0bb58af14edc_t.jpeg");
+  background: url("../../../public/ocean-background-repeat.jpeg");
 }
 .introduntion-koi-wrapper {
   width: 90%;
@@ -174,4 +175,43 @@
   margin: 2.5rem auto;
   padding-top: 40px;
   background: url("https://thumb.ac-illust.com/0c/0cbb5141beb4f97c7e7e0bb58af14edc_t.jpeg");
+  height: calc(100vh - 100px);
+}
+
+.home-testimonial-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 70%;
+  gap: 18px;
+
+  margin: 1.5rem auto;
+}
+
+.testimonial-wrapper {
+  width: 480px;
+  height: 150px;
+  display: flex;
+  background-color: white;
+  border: 1px gray solid;
+  box-shadow: 0 2px 4px rgba(0, 128, 255, 0.2);
+}
+
+.testimonial-wrapper > img {
+  width: 150px;
+  height: 100%;
+  object-fit: cover;
+}
+.testimonial-info {
+  padding: 15px 12px;
+}
+.testimonial-info > p {
+  font-size: 15px;
+  color: gray;
+}
+.testimonial-info > h3 {
+  font-size: 15px;
+  font-weight: 550;
+  text-align: right;
 }

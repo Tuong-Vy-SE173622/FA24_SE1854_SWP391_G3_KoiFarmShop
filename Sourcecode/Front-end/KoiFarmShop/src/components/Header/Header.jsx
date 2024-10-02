@@ -22,6 +22,7 @@ function Header() {
 
   const navigateResearchPage = () => navigate("/search");
   const navigateHome = () => navigate("/");
+  const navigateLink = (link) => navigate(link);
 
   const handleMouseEnter = (item) => {
     setHoveredItem(item);
@@ -125,12 +126,14 @@ function Header() {
 
   const taskList = [
     {
+      key: 1,
       lable: "Login",
-      link: "",
+      link: "/login",
     },
     {
+      key: 2,
       lable: "Register",
-      link: "",
+      link: "/register",
     },
   ];
 
@@ -221,7 +224,15 @@ function Header() {
               {hoveredItem === "user" && (
                 <ul className="dropdown">
                   {taskList.map((item) => {
-                    return <li className="dropdown-item">{item.lable}</li>;
+                    return (
+                      <li
+                        key={item.key}
+                        className="dropdown-item"
+                        onClick={() => navigateLink(item.link)}
+                      >
+                        {item.lable}
+                      </li>
+                    );
                   })}
                 </ul>
               )}

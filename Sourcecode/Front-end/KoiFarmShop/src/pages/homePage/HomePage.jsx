@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./HomePage.css";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Button, Carousel } from "antd";
@@ -68,7 +68,110 @@ function HomePage() {
     // },
   ];
 
+  const TestimonialsList = [
+    {
+      key: 1,
+      avatarImgUrl:
+        "https://img.freepik.com/premium-photo/anime-girl-with-long-hair_1108314-51771.jpg",
+      userName: "Nguyen Van A",
+      testimonial:
+        "Dịch vụ chăm sóc cá Koi rất chuyên nghiệp. Tôi gửi nuôi cá trong 6 tháng và chất lượng cá vẫn đảm bảo. Đội ngũ hỗ trợ tận tâm, giá cả hợp lý.",
+    },
+    {
+      key: 2,
+      avatarImgUrl:
+        "https://img.freepik.com/premium-photo/anime-girl-with-long-hair_1108314-51771.jpg",
+      userName: "Le Thi B",
+      testimonial:
+        "Tôi đã mua 2 con cá Koi từ trang web và chất lượng rất tốt. Cá đẹp, khoẻ mạnh, giao hàng nhanh chóng. Sẽ tiếp tục ủng hộ trong tương lai!",
+    },
+    {
+      key: 3,
+      avatarImgUrl:
+        "https://img.freepik.com/premium-photo/anime-girl-with-long-hair_1108314-51771.jpg",
+      userName: "Tran Van C",
+      testimonial:
+        "Trang web bán cá Koi uy tín, đa dạng chủng loại cá. Dịch vụ gửi nuôi cũng rất tiện lợi, cá của tôi được chăm sóc tốt, tăng trưởng đều đặn.",
+    },
+    {
+      key: 4,
+      avatarImgUrl:
+        "https://img.freepik.com/premium-photo/anime-girl-with-long-hair_1108314-51771.jpg",
+      userName: "Pham Thi D",
+      testimonial:
+        "Tôi rất hài lòng với dịch vụ gửi nuôi cá Koi. Cá của tôi được chăm sóc kỹ lưỡng, sạch sẽ. Khi nhận lại cá, chúng vẫn khoẻ và phát triển tốt.",
+    },
+    // {
+    //   key: 5,
+    //   avatarImgUrl: "https://example.com/avatar5.jpg",
+    //   userName: "Hoang Van E",
+    //   testimonial:
+    //     "Cửa hàng không chỉ bán cá Koi chất lượng cao mà còn có dịch vụ chăm sóc và nuôi hộ cực kỳ chu đáo. Tôi rất an tâm khi gửi cá tại đây.",
+    // },
+    // {
+    //   key: 6,
+    //   avatarImgUrl: "https://example.com/avatar6.jpg",
+    //   userName: "Do Thi F",
+    //   testimonial:
+    //     "Dịch vụ chăm sóc cá của website này thực sự đáng tin cậy. Tôi đã gửi nuôi cá Koi trong 3 tháng và nhận lại cá khỏe mạnh hơn, môi trường rất an toàn.",
+    // },
+    // {
+    //   key: 7,
+    //   avatarImgUrl: "https://example.com/avatar7.jpg",
+    //   userName: "Vo Van G",
+    //   testimonial:
+    //     "Tôi mua cá Koi từ trang này và thấy rất hài lòng. Cá rất đẹp, giao hàng nhanh, dịch vụ hỗ trợ rất tận tâm. Tôi cũng đã gửi nuôi và rất yên tâm.",
+    // },
+    // {
+    //   key: 8,
+    //   avatarImgUrl: "https://example.com/avatar8.jpg",
+    //   userName: "Vu Thi H",
+    //   testimonial:
+    //     "Trang web bán cá Koi này thực sự có uy tín, cá chất lượng cao và dịch vụ nuôi hộ rất tiện lợi. Tôi đã gửi nuôi trong 4 tháng và rất hài lòng.",
+    // },
+  ];
+
+  const [posts] = useState([
+    {
+      id: 1,
+      title: "Koi Fish for Sale: Choose the Best for Your Pond",
+      author: "Koi Specialist",
+      date: "2023-09-10",
+      excerpt:
+        "Learn how to select healthy and vibrant Koi fish for your home pond.",
+      image: "/thumb.png",
+    },
+    {
+      id: 2,
+      title: "Koi Care Services: Ensuring Your Fish Thrive",
+      author: "Koi Care Expert",
+      date: "2023-09-05",
+      excerpt:
+        "Professional koi fish care services to keep your pond healthy and your fish happy.",
+      image: "/thumb.png",
+    },
+    {
+      id: 3,
+      title: "Feeding Koi: Best Food for Healthy Growth",
+      author: "Koi Nutritionist",
+      date: "2023-09-01",
+      excerpt:
+        "Discover the best Koi food to promote growth, color, and overall health.",
+      image: "/thumb.png",
+    },
+  ]);
+
   const carouselRef = useRef();
+
+  const chunkArray = (array, chunkSize) => {
+    const result = [];
+    for (let i = 0; i < array.length; i += chunkSize) {
+      result.push(array.slice(i, i + chunkSize));
+    }
+    return result;
+  };
+
+  const chunks = chunkArray(TestimonialsList, 4);
 
   const handlePrev = () => {
     carouselRef.current.prev();
@@ -77,6 +180,7 @@ function HomePage() {
   const handleNext = () => {
     carouselRef.current.next();
   };
+
   return (
     <main>
       <section
@@ -90,8 +194,7 @@ function HomePage() {
         <div
           className="absolute inset-0 bg-cover bg-center z-0"
           style={{
-            backgroundImage:
-              "url('https://images2.alphacoders.com/134/thumb-1920-1348333.png')",
+            backgroundImage: "url('../../../public/thumb.png')",
           }}
         ></div>
         <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
@@ -196,6 +299,7 @@ function HomePage() {
           </div>
         </div>
       </section>
+
       <section className="item-home koi-feature-container">
         <div className="item-home-title">
           <h2>Koi</h2>
@@ -219,6 +323,100 @@ function HomePage() {
           <h2>Testimonials</h2>
           <h1>Khách hàng của chúng tôi nói gì?</h1>
           <img src="/icons/fish-line.png" alt="" />
+        </div>
+
+        <div className="home-testimonial-items">
+          {TestimonialsList.map((testimonial, index) => {
+            return (
+              <div className="testimonial-wrapper" key={index}>
+                <img
+                  src={testimonial.avatarImgUrl}
+                  alt={testimonial.userName}
+                  className="customer-testimonial-img"
+                />
+                <div className="testimonial-info">
+                  <p>{testimonial.testimonial}</p>
+                  <h3>{testimonial.userName}</h3>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="item-home">
+        <div className="item-home-title">
+          <h2>Our Blog News</h2>
+          <h1>Tin tức mới nhất</h1>
+          <img src="/icons/fish-line.png" alt="" />
+        </div>
+        {/* <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          style={{
+            width: "75%",
+            marginTop: "1.5rem",
+          }}
+        >
+          {blogPosts.map((post) => (
+            <div
+              key={post.id}
+              className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-105"
+            >
+              <img
+                src={post.image}
+                alt={post.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
+                <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                <div className="flex justify-between items-center mt-auto">
+                  <span className="text-sm text-gray-500">{post.date}</span>
+                  <button className="text-blue-600 hover:text-blue-800 transition-colors duration-300">
+                    Read More
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div> */}
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 "
+          style={{
+            marginTop: "1.5rem",
+            width: "65%",
+          }}
+        >
+          {posts.map((post) => (
+            <div
+              key={post.id}
+              className="bg-white rounded-lg shadow-md overflow-hidden"
+            >
+              <img
+                src={post.image}
+                alt={post.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
+                <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                <div className="flex justify-between items-center text-sm text-gray-500">
+                  <span>{post.author}</span>
+                  <span>{post.date}</span>
+                </div>
+                <div className="mt-4 flex justify-between items-center">
+                  <button className="text-blue-600 hover:text-blue-800">
+                    Read More
+                  </button>
+                  {/* <div className="flex space-x-2">
+                    <button className="text-gray-600 hover:text-blue-600">
+                      <FaShare />
+                    </button>
+                  </div> */}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
     </main>

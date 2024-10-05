@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "n8LLaQNB3LM=",
+  "dgSpecHash": "NdZw9CXVsjQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj",
+  "projectFilePath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\T14\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\T14\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

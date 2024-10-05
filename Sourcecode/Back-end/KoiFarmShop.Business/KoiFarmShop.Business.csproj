@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Folder Include="AutoMap\" />
+    <Folder Include="Business\" />
   </ItemGroup>
 
 </Project>

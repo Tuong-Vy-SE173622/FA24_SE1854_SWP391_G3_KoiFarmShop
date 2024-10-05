@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KoiFarmShop.Business")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2584badb6c5caf1384749c257130809fb49fcf2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6435d0bf44c6eadf81d075c672bb92f6051129a9")]
 [assembly: System.Reflection.AssemblyProductAttribute("KoiFarmShop.Business")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KoiFarmShop.Business")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

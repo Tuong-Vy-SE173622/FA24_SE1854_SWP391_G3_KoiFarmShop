@@ -14,8 +14,17 @@ namespace KoiFarmShop.Data
         private KoiRepository _koiRepository;
         private KoiTypeRepositories _koiTypeRepositories;
         private OrderRepository _orderRepository;
+        private UserRepository _userRepository;
 
         public UnitOfWork() => _context ??= new FA_SE1854_SWP391_G3_KoiFarmShopContext();
+
+        public UserRepository UserRepository
+        {
+            get
+            {
+                return _userRepository ??= new UserRepository(_context);
+            }
+        }
 
         public KoiRepository KoiRepository
         {

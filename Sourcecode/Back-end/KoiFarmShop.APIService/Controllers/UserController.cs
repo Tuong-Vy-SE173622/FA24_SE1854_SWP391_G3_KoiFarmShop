@@ -27,7 +27,7 @@ namespace KoiFarmShop.APIService.Controllers
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             //return await _context.Kois.ToListAsync();
-            return _unitOfWork.UserRepository.GetAll();
+            return await _unitOfWork.UserRepository.GetAllUsers();
         }
 
         // GET: api/Kois/5

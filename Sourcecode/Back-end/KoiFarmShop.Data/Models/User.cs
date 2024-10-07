@@ -33,7 +33,7 @@ public partial class User
 
     public int? UpdatedBy { get; set; }
 
-    public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
+    public string Role { get; set; }
 
-    public virtual UserRole UserRole { get; set; }
+    public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
 }

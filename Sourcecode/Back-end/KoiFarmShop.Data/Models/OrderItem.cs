@@ -31,7 +31,5 @@ public partial class OrderItem
 
     public virtual ICollection<Certification> Certifications { get; set; } = new List<Certification>();
 
-    public virtual Koi Koi { get; set; }
-
     public virtual Order Order { get; set; }
 }

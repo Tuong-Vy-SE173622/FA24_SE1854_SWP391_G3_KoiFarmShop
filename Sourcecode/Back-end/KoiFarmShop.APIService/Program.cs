@@ -1,6 +1,7 @@
 
+using KoiFarmShop.Business.Business.KoiBusiness;
+using KoiFarmShop.Business.Business.KoiTypeBusiness;
 using KoiFarmShop.Data;
-using KoiFarmShop.Data.Models;
 
 namespace KoiFarmShop.APIService
 {
@@ -18,7 +19,9 @@ namespace KoiFarmShop.APIService
             builder.Services.AddSwaggerGen();
             //builder.Services.AddScoped<FA_SE1854_SWP391_G3_KoiFarmShopContext>();
             builder.Services.AddScoped<UnitOfWork>();
-
+            builder.Services.AddScoped<KoiService>();
+            builder.Services.AddScoped<KoiTypeService>();
+            builder.Services.AddAutoMapper(typeof(Program));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

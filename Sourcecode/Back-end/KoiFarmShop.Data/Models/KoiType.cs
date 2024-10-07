@@ -2,11 +2,13 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace KoiFarmShop.Data.Models;
 
 public partial class KoiType
 {
+    [Key]
     public int KoiTypeId { get; set; }
 
     public string Name { get; set; }
@@ -23,10 +25,12 @@ public partial class KoiType
 
     public string Note { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    [DataType(DataType.Date)]
+    public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
     public string CreatedBy { get; set; }
 
+    [DataType(DataType.Date)]
     public DateTime? UpdatedAt { get; set; }
 
     public string UpdatedBy { get; set; }

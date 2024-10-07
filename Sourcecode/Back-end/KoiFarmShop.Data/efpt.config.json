@@ -71,20 +71,13 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Role]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[User]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[User_Role]",
          "ObjectType": 0
       }
    ],
    "UiHint": null,
    "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
    "UseDateOnlyTimeOnly": true,

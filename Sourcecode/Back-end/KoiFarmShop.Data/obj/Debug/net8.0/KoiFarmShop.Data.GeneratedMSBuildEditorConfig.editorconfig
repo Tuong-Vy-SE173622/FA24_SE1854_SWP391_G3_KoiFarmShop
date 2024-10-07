@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = KoiFarmShop.Data
-build_property.ProjectDir = C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.Data\
+build_property.ProjectDir = D:\FPT_Fall_2024\SWP391\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.Data\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

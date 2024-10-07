@@ -2,13 +2,16 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace KoiFarmShop.Data.Models;
 
 public partial class Koi
 {
+    [Key]
     public int KoiId { get; set; }
 
+    [Required]
     public int? KoiTypeId { get; set; }
 
     public string Origin { get; set; }
@@ -37,21 +40,19 @@ public partial class Koi
 
     public string Note { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    [DataType(DataType.Date)]
+    public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
     public string CreatedBy { get; set; }
 
+    [DataType(DataType.Date)]
     public DateTime? UpdatedAt { get; set; }
 
     public string UpdatedBy { get; set; }
 
-    public virtual ICollection<CareRequest> CareRequests { get; set; } = new List<CareRequest>();
-
     public virtual ICollection<ConsignmentDetail> ConsignmentDetails { get; set; } = new List<ConsignmentDetail>();
 
     public virtual KoiType KoiType { get; set; }
-
-    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
     public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
 }

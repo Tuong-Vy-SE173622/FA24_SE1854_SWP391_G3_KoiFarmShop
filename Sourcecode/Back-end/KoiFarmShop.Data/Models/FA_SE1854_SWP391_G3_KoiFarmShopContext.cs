@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace KoiFarmShop.Data.Models;
 
@@ -46,28 +45,11 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
 
     public virtual DbSet<Rating> Ratings { get; set; }
 
-    public virtual DbSet<Role> Roles { get; set; }
-
     public virtual DbSet<User> Users { get; set; }
 
-    public virtual DbSet<UserRole> UserRoles { get; set; }
-
-    public static string GetConnectionString(string connectionStringName)
-    {
-        var config = new ConfigurationBuilder()
-            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-            .AddJsonFile("appsettings.json")
-            .Build();
-
-        string connectionString = config.GetConnectionString(connectionStringName);
-        return connectionString;
-    }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
-
-    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-    //        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-34FO4U2;Initial Catalog=FA_SE1854_SWP391_G3_KoiFarmShop;Persist Security Info=True;User ID=sa;Password=12345;Encrypt=False");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source=LAPTOP-G3EK8843\\SQLEXPRESS;Initial Catalog=FA_SE1854_SWP391_G3_KoiFarmShop;Persist Security Info=True;User ID=sa;Password=12345;Encrypt=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -149,10 +131,6 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
             entity.HasOne(d => d.Customer).WithMany(p => p.CareRequests)
                 .HasForeignKey(d => d.CustomerId)
                 .HasConstraintName("care_request_customer_id_foreign");
-
-            entity.HasOne(d => d.Koi).WithMany(p => p.CareRequests)
-                .HasForeignKey(d => d.KoiId)
-                .HasConstraintName("care_request_koi_id_foreign");
         });
 
         modelBuilder.Entity<CareRequestDetail>(entity =>
@@ -390,7 +368,7 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
 
         modelBuilder.Entity<Koi>(entity =>
         {
-            entity.HasKey(e => e.KoiId).HasName("koi_koi_id_primary");
+            entity.HasKey(e => e.KoiId).HasName("animal_animal_id_primary");
 
             entity.ToTable("Koi");
 
@@ -444,7 +422,7 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
 
         modelBuilder.Entity<KoiType>(entity =>
         {
-            entity.HasKey(e => e.KoiTypeId).HasName("koi_type_koi_type_id_primary");
+            entity.HasKey(e => e.KoiTypeId).HasName("animal_type_animal_type_id_primary");
 
             entity.ToTable("Koi_Type");
 
@@ -570,10 +548,6 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("updated_by");
 
-            entity.HasOne(d => d.Koi).WithMany(p => p.OrderItems)
-                .HasForeignKey(d => d.KoiId)
-                .HasConstraintName("FK_Order_Item_koi");
-
             entity.HasOne(d => d.Order).WithMany(p => p.OrderItems)
                 .HasForeignKey(d => d.OrderId)
                 .HasConstraintName("order_item_order_id_foreign");
@@ -641,31 +615,15 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
                 .HasConstraintName("rating_animal_id_foreign");
         });
 
-        modelBuilder.Entity<Role>(entity =>
-        {
-            entity.HasKey(e => e.RoleId).HasName("role_role_id_primary");
-
-            entity.ToTable("Role");
-
-            entity.Property(e => e.RoleId)
-                .ValueGeneratedNever()
-                .HasColumnName("role_id");
-            entity.Property(e => e.Description)
-                .HasMaxLength(255)
-                .IsUnicode(false)
-                .HasColumnName("description");
-            entity.Property(e => e.RoleName)
-                .IsRequired()
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("role_name");
-        });
-
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.UserId).HasName("user_user_id_primary");
 
             entity.ToTable("User");
+
+            entity.HasIndex(e => e.Email, "user_email_unique").IsUnique();
+
+            entity.HasIndex(e => e.Username, "user_username_unique").IsUnique();
 
             entity.Property(e => e.UserId)
                 .ValueGeneratedNever()
@@ -703,6 +661,9 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false)
                 .HasColumnName("phone");
+            entity.Property(e => e.Role)
+                .HasMaxLength(55)
+                .IsUnicode(false);
             entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
             entity.Property(e => e.UpdatedBy).HasColumnName("updated_by");
             entity.Property(e => e.Username)
@@ -710,28 +671,6 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("username");
-        });
-
-        modelBuilder.Entity<UserRole>(entity =>
-        {
-            entity.HasKey(e => e.UserId).HasName("user_role_user_id_primary");
-
-            entity.ToTable("User_Role");
-
-            entity.Property(e => e.UserId)
-                .ValueGeneratedNever()
-                .HasColumnName("user_id");
-            entity.Property(e => e.RoleId).HasColumnName("role_id");
-
-            entity.HasOne(d => d.Role).WithMany(p => p.UserRoles)
-                .HasForeignKey(d => d.RoleId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("role_role_id_foreign");
-
-            entity.HasOne(d => d.User).WithOne(p => p.UserRole)
-                .HasForeignKey<UserRole>(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("user_role_user_id_foreign");
         });
 
         OnModelCreatingPartial(modelBuilder);

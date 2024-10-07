@@ -32,6 +32,4 @@ public partial class CareRequest
     public virtual ICollection<CareRequestDetail> CareRequestDetails { get; set; } = new List<CareRequestDetail>();
 
     public virtual Customer Customer { get; set; }
-
-    public virtual Koi Koi { get; set; }
 }

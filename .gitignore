@@ -522,3 +522,7 @@ FodyWeavers.xsd
 
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
+/Sourcecode/Back-end/.vs/FA24_SE1854_SWP391_G3_KoiFarmShop/DesignTimeBuild/.dtbcache.v2
+/Sourcecode/Back-end/.vs/FA24_SE1854_SWP391_G3_KoiFarmShop/v17/.futdcache.v2
+/Sourcecode/Back-end/.vs/FA24_SE1854_SWP391_G3_KoiFarmShop/v17/.suo
+/Sourcecode/Back-end/.vs/FA24_SE1854_SWP391_G3_KoiFarmShop/v17/DocumentLayout.json

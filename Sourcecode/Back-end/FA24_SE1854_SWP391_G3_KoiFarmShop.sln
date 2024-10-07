@@ -6,8 +6,11 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KoiFarmShop.Data", "KoiFarmShop.Data\KoiFarmShop.Data.csproj", "{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KoiFarmShop.APIService", "KoiFarmShop.APIService\KoiFarmShop.APIService.csproj", "{895BACCD-C130-4F5B-B570-5CD243D29FC7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD} = {9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KoiFarmShop.Business", "KoiFarmShop.Business\KoiFarmShop.Business.csproj", "{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KoiFarmShop.Business", "KoiFarmShop.Business\KoiFarmShop.Business.csproj", "{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

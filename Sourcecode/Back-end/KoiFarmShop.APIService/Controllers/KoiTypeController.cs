@@ -34,16 +34,16 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> CreateKoiType(KoiTypeDto koiTypeDto)
+        public async Task<ActionResult<int>> CreateKoiType(KoiTypeCreateDto koiTypeCreateDto)
         {
-            var id = await _koiTypeService.CreateKoiTypeAsync(koiTypeDto);
+            var id = await _koiTypeService.CreateKoiTypeAsync(koiTypeCreateDto);
             return CreatedAtAction(nameof(GetKoiTypeById), new { id }, id);
         }
 
         [HttpPut]
-        public async Task<ActionResult<int>> UpdateKoiType(KoiTypeDto koiTypeDto)
+        public async Task<ActionResult<int>> UpdateKoiType(KoiTypeUpdateDto koiTypeUpdateDto)
         {
-            var result = await _koiTypeService.UpdateKoiTypeAsync(koiTypeDto);
+            var result = await _koiTypeService.UpdateKoiTypeAsync(koiTypeUpdateDto);
             return Ok(result);
         }
 

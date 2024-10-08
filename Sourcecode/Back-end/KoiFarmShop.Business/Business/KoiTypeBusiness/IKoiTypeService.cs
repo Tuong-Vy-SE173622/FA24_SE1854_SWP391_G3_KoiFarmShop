@@ -6,8 +6,8 @@ namespace KoiFarmShop.Business.Business.KoiTypeBusiness
     {
         Task<IEnumerable<KoiTypeDto>> GetAllKoiTypesAsync();
         Task<KoiTypeDto> GetKoiTypeByIdAsync(int id);
-        Task<int> CreateKoiTypeAsync(KoiTypeDto koiTypeDto);
-        Task<int> UpdateKoiTypeAsync(KoiTypeDto koiTypeDto);
+        Task<int> CreateKoiTypeAsync(KoiTypeCreateDto koiTypeDto);
+        Task<int> UpdateKoiTypeAsync(KoiTypeUpdateDto koiTypeDto);
         Task<bool> RemoveKoiTypeAsync(int id);
     }
 }

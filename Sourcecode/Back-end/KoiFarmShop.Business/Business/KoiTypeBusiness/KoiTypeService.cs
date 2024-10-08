@@ -28,16 +28,16 @@ namespace KoiFarmShop.Business.Business.KoiTypeBusiness
             return _mapper.Map<KoiTypeDto>(koiType);
         }
 
-        public async Task<int> CreateKoiTypeAsync(KoiTypeDto koiTypeDto)
+        public async Task<int> CreateKoiTypeAsync(KoiTypeCreateDto koiTypeCreateDto)
         {
-            var koiType = _mapper.Map<KoiType>(koiTypeDto);
+            var koiType = _mapper.Map<KoiType>(koiTypeCreateDto);
             await _unitOfWork.KoiTypeRepository.CreateAsync(koiType);
             return koiType.KoiTypeId; 
         }
 
-        public async Task<int> UpdateKoiTypeAsync(KoiTypeDto koiTypeDto)
+        public async Task<int> UpdateKoiTypeAsync(KoiTypeUpdateDto koiTypeUpdateDto)
         {
-            var koiType = _mapper.Map<KoiType>(koiTypeDto);
+            var koiType = _mapper.Map<KoiType>(koiTypeUpdateDto);
             return await _unitOfWork.KoiTypeRepository.UpdateAsync(koiType);
         }
 

@@ -15,7 +15,7 @@ namespace KoiFarmShop.Business.Mapper
         {
             CreateMap<KoiTypeCreateDto, KoiType>();
             CreateMap<KoiTypeUpdateDto, KoiType>();
-            CreateMap<KoiTypeDto,KoiType>().ReverseMap();
+            CreateMap<KoiType,KoiTypeDto>();
         }
     }
 }

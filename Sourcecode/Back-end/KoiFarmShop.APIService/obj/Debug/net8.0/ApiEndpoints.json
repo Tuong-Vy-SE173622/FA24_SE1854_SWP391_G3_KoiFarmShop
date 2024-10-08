@@ -18,8 +18,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "koiDto",
-        "Type": "KoiFarmShop.Business.Dto.KoiDto",
+        "Name": "koiCreateDto",
+        "Type": "KoiFarmShop.Business.Dto.KoiCreateDto",
         "IsRequired": true
       }
     ],
@@ -55,8 +55,8 @@
         "IsRequired": true
       },
       {
-        "Name": "koiDto",
-        "Type": "KoiFarmShop.Business.Dto.KoiDto",
+        "Name": "koiUpdateDto",
+        "Type": "KoiFarmShop.Business.Dto.KoiUpdateDto",
         "IsRequired": true
       }
     ],
@@ -77,6 +77,22 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KoiFarmShop.APIService.Controllers.KoiController",
+    "Method": "test",
+    "RelativePath": "api/Koi/test",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "KoiFarmShop.APIService.Controllers.KoiTypeController",
@@ -107,8 +123,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "koiTypeDto",
-        "Type": "KoiFarmShop.Business.Dto.KoiTypeDto",
+        "Name": "koiTypeCreateDto",
+        "Type": "KoiFarmShop.Business.Dto.KoiTypeCreateDto",
         "IsRequired": true
       }
     ],
@@ -133,8 +149,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "koiTypeDto",
-        "Type": "KoiFarmShop.Business.Dto.KoiTypeDto",
+        "Name": "koiTypeUpdateDto",
+        "Type": "KoiFarmShop.Business.Dto.KoiTypeUpdateDto",
         "IsRequired": true
       }
     ],

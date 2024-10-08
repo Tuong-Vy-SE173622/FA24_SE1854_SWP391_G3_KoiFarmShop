@@ -12,9 +12,9 @@ namespace KoiFarmShop.Business.Mapper
     public class KoiProfile : Profile
     {
         public KoiProfile() {
-            CreateMap<KoiCreateDto, Koi>();
-            CreateMap<KoiUpdateDto, Koi>();
-            CreateMap<KoiDto, Koi>().ReverseMap();
+            CreateMap<KoiCreateDto, Koi>();    
+            CreateMap<KoiUpdateDto, Koi>();           
+            CreateMap<Koi, KoiDto>();
         }
     }
 }

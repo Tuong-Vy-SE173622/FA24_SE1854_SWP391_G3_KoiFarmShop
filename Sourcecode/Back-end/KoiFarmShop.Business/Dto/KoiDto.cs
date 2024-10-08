@@ -9,6 +9,9 @@ namespace KoiFarmShop.Business.Dto
     public class KoiDto
     {
         public int KoiId { get; set; }
+        public int KoiTypeId {  get; set; }
+
+        public int Gender {  get; set; }
         public string Origin { get; set; }
         public int? Age { get; set; }
         public double? Size { get; set; }

@@ -5,7 +5,7 @@ using KoiFarmShop.Data.Models;
 
 namespace KoiFarmShop.Business.Business.KoiBusiness
 {
-    public class KoiService
+    public class KoiService : IKoiService
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -51,6 +51,8 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             }
             return false;
         }
+
+        
     }
 
 

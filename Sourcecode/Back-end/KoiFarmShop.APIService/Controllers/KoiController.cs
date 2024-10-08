@@ -1,4 +1,5 @@
-﻿using KoiFarmShop.Business.Business.KoiBusiness;
+﻿using AutoMapper;
+using KoiFarmShop.Business.Business.KoiBusiness;
 using KoiFarmShop.Business.Dto;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,11 +9,12 @@ namespace KoiFarmShop.APIService.Controllers
     [ApiController]
     public class KoiController : ControllerBase
     {
-        private readonly KoiService _koiService;
+        private readonly IKoiService _koiService;
 
-        public KoiController(KoiService koiService)
+        public KoiController(IKoiService koiService)
         {
             _koiService = koiService;
+            
         }
 
         [HttpGet]

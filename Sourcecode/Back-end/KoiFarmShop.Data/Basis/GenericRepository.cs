@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,12 +28,15 @@ namespace KoiFarmShop.Data.Basis
         //}
 
 
-        public List<T> GetAll()
+        public virtual List<T> GetAll()
         {
             return _context.Set<T>().ToList();
             //return _context.Set<T>().AsNoTracking().ToList();
         }
-
+        public virtual T Get(Expression<Func<T, bool>> expression)
+        {
+            return _context.Set<T>().FirstOrDefault(expression);
+        }
         public void Create(T entity)
         {
             _context.Add(entity);

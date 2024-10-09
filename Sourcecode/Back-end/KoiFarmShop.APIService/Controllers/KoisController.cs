@@ -129,7 +129,8 @@ namespace KoiFarmShop.APIService.Controllers
 
         private bool KoiExists(int id)
         {
-            return _context.Kois.Any(e => e.KoiId == id);
+            //return _context.Kois.Any(e => e.KoiId == id);
+            return _unitOfWork.KoiRepository.GetByIdAsync(id) == null;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace KoiFarmShop.Business.Dto
 {
     public class TokenDto
     {
-        public string AccessTokenToken { get; set; }
+        public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
         public DateTime? ExpiredAt { get; set; }
     }

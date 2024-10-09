@@ -3,6 +3,8 @@ using Microsoft.IdentityModel.Tokens;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 using Microsoft.OpenApi.Models;
+using KoiFarmShop.Business.Business.TokenBusiness;
+using KoiFarmShop.Business.Business.UserBusiness;
 
 namespace KoiFarmShop.APIService
 {
@@ -144,6 +146,9 @@ namespace KoiFarmShop.APIService
             });
             //builder.Services.AddScoped<FA_SE1854_SWP391_G3_KoiFarmShopContext>();
             builder.Services.AddScoped<UnitOfWork>();
+            builder.Services.AddScoped<ITokenService, TokenService>();
+            builder.Services.AddScoped<IUserService, UserService>();
+
 
             var app = builder.Build();
 

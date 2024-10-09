@@ -1,6 +1,8 @@
-﻿using KoiFarmShop.Data;
+﻿using KoiFarmShop.Business.Business.TokenBusiness;
+using KoiFarmShop.Business.Business.UserBusiness;
+using KoiFarmShop.Business.Dto;
+using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
-using KoiFarmShop.Data.ViewModels.ResultModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -15,11 +17,13 @@ namespace KoiFarmShop.APIService.Controllers
     [ApiController]
     public class AuthorizeController : ControllerBase
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly ITokenService _tokenService;
+        private readonly IUserService _userService;
 
-        public AuthorizeController(UnitOfWork unitOfWork)
+        public AuthorizeController(ITokenService tokenService, IUserService userService)
         {
-            _unitOfWork = unitOfWork;
+            _tokenService = tokenService;
+            _userService = userService;
         }
 
         #region GenerateToken
@@ -29,14 +33,14 @@ namespace KoiFarmShop.APIService.Controllers
         /// <param name="user"></param>
         /// <returns></returns>
         [NonAction]
-        public Token GenerateToken(User user, String? RT)
+        public TokenDto GenerateToken(User user, String? RT)
         {
             List<Claim> claims = new List<Claim>()
             {
                 new Claim("UserId", user.UserId.ToString()),
                 new Claim("UserName", user.Username),
                 new Claim("Email", user.Email),
-                new Claim("Role", user.Role.ToString())
+                new Claim("Role", user.Role)
             };
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("c2VydmVwZXJmZWN0bHljaGVlc2VxdWlja2NvYWNoY29sbGVjdHNsb3Bld2lzZWNhbWU="));
@@ -52,18 +56,18 @@ namespace KoiFarmShop.APIService.Controllers
             var accessToken = new JwtSecurityTokenHandler().WriteToken(token);
             if (RT != null)
             {
-                return new Token()
+                return new TokenDto()
                 {
                     AccessToken = accessToken,
                     RefreshToken = RT,
-                    ExpiredTime = _unitOfWork.TokenRepository.GetRefreshTokenByUserID(user.UserId).ExpiredTime
+                    ExpiredAt = _tokenService.GetRefreshTokenByUserID(user.UserId).ExpiredTime
                 };
             }
-            return new Token()
+            return new TokenDto()
             {
                 AccessToken = accessToken,
                 RefreshToken = GenerateRefreshToken(user),
-                ExpiredTime = _unitOfWork.TokenRepository.GetRefreshTokenByUserID(user.UserId).ExpiredTime
+                ExpiredAt = _tokenService.GetRefreshTokenByUserID(user.UserId).ExpiredTime
             };
         }
         #endregion
@@ -88,7 +92,7 @@ namespace KoiFarmShop.APIService.Controllers
                     Status = 1
                 };
 
-                _unitOfWork.TokenRepository.GenerateRefreshToken(refreshTokenEntity);
+                _tokenService.GenerateRefreshToken(refreshTokenEntity);
                 return refreshtoken;
             }
         }
@@ -112,12 +116,12 @@ namespace KoiFarmShop.APIService.Controllers
                     ValidateLifetime = false
                 };
                 //ResetRefreshToken in DB if token is disable or expired will Remove RT
-                _unitOfWork.TokenRepository.ResetRefreshToken();
+                _tokenService.ResetRefreshToken();
                 //check validate of Parameter
                 var tokenVerification = jwtTokenHander.ValidateToken(token.AccessToken, TokenValidationParameters, out var validatedToken);
                 if (tokenVerification == null)
                 {
-                    return Ok(new ResultModel
+                    return Ok(new ResultDto
                     {
                         IsSuccess = false,
                         Message = "Invalid Param"
@@ -129,7 +133,7 @@ namespace KoiFarmShop.APIService.Controllers
                 DateTime dateTimeUtcConverted = dateTimeUtc.UtcDateTime;
                 if (dateTimeUtcConverted > DateTime.UtcNow)
                 {
-                    return Ok(new ResultModel
+                    return Ok(new ResultDto
                     {
                         IsSuccess = false,
                         Message = "AccessToken had not expired",
@@ -137,10 +141,10 @@ namespace KoiFarmShop.APIService.Controllers
                     });
                 }
                 //check RefreshToken exist in DB
-                var storedToken = _unitOfWork.TokenRepository.GetRefreshToken(token.RefreshToken);
+                var storedToken = _tokenService.GetRefreshToken(token.RefreshToken);
                 if (storedToken == null)
                 {
-                    return Ok(new ResultModel
+                    return Ok(new ResultDto
                     {
                         IsSuccess = false,
                         Message = "RefreshToken had not existed"
@@ -149,16 +153,16 @@ namespace KoiFarmShop.APIService.Controllers
                 //check RefreshToken is revoked?
                 if (storedToken.Status == 2)
                 {
-                    return Ok(new ResultModel
+                    return Ok(new ResultDto
                     {
                         IsSuccess = false,
                         Message = "RefreshToken had been revoked"
                     });
                 }
-                var User = _unitOfWork.UserRepository.GetUserById(storedToken.UserId);
+                var User = _userService.GetUserById(storedToken.UserId);
                 var newAT = GenerateToken(User, token.RefreshToken);
 
-                return Ok(new ResultModel
+                return Ok(new ResultDto
                 {
                     IsSuccess = true,
                     Message = "Refresh AT success fully",
@@ -167,7 +171,7 @@ namespace KoiFarmShop.APIService.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new ResultModel
+                return BadRequest(new ResultDto
                 {
                     IsSuccess = false,
                     Code = 500,
@@ -183,19 +187,19 @@ namespace KoiFarmShop.APIService.Controllers
         [Route("Login")]
         public IActionResult Login(string userName, string password)
         {
-            var user = _unitOfWork.UserRepository.GetUserByUserName(userName);
+            var user = _userService.GetUserByUserName(userName);
             if (user != null && user.IsActive == true)
             {
                 // Hash the input password with SHA256
                 //var hashedInputPasswordString = PasswordHasher.HashPassword(password);
 
                 // Compare the hashed input password with the stored hashed password
-                _unitOfWork.TokenRepository.ResetRefreshToken();
+                _tokenService.ResetRefreshToken();
                 var token = GenerateToken(user, null);
                 return Ok(token);
 
             }
-            return BadRequest(new ResultModel
+            return BadRequest(new ResultDto
             {
                 IsSuccess = false,
                 Message = "Status Code:401 Unauthorized",
@@ -231,14 +235,14 @@ namespace KoiFarmShop.APIService.Controllers
 
                 if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
                 {
-                    var _refreshToken = _unitOfWork.TokenRepository.GetRefreshTokenByUserID(userId);
-                    _unitOfWork.TokenRepository.UpdateRefreshToken(_refreshToken);
-                    _unitOfWork.TokenRepository.ResetRefreshToken();
+                    var _refreshToken = _tokenService.GetRefreshTokenByUserID(userId);
+                    _tokenService.UpdateRefreshToken(_refreshToken);
+                    _tokenService.ResetRefreshToken();
                 }
                 else
                 {
                     // Handle the case where the UserId claim is missing or invalid
-                    return BadRequest(new ResultModel
+                    return BadRequest(new ResultDto
                     {
                         IsSuccess = false,
                         Message = "User ID not found or invalid."
@@ -250,7 +254,7 @@ namespace KoiFarmShop.APIService.Controllers
                     HttpContext.Request.Headers.Remove("Authorization");
                 }
 
-                return Ok(new ResultModel
+                return Ok(new ResultDto
                 {
                     IsSuccess = true,
                     Message = "Logout successfully!"
@@ -258,7 +262,7 @@ namespace KoiFarmShop.APIService.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new ResultModel
+                return BadRequest(new ResultDto
                 {
                     IsSuccess = false,
                     Message = "Something went wrong: " + ex.Message
@@ -314,6 +318,11 @@ namespace KoiFarmShop.APIService.Controllers
                 // Trả về lỗi 401 Unauthorized nếu người dùng chưa được xác thực
                 return Unauthorized();
             }
+        }
+        [HttpGet("test")]
+        public void ViewAllUsers()
+        {
+            var result = _userService.GetUserByUserName("minhman");
         }
     }
 }

@@ -35,34 +35,5 @@ namespace KoiFarmShop.Data.Repositories
                 })
                 .AsNoTracking()
                 .ToListAsync();
-        }
-        public User GetUserById(int uid)
-        {
-            try
-            {
-                var user = Get(x => x.UserId == uid);
-
-                if (user == null)
-                {
-                    // Handle the case where the user is not found, e.g., return null or throw an exception
-                    return null;
-                }
-
-                return user;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-        public User GetUserByUserName(string userName)
-        {
-            var user = Get(u => u.Username == userName);
-            if (user == null)
-            {
-                return null;
-            }
-            return user;
-        }
-    }
+        }    }
 }

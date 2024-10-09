@@ -2,6 +2,7 @@
 using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace KoiFarmShop.Business.Business.KoiBusiness
 {
@@ -18,7 +19,10 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
 
         public async Task<IEnumerable<KoiDto>> GetAllKoisAsync()
         {
+            //TODO: filtering and pagination
+
             var kois = await _unitOfWork.KoiRepository.GetAllAsync();
+       
             return _mapper.Map<IEnumerable<KoiDto>>(kois);
         }
 
@@ -52,7 +56,26 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             return false;
         }
 
-        
+        public IQueryable<Koi> ApplyFilters(IQueryable<Koi> query, KoiFilterDto filterDto)
+        {
+            if (!string.IsNullOrEmpty(filterDto.Origin))
+            {
+                query = query.Where(k => k.Origin.Contains(filterDto.Origin));
+            }
+
+            if (filterDto.KoiTypeId.HasValue)
+            {
+                query = query.Where(k => k.KoiTypeId == filterDto.KoiTypeId);
+            }
+
+            if (filterDto.IsImported.HasValue)
+            {
+                query = query.Where(k => k.IsImported == filterDto.IsImported);
+            }
+            // need to add more filters based on the need, but might consider dynamic filter :D
+
+            return query;
+        }
     }
 
 

@@ -141,5 +141,10 @@ namespace KoiFarmShop.Data.Basis
         }
 
         #endregion Separating asign entity and save operators
+
+        public IQueryable<T> GetQueryable()
+        {
+            return _context.Set<T>().AsQueryable();
+        }
     }
 }

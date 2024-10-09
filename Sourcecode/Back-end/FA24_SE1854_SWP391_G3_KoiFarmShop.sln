@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KoiFarmShop.Data", "KoiFarmShop.Data\KoiFarmShop.Data.csproj", "{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KoiFarmShop.APIService", "KoiFarmShop.APIService\KoiFarmShop.APIService.csproj", "{895BACCD-C130-4F5B-B570-5CD243D29FC7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{895BACCD-C130-4F5B-B570-5CD243D29FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{895BACCD-C130-4F5B-B570-5CD243D29FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{895BACCD-C130-4F5B-B570-5CD243D29FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{895BACCD-C130-4F5B-B570-5CD243D29FC7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D3EF30B-8BAD-4148-AC2F-84F59E1A8252}
+	EndGlobalSection
+EndGlobal

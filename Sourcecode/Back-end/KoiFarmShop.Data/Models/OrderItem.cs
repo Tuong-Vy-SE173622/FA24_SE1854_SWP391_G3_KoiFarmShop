@@ -9,7 +9,7 @@ public partial class OrderItem
 {
     public int OrderItemId { get; set; }
 
-    public int? OrderId { get; set; }
+    public int OrderId { get; set; }
 
     public int? KoiId { get; set; }
 

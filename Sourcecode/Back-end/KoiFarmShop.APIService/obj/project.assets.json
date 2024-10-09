@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "AutoMapper/13.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Options": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Azure.Core/1.35.0": {
         "type": "package",
         "dependencies": {
@@ -2954,6 +2970,20 @@
           }
         }
       },
+      "KoiFarmShop.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "AutoMapper": "13.0.1",
+          "KoiFarmShop.Data": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/KoiFarmShop.Business.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/KoiFarmShop.Business.dll": {}
+        }
+      },
       "KoiFarmShop.Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -2973,6 +3003,21 @@
     }
   },
   "libraries": {
+    "AutoMapper/13.0.1": {
+      "sha512": "/Fx1SbJ16qS7dU4i604Sle+U9VLX+WSNVJggk6MupKVkYvvBm4XqYaeFuf67diHefHKHs50uQIS2YEDFhPCakQ==",
+      "type": "package",
+      "path": "automapper/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.13.0.1.nupkg.sha512",
+        "automapper.nuspec",
+        "icon.png",
+        "lib/net6.0/AutoMapper.dll",
+        "lib/net6.0/AutoMapper.xml"
+      ]
+    },
     "Azure.Core/1.35.0": {
       "sha512": "hENcx03Jyuqv05F4RBEPbxz29UrM3Nbhnr6Wl6NQpoU9BCIbL3XLentrxDCTrH54NLS11Exxi/o8MYgT/cnKFA==",
       "type": "package",
@@ -8442,6 +8487,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "KoiFarmShop.Business/1.0.0": {
+      "type": "project",
+      "path": "../KoiFarmShop.Business/KoiFarmShop.Business.csproj",
+      "msbuildProject": "../KoiFarmShop.Business/KoiFarmShop.Business.csproj"
+    },
     "KoiFarmShop.Data/1.0.0": {
       "type": "project",
       "path": "../KoiFarmShop.Data/KoiFarmShop.Data.csproj",
@@ -8450,7 +8500,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "KoiFarmShop.Data >= 1.0.0",
+      "KoiFarmShop.Business >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.8",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.5",
       "Swashbuckle.AspNetCore >= 6.4.0"
@@ -8489,8 +8539,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj": {
-              "projectPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj"
+            "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\KoiFarmShop.Business.csproj": {
+              "projectPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\KoiFarmShop.Business.csproj"
             }
           }
         }

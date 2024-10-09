@@ -4,23 +4,40 @@ namespace KoiFarmShop.Business.Dto
 {
     public class OrderDto
     {
-        [Key] public int order_id { get; set; }
-        public int? customer_id { get; set; }
-        public DateTime order_date { get; set; }
-        public decimal? sub_amount { get; set; }
-        public decimal? VAT { get; set; }
-        public decimal? VAT_amount { get; set; }
-        public decimal? promotion_amount { get; set; }
-        public decimal? total_amount { get; set; }
-        public string payment_method { get; set; }
-        public string payment_status { get; set; }
-        public bool is_active { get; set; }
-        public string? note { get; set; }
-        public int status { get; set; }
-        public DateTime created_at { get; set; }
-        public string created_by { get; set; }
-        public DateTime updated_at { get; set; }
-        public string updated_by { get; set; }
-        public CustomerDto customerDto { get; set; }
+        [Key]
+        public int OrderId { get; set; }
+
+        public int? CustomerId { get; set; }
+
+        public DateTime? OrderDate { get; set; }
+
+        public double? SubAmount { get; set; }
+
+        public double? Vat { get; set; }
+
+        public double? VatAmount { get; set; }
+
+        public double? PromotionAmount { get; set; }
+
+        public double? TotalAmount { get; set; }
+
+        public string PaymentMethod { get; set; }
+
+        public string PaymentStatus { get; set; }
+
+        public bool? IsActive { get; set; }
+
+        public string Note { get; set; }
+
+        public string Status { get; set; }
+
+        public DateTime? CreatedAt { get; set; }
+
+        public string CreatedBy { get; set; }
+
+        public DateTime? UpdatedAt { get; set; }
+
+        public string UpdatedBy { get; set; }
+        public CustomerDto? Customer { get; set; }
     }
 }

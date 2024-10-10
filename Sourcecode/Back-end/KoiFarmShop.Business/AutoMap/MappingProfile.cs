@@ -25,6 +25,8 @@ namespace KoiFarmShop.Business.AutoMap
 
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<User, RegisterDto>().ReverseMap();
+            CreateMap<User, EditUserDto>().ReverseMap();
+            CreateMap<User, DeleteUserDto>().ReverseMap();
         }
     }
 }

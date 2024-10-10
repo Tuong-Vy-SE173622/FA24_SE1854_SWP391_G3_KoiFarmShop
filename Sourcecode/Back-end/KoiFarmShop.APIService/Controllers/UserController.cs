@@ -60,77 +60,42 @@ namespace KoiFarmShop.APIService.Controllers
         /// </summary>
         /// <returns>Status of action</returns>
         [HttpPut("{userId}")]
-        public async Task<ActionResult<ResultDto>> UpdateUser(int userId, UserDto userDto)
+        public async Task<ActionResult> UpdateUser(int userId, UserDto userDto)
         {
-            try
-            {
-                var currentUser = HttpContext.User;
-                var updateResult = await _userService.UpdateUser(userId, userDto, currentUser);
-                var result = new ResultDto
-                {
-                    IsSuccess = true,
-                    Code = 200,
-                    Data = updateResult
-                };
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                var result = new ResultDto
-                {
-                    IsSuccess = false,
-                    Code = 500,
-                    Message = ex.Message
-                };
-                return StatusCode(500, result);
-            }
+            var currentUser = HttpContext.User;
+            var updateResult = await _userService.UpdateUser(userId, userDto, currentUser);
+            return updateResult.IsSuccess ? Ok(updateResult) : BadRequest(updateResult);
         }
         #endregion
 
-        //// POST: api/Kois
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<User>> PostUser(User user)
-        //{
-        //    //_context.Kois.Add(koi);
-        //    try
-        //    {
-        //        //await _context.SaveChangesAsync();
-        //        await _unitOfWork.UserRepository.CreateAsync(user);
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (UserExists(user.UserId))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+        #region Edit User
+        /// <summary>
+        /// Edit  user
+        /// </summary>
+        /// <returns>Status of action</returns>
+        [HttpPut]
+        public async Task<ActionResult> EditUser(int userId, EditUserDto model)
+        {
+            var currentUser = HttpContext.User;
+            var editResult = await _userService.EditUser(userId, model, currentUser);
+            return editResult.IsSuccess ? Ok(editResult) : BadRequest(editResult);
+        }
+        #endregion
 
-        //    return CreatedAtAction("GetUser", new { uid = user.UserId }, user);
-        //}
 
-        //// DELETE: api/Kois/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteUser(int id)
-        //{
-        //    //var koi = await _context.Kois.FindAsync(id);
-        //    var koi = await _unitOfWork.UserRepository.GetByIdAsync(id);
-        //    if (koi == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    await _unitOfWork.UserRepository.SaveAsync();
-
-        //    //_context.Kois.Remove(koi);
-        //    //await _context.SaveChangesAsync();
-
-        //    return NoContent();
-        //}
+        #region Delete user
+        /// <summary>
+        /// Delete a user
+        /// </summary>
+        /// <returns>Status of action</returns>
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUser([FromBody] DeleteUserDto request)
+        {
+            var currentUser = HttpContext.User;
+            var result = await _userService.DeleteUser(request, currentUser);
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
+        }
+        #endregion
 
         //private bool UserExists(int uid)
         //{

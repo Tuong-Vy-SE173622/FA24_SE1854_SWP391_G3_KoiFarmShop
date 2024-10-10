@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KoiFarmShop.Business.Dto;
+using KoiFarmShop.Business.Security;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 using Microsoft.AspNetCore.Identity;
@@ -70,7 +71,7 @@ namespace KoiFarmShop.Business.Business.AccountBusiness
                 user.UserId = await _unitOfWork.AccountRepository.GenerateNewUserId();
 
                 // Hash the password using PasswordHasher
-                //user.Password = PasswordHasher.HashPassword(model.Password);
+                user.Password = PasswordHasher.HashPassword(model.Password);
 
                 // Set other properties (e.g., CreatedDate, Status, etc.)
                 user.CreatedBy = userCreate.FindFirst("UserName")?.Value;

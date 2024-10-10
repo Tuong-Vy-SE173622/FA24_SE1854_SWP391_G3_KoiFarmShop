@@ -29,9 +29,14 @@ namespace KoiFarmShop.Data.Repositories
                     FirstName = x.FirstName,
                     LastName = x.LastName,
                     Phone = x.Phone,
+                    IsActive = x.IsActive,
+                    Note = x.Note,
                     CreatedAt = x.CreatedAt,
                     CreatedBy = x.CreatedBy,
-                    Role = x.Role
+                    Role = x.Role,
+                    UpdatedAt = x.UpdatedAt,
+                    UpdatedBy = x.UpdatedBy
+                   
                 })
                 .AsNoTracking()
                 .ToListAsync();

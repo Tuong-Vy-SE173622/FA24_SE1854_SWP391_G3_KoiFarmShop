@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using KoiFarmShop.Business.Dto;
+using KoiFarmShop.Business.Security;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 using KoiFarmShop.Data.Repositories;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,7 +99,7 @@ namespace KoiFarmShop.Business.Business.UserBusiness
                 {
                     users = users.OrderByDescending(u => u.UserId).ToList();
 
-                    var userViewModels = users.Select(u => new UserDto
+                    var userViewModels = users.Select(u => new ListUserDto
                     {
                         UserId = u.UserId,
                         Username = u.Username,
@@ -105,8 +108,13 @@ namespace KoiFarmShop.Business.Business.UserBusiness
                         FirstName = u.FirstName,
                         LastName = u.LastName,
                         Phone = u.Phone,
+                        IsActive = u.IsActive,
+                        Note = u.Note,
                         Role = u.Role,
-                        CreatedAt = u.CreatedAt
+                        CreatedAt = u.CreatedAt,
+                        CreatedBy = u.CreatedBy,
+                        UpdatedAt = u.UpdatedAt,
+                        UpdatedBy = u.UpdatedBy
                     }).ToList();
 
                     result.Data = userViewModels;
@@ -193,6 +201,7 @@ namespace KoiFarmShop.Business.Business.UserBusiness
                 existingUser.Email = userDto.Email;
                 existingUser.Phone = userDto.Phone;
                 existingUser.Role = userDto.Role;
+                existingUser.Note = userDto.Note;
                 existingUser.UpdatedBy = userUpdate.FindFirst("UserName").Value;
                 existingUser.UpdatedAt = DateTime.Now;
                 _unitOfWork.UserRepository.Update(existingUser);
@@ -209,6 +218,117 @@ namespace KoiFarmShop.Business.Business.UserBusiness
                 result.Code = 400;
                 result.Message = ex.Message;
                 return result;
+            }
+            return result;
+        }
+        public async Task<ResultDto> EditUser(int userId, EditUserDto edit, ClaimsPrincipal userUpdate)
+        {
+            var result = new ResultDto();
+            try
+            {
+                var existingUser = _unitOfWork.UserRepository.Get(x => x.UserId == userId);
+                if (existingUser == null)
+                {
+                    result.IsSuccess = false;
+                    result.Code = 404;
+                    result.Message = "Cannot find user";
+                    return result;
+                }
+
+                // Check if email already exists
+                var existingEmail = _unitOfWork.UserRepository.Get(x => x.Email == edit.Email && x.UserId != userId);
+                if (existingEmail != null)
+                {
+                    result.IsSuccess = false;
+                    result.Code = 400;
+                    result.Message = "Email already exists";
+                    return result;
+                }
+
+                // Check if Phone already exists
+                var existingPhone = _unitOfWork.UserRepository.Get(x => x.Phone == edit.Phone && x.UserId != userId);
+                if (existingPhone != null)
+                {
+                    result.IsSuccess = false;
+                    result.Code = 400;
+                    result.Message = "Phone already exists";
+                    return result;
+                }
+
+                // Check if the old password is correct
+                if (!PasswordHasher.VerifyPassword(edit.OldPassword, existingUser.Password))
+                {
+                    result.IsSuccess = false;
+                    result.Code = 400;
+                    result.Message = "Old password is incorrect";
+                    return result;
+                }
+
+                // Check if the new password and confirm password match
+                if (edit.NewPassword != edit.ConfirmPassword)
+                {
+                    result.IsSuccess = false;
+                    result.Code = 400;
+                    result.Message = "New password and confirm password do not match";
+                    return result;
+                }
+
+                // Map the ViewModel to the existing user entity
+                _mapper.Map(edit, existingUser);
+
+                // Update the additional fields
+                existingUser.Username = edit.Username;
+                existingUser.Password = PasswordHasher.HashPassword(edit.NewPassword); // Update the password
+                existingUser.Email = edit.Email;
+                existingUser.Phone = edit.Phone;
+                existingUser.UpdatedBy = userUpdate.FindFirst("UserName")?.Value;
+                existingUser.UpdatedAt = DateTime.Now;
+
+                _unitOfWork.UserRepository.Update(existingUser);
+                _unitOfWork.UserRepository.Save();
+
+                result.IsSuccess = true;
+                result.Code = 200;
+                result.Message = "Edit User Success";
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.Code = 400;
+                result.Message = ex.Message;
+                return result;
+            }
+        }
+        public async Task<ResultDto> DeleteUser(DeleteUserDto request, ClaimsPrincipal userDelete)
+        {
+            var result = new ResultDto();
+            try
+            {
+                var user = GetUserById(request.UserId);
+                if (user == null)
+                {
+                    result.Message = "UserName not found or deleted";
+                    result.Code = 404;
+                    result.IsSuccess = false;
+                    result.Data = null;
+                    return result;
+                }
+                user.UpdatedBy = userDelete.FindFirst("UserName")?.Value;
+                user.UpdatedAt = DateTime.UtcNow;
+                user.IsActive = false;
+                _unitOfWork.UserRepository.Update(user);
+                _unitOfWork.UserRepository.Save();
+
+                result.Message = "Delete user successfully";
+                result.Code = 200;
+                result.IsSuccess = true;
+                result.Data = user;
+            }
+            catch (DbUpdateException ex)
+            {
+                result.Message = ex.Message;
+                result.IsSuccess = false;
             }
             return result;
         }

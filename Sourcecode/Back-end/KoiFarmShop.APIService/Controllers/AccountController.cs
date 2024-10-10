@@ -26,7 +26,7 @@ namespace KoiFarmShop.APIService.Controllers
         /// </summary>
         /// <returns>Status of action</returns>
         [HttpPost]
-        public async Task<ActionResult<ResultDto>> AddNewUser(RegisterDto model)
+        public async Task<ActionResult> AddNewUser(RegisterDto model)
         {
             try
             {

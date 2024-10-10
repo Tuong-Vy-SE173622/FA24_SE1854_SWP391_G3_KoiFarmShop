@@ -1,6 +1,7 @@
 ﻿using KoiFarmShop.Business.Business.TokenBusiness;
 using KoiFarmShop.Business.Business.UserBusiness;
 using KoiFarmShop.Business.Dto;
+using KoiFarmShop.Business.Security;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 using Microsoft.AspNetCore.Identity;
@@ -191,13 +192,21 @@ namespace KoiFarmShop.APIService.Controllers
             if (user != null && user.IsActive == true)
             {
                 // Hash the input password with SHA256
-                //var hashedInputPasswordString = PasswordHasher.HashPassword(password);
+                var hashedInputPasswordString = PasswordHasher.HashPassword(password);
 
-                // Compare the hashed input password with the stored hashed password
-                _tokenService.ResetRefreshToken();
+                if (hashedInputPasswordString == user.Password)
+                {
+                    // Convert userId to string using .ToString()
+                    var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+                new Claim(ClaimTypes.Name, user.Username)
+            };
+                    // Compare the hashed input password with the stored hashed password
+                    _tokenService.ResetRefreshToken();
                 var token = GenerateToken(user, null);
                 return Ok(token);
-
+                }
             }
             return BadRequest(new ResultDto
             {
@@ -272,6 +281,11 @@ namespace KoiFarmShop.APIService.Controllers
         #endregion
 
 
+        #region Who Am I
+        /// <summary>
+        /// Check infor of user
+        /// </summary>
+        /// <returns>Infor of user</returns>
         [HttpGet("whoami")]
         public IActionResult WhoAmI()
         {
@@ -319,6 +333,9 @@ namespace KoiFarmShop.APIService.Controllers
                 return Unauthorized();
             }
         }
+        #endregion
+
+
         [HttpGet("test")]
         public void ViewAllUsers()
         {

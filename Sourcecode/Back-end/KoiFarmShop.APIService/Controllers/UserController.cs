@@ -2,6 +2,8 @@
 using KoiFarmShop.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using KoiFarmShop.Business.Business.UserBusiness;
+using KoiFarmShop.Business.Dto;
 
 namespace KoiFarmShop.APIService.Controllers
 {
@@ -10,11 +12,11 @@ namespace KoiFarmShop.APIService.Controllers
     public class UserController : ControllerBase
     {
         //private readonly FA_SE1854_SWP391_G3_KoiFarmShopContext _context;
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
 
-        public UserController(UnitOfWork unitOfWork)
+        public UserController(IUserService userService)
         {
-            _unitOfWork = unitOfWork;
+            _userService = userService;
         }
 
         //public KoisController(FA_SE1854_SWP391_G3_KoiFarmShopContext context)
@@ -22,110 +24,118 @@ namespace KoiFarmShop.APIService.Controllers
         //    _context = context;
         //}
 
-        // GET: api/Kois
+
+        #region Get list user filter
+        /// <summary>
+        /// Get list of users by filter
+        /// </summary>
+        /// <returns>A list of users</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<IActionResult> GetUsers(int? userId, string? name, string? email, string? phone, string? firstName, string? lastName)
         {
             //return await _context.Kois.ToListAsync();
-            return await _unitOfWork.UserRepository.GetAllUsers();
+            var result = await _userService.GetUserList(userId, name, email, phone, firstName, lastName);
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
+        #endregion
 
-        // GET: api/Kois/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int uid)
+        #region Search user
+        /// <summary>
+        /// Search user by keyword
+        /// </summary>
+        /// <returns>A list of users</returns>
+        [HttpGet("{keyword}")]
+        public async Task<ActionResult<ResultDto>> SearchUser(string keyword)
         {
             //var koi = await _context.Kois.FindAsync(id);
-            var user = _unitOfWork.UserRepository.GetById(uid);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return user;
+            var result = await _userService.SearchUserByKeyword(keyword);
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
+        #endregion
 
-        // PUT: api/Kois/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int uid, User user)
+
+        #region Update User
+        /// <summary>
+        /// Update a user
+        /// </summary>
+        /// <returns>Status of action</returns>
+        [HttpPut("{userId}")]
+        public async Task<ActionResult<ResultDto>> UpdateUser(int userId, UserDto userDto)
         {
-            if (uid != user.UserId)
-            {
-                return BadRequest();
-            }
-
-            //_context.Entry(koi).State = EntityState.Modified;
-
             try
             {
-                //await _context.SaveChangesAsync();
-                _unitOfWork.UserRepository.UpdateAsync(user);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(uid))
+                var currentUser = HttpContext.User;
+                var updateResult = await _userService.UpdateUser(userId, userDto, currentUser);
+                var result = new ResultDto
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                    IsSuccess = true,
+                    Code = 200,
+                    Data = updateResult
+                };
+                return Ok(result);
             }
-
-            return NoContent();
-        }
-
-        // POST: api/Kois
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
-        {
-            //_context.Kois.Add(koi);
-            try
+            catch (Exception ex)
             {
-                //await _context.SaveChangesAsync();
-                await _unitOfWork.UserRepository.CreateAsync(user);
-            }
-            catch (DbUpdateException)
-            {
-                if (UserExists(user.UserId))
+                var result = new ResultDto
                 {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                    IsSuccess = false,
+                    Code = 500,
+                    Message = ex.Message
+                };
+                return StatusCode(500, result);
             }
-
-            return CreatedAtAction("GetUser", new { uid = user.UserId }, user);
         }
+        #endregion
 
-        // DELETE: api/Kois/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            //var koi = await _context.Kois.FindAsync(id);
-            var koi = await _unitOfWork.UserRepository.GetByIdAsync(id);
-            if (koi == null)
-            {
-                return NotFound();
-            }
+        //// POST: api/Kois
+        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPost]
+        //public async Task<ActionResult<User>> PostUser(User user)
+        //{
+        //    //_context.Kois.Add(koi);
+        //    try
+        //    {
+        //        //await _context.SaveChangesAsync();
+        //        await _unitOfWork.UserRepository.CreateAsync(user);
+        //    }
+        //    catch (DbUpdateException)
+        //    {
+        //        if (UserExists(user.UserId))
+        //        {
+        //            return Conflict();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            await _unitOfWork.UserRepository.SaveAsync();
+        //    return CreatedAtAction("GetUser", new { uid = user.UserId }, user);
+        //}
 
-            //_context.Kois.Remove(koi);
-            //await _context.SaveChangesAsync();
+        //// DELETE: api/Kois/5
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteUser(int id)
+        //{
+        //    //var koi = await _context.Kois.FindAsync(id);
+        //    var koi = await _unitOfWork.UserRepository.GetByIdAsync(id);
+        //    if (koi == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return NoContent();
-        }
+        //    await _unitOfWork.UserRepository.SaveAsync();
 
-        private bool UserExists(int uid)
-        {
-            //return _context.Kois.Any(e => e.KoiId == id);
-            return _unitOfWork.UserRepository.GetByIdAsync(uid) == null;
-        }
+        //    //_context.Kois.Remove(koi);
+        //    //await _context.SaveChangesAsync();
+
+        //    return NoContent();
+        //}
+
+        //private bool UserExists(int uid)
+        //{
+        //    //return _context.Kois.Any(e => e.KoiId == id);
+        //    return _unitOfWork.UserRepository.GetByIdAsync(uid) == null;
+        //}
     }
 }

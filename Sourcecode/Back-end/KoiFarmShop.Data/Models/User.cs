@@ -55,13 +55,17 @@ public partial class User
     public DateTime? CreatedAt { get; set; }
 
     [Column("created_by")]
-    public int? CreatedBy { get; set; }
+    [StringLength(55)]
+    [Unicode(false)]
+    public string? CreatedBy { get; set; }
 
     [Column("updated_at")]
     public DateTime? UpdatedAt { get; set; }
 
     [Column("updated_by")]
-    public int? UpdatedBy { get; set; }
+    [StringLength(55)]
+    [Unicode(false)]
+    public string? UpdatedBy { get; set; }
 
     [StringLength(55)]
     [Unicode(false)]

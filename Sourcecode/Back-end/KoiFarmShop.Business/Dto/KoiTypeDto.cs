@@ -7,20 +7,22 @@ using System.Threading.Tasks;
 
 namespace KoiFarmShop.Business.Dto
 {
-    public class OrderItemDto
+    public class KoiTypeDto
     {
         [Key]
-        public int OrderItemId { get; set; }
+        public int KoiTypeId { get; set; }
 
-        public int? OrderId { get; set; }
+        public string Name { get; set; }
 
-        public int? KoiId { get; set; }
+        public string ShortDescription { get; set; }
 
-        public int? Amount { get; set; }
+        public string OriginHistory { get; set; }
 
-        public double? Price { get; set; }
+        public string CategoryDescription { get; set; }
 
-        public bool? IsActive { get; set; }
+        public string FengShui { get; set; }
+
+        public string RaisingCondition { get; set; }
 
         public string Note { get; set; }
 
@@ -31,7 +33,5 @@ namespace KoiFarmShop.Business.Dto
         public DateTime? UpdatedAt { get; set; }
 
         public string UpdatedBy { get; set; }
-        public OrderDto? Order { get; set; }
-        public KoiDto? Koi { get; set; }
     }
 }

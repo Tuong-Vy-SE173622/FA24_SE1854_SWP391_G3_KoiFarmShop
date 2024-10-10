@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace KoiFarmShop.Data.Repositories
 {
-    public class UserRepository: GenericRepository<User>
+    public class UserRepository : GenericRepository<User>
     {
         private readonly FA_SE1854_SWP391_G3_KoiFarmShopContext _context;
         public UserRepository(FA_SE1854_SWP391_G3_KoiFarmShopContext context) : base(context)
         {
             _context = context;
         }
-            
-        public async Task<List<User>> GetAllUsers()
+
+        public async Task<List<User>> GetUsers()
         {
             return await _context.Users
                 .Select(x => new User
@@ -35,5 +35,6 @@ namespace KoiFarmShop.Data.Repositories
                 })
                 .AsNoTracking()
                 .ToListAsync();
-        }    }
+        }
+    }
 }

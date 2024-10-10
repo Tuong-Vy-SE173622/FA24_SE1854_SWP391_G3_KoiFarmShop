@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using KoiFarmShop.Data;
-using KoiFarmShop.Data.Models;
 using Microsoft.OpenApi.Models;
 using KoiFarmShop.Business.Business.TokenBusiness;
 using KoiFarmShop.Business.Business.UserBusiness;
+using KoiFarmShop.Business.Business.AccountBusiness;
+using KoiFarmShop.Business.AutoMap;
 
 namespace KoiFarmShop.APIService
 {
@@ -144,10 +145,16 @@ namespace KoiFarmShop.APIService
                     ClockSkew = TimeSpan.Zero
                 };
             });
+
+
+            //add automapper
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
+
             //builder.Services.AddScoped<FA_SE1854_SWP391_G3_KoiFarmShopContext>();
             builder.Services.AddScoped<UnitOfWork>();
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IAccountService, AccountService>();
 
 
             var app = builder.Build();

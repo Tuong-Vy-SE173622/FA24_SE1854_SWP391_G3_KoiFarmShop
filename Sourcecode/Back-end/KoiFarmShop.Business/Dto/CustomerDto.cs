@@ -5,13 +5,21 @@ namespace KoiFarmShop.Business.Dto
     public class CustomerDto
     {
         [Key]
-        public int customer_id { get; set; }
-        public int user_id { get; set; }
-        public string address { get; set; }
-        public int loyalty_points { get; set; }
-        public DateTime created_at { get; set; }
-        public string created_by { get; set; }
-        public DateTime updated_at { get; set; }
-        public string updated_by { get; set; }
+        public int CustomerId { get; set; }
+
+        public int? UserId { get; set; }
+
+        public string Address { get; set; }
+
+        public int? LoyaltyPoints { get; set; }
+
+        public DateTime? CreatedAt { get; set; }
+
+        public string CreatedBy { get; set; }
+
+        public DateTime? UpdatedAt { get; set; }
+
+        public string UpdatedBy { get; set; }
+        public UserDto? User { get; set; }
     }
 }

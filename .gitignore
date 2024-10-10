@@ -106,3 +106,11 @@
 /Sourcecode/Back-end/KoiFarmShop.Business/obj/Debug/net8.0/KoiFarmShop.Business.csproj.BuildWithSkipAnalyzers
 /Sourcecode/Back-end/KoiFarmShop.Data/efpt.config.json
 /Sourcecode/Back-end/KoiFarmShop.Data/ViewModels/ResultModel/ResultModel.cs
+/Sourcecode/Back-end/KoiFarmShop.APIService/bin/Debug/net8.0/AutoMapper.dll
+/Sourcecode/Back-end/KoiFarmShop.APIService/obj/Debug/net8.0/KoiFarmShop.APIService.GeneratedMSBuildEditorConfig.editorconfig
+/Sourcecode/Back-end/KoiFarmShop.APIService/obj/Debug/net8.0/KoiFarmShop.APIService.genruntimeconfig.cache
+/Sourcecode/Back-end/KoiFarmShop.Business/obj/Debug/net8.0/KoiFarmShop.Business.GeneratedMSBuildEditorConfig.editorconfig
+/Sourcecode/Back-end/KoiFarmShop.Business/obj/Release/net8.0/KoiFarmShop.Business.GeneratedMSBuildEditorConfig.editorconfig
+/Sourcecode/Back-end/KoiFarmShop.Data/obj/Debug/net8.0/KoiFarmShop.Data.GeneratedMSBuildEditorConfig.editorconfig
+/Sourcecode/Back-end/KoiFarmShop.Data/obj/Debug/net8.0/KoiFarmShop.Data.genruntimeconfig.cache
+/Sourcecode/Back-end/KoiFarmShop.Data/obj/Release/net8.0/KoiFarmShop.Data.GeneratedMSBuildEditorConfig.editorconfig

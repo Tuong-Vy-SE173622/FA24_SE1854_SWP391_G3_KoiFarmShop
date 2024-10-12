@@ -48,7 +48,9 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public virtual DbSet<UserRole> UserRoles { get; set; }
+
+    public static string GetConnectionString(string connectionStringName)
     {
         optionsBuilder.UseSqlServer(GetConnectionString());
     }
@@ -60,6 +62,12 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
         .AddJsonFile("appsettings.json", true, true).Build();
         return configuration["ConnectionStrings:DefaultConnection"];
     }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
+
+    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+    //        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-34FO4U2;Initial Catalog=FA_SE1854_SWP391_G3_KoiFarmShop;Persist Security Info=True;User ID=sa;Password=12345;Encrypt=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -79,11 +87,46 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
             entity.Property(e => e.RequestId).ValueGeneratedNever();
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("('GETDATE()')");
             entity.Property(e => e.IsActive).HasDefaultValueSql("('DEFAULT TRUE')");
-            entity.Property(e => e.RequestedDate).HasDefaultValueSql("('GETDATE()')");
+            entity.Property(e => e.RequestId)
+                .ValueGeneratedNever()
+                .HasColumnName("request_id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("('GETDATE()')")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("created_by");
+            entity.Property(e => e.CustomerId).HasColumnName("customer_id");
+            entity.Property(e => e.IsActive)
+                .HasDefaultValueSql("('DEFAULT TRUE')")
+                .HasColumnName("is_active");
+            entity.Property(e => e.KoiId).HasColumnName("koi_id");
+            entity.Property(e => e.Note)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("note");
+            entity.Property(e => e.RequestedDate)
+                .HasDefaultValueSql("('GETDATE()')")
+                .HasColumnName("requested_date");
+            entity.Property(e => e.Status)
+                .HasMaxLength(255)
+                .HasColumnName("status");
+            entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
+            entity.Property(e => e.UpdatedBy)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("updated_by");
 
             entity.HasOne(d => d.Customer).WithMany(p => p.CareRequests).HasConstraintName("care_request_customer_id_foreign");
 
-            entity.HasOne(d => d.Koi).WithMany(p => p.CareRequests).HasConstraintName("care_request_koi_id_foreign");
+            entity.HasOne(d => d.Customer).WithMany(p => p.CareRequests)
+                .HasForeignKey(d => d.CustomerId)
+                .HasConstraintName("care_request_customer_id_foreign");
+
+            entity.HasOne(d => d.Koi).WithMany(p => p.CareRequests)
+                .HasForeignKey(d => d.KoiId)
+                .HasConstraintName("care_request_koi_id_foreign");
         });
 
         modelBuilder.Entity<CareRequestDetail>(entity =>
@@ -158,7 +201,7 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
 
         modelBuilder.Entity<Koi>(entity =>
         {
-            entity.HasKey(e => e.KoiId).HasName("koi_koi_id_primary");
+            entity.HasKey(e => e.KoiId).HasName("animal_animal_id_primary");
 
             entity.Property(e => e.KoiId).ValueGeneratedNever();
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("('GETDATE()')");
@@ -169,7 +212,7 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
 
         modelBuilder.Entity<KoiType>(entity =>
         {
-            entity.HasKey(e => e.KoiTypeId).HasName("koi_type_koi_type_id_primary");
+            entity.HasKey(e => e.KoiTypeId).HasName("animal_type_animal_type_id_primary");
 
             entity.Property(e => e.KoiTypeId).ValueGeneratedNever();
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("('GETDATE()')");
@@ -195,9 +238,13 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("('GETDATE()')");
             entity.Property(e => e.IsActive).HasDefaultValueSql("('DEFAULT TRUE')");
 
-            entity.HasOne(d => d.Koi).WithMany(p => p.OrderItems).HasConstraintName("FK_Order_Item_koi");
+            entity.HasOne(d => d.Koi).WithMany(p => p.OrderItems)
+                .HasForeignKey(d => d.KoiId)
+                .HasConstraintName("FK_Order_Item_koi");
 
-            entity.HasOne(d => d.Order).WithMany(p => p.OrderItems).HasConstraintName("order_item_order_id_foreign");
+            entity.HasOne(d => d.Order).WithMany(p => p.OrderItems)
+                .HasForeignKey(d => d.OrderId)
+                .HasConstraintName("order_item_order_id_foreign");
         });
 
         modelBuilder.Entity<Promotion>(entity =>
@@ -211,28 +258,58 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
 
         modelBuilder.Entity<Rating>(entity =>
         {
-            entity.HasKey(e => e.RatingId).HasName("rating_rating_id_primary");
-
-            entity.Property(e => e.RatingId).ValueGeneratedNever();
-            entity.Property(e => e.CreatedAt).HasDefaultValueSql("('GETDATE()')");
-
-            entity.HasOne(d => d.Customer).WithMany(p => p.Ratings).HasConstraintName("rating_customer_id_foreign");
-
-            entity.HasOne(d => d.Koi).WithMany(p => p.Ratings).HasConstraintName("rating_animal_id_foreign");
-        });
-
         modelBuilder.Entity<Token>(entity =>
         {
             entity.Property(e => e.UserId).ValueGeneratedNever();
         });
 
-        modelBuilder.Entity<User>(entity =>
-        {
-            entity.HasKey(e => e.UserId).HasName("user_user_id_primary");
+            entity.HasOne(d => d.Customer).WithMany(p => p.Ratings).HasConstraintName("rating_customer_id_foreign");
 
+            entity.HasOne(d => d.Koi).WithMany(p => p.Ratings).HasConstraintName("rating_animal_id_foreign");
+        });
             entity.Property(e => e.UserId).ValueGeneratedNever();
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("('GETDATE()')");
             entity.Property(e => e.IsActive).HasDefaultValueSql("('DEFAULT TRUE')");
+        });
+
+            entity.Property(e => e.Password)
+                .IsRequired()
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("password");
+            entity.Property(e => e.Phone)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("phone");
+            entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
+            entity.Property(e => e.UpdatedBy).HasColumnName("updated_by");
+            entity.Property(e => e.Username)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("username");
+        });
+
+        modelBuilder.Entity<UserRole>(entity =>
+        {
+            entity.HasKey(e => e.UserId).HasName("user_role_user_id_primary");
+
+            entity.ToTable("User_Role");
+
+            entity.Property(e => e.UserId)
+                .ValueGeneratedNever()
+                .HasColumnName("user_id");
+            entity.Property(e => e.RoleId).HasColumnName("role_id");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.UserRoles)
+                .HasForeignKey(d => d.RoleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("role_role_id_foreign");
+
+            entity.HasOne(d => d.User).WithOne(p => p.UserRole)
+                .HasForeignKey<UserRole>(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("user_role_user_id_foreign");
         });
 
         OnModelCreatingPartial(modelBuilder);

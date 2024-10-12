@@ -157,6 +157,9 @@ namespace KoiFarmShop.APIService
             builder.Services.AddScoped<IAccountService, AccountService>();
 
 
+            builder.Services.AddScoped<IKoiService,KoiService>();
+            builder.Services.AddScoped<IKoiTypeService ,KoiTypeService>();
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

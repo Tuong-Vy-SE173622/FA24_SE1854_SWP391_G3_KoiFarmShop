@@ -536,3 +536,5 @@ FodyWeavers.xsd
 /Sourcecode/Back-end/KoiFarmShop.Business/obj/Debug/net8.0/KoiFarmShop.Business.csproj.AssemblyReference.cache
 /Sourcecode/Back-end/KoiFarmShop.Data/obj/Debug/net8.0/KoiFarmShop.Data.AssemblyInfo.cs
 /Sourcecode/Back-end/KoiFarmShop.Data/obj/Debug/net8.0/KoiFarmShop.Data.AssemblyInfoInputs.cache
+/Sourcecode/Back-end/KoiFarmShop.Business/obj/KoiFarmShop.Business.csproj.nuget.g.props
+/Sourcecode/Back-end/KoiFarmShop.Data/obj/KoiFarmShop.Data.csproj.nuget.g.props

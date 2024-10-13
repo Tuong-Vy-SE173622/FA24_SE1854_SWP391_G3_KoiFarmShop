@@ -11,7 +11,6 @@ namespace KoiFarmShop.Business.Dto
     {
         [Key]
         public int KoiId { get; set; }
-        public int KoiTypeId {  get; set; }
 
         public int? KoiTypeId { get; set; }
 

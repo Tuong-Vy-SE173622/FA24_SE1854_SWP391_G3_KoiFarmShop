@@ -6,6 +6,8 @@ using KoiFarmShop.Business.Business.TokenBusiness;
 using KoiFarmShop.Business.Business.UserBusiness;
 using KoiFarmShop.Business.Business.AccountBusiness;
 using KoiFarmShop.Business.AutoMap;
+using KoiFarmShop.Business.Business.KoiBusiness;
+using KoiFarmShop.Business.Business.KoiTypeBusiness;
 
 namespace KoiFarmShop.APIService
 {

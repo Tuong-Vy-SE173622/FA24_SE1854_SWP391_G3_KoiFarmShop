@@ -9,15 +9,15 @@ public partial class ConsignmentRequest
 {
     public int ConsignmentId { get; set; }
 
-    public int? CustomerId { get; set; }
+    public int CustomerId { get; set; }
 
-    public string SubAmount { get; set; }
+    public double? SubAmount { get; set; }
 
-    public string Vat { get; set; }
+    public double? Vat { get; set; }
 
-    public string VatAmount { get; set; }
+    public double? VatAmount { get; set; }
 
-    public int? PromotionAmount { get; set; }
+    public double? PromotionAmount { get; set; }
 
     public double? TotalAmount { get; set; }
 

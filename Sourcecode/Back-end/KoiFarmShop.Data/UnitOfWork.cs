@@ -13,7 +13,9 @@ namespace KoiFarmShop.Data
     {
         private FA_SE1854_SWP391_G3_KoiFarmShopContext _context;
         private const string ErrorOrder = "Error!";
+        private const string ErrorRequest = "Error!";
         private bool isOrder;
+        private bool isRequest;
         private bool _disposed;
 
 
@@ -23,6 +25,8 @@ namespace KoiFarmShop.Data
         private OrderItemRepository _orderItemRepository;
         private CustomerRepository _customerRepository;
         private UserRepository _userRepository;
+        private ConsignmentRequestRepository _consignmentRequestRepository;
+        private ConsignmentDetailRepository _consignmentDetailRepository;
 
         public UnitOfWork() => _context ??= new FA_SE1854_SWP391_G3_KoiFarmShopContext();
         //public UnitOfWork(FA_SE1854_SWP391_G3_KoiFarmShopContext context)
@@ -44,14 +48,26 @@ namespace KoiFarmShop.Data
            _orderItemRepository ??= new OrderItemRepository(this);
         public CustomerRepository CustomerRepository =>
            _customerRepository ??= new CustomerRepository(this);
-        public UserRepository USerRepository =>
+        public UserRepository UserRepository =>
            _userRepository ??= new UserRepository(this);
+        public ConsignmentRequestRepository ConsignmentRequestRepository =>
+           _consignmentRequestRepository ??= new ConsignmentRequestRepository(this);
+        public ConsignmentDetailRepository ConsignmentDetailRepository =>
+           _consignmentDetailRepository ??= new ConsignmentDetailRepository(this);
 
         public bool IsOrder
         {
             get
             {
                 return this.isOrder;
+            }
+        }
+
+        public bool IsRequest
+        {
+            get
+            {
+                return this.isRequest;
             }
         }
 
@@ -84,6 +100,42 @@ namespace KoiFarmShop.Data
             }
 
             this.isOrder = false;
+
+            foreach (var entry in this._context.ChangeTracker.Entries())
+            {
+                entry.State = EntityState.Detached;
+            }
+        }
+
+        public async Task BeginRequestAsync()
+        {
+            if (this.isRequest)
+            {
+                throw new Exception(ErrorRequest);
+            }
+
+            isRequest = true;
+        }
+
+        public async Task CommitRequestAsync()
+        {
+            if (!this.isRequest)
+            {
+                throw new Exception(ErrorRequest);
+            }
+
+            await this._context.SaveChangesAsync();
+            this.isRequest = false;
+        }
+
+        public async Task RollbackRequestAsync()
+        {
+            if (!this.isRequest)
+            {
+                throw new Exception(ErrorRequest);
+            }
+
+            this.isRequest = false;
 
             foreach (var entry in this._context.ChangeTracker.Entries())
             {

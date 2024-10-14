@@ -3,28 +3,96 @@
   "WorkspaceRootPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{895BACCD-C130-4F5B-B570-5CD243D29FC7}|KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.apiservice\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{895BACCD-C130-4F5B-B570-5CD243D29FC7}|KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj|solutionrelative:koifarmshop.apiservice\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{895BACCD-C130-4F5B-B570-5CD243D29FC7}|KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.apiservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{895BACCD-C130-4F5B-B570-5CD243D29FC7}|KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj|solutionrelative:koifarmshop.apiservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\business\\orderbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\business\\orderbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{895BACCD-C130-4F5B-B570-5CD243D29FC7}|KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.apiservice\\controllers\\consignmentrequestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{895BACCD-C130-4F5B-B570-5CD243D29FC7}|KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj|solutionrelative:koifarmshop.apiservice\\controllers\\consignmentrequestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{895BACCD-C130-4F5B-B570-5CD243D29FC7}|KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.apiservice\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{895BACCD-C130-4F5B-B570-5CD243D29FC7}|KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj|solutionrelative:koifarmshop.apiservice\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{895BACCD-C130-4F5B-B570-5CD243D29FC7}|KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.apiservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{895BACCD-C130-4F5B-B570-5CD243D29FC7}|KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj|solutionrelative:koifarmshop.apiservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{895BACCD-C130-4F5B-B570-5CD243D29FC7}|KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.apiservice\\controllers\\koiscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{895BACCD-C130-4F5B-B570-5CD243D29FC7}|KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj|solutionrelative:koifarmshop.apiservice\\controllers\\koiscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\business\\consignmentrequestbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\business\\consignmentrequestbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\models\\consignmentdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\models\\consignmentdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\business\\ibusinessresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\business\\ibusinessresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\business\\businessresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\business\\businessresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\models\\consignmentrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\models\\consignmentrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\dto\\consignmentdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\dto\\consignmentdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\basis\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\basis\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\dto\\consignmentrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\dto\\consignmentrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\dto\\customerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\dto\\customerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\repositories\\consignmentdetailrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\repositories\\consignmentdetailrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\repositories\\orderitemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\repositories\\orderitemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\business\\ibusinessresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\business\\ibusinessresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\models\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\models\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\repositories\\consignmentrequestrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\repositories\\consignmentrequestrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\automap\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\automap\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\repositories\\koirepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\repositories\\koirepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\repositories\\customerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\repositories\\customerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\repositories\\koityperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\repositories\\koityperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -35,28 +103,20 @@
       "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\repositories\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\repositories\\koityperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\repositories\\koityperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\dto\\koidto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\dto\\koidto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\dto\\koitypedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\dto\\koitypedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\basis\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\basis\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\automap\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\automap\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{895BACCD-C130-4F5B-B570-5CD243D29FC7}|KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.apiservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -67,32 +127,12 @@
       "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\koifarmshop.business.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\dto\\customerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\dto\\customerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\dto\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\dto\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\dto\\koitypedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\dto\\koitypedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\dto\\orderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\dto\\orderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.business\\dto\\koidto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9EA82E40-F6E0-46B3-9D8E-CA8442C7F5AD}|KoiFarmShop.Business\\KoiFarmShop.Business.csproj|solutionrelative:koifarmshop.business\\dto\\koidto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\repositories\\koirepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\repositories\\koirepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\repositories\\customerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|solutionrelative:koifarmshop.data\\repositories\\customerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{34E5FFDB-A1E7-4643-AE66-E94F53D05C7F}|KoiFarmShop.Data\\KoiFarmShop.Data.csproj|c:\\users\\t14\\source\\repos\\fa24_se1854_swp391_g3_koifarmshop\\fa24_se1854_swp391_g3_koifarmshop\\sourcecode\\back-end\\koifarmshop.data\\models\\koi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -130,7 +170,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 20,
+          "SelectedChildIndex": 24,
           "Children": [
             {
               "$type": "Bookmark",
@@ -210,52 +250,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IBusinessResult.cs",
-              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Business\\IBusinessResult.cs",
-              "RelativeDocumentMoniker": "KoiFarmShop.Business\\Business\\IBusinessResult.cs",
-              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Business\\IBusinessResult.cs",
-              "RelativeToolTip": "KoiFarmShop.Business\\Business\\IBusinessResult.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 2,
+              "Title": "ConsignmentRequestController.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\Controllers\\ConsignmentRequestController.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.APIService\\Controllers\\ConsignmentRequestController.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\Controllers\\ConsignmentRequestController.cs",
+              "RelativeToolTip": "KoiFarmShop.APIService\\Controllers\\ConsignmentRequestController.cs",
+              "ViewState": "AQIAAEQAAAAAAAAAAAAIwHUAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-09T21:31:24.953Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "OrdersController.cs",
-              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\Controllers\\OrdersController.cs",
-              "RelativeDocumentMoniker": "KoiFarmShop.APIService\\Controllers\\OrdersController.cs",
-              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\Controllers\\OrdersController.cs",
-              "RelativeToolTip": "KoiFarmShop.APIService\\Controllers\\OrdersController.cs",
-              "ViewState": "AQIAAJcAAAAAAAAAAAAcwIMAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T05:59:05.752Z",
+              "WhenOpened": "2024-10-14T03:22:00.312Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "WeatherForecastController.cs",
-              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\Controllers\\WeatherForecastController.cs",
-              "RelativeDocumentMoniker": "KoiFarmShop.APIService\\Controllers\\WeatherForecastController.cs",
-              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\Controllers\\WeatherForecastController.cs",
-              "RelativeToolTip": "KoiFarmShop.APIService\\Controllers\\WeatherForecastController.cs",
+              "DocumentIndex": 4,
+              "Title": "KoisController.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\Controllers\\KoisController.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.APIService\\Controllers\\KoisController.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\Controllers\\KoisController.cs",
+              "RelativeToolTip": "KoiFarmShop.APIService\\Controllers\\KoisController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-09T21:35:58.853Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "KoiFarmShop.APIService\\Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\Properties\\launchSettings.json",
-              "RelativeToolTip": "KoiFarmShop.APIService\\Properties\\launchSettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-10-09T22:04:13.038Z"
+              "WhenOpened": "2024-10-14T04:00:02.281Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -265,37 +282,261 @@
               "RelativeDocumentMoniker": "KoiFarmShop.Business\\Business\\OrderBusiness.cs",
               "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Business\\OrderBusiness.cs",
               "RelativeToolTip": "KoiFarmShop.Business\\Business\\OrderBusiness.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGkAAAA4AAAA",
+              "ViewState": "AQIAANAAAAAAAAAAAAAUwN8AAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T20:49:06.352Z"
+              "WhenOpened": "2024-10-07T20:49:06.352Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.APIService\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "KoiFarmShop.APIService\\Controllers\\WeatherForecastController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-09T21:35:58.853Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "KoiFarmShop.APIService\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\Properties\\launchSettings.json",
+              "RelativeToolTip": "KoiFarmShop.APIService\\Properties\\launchSettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-09T22:04:13.038Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ConsignmentRequestBusiness.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Business\\ConsignmentRequestBusiness.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Business\\Business\\ConsignmentRequestBusiness.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Business\\ConsignmentRequestBusiness.cs",
+              "RelativeToolTip": "KoiFarmShop.Business\\Business\\ConsignmentRequestBusiness.cs",
+              "ViewState": "AQIAAJ8AAAAAAAAAAAAUwNgAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T14:20:05.543Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ConsignmentDetail.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Models\\ConsignmentDetail.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Data\\Models\\ConsignmentDetail.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Models\\ConsignmentDetail.cs",
+              "RelativeToolTip": "KoiFarmShop.Data\\Models\\ConsignmentDetail.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T14:08:12.413Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IBusinessResult.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Business\\IBusinessResult.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Business\\Business\\IBusinessResult.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Business\\IBusinessResult.cs",
+              "RelativeToolTip": "KoiFarmShop.Business\\Business\\IBusinessResult.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-09T21:31:24.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Data\\UnitOfWork.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\UnitOfWork.cs",
+              "RelativeToolTip": "KoiFarmShop.Data\\UnitOfWork.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T19:57:45.207Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "BusinessResult.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Business\\BusinessResult.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Business\\Business\\BusinessResult.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Business\\BusinessResult.cs",
+              "RelativeToolTip": "KoiFarmShop.Business\\Business\\BusinessResult.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T14:20:22.432Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ConsignmentRequest.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Models\\ConsignmentRequest.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Data\\Models\\ConsignmentRequest.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Models\\ConsignmentRequest.cs",
+              "RelativeToolTip": "KoiFarmShop.Data\\Models\\ConsignmentRequest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T14:09:21.324Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ConsignmentDetailDto.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\ConsignmentDetailDto.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Business\\Dto\\ConsignmentDetailDto.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\ConsignmentDetailDto.cs",
+              "RelativeToolTip": "KoiFarmShop.Business\\Dto\\ConsignmentDetailDto.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T14:08:05.572Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Basis\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Data\\Basis\\GenericRepository.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Basis\\GenericRepository.cs",
+              "RelativeToolTip": "KoiFarmShop.Data\\Basis\\GenericRepository.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAASwCoAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T19:53:14.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ConsignmentRequestDto.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\ConsignmentRequestDto.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Business\\Dto\\ConsignmentRequestDto.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\ConsignmentRequestDto.cs",
+              "RelativeToolTip": "KoiFarmShop.Business\\Dto\\ConsignmentRequestDto.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA8AAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T14:07:38.942Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CustomerDto.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\CustomerDto.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Business\\Dto\\CustomerDto.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\CustomerDto.cs",
+              "RelativeToolTip": "KoiFarmShop.Business\\Dto\\CustomerDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T06:50:33.059Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ConsignmentDetailRepository.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\ConsignmentDetailRepository.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Data\\Repositories\\ConsignmentDetailRepository.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\ConsignmentDetailRepository.cs",
+              "RelativeToolTip": "KoiFarmShop.Data\\Repositories\\ConsignmentDetailRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T14:13:01.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "OrderItem.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Models\\OrderItem.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Data\\Models\\OrderItem.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Models\\OrderItem.cs",
+              "RelativeToolTip": "KoiFarmShop.Data\\Models\\OrderItem.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T14:58:12.43Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ConsignmentRequestRepository.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\ConsignmentRequestRepository.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Data\\Repositories\\ConsignmentRequestRepository.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\ConsignmentRequestRepository.cs",
+              "RelativeToolTip": "KoiFarmShop.Data\\Repositories\\ConsignmentRequestRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T14:12:37.689Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "MappingProfile.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\AutoMap\\MappingProfile.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Business\\AutoMap\\MappingProfile.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\AutoMap\\MappingProfile.cs",
+              "RelativeToolTip": "KoiFarmShop.Business\\AutoMap\\MappingProfile.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAABuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T02:59:50.354Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
               "Title": "OrderItemRepository.cs",
               "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\OrderItemRepository.cs",
               "RelativeDocumentMoniker": "KoiFarmShop.Data\\Repositories\\OrderItemRepository.cs",
               "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\OrderItemRepository.cs",
               "RelativeToolTip": "KoiFarmShop.Data\\Repositories\\OrderItemRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBIAAABiAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBQAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T20:13:00.796Z"
+              "WhenOpened": "2024-10-07T20:13:00.796Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\UserRepository.cs",
-              "RelativeDocumentMoniker": "KoiFarmShop.Data\\Repositories\\UserRepository.cs",
-              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\UserRepository.cs",
-              "RelativeToolTip": "KoiFarmShop.Data\\Repositories\\UserRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAARAAAA",
+              "DocumentIndex": 20,
+              "Title": "KoiRepository.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\KoiRepository.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Data\\Repositories\\KoiRepository.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\KoiRepository.cs",
+              "RelativeToolTip": "KoiFarmShop.Data\\Repositories\\KoiRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAABHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T20:15:31.192Z"
+              "WhenOpened": "2024-10-07T19:30:03.361Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 21,
+              "Title": "CustomerRepository.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\CustomerRepository.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Data\\Repositories\\CustomerRepository.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\CustomerRepository.cs",
+              "RelativeToolTip": "KoiFarmShop.Data\\Repositories\\CustomerRepository.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABAAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T20:14:00.94Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
               "Title": "OrderRepository.cs",
               "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\OrderRepository.cs",
               "RelativeDocumentMoniker": "KoiFarmShop.Data\\Repositories\\OrderRepository.cs",
@@ -303,11 +544,38 @@
               "RelativeToolTip": "KoiFarmShop.Data\\Repositories\\OrderRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T06:12:08.913Z"
+              "WhenOpened": "2024-10-05T06:12:08.913Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 25,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Data\\Models\\Order.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Models\\Order.cs",
+              "RelativeToolTip": "KoiFarmShop.Data\\Models\\Order.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAAAAcAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T19:18:20.246Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "KoiDto.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\KoiDto.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Business\\Dto\\KoiDto.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\KoiDto.cs",
+              "RelativeToolTip": "KoiFarmShop.Business\\Dto\\KoiDto.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAA9wCoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T13:29:51.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
               "Title": "KoiTypeRepository.cs",
               "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\KoiTypeRepository.cs",
               "RelativeDocumentMoniker": "KoiFarmShop.Data\\Repositories\\KoiTypeRepository.cs",
@@ -315,11 +583,38 @@
               "RelativeToolTip": "KoiFarmShop.Data\\Repositories\\KoiTypeRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAqwBEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T20:00:54.067Z"
+              "WhenOpened": "2024-10-07T20:00:54.067Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 27,
+              "Title": "KoiTypeDto.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\KoiTypeDto.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Business\\Dto\\KoiTypeDto.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\KoiTypeDto.cs",
+              "RelativeToolTip": "KoiFarmShop.Business\\Dto\\KoiTypeDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T13:30:04.755Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "KoiFarmShop.Data\\Repositories\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "KoiFarmShop.Data\\Repositories\\UserRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T20:15:31.192Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Models\\User.cs",
               "RelativeDocumentMoniker": "KoiFarmShop.Data\\Models\\User.cs",
@@ -331,19 +626,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "GenericRepository.cs",
-              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Basis\\GenericRepository.cs",
-              "RelativeDocumentMoniker": "KoiFarmShop.Data\\Basis\\GenericRepository.cs",
-              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Basis\\GenericRepository.cs",
-              "RelativeToolTip": "KoiFarmShop.Data\\Basis\\GenericRepository.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAEwE8AAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T19:53:14.104Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 30,
               "Title": "KoiFarmShop.Business.csproj",
               "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\KoiFarmShop.Business.csproj",
               "RelativeDocumentMoniker": "KoiFarmShop.Business\\KoiFarmShop.Business.csproj",
@@ -355,7 +638,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 29,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\Program.cs",
               "RelativeDocumentMoniker": "KoiFarmShop.APIService\\Program.cs",
@@ -367,55 +650,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Order.cs",
-              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Models\\Order.cs",
-              "RelativeDocumentMoniker": "KoiFarmShop.Data\\Models\\Order.cs",
-              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Models\\Order.cs",
-              "RelativeToolTip": "KoiFarmShop.Data\\Models\\Order.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAAAAcAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T19:18:20.246Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "MappingProfile.cs",
-              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\AutoMap\\MappingProfile.cs",
-              "RelativeDocumentMoniker": "KoiFarmShop.Business\\AutoMap\\MappingProfile.cs",
-              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\AutoMap\\MappingProfile.cs",
-              "RelativeToolTip": "KoiFarmShop.Business\\AutoMap\\MappingProfile.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-08T02:59:50.354Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "UnitOfWork.cs",
-              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\UnitOfWork.cs",
-              "RelativeDocumentMoniker": "KoiFarmShop.Data\\UnitOfWork.cs",
-              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\UnitOfWork.cs",
-              "RelativeToolTip": "KoiFarmShop.Data\\UnitOfWork.cs",
-              "ViewState": "AQIAACUAAAAAAAAAAAA3wDsAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T19:57:45.207Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "CustomerDto.cs",
-              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\CustomerDto.cs",
-              "RelativeDocumentMoniker": "KoiFarmShop.Business\\Dto\\CustomerDto.cs",
-              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\CustomerDto.cs",
-              "RelativeToolTip": "KoiFarmShop.Business\\Dto\\CustomerDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T06:50:33.059Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 32,
               "Title": "OrderDto.cs",
               "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\OrderDto.cs",
               "RelativeDocumentMoniker": "KoiFarmShop.Business\\Dto\\OrderDto.cs",
@@ -427,19 +662,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "KoiTypeDto.cs",
-              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\KoiTypeDto.cs",
-              "RelativeDocumentMoniker": "KoiFarmShop.Business\\Dto\\KoiTypeDto.cs",
-              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\KoiTypeDto.cs",
-              "RelativeToolTip": "KoiFarmShop.Business\\Dto\\KoiTypeDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T13:30:04.755Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 31,
               "Title": "UserDto.cs",
               "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\UserDto.cs",
               "RelativeDocumentMoniker": "KoiFarmShop.Business\\Dto\\UserDto.cs",
@@ -451,43 +674,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "KoiDto.cs",
-              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\KoiDto.cs",
-              "RelativeDocumentMoniker": "KoiFarmShop.Business\\Dto\\KoiDto.cs",
-              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\Dto\\KoiDto.cs",
-              "RelativeToolTip": "KoiFarmShop.Business\\Dto\\KoiDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T13:29:51.881Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "CustomerRepository.cs",
-              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\CustomerRepository.cs",
-              "RelativeDocumentMoniker": "KoiFarmShop.Data\\Repositories\\CustomerRepository.cs",
-              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\CustomerRepository.cs",
-              "RelativeToolTip": "KoiFarmShop.Data\\Repositories\\CustomerRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T20:14:00.94Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "KoiRepository.cs",
-              "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\KoiRepository.cs",
-              "RelativeDocumentMoniker": "KoiFarmShop.Data\\Repositories\\KoiRepository.cs",
-              "ToolTip": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Repositories\\KoiRepository.cs",
-              "RelativeToolTip": "KoiFarmShop.Data\\Repositories\\KoiRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T19:30:03.361Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 33,
               "Title": "Koi.cs",
               "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Models\\Koi.cs",
               "RelativeDocumentMoniker": "KoiFarmShop.Data\\Models\\Koi.cs",
@@ -499,7 +686,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 34,
               "Title": "KoiType.cs",
               "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Models\\KoiType.cs",
               "RelativeDocumentMoniker": "KoiFarmShop.Data\\Models\\KoiType.cs",
@@ -511,7 +698,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 35,
               "Title": "BlogPost.cs",
               "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Models\\BlogPost.cs",
               "RelativeDocumentMoniker": "KoiFarmShop.Data\\Models\\BlogPost.cs",
@@ -523,7 +710,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 36,
               "Title": "Customer.cs",
               "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\Models\\Customer.cs",
               "RelativeDocumentMoniker": "KoiFarmShop.Data\\Models\\Customer.cs",
@@ -535,7 +722,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 37,
               "Title": "efpt.config.json",
               "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\efpt.config.json",
               "RelativeDocumentMoniker": "KoiFarmShop.Data\\efpt.config.json",
@@ -547,7 +734,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 38,
               "Title": "KoiFarmShop.Data.csproj",
               "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj",
               "RelativeDocumentMoniker": "KoiFarmShop.Data\\KoiFarmShop.Data.csproj",
@@ -559,7 +746,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 39,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\appsettings.json",
               "RelativeDocumentMoniker": "KoiFarmShop.APIService\\appsettings.json",

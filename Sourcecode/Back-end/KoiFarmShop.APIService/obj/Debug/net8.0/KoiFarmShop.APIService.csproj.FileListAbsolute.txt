@@ -333,7 +333,6 @@ C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G
 C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\System.Runtime.Caching.dll
 C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\System.Security.Permissions.dll
-C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\System.Text.Json.dll
 C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\System.Windows.Extensions.dll
 C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\af\Humanizer.resources.dll
 C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\ar\Humanizer.resources.dll
@@ -512,3 +511,10 @@ C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G
 C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\KoiFarmShop.Business.dll
 C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\KoiFarmShop.Business.pdb
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\FA24_SE1854_SWP391_G3_KoiFarmShop\Sourcecode\Back-end\KoiFarmShop.APIService\bin\Debug\net8.0\System.Formats.Asn1.dll

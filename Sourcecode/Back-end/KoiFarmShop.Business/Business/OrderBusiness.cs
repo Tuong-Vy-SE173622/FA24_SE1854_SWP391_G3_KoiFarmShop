@@ -35,7 +35,7 @@ namespace KoiFarmShop.Business.Business
                     return new BusinessResult(404, "No order found.");
                 }
 
-                return new BusinessResult(200, "Successfully retreived all orders.", o);
+                return new BusinessResult(200, "Successfully retrieved all orders.", o);
             }
             catch (Exception ex)
             {
@@ -98,7 +98,7 @@ namespace KoiFarmShop.Business.Business
             }
             catch (Exception ex)
             {
-                _unitOfWork.RollbackOrderAsync();
+                await _unitOfWork.RollbackOrderAsync();
                 return new BusinessResult(500, $"Failed to create order request: {ex.Message}");
             }
         }

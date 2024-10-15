@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using KoiFarmShop.Business.Dto;
+using KoiFarmShop.Business.Dto.Consigments;
 using KoiFarmShop.Data.Models;
 
 namespace KoiFarmShop.Business.AutoMap
@@ -27,6 +28,9 @@ namespace KoiFarmShop.Business.AutoMap
             CreateMap<User, RegisterDto>().ReverseMap();
             CreateMap<User, EditUserDto>().ReverseMap();
             CreateMap<User, DeleteUserDto>().ReverseMap();
+
+            CreateMap<ConsignmentRequest, ConsignmentRequestDto>().ReverseMap();
+            CreateMap<ConsignmentDetail, ConsignmentDetailDto>().ReverseMap();
         }
     }
 }

@@ -8,6 +8,7 @@ using KoiFarmShop.Business.Business.AccountBusiness;
 using KoiFarmShop.Business.AutoMap;
 using KoiFarmShop.Business.Business.KoiBusiness;
 using KoiFarmShop.Business.Business.KoiTypeBusiness;
+using KoiFarmShop.Business.Business.ConsignmentBusiness;
 
 namespace KoiFarmShop.APIService
 {
@@ -161,6 +162,10 @@ namespace KoiFarmShop.APIService
 
             builder.Services.AddScoped<IKoiService,KoiService>();
             builder.Services.AddScoped<IKoiTypeService ,KoiTypeService>();
+
+            builder.Services.AddScoped<IConsignmentRequestService, ConsignmentRequestService>();
+            builder.Services.AddScoped<IConsignmentDetailService, ConsignmentDetailService>();
+
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();
 

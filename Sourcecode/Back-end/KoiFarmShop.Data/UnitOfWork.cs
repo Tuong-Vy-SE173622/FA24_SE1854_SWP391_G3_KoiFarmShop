@@ -17,6 +17,8 @@ namespace KoiFarmShop.Data
         private UserRepository _userRepository;
         private TokenRepository _tokenRepository;
         private AccountRepository _accountRepository;
+        private ConsignmentDetailRepository _consignmentDetailRepository;
+        private ConsignmentRequestRepository _consignmentRequestRepository;
 
         public UnitOfWork() => _context ??= new FA_SE1854_SWP391_G3_KoiFarmShopContext();
 
@@ -62,6 +64,27 @@ namespace KoiFarmShop.Data
             {
                 return _accountRepository ??= new AccountRepository(_context);
             }
+        }
+
+        public ConsignmentDetailRepository ConsignmentDetailRepository
+        {
+            get
+            {
+                return _consignmentDetailRepository ??= new ConsignmentDetailRepository(_context);
+            }
+        }
+
+        public ConsignmentRequestRepository ConsignmentRequestRepository
+        {
+            get
+            {
+                return _consignmentRequestRepository ??= new ConsignmentRequestRepository(_context);
+            }
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
         }
     }
 }

@@ -1,9 +1,6 @@
-﻿using KoiFarmShop.Data.Models;
-using KoiFarmShop.Data;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using KoiFarmShop.Business.Business.UserBusiness;
+﻿using KoiFarmShop.Business.Business.UserBusiness;
 using KoiFarmShop.Business.Dto;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KoiFarmShop.APIService.Controllers
 {

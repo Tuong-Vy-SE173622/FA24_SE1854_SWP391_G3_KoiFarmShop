@@ -1,29 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using KoiFarmShop.Data.Models;
 
 namespace KoiFarmShop.Business.Dto
 {
-    public class KoiTypeDto
+    public class CareRequestDto
     {
         [Key]
-        public int KoiTypeId { get; set; }
+        public int RequestId { get; set; }
 
-        public string Name { get; set; }
+        public int? CustomerId { get; set; }
 
-        public string ShortDescription { get; set; }
+        public int? KoiId { get; set; }
 
-        public string OriginHistory { get; set; }
+        public DateTime? RequestedDate { get; set; }
 
-        public string CategoryDescription { get; set; }
+        public string Status { get; set; }
 
-        public string FengShui { get; set; }
-
-        public string RaisingCondition { get; set; }
+        public bool? IsActive { get; set; }
 
         public string Note { get; set; }
 
@@ -34,5 +32,9 @@ namespace KoiFarmShop.Business.Dto
         public DateTime? UpdatedAt { get; set; }
 
         public string UpdatedBy { get; set; }
+
+        public CustomerDto Customer { get; set; }
+
+        public KoiDto Koi { get; set; }
     }
 }

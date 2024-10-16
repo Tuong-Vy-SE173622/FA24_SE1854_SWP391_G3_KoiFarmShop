@@ -11,7 +11,7 @@ namespace KoiFarmShop.Business.AutoMap
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile()
+        public MappingProfile() 
         {
             CreateMap<Customer, CustomerDto>().ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User)).ReverseMap();
 
@@ -24,6 +24,18 @@ namespace KoiFarmShop.Business.AutoMap
             CreateMap<OrderItem, OrderItemDto>().ForMember(dest => dest.Order, opt => opt.MapFrom(src => src.Order)).ReverseMap();
 
             CreateMap<User, UserDto>().ReverseMap();
+
+            CreateMap<ConsignmentRequest, ConsignmentRequestDto>().ForMember(dest => dest.Customer, opt => opt.MapFrom(src => src.Customer)).ReverseMap();
+
+            CreateMap<ConsignmentDetail, ConsignmentDetailDto>().ForMember(dest => dest.Consignment, opt => opt.MapFrom(src => src.Consignment))
+                .ForMember(dest => dest.Koi, opt => opt.MapFrom(src => src.Koi))
+                .ReverseMap();
+
+            CreateMap<CareRequest, CareRequestDto>().ForMember(dest => dest.Koi, opt => opt.MapFrom(src => src.Koi))
+                .ForMember(dest => dest.Customer, opt => opt.MapFrom(src => src.Customer))
+                .ReverseMap();
+
+            CreateMap<CareRequestDetail, CareRequestDetailDto>().ForMember(dest => dest.CareRequest, opt => opt.MapFrom(src => src.Request)).ReverseMap();
             CreateMap<User, RegisterDto>().ReverseMap();
             CreateMap<User, EditUserDto>().ReverseMap();
             CreateMap<User, DeleteUserDto>().ReverseMap();

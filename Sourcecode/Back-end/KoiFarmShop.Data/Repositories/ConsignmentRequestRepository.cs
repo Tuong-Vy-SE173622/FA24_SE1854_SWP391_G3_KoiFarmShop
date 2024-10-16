@@ -5,14 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace KoiFarmShop.Data.Repositories
 {
-    public class KoiRepository : GenericRepository<Koi>
+    public class ConsignmentRequestRepository : GenericRepository<ConsignmentRequest>
     {
-        public KoiRepository(UnitOfWork unitOfWork) : base(unitOfWork) 
+        public ConsignmentRequestRepository(UnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
+
+
     }
 }

@@ -13,14 +13,21 @@ namespace KoiFarmShop.Data.Basis
     {
         protected FA_SE1854_SWP391_G3_KoiFarmShopContext _context;
 
-        public GenericRepository() => _context ??= new FA_SE1854_SWP391_G3_KoiFarmShopContext();
+        internal readonly DbSet<T> _dbSet;
+        private readonly UnitOfWork _unitOfWork;
+
+        //public GenericRepository() => _context ??= new FA_SE1854_SWP391_G3_KoiFarmShopContext();
 
         //public GenericRepository()
         //{
         //    _context ??= new SWP391ProductManagementSystemContext();
         //}
 
-        public GenericRepository(FA_SE1854_SWP391_G3_KoiFarmShopContext context) => _context = context;
+        public GenericRepository(UnitOfWork unitOfWork)
+        {
+            _dbSet = unitOfWork.Context.Set<T>();
+            this._unitOfWork = unitOfWork;
+        }
 
         //public GenericRepository(SWP391ProductManagementSystemContext context)
         //{

@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace KoiFarmShop.Data.Repositories
 {
-    public class OrderRepository : GenericRepository<Koi>
+    public class OrderRepository : GenericRepository<Order>
     {
-        public OrderRepository(FA_SE1854_SWP391_G3_KoiFarmShopContext context) => _context = context;
+        public OrderRepository(UnitOfWork unitOfWork) : base(unitOfWork)
+        {
+        }
     }
 }

@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KoiFarmShop.Data.Repositories
 {
-    public class KoiRepository : GenericRepository<Koi>
+    public class CustomerRepository : GenericRepository<Customer>
     {
-        public KoiRepository(UnitOfWork unitOfWork) : base(unitOfWork) 
+        public CustomerRepository(UnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
     }

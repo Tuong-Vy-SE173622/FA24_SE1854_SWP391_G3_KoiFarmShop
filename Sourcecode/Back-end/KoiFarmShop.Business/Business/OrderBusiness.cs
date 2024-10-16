@@ -88,17 +88,17 @@ namespace KoiFarmShop.Business.Business
 
         public async Task<IBusinessResult> CreateOrder(Order order)
         {
-            await _unitOfWork.BeginOrderAsync();
+            await _unitOfWork.BeginTransactionAsync();
             try
             {
                 _unitOfWork.OrderRepository.Create(order);
-                await _unitOfWork.CommitOrderAsync();
+                await _unitOfWork.CommitTransactionAsync();
 
                 return new BusinessResult(200, "Order created successfully.", order);
             }
             catch (Exception ex)
             {
-                await _unitOfWork.RollbackOrderAsync();
+                await _unitOfWork.RollbackTransactionAsync();
                 return new BusinessResult(500, $"Failed to create order request: {ex.Message}");
             }
         }
@@ -106,24 +106,24 @@ namespace KoiFarmShop.Business.Business
         public async Task<IBusinessResult> CreateOrderItem(OrderItem orderItem)
         {
 
-            await _unitOfWork.BeginOrderAsync();
+            await _unitOfWork.BeginTransactionAsync();
             try
             {
                 _unitOfWork.OrderItemRepository.Create(orderItem);
-                await _unitOfWork.CommitOrderAsync();
+                await _unitOfWork.CommitTransactionAsync();
 
                 return new BusinessResult(200, "Order item created successfully.", orderItem);
             }
             catch (Exception ex)
             {
-                _unitOfWork.RollbackOrderAsync();
+                _unitOfWork.RollbackTransactionAsync();
                 return new BusinessResult(500, $"Failed to create order item request: {ex.Message}");
             }
         }
 
         public async Task<IBusinessResult> UpdateOrder(OrderDto orderDto)
         {
-            await _unitOfWork.BeginOrderAsync();
+            await _unitOfWork.BeginTransactionAsync();
             try
             {
                 var existingOrder = await _unitOfWork.OrderRepository.GetByIdAsync(orderDto.OrderId);
@@ -153,13 +153,13 @@ namespace KoiFarmShop.Business.Business
 
 
                 _unitOfWork.OrderRepository.Update(existingOrder);
-                await _unitOfWork.CommitOrderAsync();
+                await _unitOfWork.CommitTransactionAsync();
 
                 return new BusinessResult(200, $"Order with ID {orderDto.OrderId} updated successfully.");
             }
             catch (Exception ex)
             {
-                _unitOfWork.RollbackOrderAsync();
+                _unitOfWork.RollbackTransactionAsync();
                 return new BusinessResult(500, $"Failed to update order with ID {orderDto.OrderId}: {ex.Message}");
             }
 
@@ -167,7 +167,7 @@ namespace KoiFarmShop.Business.Business
 
         public async Task<IBusinessResult> UpdateOrderItem(OrderItemDto orderItemDto)
         {
-            await _unitOfWork.BeginOrderAsync();
+            await _unitOfWork.BeginTransactionAsync();
             try
             {
                 var existingOrderItem = await _unitOfWork.OrderItemRepository.GetByIdAsync(orderItemDto.OrderItemId);
@@ -186,13 +186,13 @@ namespace KoiFarmShop.Business.Business
 
 
                 _unitOfWork.OrderItemRepository.Update(existingOrderItem);
-                await _unitOfWork.CommitOrderAsync();
+                await _unitOfWork.CommitTransactionAsync();
 
                 return new BusinessResult(200, $"Order item with ID {orderItemDto.OrderItemId} updated successfully.");
             }
             catch (Exception ex)
             {
-                _unitOfWork.RollbackOrderAsync();
+                _unitOfWork.RollbackTransactionAsync();
                 return new BusinessResult(500, $"Failed to update order item with ID {orderItemDto.OrderItemId}: {ex.Message}");
             }
 
@@ -200,7 +200,7 @@ namespace KoiFarmShop.Business.Business
 
         public async Task<IBusinessResult> RemoveOrder(int orderId)
         {
-            await _unitOfWork.BeginOrderAsync();
+            await _unitOfWork.BeginTransactionAsync();
             try
             {
                 var existingOrder = await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
@@ -210,20 +210,20 @@ namespace KoiFarmShop.Business.Business
                 }
 
                 _unitOfWork.OrderRepository.Remove(existingOrder);
-                await _unitOfWork.CommitOrderAsync();
+                await _unitOfWork.CommitTransactionAsync();
 
                 return new BusinessResult(200, $"Order item with ID {orderId} deleted successfully.");
             }
             catch (Exception ex)
             {
-                _unitOfWork.RollbackOrderAsync();
+                _unitOfWork.RollbackTransactionAsync();
                 return new BusinessResult(500, $"Failed to delete order item with ID {orderId}: {ex.Message}");
             }
         }
 
         public async Task<IBusinessResult> RemoveOrderItem(int orderItemId)
         {
-            await _unitOfWork.BeginOrderAsync();
+            await _unitOfWork.BeginTransactionAsync();
             try
             {
                 var existingOrderItem = await _unitOfWork.OrderItemRepository.GetByIdAsync(orderItemId);
@@ -233,13 +233,13 @@ namespace KoiFarmShop.Business.Business
                 }
 
                 _unitOfWork.OrderItemRepository.Remove(existingOrderItem);
-                await _unitOfWork.CommitOrderAsync();
+                await _unitOfWork.CommitTransactionAsync();
 
                 return new BusinessResult(200, $"Order item with ID {orderItemId} deleted successfully.");
             }
             catch (Exception ex)
             {
-                _unitOfWork.RollbackOrderAsync();
+                _unitOfWork.RollbackTransactionAsync();
                 return new BusinessResult(500, $"Failed to delete order item with ID {orderItemId}: {ex.Message}");
             }
         }

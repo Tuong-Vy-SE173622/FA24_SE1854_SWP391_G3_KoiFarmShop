@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace KoiFarmShop.Business.Dto
 {
     public class ConsignmentRequestDto
     {
+        [Key]
         public int ConsignmentId { get; set; }
 
         public int CustomerId { get; set; }

@@ -43,7 +43,7 @@ namespace KoiFarmShop.APIService.Controllers
 
         // GET api/<ConsignmentRequestController>/5
         [HttpGet("{id}/details")]
-        public async Task<ActionResult<IEnumerable<Order>>> GetDetails(int requestId)
+        public async Task<ActionResult<IEnumerable<ConsignmentDetail>>> GetDetails(int requestId)
         {
             //return await _context.Orders.ToListAsync();
 
@@ -51,14 +51,14 @@ namespace KoiFarmShop.APIService.Controllers
 
             if (requestDetails == null)
             {
-                return NotFound("No request details found in the order.");
+                return NotFound("No request details found in the request.");
             }
 
             return Ok(requestDetails);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Order>> GetRequest(int id)
+        public async Task<ActionResult<ConsignmentRequest>> GetRequest(int id)
         {
 
             var request = await _consignmentRequestBusiness.GetRequestById(id);
@@ -79,7 +79,7 @@ namespace KoiFarmShop.APIService.Controllers
             return Ok(result);
         }
 
-        [HttpPost("{requestId}/detailss")]
+        [HttpPost("{requestId}/details")]
         public async Task<ActionResult<Order>> PostRequestDetails(ConsignmentDetail consignmentDetail)
         {
 

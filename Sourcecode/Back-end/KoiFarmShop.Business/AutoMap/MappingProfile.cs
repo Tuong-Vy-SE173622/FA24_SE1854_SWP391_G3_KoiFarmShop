@@ -28,8 +28,14 @@ namespace KoiFarmShop.Business.AutoMap
             CreateMap<ConsignmentRequest, ConsignmentRequestDto>().ForMember(dest => dest.Customer, opt => opt.MapFrom(src => src.Customer)).ReverseMap();
 
             CreateMap<ConsignmentDetail, ConsignmentDetailDto>().ForMember(dest => dest.Consignment, opt => opt.MapFrom(src => src.Consignment))
-                .ForMember(dest => dest.Koi, opt => opt.MapFrom(src=>src.Koi))
+                .ForMember(dest => dest.Koi, opt => opt.MapFrom(src => src.Koi))
                 .ReverseMap();
+
+            CreateMap<CareRequest, CareRequestDto>().ForMember(dest => dest.Koi, opt => opt.MapFrom(src => src.Koi))
+                .ForMember(dest => dest.Customer, opt => opt.MapFrom(src => src.Customer))
+                .ReverseMap();
+
+            CreateMap<CareRequestDetail, CareRequestDetailDto>().ForMember(dest => dest.CareRequest, opt => opt.MapFrom(src => src.Request)).ReverseMap();
         }
     }
 }

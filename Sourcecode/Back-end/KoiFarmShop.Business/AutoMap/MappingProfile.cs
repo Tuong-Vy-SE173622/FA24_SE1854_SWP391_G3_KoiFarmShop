@@ -28,6 +28,7 @@ namespace KoiFarmShop.Business.AutoMap
             CreateMap<User, RegisterDto>().ReverseMap();
             CreateMap<User, EditUserDto>().ReverseMap();
             CreateMap<User, DeleteUserDto>().ReverseMap();
+            CreateMap<Promotion, PromotionDto>().ReverseMap();
 
             //consignment request MAPPER
             CreateMap<ConsignmentRequestCreateDto, ConsignmentRequest>();

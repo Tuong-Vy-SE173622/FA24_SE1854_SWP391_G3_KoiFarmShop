@@ -9,6 +9,7 @@ using KoiFarmShop.Business.AutoMap;
 using KoiFarmShop.Business.Business.KoiBusiness;
 using KoiFarmShop.Business.Business.KoiTypeBusiness;
 using KoiFarmShop.Business.Business.ConsignmentBusiness;
+using KoiFarmShop.Business.Business.PromotionBusiness;
 
 namespace KoiFarmShop.APIService
 {
@@ -159,6 +160,7 @@ namespace KoiFarmShop.APIService
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IAccountService, AccountService>();
 
+            builder.Services.AddScoped<IPromotionService, PromotionService>();
 
             builder.Services.AddScoped<IKoiService,KoiService>();
             builder.Services.AddScoped<IKoiTypeService ,KoiTypeService>();

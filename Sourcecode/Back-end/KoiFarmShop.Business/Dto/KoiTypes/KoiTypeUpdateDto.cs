@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KoiFarmShop.Business.Dto
+namespace KoiFarmShop.Business.Dto.KoiTypes
 {
-    public class KoiTypeCreateDto
+    public class KoiTypeUpdateDto
     {
         public string Name { get; set; }
         public string ShortDescription { get; set; }

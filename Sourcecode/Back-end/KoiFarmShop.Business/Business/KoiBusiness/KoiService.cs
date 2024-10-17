@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using KoiFarmShop.Business.Dto;
+using KoiFarmShop.Business.Dto.Kois;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -39,11 +39,16 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             return koi.KoiId;
         }
 
-        public async Task<int> UpdateKoiAsync(KoiUpdateDto koiUpdateDto)
+        public async Task<int> UpdateKoiAsync(int id, KoiUpdateDto koiUpdateDto)
         {
-            var koi = _mapper.Map<Koi>(koiUpdateDto);
-            return await _unitOfWork.KoiRepository.UpdateAsync(koi);
+            var existingKoi = await _unitOfWork.KoiRepository.GetByIdAsync(id);
+            if (existingKoi == null)
+                return -1; // Koi not found
+
+            _mapper.Map(koiUpdateDto, existingKoi); // This will only update non-null fields
+            return await _unitOfWork.KoiRepository.UpdateAsync(existingKoi);
         }
+
 
         public async Task<bool> RemoveKoiAsync(int id)
         {
@@ -56,26 +61,66 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             return false;
         }
 
-        //public IQueryable<Koi> ApplyFilters(IQueryable<Koi> query, KoiFilterDto filterDto)
-        //{
-        //    if (!string.IsNullOrEmpty(filterDto.Origin))
-        //    {
-        //        query = query.Where(k => k.Origin.Contains(filterDto.Origin));
-        //    }
+        public async Task<PaginatedResult<KoiDto>> GetAllKoisAsync(KoiFilterDto filterDto)
+        {
+            var query = _unitOfWork.KoiRepository.GetQueryable();
 
-        //    if (filterDto.KoiTypeId.HasValue)
-        //    {
-        //        query = query.Where(k => k.KoiTypeId == filterDto.KoiTypeId);
-        //    }
+            // Filtering logic
 
-        //    if (filterDto.IsImported.HasValue)
-        //    {
-        //        query = query.Where(k => k.IsImported == filterDto.IsImported);
-        //    }
-        //    // need to add more filters based on the need, but might consider dynamic filter :D
+            if (!string.IsNullOrEmpty(filterDto.TypeName))
+            {
+                query = query.Where(k => k.KoiType.Name == filterDto.TypeName);
+            }
 
-        //    return query;
-        //}
+            if (filterDto.MinAge.HasValue)
+            {
+                query = query.Where(k => k.Age >= filterDto.MinAge.Value);
+            }
+
+            if (filterDto.MaxAge.HasValue)
+            {
+                query = query.Where(k => k.Age <= filterDto.MaxAge.Value);
+            }
+
+            if (filterDto.MinSize.HasValue)
+            {
+                query = query.Where(k => k.Size >= filterDto.MinSize.Value);
+            }
+
+            if (filterDto.MaxSize.HasValue)
+            {
+                query = query.Where(k => k.Size <= filterDto.MaxSize.Value);
+            }
+
+            if (filterDto.IsOwnedByFarm.HasValue)
+            {
+                query = query.Where(k => k.IsOwnedByFarm == filterDto.IsOwnedByFarm.Value);
+            }
+
+            if (filterDto.IsImport.HasValue)
+            {
+                query = query.Where(k => k.IsImported == filterDto.IsImport.Value);
+            }
+
+            // Pagination logic
+            var totalRecords = await query.CountAsync();
+            var pagedKois = await query
+                .Skip((filterDto.PageNumber - 1) * filterDto.PageSize)
+                .Take(filterDto.PageSize)
+                .ToListAsync();
+
+            // Mapping the result
+            var koiDtos = _mapper.Map<List<KoiDto>>(pagedKois);
+
+            return new PaginatedResult<KoiDto>
+            {
+                Data = koiDtos,
+                TotalRecords = totalRecords,
+                PageNumber = filterDto.PageNumber,
+                PageSize = filterDto.PageSize
+            };
+        }
+
     }
 
 

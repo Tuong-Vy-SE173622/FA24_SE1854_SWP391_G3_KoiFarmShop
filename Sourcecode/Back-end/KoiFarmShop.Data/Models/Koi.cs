@@ -14,7 +14,7 @@ public partial class Koi
     public int KoiId { get; set; }
 
     [Column("koi_type_id")]
-    public int? KoiTypeId { get; set; }
+    public int KoiTypeId { get; set; }
 
     [Column("origin")]
     [StringLength(100)]

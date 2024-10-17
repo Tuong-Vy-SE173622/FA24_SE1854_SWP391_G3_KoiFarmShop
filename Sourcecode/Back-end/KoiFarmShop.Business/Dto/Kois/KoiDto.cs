@@ -4,8 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KoiFarmShop.Business.Dto.KoiTypes;
 
-namespace KoiFarmShop.Business.Dto
+namespace KoiFarmShop.Business.Dto.Kois
 {
     public class KoiDto
     {

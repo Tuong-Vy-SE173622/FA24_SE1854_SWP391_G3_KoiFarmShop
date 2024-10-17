@@ -1,5 +1,5 @@
 ﻿using KoiFarmShop.Business.Business.KoiTypeBusiness;
-using KoiFarmShop.Business.Dto;
+using KoiFarmShop.Business.Dto.KoiTypes;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -23,6 +23,14 @@ namespace KoiFarmShop.APIService.Controllers
             return Ok(koiTypes);
         }
 
+        [HttpGet("koitypes")]
+        public async Task<IActionResult> GetFilteredKoiTypes([FromQuery] KoiTypeFilterDto filterDto)
+        {
+            var result = await _koiTypeService.GetAllKoiTypesAsync(filterDto);
+            return Ok(result);
+        }
+
+
         [HttpGet("{id}")]
         public async Task<ActionResult<KoiTypeDto>> GetKoiTypeById(int id)
         {
@@ -39,10 +47,14 @@ namespace KoiFarmShop.APIService.Controllers
             return CreatedAtAction(nameof(GetKoiTypeById), new { id }, id);
         }
 
-        [HttpPut]
-        public async Task<ActionResult<int>> UpdateKoiType(KoiTypeUpdateDto koiTypeUpdateDto)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateKoiType(int id, [FromBody] KoiTypeUpdateDto koiTypeUpdateDto)
         {
-            var result = await _koiTypeService.UpdateKoiTypeAsync(koiTypeUpdateDto);
+            var result = await _koiTypeService.UpdateKoiTypeAsync(id, koiTypeUpdateDto);
+            if (result < 0)
+            {
+                return NotFound(); 
+            }
             return Ok(result);
         }
 

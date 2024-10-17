@@ -17,8 +17,11 @@ namespace KoiFarmShop.Business.AutoMap
             CreateMap<Customer, CustomerDto>().ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User)).ReverseMap();
 
             CreateMap<Koi, KoiDto>().ForMember(dest => dest.KoiType, opt => opt.MapFrom(src => src.KoiType)).ReverseMap();
-
             CreateMap<KoiType, KoiTypeDto>().ReverseMap();
+            CreateMap<KoiCreateDto, Koi>();
+            CreateMap<KoiUpdateDto, Koi>();
+            CreateMap<KoiTypeCreateDto, KoiType>();
+            CreateMap<KoiTypeUpdateDto, KoiType>();
 
             CreateMap<Order, OrderDto>().ForMember(dest => dest.Customer, opt => opt.MapFrom(src => src.Customer)).ReverseMap();
 

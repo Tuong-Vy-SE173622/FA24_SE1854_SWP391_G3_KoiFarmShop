@@ -49,7 +49,7 @@ namespace KoiFarmShop.APIService.Controllers
                 return BadRequest();
             }
             await _koiService.UpdateKoiAsync(koiUpdateDto);
-            return NoContent();
+            return Ok(koiUpdateDto);
         }
 
         [HttpDelete("{id}")]

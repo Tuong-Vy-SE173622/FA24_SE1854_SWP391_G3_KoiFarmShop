@@ -19,6 +19,7 @@ namespace KoiFarmShop.Data
         private AccountRepository _accountRepository;
         private ConsignmentDetailRepository _consignmentDetailRepository;
         private ConsignmentRequestRepository _consignmentRequestRepository;
+        private PromotionRepository _promotionRepository;
 
         public UnitOfWork() => _context ??= new FA_SE1854_SWP391_G3_KoiFarmShopContext();
 
@@ -79,6 +80,14 @@ namespace KoiFarmShop.Data
             get
             {
                 return _consignmentRequestRepository ??= new ConsignmentRequestRepository(_context);
+            }
+        }
+
+        public PromotionRepository PromotionRepository
+        {
+            get
+            {
+                return _promotionRepository ??= new PromotionRepository(_context);
             }
         }
 

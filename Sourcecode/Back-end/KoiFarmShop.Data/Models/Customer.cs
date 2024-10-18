@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+#nullable disable
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,7 +21,7 @@ public partial class Customer
     [Column("address")]
     [StringLength(255)]
     [Unicode(false)]
-    public string? Address { get; set; }
+    public string Address { get; set; }
 
     [Column("loyalty_points")]
     public int? LoyaltyPoints { get; set; }
@@ -30,7 +32,7 @@ public partial class Customer
     [Column("created_by")]
     [StringLength(255)]
     [Unicode(false)]
-    public string? CreatedBy { get; set; }
+    public string CreatedBy { get; set; }
 
     [Column("updated_at", TypeName = "datetime")]
     public DateTime? UpdatedAt { get; set; }
@@ -38,7 +40,7 @@ public partial class Customer
     [Column("updated_by")]
     [StringLength(255)]
     [Unicode(false)]
-    public string? UpdatedBy { get; set; }
+    public string UpdatedBy { get; set; }
 
     [InverseProperty("Customer")]
     public virtual ICollection<CareRequest> CareRequests { get; set; } = new List<CareRequest>();
@@ -57,5 +59,5 @@ public partial class Customer
 
     [ForeignKey("UserId")]
     [InverseProperty("Customers")]
-    public virtual User? User { get; set; }
+    public virtual User User { get; set; }
 }

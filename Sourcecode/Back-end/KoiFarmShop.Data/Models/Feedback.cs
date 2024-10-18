@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+#nullable disable
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,7 +24,7 @@ public partial class Feedback
     [Column("content")]
     [StringLength(255)]
     [Unicode(false)]
-    public string? Content { get; set; }
+    public string Content { get; set; }
 
     [Column("is_active")]
     public bool? IsActive { get; set; }
@@ -32,9 +34,9 @@ public partial class Feedback
 
     [ForeignKey("CustomerId")]
     [InverseProperty("Feedbacks")]
-    public virtual Customer? Customer { get; set; }
+    public virtual Customer Customer { get; set; }
 
     [ForeignKey("OrderId")]
     [InverseProperty("Feedbacks")]
-    public virtual Order Order { get; set; } = null!;
+    public virtual Order Order { get; set; }
 }

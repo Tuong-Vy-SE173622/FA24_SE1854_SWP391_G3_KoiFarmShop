@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+#nullable disable
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,12 +26,12 @@ public partial class CareRequestDetail
 
     [Column("status")]
     [StringLength(255)]
-    public string? Status { get; set; }
+    public string Status { get; set; }
 
     [Column("note")]
     [StringLength(255)]
     [Unicode(false)]
-    public string? Note { get; set; }
+    public string Note { get; set; }
 
     [Column("created_at")]
     public DateTime? CreatedAt { get; set; }
@@ -37,7 +39,7 @@ public partial class CareRequestDetail
     [Column("created_by")]
     [StringLength(255)]
     [Unicode(false)]
-    public string? CreatedBy { get; set; }
+    public string CreatedBy { get; set; }
 
     [Column("updated_at")]
     public DateTime? UpdatedAt { get; set; }
@@ -45,9 +47,9 @@ public partial class CareRequestDetail
     [Column("updated_by")]
     [StringLength(255)]
     [Unicode(false)]
-    public string? UpdatedBy { get; set; }
+    public string UpdatedBy { get; set; }
 
     [ForeignKey("RequestId")]
     [InverseProperty("CareRequestDetails")]
-    public virtual CareRequest Request { get; set; } = null!;
+    public virtual CareRequest Request { get; set; }
 }

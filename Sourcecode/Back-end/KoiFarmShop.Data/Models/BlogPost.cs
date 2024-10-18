@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+#nullable disable
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,12 +18,12 @@ public partial class BlogPost
     [Column("title")]
     [StringLength(255)]
     [Unicode(false)]
-    public string? Title { get; set; }
+    public string Title { get; set; }
 
     [Column("content")]
     [StringLength(255)]
     [Unicode(false)]
-    public string? Content { get; set; }
+    public string Content { get; set; }
 
     [Column("is_active")]
     public bool? IsActive { get; set; }
@@ -29,7 +31,7 @@ public partial class BlogPost
     [Column("note")]
     [StringLength(255)]
     [Unicode(false)]
-    public string? Note { get; set; }
+    public string Note { get; set; }
 
     [Column("created_at")]
     public DateTime? CreatedAt { get; set; }
@@ -37,7 +39,7 @@ public partial class BlogPost
     [Column("created_by")]
     [StringLength(255)]
     [Unicode(false)]
-    public string? CreatedBy { get; set; }
+    public string CreatedBy { get; set; }
 
     [Column("updated_at")]
     public DateTime? UpdatedAt { get; set; }
@@ -45,5 +47,5 @@ public partial class BlogPost
     [Column("updated_by")]
     [StringLength(255)]
     [Unicode(false)]
-    public string? UpdatedBy { get; set; }
+    public string UpdatedBy { get; set; }
 }

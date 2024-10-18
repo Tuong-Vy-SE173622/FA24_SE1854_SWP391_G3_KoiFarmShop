@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,7 +17,7 @@ public partial class KoiType
     [Column("name")]
     [StringLength(100)]
     [Unicode(false)]
-    public string? Name { get; set; }
+    public string Name { get; set; }
 
     [Column("short_description")]
     [StringLength(500)]

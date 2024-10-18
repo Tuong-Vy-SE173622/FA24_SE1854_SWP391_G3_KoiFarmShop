@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+#nullable disable
+using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -7,12 +9,12 @@ namespace KoiFarmShop.Data.Models;
 
 public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
 {
-    public FA_SE1854_SWP391_G3_KoiFarmShopContext()
+    public FA_SE1854_SWP391_G3_KoiFarmShopContext(DbContextOptions<FA_SE1854_SWP391_G3_KoiFarmShopContext> options)
+        : base(options)
     {
     }
 
-    public FA_SE1854_SWP391_G3_KoiFarmShopContext(DbContextOptions<FA_SE1854_SWP391_G3_KoiFarmShopContext> options)
-        : base(options)
+    public FA_SE1854_SWP391_G3_KoiFarmShopContext()
     {
     }
 
@@ -82,8 +84,6 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
             entity.Property(e => e.RequestedDate).HasDefaultValueSql("('GETDATE()')");
 
             entity.HasOne(d => d.Customer).WithMany(p => p.CareRequests).HasConstraintName("care_request_customer_id_foreign");
-
-            entity.HasOne(d => d.Koi).WithMany(p => p.CareRequests).HasConstraintName("care_request_koi_id_foreign");
         });
 
         modelBuilder.Entity<CareRequestDetail>(entity =>
@@ -111,9 +111,8 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
         {
             entity.HasKey(e => e.ConsignmentDetailId).HasName("consignment_item_consignment_id_primary");
 
-            entity.Property(e => e.ConsignmentDetailId).ValueGeneratedNever();
-            entity.Property(e => e.CreatedAt).HasDefaultValueSql("('GETDATE()')");
-            entity.Property(e => e.IsActive).HasDefaultValueSql("('DEFAULT TRUE')");
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
 
             entity.HasOne(d => d.Consignment).WithMany(p => p.ConsignmentDetails).HasConstraintName("FK_Consignment_Detail_Consignment_Request");
 
@@ -122,11 +121,7 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
 
         modelBuilder.Entity<ConsignmentRequest>(entity =>
         {
-            entity.Property(e => e.ConsignmentId).ValueGeneratedNever();
-            entity.Property(e => e.IsActive).HasDefaultValueSql("('DEFAULT TRUE')");
-            entity.Property(e => e.SubAmount).IsFixedLength();
-            entity.Property(e => e.Vat).IsFixedLength();
-            entity.Property(e => e.VatAmount).IsFixedLength();
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
 
             entity.HasOne(d => d.Customer).WithMany(p => p.ConsignmentRequests).HasConstraintName("FK_Consignment_Request_Customer");
         });
@@ -158,21 +153,19 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
 
         modelBuilder.Entity<Koi>(entity =>
         {
-            entity.HasKey(e => e.KoiId).HasName("koi_koi_id_primary");
+            entity.HasKey(e => e.KoiId).HasName("animal_animal_id_primary");
 
-            entity.Property(e => e.KoiId).ValueGeneratedNever();
-            entity.Property(e => e.CreatedAt).HasDefaultValueSql("('GETDATE()')");
-            entity.Property(e => e.IsActive).HasDefaultValueSql("('DEFAULT TRUE')");
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
 
             entity.HasOne(d => d.KoiType).WithMany(p => p.Kois).HasConstraintName("koi_koi_type_id_foreign");
         });
 
         modelBuilder.Entity<KoiType>(entity =>
         {
-            entity.HasKey(e => e.KoiTypeId).HasName("koi_type_koi_type_id_primary");
+            entity.HasKey(e => e.KoiTypeId).HasName("animal_type_animal_type_id_primary");
 
-            entity.Property(e => e.KoiTypeId).ValueGeneratedNever();
-            entity.Property(e => e.CreatedAt).HasDefaultValueSql("('GETDATE()')");
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
         });
 
         modelBuilder.Entity<Order>(entity =>
@@ -194,8 +187,6 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
             entity.Property(e => e.OrderItemId).ValueGeneratedNever();
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("('GETDATE()')");
             entity.Property(e => e.IsActive).HasDefaultValueSql("('DEFAULT TRUE')");
-
-            entity.HasOne(d => d.Koi).WithMany(p => p.OrderItems).HasConstraintName("FK_Order_Item_koi");
 
             entity.HasOne(d => d.Order).WithMany(p => p.OrderItems).HasConstraintName("order_item_order_id_foreign");
         });

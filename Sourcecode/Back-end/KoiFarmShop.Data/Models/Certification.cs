@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+#nullable disable
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,21 +20,21 @@ public partial class Certification
 
     [Column("origin")]
     [StringLength(500)]
-    public string? Origin { get; set; }
+    public string Origin { get; set; }
 
     [Column("image")]
     [StringLength(500)]
-    public string? Image { get; set; }
+    public string Image { get; set; }
 
     [Column("health_status_description")]
     [StringLength(500)]
-    public string? HealthStatusDescription { get; set; }
+    public string HealthStatusDescription { get; set; }
 
     [Column("award")]
     [StringLength(500)]
-    public string? Award { get; set; }
+    public string Award { get; set; }
 
     [ForeignKey("OrderItemId")]
     [InverseProperty("Certifications")]
-    public virtual OrderItem OrderItem { get; set; } = null!;
+    public virtual OrderItem OrderItem { get; set; }
 }

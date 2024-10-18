@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+#nullable disable
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -79,17 +81,11 @@ public partial class Koi
     public string? UpdatedBy { get; set; }
 
     [InverseProperty("Koi")]
-    public virtual ICollection<CareRequest> CareRequests { get; set; } = new List<CareRequest>();
-
-    [InverseProperty("Koi")]
     public virtual ICollection<ConsignmentDetail> ConsignmentDetails { get; set; } = new List<ConsignmentDetail>();
 
     [ForeignKey("KoiTypeId")]
     [InverseProperty("Kois")]
-    public virtual KoiType? KoiType { get; set; }
-
-    [InverseProperty("Koi")]
-    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+    public virtual KoiType KoiType { get; set; }
 
     [InverseProperty("Koi")]
     public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();

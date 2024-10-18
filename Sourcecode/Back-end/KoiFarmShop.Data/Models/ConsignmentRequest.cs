@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+#nullable disable
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,18 +16,15 @@ public partial class ConsignmentRequest
     public int ConsignmentId { get; set; }
 
     [Column("customer_id")]
-    public int? CustomerId { get; set; }
+    public int CustomerId { get; set; }
 
     [Column("sub_amount")]
-    [StringLength(10)]
     public double? SubAmount { get; set; }
 
     [Column("VAT")]
-    [StringLength(10)]
     public double? Vat { get; set; }
 
     [Column("VAT_amount")]
-    [StringLength(10)]
     public double? VatAmount { get; set; }
 
     [Column("promotion_amount")]
@@ -35,6 +34,7 @@ public partial class ConsignmentRequest
     public double? TotalAmount { get; set; }
 
     [Column("payment_method")]
+    [StringLength(255)]
     public string? PaymentMethod { get; set; }
 
     [Column("payment_status")]

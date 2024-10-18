@@ -8,6 +8,7 @@ using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Consigments;
 using KoiFarmShop.Business.Dto.Kois;
 using KoiFarmShop.Business.Dto.KoiTypes;
+using KoiFarmShop.Business.Dto.Promotion;
 using KoiFarmShop.Data.Models;
 
 namespace KoiFarmShop.Business.AutoMap
@@ -19,11 +20,8 @@ namespace KoiFarmShop.Business.AutoMap
             CreateMap<Customer, CustomerDto>().ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User)).ReverseMap();
 
             CreateMap<Koi, KoiDto>().ForMember(dest => dest.KoiType, opt => opt.MapFrom(src => src.KoiType)).ReverseMap();
+
             CreateMap<KoiType, KoiTypeDto>().ReverseMap();
-            CreateMap<KoiCreateDto, Koi>();
-            CreateMap<KoiUpdateDto, Koi>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
-            CreateMap<KoiTypeCreateDto, KoiType>();
-            CreateMap<KoiTypeUpdateDto, KoiType>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null)); ;
 
             CreateMap<Order, OrderDto>().ForMember(dest => dest.Customer, opt => opt.MapFrom(src => src.Customer)).ReverseMap();
 
@@ -34,6 +32,8 @@ namespace KoiFarmShop.Business.AutoMap
             CreateMap<User, EditUserDto>().ReverseMap();
             CreateMap<User, DeleteUserDto>().ReverseMap();
             CreateMap<Promotion, PromotionDto>().ReverseMap();
+            CreateMap<Promotion, PromotionCreateDto>().ReverseMap();
+            CreateMap<Promotion, DeletePromotionDto>().ReverseMap();
 
             //consignment request MAPPER
             CreateMap<ConsignmentRequestCreateDto, ConsignmentRequest>();

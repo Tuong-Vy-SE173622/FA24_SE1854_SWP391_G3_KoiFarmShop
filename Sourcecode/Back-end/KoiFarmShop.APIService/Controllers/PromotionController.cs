@@ -1,6 +1,7 @@
 ﻿using KoiFarmShop.Business.Business.PromotionBusiness;
 using KoiFarmShop.Business.Business.UserBusiness;
 using KoiFarmShop.Business.Dto;
+using KoiFarmShop.Business.Dto.Promotion;
 using KoiFarmShop.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,7 +26,7 @@ namespace KoiFarmShop.APIService.Controllers
 
         #region Get all list promotion 
         /// <summary>
-        /// Get list of users by filter
+        /// Get list of promotion 
         /// </summary>
         /// <returns>A list of users</returns>
         [HttpGet]
@@ -39,7 +40,7 @@ namespace KoiFarmShop.APIService.Controllers
 
         #region Get list promotion filter
         /// <summary>
-        /// Get list of users by filter
+        /// Get list of promotions by filter
         /// </summary>
         /// <returns>A list of users</returns>
         [HttpGet("{id}")]
@@ -53,7 +54,7 @@ namespace KoiFarmShop.APIService.Controllers
 
         #region Add a new voucher
         /// <summary>
-        /// Add a new user by admin
+        /// Add a new promotion by admin
         /// </summary>
         /// <returns>Status of action</returns>
         [HttpPost]
@@ -87,7 +88,7 @@ namespace KoiFarmShop.APIService.Controllers
 
         #region Update Promotion
         /// <summary>
-        /// Update a user
+        /// Update a promotion
         /// </summary>
         /// <returns>Status of action</returns>
         [HttpPut("{id}")]
@@ -96,6 +97,21 @@ namespace KoiFarmShop.APIService.Controllers
             var currentUser = HttpContext.User;
             var updateResult = await _promotionService.UpdatePromotion(promotionId, promotionDto, currentUser);
             return updateResult.IsSuccess ? Ok(updateResult) : BadRequest(updateResult);
+        }
+        #endregion
+
+
+        #region Delete promotion
+        /// <summary>
+        /// Delete a user
+        /// </summary>
+        /// <returns>Status of action</returns>
+        [HttpDelete]
+        public async Task<IActionResult> DeletePromotion([FromBody] DeletePromotionDto request)
+        {
+            var currentUser = HttpContext.User;
+            var result = await _promotionService.DeletePromotion(request, currentUser);
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
         #endregion
     }

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KoiFarmShop.Business.Dto
+namespace KoiFarmShop.Business.Dto.Promotion
 {
     public class PromotionDto
     {

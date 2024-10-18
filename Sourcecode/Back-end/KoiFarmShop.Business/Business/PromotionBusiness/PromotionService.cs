@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using KoiFarmShop.Business.Dto;
+using KoiFarmShop.Business.Dto.Promotion;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,10 +30,24 @@ namespace KoiFarmShop.Business.Business.PromotionBusiness
 
             return _mapper.Map<IEnumerable<PromotionDto>>(p);
         }
-        public async Task<PromotionDto> GetPromotionByIdAsync(int id)
+        public Promotion GetPromotionById(int id)
         {
-            var p = await _unitOfWork.PromotionRepository.GetByIdAsync(id);
-            return _mapper.Map<PromotionDto>(p);
+            try
+            {
+                var p = _unitOfWork.PromotionRepository.Get(x => x.PromotionId == id);
+
+                if (p == null)
+                {
+                    // Handle the case where the user is not found, e.g., return null or throw an exception
+                    return null;
+                }
+
+                return p;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         public async Task<ResultDto> GetPromotionList(int? promotionId)
         {
@@ -157,6 +173,38 @@ namespace KoiFarmShop.Business.Business.PromotionBusiness
                 result.Code = 400;
                 result.Message = ex.Message;
                 return result;
+            }
+            return result;
+        }
+        public async Task<ResultDto> DeletePromotion(DeletePromotionDto request, ClaimsPrincipal userDelete)
+        {
+            var result = new ResultDto();
+            try
+            {
+                var p = GetPromotionById(request.PromotionId);
+                if (p == null)
+                {
+                    result.Message = "Voucher not found or deleted";
+                    result.Code = 404;
+                    result.IsSuccess = false;
+                    result.Data = null;
+                    return result;
+                }
+                p.UpdatedBy = userDelete.FindFirst("UserName")?.Value;
+                p.UpdatedAt = DateTime.UtcNow;
+                p.IsActive = false;
+                _unitOfWork.PromotionRepository.Update(p);
+                _unitOfWork.PromotionRepository.Save();
+
+                result.Message = "Delete voucher successfully";
+                result.Code = 200;
+                result.IsSuccess = true;
+                result.Data = p;
+            }
+            catch (DbUpdateException ex)
+            {
+                result.Message = ex.Message;
+                result.IsSuccess = false;
             }
             return result;
         }

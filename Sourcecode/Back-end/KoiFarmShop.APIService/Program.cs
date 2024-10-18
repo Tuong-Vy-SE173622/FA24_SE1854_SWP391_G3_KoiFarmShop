@@ -171,6 +171,9 @@ namespace KoiFarmShop.APIService
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();
 
+            //exception handler
+            app.UseMiddleware<GlobalExceptionHandler>();
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

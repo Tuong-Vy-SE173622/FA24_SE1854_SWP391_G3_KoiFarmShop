@@ -10,10 +10,10 @@ namespace KoiFarmShop.Business.Dto.Consigments
     public class ConsignmentDetailCreateDto
     {
         [Required]
-        public int? ConsignmentId { get; set; }
+        public int ConsignmentId { get; set; }
 
         [Required]
-        public int? KoiId { get; set; }
+        public int KoiId { get; set; }
 
         [StringLength(30, ErrorMessage = "ConsignmentType cannot be longer than 30 characters.")]
         public string? ConsignmentType { get; set; }

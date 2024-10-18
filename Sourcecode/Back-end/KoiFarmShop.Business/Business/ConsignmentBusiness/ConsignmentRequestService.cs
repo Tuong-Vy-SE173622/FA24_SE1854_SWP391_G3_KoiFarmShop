@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KoiFarmShop.Business.Dto.Consigments;
+using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 
@@ -18,8 +19,13 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
 
         public async Task<ConsignmentRequestResponseDto> CreateConsignmentRequestAsync(ConsignmentRequestCreateDto consignmentRequestCreateDto)
         {
-            //need to check customerId
-            
+            //need to check customerId (here still uses userId)
+            var user = _unitOfWork.UserRepository.GetById(consignmentRequestCreateDto.CustomerId);
+            if (user == null)
+            {
+                throw new NotFoundException("Customer Id does not exist");
+            }
+
             var consignmentRequest = _mapper.Map<ConsignmentRequest>(consignmentRequestCreateDto);
             await _unitOfWork.ConsignmentRequestRepository.CreateAsync(consignmentRequest);
             await _unitOfWork.SaveChangesAsync();

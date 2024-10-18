@@ -11,7 +11,7 @@ namespace KoiFarmShop.Business.Dto.Consigments
     public class ConsignmentRequestCreateDto
     {
         [Required(ErrorMessage = "CustomerId is required.")]
-        public int? CustomerId { get; set; }
+        public int CustomerId { get; set; }
 
         [StringLength(50, ErrorMessage = "PaymentMethod cannot be longer than 50 characters.")]
         public string? PaymentMethod { get; set; }

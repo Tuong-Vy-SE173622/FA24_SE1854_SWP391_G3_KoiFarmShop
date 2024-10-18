@@ -9,7 +9,7 @@ namespace KoiFarmShop.Business.Dto.Consigments
     public class ConsignmentRequestResponseDto
     {
         public int ConsignmentId { get; set; }
-        public int? CustomerId { get; set; }
+        public int CustomerId { get; set; }
         public string? Status { get; set; }
         public double? SubAmount { get; set; }
         public double? Vat { get; set; }

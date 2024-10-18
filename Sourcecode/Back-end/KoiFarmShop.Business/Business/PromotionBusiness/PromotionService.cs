@@ -5,6 +5,7 @@ using KoiFarmShop.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,24 +20,18 @@ namespace KoiFarmShop.Business.Business.PromotionBusiness
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public Promotion GetPromotionById(int id)
+        public async Task<IEnumerable<PromotionDto>> GetAllPromotionsAsync()
         {
-            try
-            {
-                var p = _unitOfWork.PromotionRepository.Get(x => x.PromotionId == id);
+            //TODO: filtering and pagination
 
-                if (p == null)
-                {
-                    // Handle the case where the user is not found, e.g., return null or throw an exception
-                    return null;
-                }
+            var p = await _unitOfWork.PromotionRepository.GetAllAsync();
 
-                return p;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return _mapper.Map<IEnumerable<PromotionDto>>(p);
+        }
+        public async Task<PromotionDto> GetPromotionByIdAsync(int id)
+        {
+            var p = await _unitOfWork.PromotionRepository.GetByIdAsync(id);
+            return _mapper.Map<PromotionDto>(p);
         }
         public async Task<ResultDto> GetPromotionList(int? promotionId)
         {
@@ -87,6 +82,52 @@ namespace KoiFarmShop.Business.Business.PromotionBusiness
                 result.Code = 500; // Add the status code for error
             }
             return result;
+        }
+        //public async Task<int> CreatePromotionAsync(PromotionCreateDto promotionCreateDto)
+        //{
+        //    var p = _mapper.Map<Promotion>(promotionCreateDto);
+        //    await _unitOfWork.PromotionRepository.CreateAsync(p);
+        //    return p.PromotionId;
+        //}
+        public async Task<ResultDto> AddNewPromotion(PromotionCreateDto model, ClaimsPrincipal userCreate)
+        {
+            ResultDto result = new ResultDto();
+            try
+            {
+                // Check if user already exists
+                var existingPromotion = _unitOfWork.PromotionRepository.Get(u => u.PromotionId == model.PromotionId);
+                if (existingPromotion != null)
+                {
+                    result.IsSuccess = false;
+                    result.Code = 400;
+                    result.Message = "PromotionId already exists";
+                    return result;
+                }
+                // Map the request model to the user entity
+                var p = _mapper.Map<Promotion>(model);
+
+                // Generate the next user ID
+                p.PromotionId = await _unitOfWork.PromotionRepository.GenerateNewPromotionId();
+
+                // Set other properties (e.g., CreatedDate, Status, etc.)
+                p.CreatedBy = userCreate.FindFirst("UserName")?.Value;
+                p.CreatedAt = DateTime.UtcNow;
+
+                // Add the user to the repository and save changes
+                _unitOfWork.PromotionRepository.Create(p);
+                _unitOfWork.PromotionRepository.Save();
+                result.IsSuccess = true;
+                result.Code = 200;
+                result.Message = "Add New Voucher Success";
+                return result;
+            }
+            catch (Exception e)
+            {
+                result.IsSuccess = false;
+                result.Code = 400;
+                result.Message = e.Message;
+                return result;
+            }
         }
     }
 }

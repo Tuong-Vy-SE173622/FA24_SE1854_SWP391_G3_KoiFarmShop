@@ -38,5 +38,39 @@ namespace KoiFarmShop.Data.Repositories
                 .AsNoTracking()
                 .ToListAsync();
         }
+        public async Task<int> GenerateNewPromotionId()
+        {
+            const int maxRetryCount = 5;
+            int retryCount = 0;
+
+            while (retryCount < maxRetryCount)
+            {
+                var lastPromotion = await _context.Promotions
+                                             .OrderByDescending(u => u.PromotionId)
+                                             .FirstOrDefaultAsync();
+
+                if (lastPromotion == null || lastPromotion.PromotionId == 0)
+                {
+                    return 1; // Start from 1 (integer value)
+                }
+
+                int newId = lastPromotion.PromotionId + 1;
+
+                // Check if the generated userId already exists
+                var existingPromotion = await _context.Promotions
+                                                 .Where(u => u.PromotionId == newId)
+                                                 .FirstOrDefaultAsync();
+
+                if (existingPromotion == null)
+                {
+                    return newId; // Return the new integer ID
+                }
+
+                // Increment retry count and try again
+                retryCount++;
+            }
+
+            throw new InvalidOperationException("Failed to generate a unique UserId after multiple attempts.");
+        }
     }
 }

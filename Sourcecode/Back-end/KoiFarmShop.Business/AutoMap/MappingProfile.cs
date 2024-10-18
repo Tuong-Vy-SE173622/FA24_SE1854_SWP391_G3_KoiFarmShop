@@ -20,8 +20,11 @@ namespace KoiFarmShop.Business.AutoMap
             CreateMap<Customer, CustomerDto>().ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User)).ReverseMap();
 
             CreateMap<Koi, KoiDto>().ForMember(dest => dest.KoiType, opt => opt.MapFrom(src => src.KoiType)).ReverseMap();
-
+            CreateMap<KoiCreateDto, Koi>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+            CreateMap<KoiUpdateDto, Koi>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null)); 
             CreateMap<KoiType, KoiTypeDto>().ReverseMap();
+            CreateMap<KoiTypeCreateDto, KoiType>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null)); 
+            CreateMap<KoiTypeUpdateDto, KoiType>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null)); 
 
             CreateMap<Order, OrderDto>().ForMember(dest => dest.Customer, opt => opt.MapFrom(src => src.Customer)).ReverseMap();
 
@@ -37,11 +40,23 @@ namespace KoiFarmShop.Business.AutoMap
 
             //consignment request MAPPER
             CreateMap<ConsignmentRequestCreateDto, ConsignmentRequest>();
-            CreateMap<ConsignmentRequestUpdateDto, ConsignmentRequest>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null)); ;
+            CreateMap<ConsignmentRequestUpdateDto, ConsignmentRequest>().ForAllMembers(
+                opt => opt.Condition(
+                    (src, dest, srcMember) =>srcMember != null &&
+                                            !(srcMember is int && (int)srcMember == 0) &&
+                                            !(srcMember is double && (double)srcMember == 0)
+                    )
+                );
+
             CreateMap<ConsignmentRequest, ConsignmentRequestResponseDto>();
             //considement detail MAPPER
             CreateMap<ConsignmentDetailCreateDto, ConsignmentDetail>();
-            CreateMap<ConsignmentDetailUpdateDto, ConsignmentDetail>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null)); ;
+            CreateMap<ConsignmentDetailUpdateDto, ConsignmentDetail>().ForAllMembers(opt => opt.Condition(
+                    (src, dest, srcMember) => srcMember != null &&
+                                            !(srcMember is int && (int)srcMember == 0) &&
+                                            !(srcMember is double && (double)srcMember == 0)
+                    )
+                );
             CreateMap<ConsignmentDetail, ConsignmentDetailResponseDto>();
         }
     }

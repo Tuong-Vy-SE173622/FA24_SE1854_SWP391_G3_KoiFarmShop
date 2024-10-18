@@ -45,7 +45,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             if (existingKoi == null)
                 return -1; // Koi not found
 
-            _mapper.Map(koiUpdateDto, existingKoi); // This will only update non-null fields
+            _mapper.Map(koiUpdateDto, existingKoi); // only update non-null fields :3
             return await _unitOfWork.KoiRepository.UpdateAsync(existingKoi);
         }
 

@@ -36,7 +36,7 @@ namespace KoiFarmShop.APIService.Controllers
             return NoContent();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{consignmentRequestId}")]
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _consignmentDetailService.GetDetailsByConsignmentRequestIdAsync(id);

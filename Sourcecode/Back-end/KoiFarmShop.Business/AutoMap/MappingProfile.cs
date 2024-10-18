@@ -37,11 +37,11 @@ namespace KoiFarmShop.Business.AutoMap
 
             //consignment request MAPPER
             CreateMap<ConsignmentRequestCreateDto, ConsignmentRequest>();
-            CreateMap<ConsignmentUpdateDto, ConsignmentRequest>();
+            CreateMap<ConsignmentRequestUpdateDto, ConsignmentRequest>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null)); ;
             CreateMap<ConsignmentRequest, ConsignmentRequestResponseDto>();
             //considement detail MAPPER
             CreateMap<ConsignmentDetailCreateDto, ConsignmentDetail>();
-            CreateMap<ConsignmentDetailUpdateDto, ConsignmentDetail>();
+            CreateMap<ConsignmentDetailUpdateDto, ConsignmentDetail>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null)); ;
             CreateMap<ConsignmentDetail, ConsignmentDetailResponseDto>();
         }
     }

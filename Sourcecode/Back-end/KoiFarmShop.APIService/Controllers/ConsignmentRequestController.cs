@@ -16,42 +16,40 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ConsignmentRequestResponseDto>> CreateConsignmentRequest(ConsignmentRequestCreateDto createDto)
+        public async Task<IActionResult> CreateConsignmentRequest([FromBody] ConsignmentRequestCreateDto consignmentRequestCreateDto)
         {
-            var result = await _consignmentRequestService.CreateConsignmentRequestAsync(createDto);
-            return CreatedAtAction(nameof(GetConsignmentRequestById), new { id = result.ConsignmentId }, result);
+            var result = await _consignmentRequestService.CreateConsignmentRequestAsync(consignmentRequestCreateDto);
+            return CreatedAtAction(nameof(GetById), new { id = result.ConsignmentId }, result);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ConsignmentRequestResponseDto>> UpdateConsignmentRequest(int id, ConsignmentUpdateDto updateDto)
+        public async Task<IActionResult> UpdateConsignmentRequest(int id, [FromBody] ConsignmentRequestUpdateDto consignmentRequestUpdateDto)
         {
-            var result = await _consignmentRequestService.UpdateConsignmentRequestAsync(id, updateDto);
-            if (result == null) return NotFound();
+            var result = await _consignmentRequestService.UpdateConsignmentRequestAsync(id, consignmentRequestUpdateDto);
             return Ok(result);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteConsignmentRequest(int id)
         {
-            var deleted = await _consignmentRequestService.DeleteConsignmentRequestAsync(id);
-            if (!deleted) return NotFound();
+            await _consignmentRequestService.DeleteConsignmentRequestAsync(id);
             return NoContent();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ConsignmentRequestResponseDto>> GetConsignmentRequestById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             var result = await _consignmentRequestService.GetConsignmentRequestByIdAsync(id);
-            if (result == null) return NotFound();
             return Ok(result);
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ConsignmentRequestResponseDto>>> GetAllConsignmentRequests()
+        public async Task<IActionResult> GetAll()
         {
-            var results = await _consignmentRequestService.GetAllConsignmentRequestsAsync();
-            return Ok(results);
+            var result = await _consignmentRequestService.GetAllConsignmentRequestsAsync();
+            return Ok(result);
         }
     }
+
 
 }

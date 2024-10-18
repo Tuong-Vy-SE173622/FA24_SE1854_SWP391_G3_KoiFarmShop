@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
 using KoiFarmShop.Business.Dto.Consigments;
-using KoiFarmShop.Data.Models;
 using KoiFarmShop.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KoiFarmShop.Data.Models;
 
 namespace KoiFarmShop.Business.Business.ConsignmentBusiness
 {
@@ -21,40 +16,41 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             _mapper = mapper;
         }
 
-        public async Task<ConsignmentRequestResponseDto> CreateConsignmentRequestAsync(ConsignmentRequestCreateDto createDto)
+        public async Task<ConsignmentRequestResponseDto> CreateConsignmentRequestAsync(ConsignmentRequestCreateDto consignmentRequestCreateDto)
         {
-            var consignmentRequest = _mapper.Map<ConsignmentRequest>(createDto);
+            //need to check customerId
+            
+            var consignmentRequest = _mapper.Map<ConsignmentRequest>(consignmentRequestCreateDto);
             await _unitOfWork.ConsignmentRequestRepository.CreateAsync(consignmentRequest);
             await _unitOfWork.SaveChangesAsync();
             return _mapper.Map<ConsignmentRequestResponseDto>(consignmentRequest);
         }
 
-        public async Task<ConsignmentRequestResponseDto> UpdateConsignmentRequestAsync(int id, ConsignmentUpdateDto updateDto)
+        public async Task<ConsignmentRequestResponseDto> UpdateConsignmentRequestAsync(int id, ConsignmentRequestUpdateDto consignmentRequestUpdateDto)
         {
             var consignmentRequest = await _unitOfWork.ConsignmentRequestRepository.GetByIdAsync(id);
-            if (consignmentRequest == null) return null;
+            if (consignmentRequest == null) throw new KeyNotFoundException("Consignment Request not found");
 
-            _mapper.Map(updateDto, consignmentRequest);
+            _mapper.Map(consignmentRequestUpdateDto, consignmentRequest);
+            await _unitOfWork.ConsignmentRequestRepository.UpdateAsync(consignmentRequest);
             await _unitOfWork.SaveChangesAsync();
 
             return _mapper.Map<ConsignmentRequestResponseDto>(consignmentRequest);
         }
 
-        public async Task<bool> DeleteConsignmentRequestAsync(int id)
+        public async Task DeleteConsignmentRequestAsync(int id)
         {
             var consignmentRequest = await _unitOfWork.ConsignmentRequestRepository.GetByIdAsync(id);
-            if (consignmentRequest == null) return false;
+            if (consignmentRequest == null) throw new KeyNotFoundException("Consignment Request not found");
 
             await _unitOfWork.ConsignmentRequestRepository.RemoveAsync(consignmentRequest);
             await _unitOfWork.SaveChangesAsync();
-
-            return true;
         }
 
         public async Task<ConsignmentRequestResponseDto> GetConsignmentRequestByIdAsync(int id)
         {
-            var consignmentRequest = await _unitOfWork.ConsignmentRequestRepository.GetByIdAsync(id);
-            return consignmentRequest != null ? _mapper.Map<ConsignmentRequestResponseDto>(consignmentRequest) : null;
+            var consignmentRequest = await _unitOfWork.ConsignmentRequestRepository.GetRequestWithDetailsAsync(id);
+            return _mapper.Map<ConsignmentRequestResponseDto>(consignmentRequest);
         }
 
         public async Task<IEnumerable<ConsignmentRequestResponseDto>> GetAllConsignmentRequestsAsync()
@@ -63,5 +59,6 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             return _mapper.Map<IEnumerable<ConsignmentRequestResponseDto>>(consignmentRequests);
         }
     }
+
 
 }

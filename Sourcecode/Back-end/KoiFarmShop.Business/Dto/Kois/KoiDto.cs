@@ -15,7 +15,7 @@ namespace KoiFarmShop.Business.Dto.Kois
 
         public int? KoiTypeId { get; set; }
 
-        public string Origin { get; set; }
+        public string? Origin { get; set; }
 
         public int? Gender { get; set; }
 

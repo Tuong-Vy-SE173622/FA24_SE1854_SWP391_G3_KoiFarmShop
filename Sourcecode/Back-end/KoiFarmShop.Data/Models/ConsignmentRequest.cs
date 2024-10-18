@@ -18,24 +18,24 @@ public partial class ConsignmentRequest
 
     [Column("sub_amount")]
     [StringLength(10)]
-    public string? SubAmount { get; set; }
+    public double? SubAmount { get; set; }
 
     [Column("VAT")]
     [StringLength(10)]
-    public string? Vat { get; set; }
+    public double? Vat { get; set; }
 
     [Column("VAT_amount")]
     [StringLength(10)]
-    public string? VatAmount { get; set; }
+    public double? VatAmount { get; set; }
 
     [Column("promotion_amount")]
-    public int? PromotionAmount { get; set; }
+    public double? PromotionAmount { get; set; }
 
     [Column("total_amount")]
     public double? TotalAmount { get; set; }
 
     [Column("payment_method")]
-    public double? PaymentMethod { get; set; }
+    public string? PaymentMethod { get; set; }
 
     [Column("payment_status")]
     [StringLength(50)]

@@ -7,51 +7,42 @@ namespace KoiFarmShop.APIService.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class ConsignmentDetailController : ControllerBase
+    {
+        private readonly IConsignmentDetailService _consignmentDetailService;
+
+        public ConsignmentDetailController(IConsignmentDetailService consignmentDetailService)
         {
-            private readonly IConsignmentDetailService _consignmentDetailService;
-
-            public ConsignmentDetailController(IConsignmentDetailService consignmentDetailService)
-            {
-                _consignmentDetailService = consignmentDetailService;
-            }
-
-            [HttpPost]
-            public async Task<ActionResult<ConsignmentDetailResponseDto>> CreateConsignmentDetail(ConsignmentDetailCreateDto createDto)
-            {
-                var result = await _consignmentDetailService.CreateConsignmentDetailAsync(createDto);
-                return CreatedAtAction(nameof(GetConsignmentDetailById), new { id = result.ConsignmentDetailId }, result);
-            }
-
-            [HttpPut("{id}")]
-            public async Task<ActionResult<ConsignmentDetailResponseDto>> UpdateConsignmentDetail(int id, ConsignmentDetailUpdateDto updateDto)
-            {
-                var result = await _consignmentDetailService.UpdateConsignmentDetailAsync(id, updateDto);
-                if (result == null) return NotFound();
-                return Ok(result);
-            }
-
-            [HttpDelete("{id}")]
-            public async Task<IActionResult> DeleteConsignmentDetail(int id)
-            {
-                var deleted = await _consignmentDetailService.DeleteConsignmentDetailAsync(id);
-                if (!deleted) return NotFound();
-                return NoContent();
-            }
-
-            [HttpGet("{id}")]
-            public async Task<ActionResult<ConsignmentDetailResponseDto>> GetConsignmentDetailById(int id)
-            {
-                var result = await _consignmentDetailService.GetConsignmentDetailByIdAsync(id);
-                if (result == null) return NotFound();
-                return Ok(result);
-            }
-
-            [HttpGet]
-            public async Task<ActionResult<IEnumerable<ConsignmentDetailResponseDto>>> GetAllConsignmentDetails()
-            {
-                var results = await _consignmentDetailService.GetAllConsignmentDetailsAsync();
-                return Ok(results);
-            }
+            _consignmentDetailService = consignmentDetailService;
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateConsignmentDetail([FromBody] ConsignmentDetailCreateDto consignmentDetailCreateDto)
+        {
+            var result = await _consignmentDetailService.CreateConsignmentDetailAsync(consignmentDetailCreateDto);
+            return CreatedAtAction(nameof(GetById), new { id = result.ConsignmentDetailId }, result);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateConsignmentDetail(int id, [FromBody] ConsignmentDetailUpdateDto consignmentDetailUpdateDto)
+        {
+            var result = await _consignmentDetailService.UpdateConsignmentDetailAsync(id, consignmentDetailUpdateDto);
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteConsignmentDetail(int id)
+        {
+            await _consignmentDetailService.DeleteConsignmentDetailAsync(id);
+            return NoContent();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await _consignmentDetailService.GetDetailsByConsignmentRequestIdAsync(id);
+            return Ok(result);
+        }
+    }
+
 
 }

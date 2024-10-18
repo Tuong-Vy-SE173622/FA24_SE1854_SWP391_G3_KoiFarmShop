@@ -9,6 +9,7 @@ namespace KoiFarmShop.Business.Dto.Consigments
     public class ConsignmentDetailDto
     {
         public int ConsignmentDetailId { get; set; }
+        public int ConsignmentId { get; set; }
         public int? KoiId { get; set; }
         public string? ConsignmentType { get; set; }
         public double? MonthlyConsignmentFee { get; set; }
@@ -16,5 +17,6 @@ namespace KoiFarmShop.Business.Dto.Consigments
         public string? HealthDescription { get; set; }
         public double? Weight { get; set; }
         public string? Status { get; set; }
+        public string? Note { get; set; }
     }
 }

@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KoiFarmShop.Business.Dto
+namespace KoiFarmShop.Business.Dto.KoiTypes
 {
     public class KoiTypeDto
-    {  
+    {
         [Key]
         public int KoiTypeId { get; set; }
 
@@ -27,7 +27,7 @@ namespace KoiFarmShop.Business.Dto
         public string Note { get; set; }
 
         public DateTime? CreatedAt { get; set; }
-    
+
         public string CreatedBy { get; set; }
 
         public DateTime? UpdatedAt { get; set; }

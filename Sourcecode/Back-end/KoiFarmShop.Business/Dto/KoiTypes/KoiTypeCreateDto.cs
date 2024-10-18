@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KoiFarmShop.Business.Dto
+namespace KoiFarmShop.Business.Dto.KoiTypes
 {
-    public class KoiTypeUpdateDto
+    public class KoiTypeCreateDto
     {
-        public int KoiTypeId { get; set; } 
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string OriginHistory { get; set; }

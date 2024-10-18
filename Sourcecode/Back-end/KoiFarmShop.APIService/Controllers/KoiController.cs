@@ -1,5 +1,5 @@
 ﻿using KoiFarmShop.Business.Business.KoiBusiness;
-using KoiFarmShop.Business.Dto;
+using KoiFarmShop.Business.Dto.Kois;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KoiFarmShop.APIService.Controllers
@@ -17,9 +17,9 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllKois()
+        public async Task<IActionResult> GetAllKois([FromQuery] KoiFilterDto filterDto)
         {
-            var kois = await _koiService.GetAllKoisAsync();
+            var kois = await _koiService.GetAllKoisAsync(filterDto);
             return Ok(kois);
         }
 
@@ -44,13 +44,15 @@ namespace KoiFarmShop.APIService.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateKoi(int id, [FromBody] KoiUpdateDto koiUpdateDto)
         {
-            if (id != koiUpdateDto.KoiId)
-            {
-                return BadRequest();
-            }
-            await _koiService.UpdateKoiAsync(koiUpdateDto);
-            return NoContent();
+            if (koiUpdateDto == null)
+                return BadRequest("Invalid data.");
+
+            var result = await _koiService.UpdateKoiAsync(id, koiUpdateDto);
+            if (result >= 0)
+                return Ok("Koi updated successfully.");
+            return NotFound("Koi not found.");
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveKoi(int id)

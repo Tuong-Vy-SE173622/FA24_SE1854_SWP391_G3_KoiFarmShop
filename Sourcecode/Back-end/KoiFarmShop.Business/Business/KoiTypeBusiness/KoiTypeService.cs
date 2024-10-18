@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
-using KoiFarmShop.Business.Dto;
+using KoiFarmShop.Business.Dto.KoiTypes;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace KoiFarmShop.Business.Business.KoiTypeBusiness
 {
@@ -35,10 +36,18 @@ namespace KoiFarmShop.Business.Business.KoiTypeBusiness
             return koiType.KoiTypeId; 
         }
 
-        public async Task<int> UpdateKoiTypeAsync(KoiTypeUpdateDto koiTypeUpdateDto)
+        public async Task<int> UpdateKoiTypeAsync(int koiTypeId, KoiTypeUpdateDto koiTypeUpdateDto)
         {
-            var koiType = _mapper.Map<KoiType>(koiTypeUpdateDto);
-            return await _unitOfWork.KoiTypeRepository.UpdateAsync(koiType);
+            var existingKoiType = await _unitOfWork.KoiTypeRepository.GetByIdAsync(koiTypeId);
+            if (existingKoiType == null)
+            {
+                return -1;
+            }
+
+            // Map the non-null fields from the DTO to the existing entity
+            _mapper.Map(koiTypeUpdateDto, existingKoiType);
+
+            return await _unitOfWork.KoiTypeRepository.UpdateAsync(existingKoiType);
         }
 
         public async Task<bool> RemoveKoiTypeAsync(int id)
@@ -51,5 +60,34 @@ namespace KoiFarmShop.Business.Business.KoiTypeBusiness
             }
             return false;
         }
+
+        public async Task<PaginatedResult<KoiTypeDto>> GetAllKoiTypesAsync(KoiTypeFilterDto filterDto)
+        {
+            var query = _unitOfWork.KoiTypeRepository.GetQueryable();
+
+            // Filtering logic based on available fields
+            if (!string.IsNullOrWhiteSpace(filterDto.Name))
+            {
+                query = query.Where(kt => kt.Name.Contains(filterDto.Name));
+            }
+
+            // Pagination logic
+            var totalRecords = await query.CountAsync();
+            var pagedKoiTypes = await query
+                .Skip((filterDto.PageNumber - 1) * filterDto.PageSize)
+                .Take(filterDto.PageSize)
+                .ToListAsync();
+
+            var koiTypeDtos = _mapper.Map<List<KoiTypeDto>>(pagedKoiTypes);
+
+            return new PaginatedResult<KoiTypeDto>
+            {
+                Data = koiTypeDtos,
+                TotalRecords = totalRecords,
+                PageNumber = filterDto.PageNumber,
+                PageSize = filterDto.PageSize
+            };
+        }
+
     }
 }

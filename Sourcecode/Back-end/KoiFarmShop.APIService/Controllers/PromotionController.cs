@@ -83,5 +83,20 @@ namespace KoiFarmShop.APIService.Controllers
             }
         }
         #endregion
+
+
+        #region Update Promotion
+        /// <summary>
+        /// Update a user
+        /// </summary>
+        /// <returns>Status of action</returns>
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdatePromotion(int promotionId, PromotionCreateDto promotionDto)
+        {
+            var currentUser = HttpContext.User;
+            var updateResult = await _promotionService.UpdatePromotion(promotionId, promotionDto, currentUser);
+            return updateResult.IsSuccess ? Ok(updateResult) : BadRequest(updateResult);
+        }
+        #endregion
     }
 }

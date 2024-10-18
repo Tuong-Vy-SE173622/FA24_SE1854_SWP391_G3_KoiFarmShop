@@ -120,5 +120,45 @@ namespace KoiFarmShop.Business.Business.PromotionBusiness
                 return result;
             }
         }
+        public async Task<ResultDto> UpdatePromotion(int promotionId, PromotionCreateDto promotionDto, ClaimsPrincipal userUpdate)
+
+        {
+            var result = new ResultDto();
+            try
+            {
+                var existingPromotion = _unitOfWork.PromotionRepository.Get(x => x.PromotionId == promotionId);
+                if (existingPromotion == null)
+                {
+                    result.IsSuccess = false;
+                    result.Code = 404;
+                    result.Message = "Can not find voucher";
+                    return result;
+                }
+                // Map the Dto to the existing userid entity
+                _mapper.Map(promotionDto, existingPromotion);
+
+                // Update the additional fields
+                existingPromotion.Description = promotionDto.Description;
+                existingPromotion.DiscountPercentage = promotionDto.DiscountPercentage;
+                existingPromotion.Note = promotionDto.Note;
+                existingPromotion.UpdatedBy = userUpdate.FindFirst("UserName").Value;
+                existingPromotion.UpdatedAt = DateTime.Now;
+                _unitOfWork.PromotionRepository.Update(existingPromotion);
+                _unitOfWork.PromotionRepository.Save();
+                result.IsSuccess = true;
+                result.Code = 200;
+                result.Message = "Update Voucher Success";
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.Code = 400;
+                result.Message = ex.Message;
+                return result;
+            }
+            return result;
+        }
     }
 }

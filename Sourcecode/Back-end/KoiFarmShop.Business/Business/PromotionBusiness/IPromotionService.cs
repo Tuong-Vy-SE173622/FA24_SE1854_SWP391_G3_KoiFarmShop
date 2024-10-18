@@ -15,5 +15,6 @@ namespace KoiFarmShop.Business.Business.PromotionBusiness
         public Task<ResultDto> GetPromotionList(int? promotionId);
         //public Task<int> CreatePromotionAsync(PromotionCreateDto promotionCreateDto);
         public Task<ResultDto> AddNewPromotion(PromotionCreateDto model, ClaimsPrincipal userCreate);
+        public Task<ResultDto> UpdatePromotion(int promotionId, PromotionCreateDto promotionDto, ClaimsPrincipal userUpdate);
     }
 }

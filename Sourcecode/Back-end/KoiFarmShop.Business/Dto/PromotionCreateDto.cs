@@ -8,7 +8,6 @@ namespace KoiFarmShop.Business.Dto
 {
     public class PromotionCreateDto
     {
-        public int PromotionId { get; set; }
         public string? Description { get; set; }
         public double? DiscountPercentage { get; set; }
         public bool? IsActive { get; set; }

@@ -94,15 +94,6 @@ namespace KoiFarmShop.Business.Business.PromotionBusiness
             ResultDto result = new ResultDto();
             try
             {
-                // Check if user already exists
-                var existingPromotion = _unitOfWork.PromotionRepository.Get(u => u.PromotionId == model.PromotionId);
-                if (existingPromotion != null)
-                {
-                    result.IsSuccess = false;
-                    result.Code = 400;
-                    result.Message = "PromotionId already exists";
-                    return result;
-                }
                 // Map the request model to the user entity
                 var p = _mapper.Map<Promotion>(model);
 

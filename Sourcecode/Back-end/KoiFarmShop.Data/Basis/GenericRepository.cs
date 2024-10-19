@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,21 +13,14 @@ namespace KoiFarmShop.Data.Basis
     {
         protected FA_SE1854_SWP391_G3_KoiFarmShopContext _context;
 
-        internal readonly DbSet<T> _dbSet;
-        private readonly UnitOfWork _unitOfWork;
-
-        //public GenericRepository() => _context ??= new FA_SE1854_SWP391_G3_KoiFarmShopContext();
+        public GenericRepository() => _context ??= new FA_SE1854_SWP391_G3_KoiFarmShopContext();
 
         //public GenericRepository()
         //{
         //    _context ??= new SWP391ProductManagementSystemContext();
         //}
 
-        public GenericRepository(UnitOfWork unitOfWork)
-        {
-            _dbSet = unitOfWork.Context.Set<T>();
-            this._unitOfWork = unitOfWork;
-        }
+        public GenericRepository(FA_SE1854_SWP391_G3_KoiFarmShopContext context) => _context = context;
 
         //public GenericRepository(SWP391ProductManagementSystemContext context)
         //{
@@ -34,12 +28,15 @@ namespace KoiFarmShop.Data.Basis
         //}
 
 
-        public List<T> GetAll()
+        public virtual List<T> GetAll()
         {
             return _context.Set<T>().ToList();
             //return _context.Set<T>().AsNoTracking().ToList();
         }
-
+        public virtual T Get(Expression<Func<T, bool>> expression)
+        {
+            return _context.Set<T>().FirstOrDefault(expression);
+        }
         public void Create(T entity)
         {
             _context.Add(entity);
@@ -148,5 +145,10 @@ namespace KoiFarmShop.Data.Basis
         }
 
         #endregion Separating asign entity and save operators
+
+        public IQueryable<T> GetQueryable()
+        {
+            return _context.Set<T>().AsQueryable();
+        }
     }
 }

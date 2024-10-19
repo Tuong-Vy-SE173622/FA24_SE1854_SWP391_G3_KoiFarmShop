@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using KoiFarmShop.Business.Business.ConsignmentBusiness;
+using KoiFarmShop.Business.Dto.Consigments;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using KoiFarmShop.Data.Models;
-using KoiFarmShop.Data;
-using KoiFarmShop.Business.Business;
-using KoiFarmShop.Business.Dto;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace KoiFarmShop.APIService.Controllers
 {
@@ -18,115 +8,48 @@ namespace KoiFarmShop.APIService.Controllers
     [ApiController]
     public class ConsignmentRequestController : ControllerBase
     {
-        // GET: api/<ConsignmentRequestController>
-        private readonly ConsignmentRequestBusiness _consignmentRequestBusiness;
+        private readonly IConsignmentRequestService _consignmentRequestService;
 
-        public ConsignmentRequestController(ConsignmentRequestBusiness consignmentRequestBusiness)
+        public ConsignmentRequestController(IConsignmentRequestService consignmentRequestService)
         {
-            _consignmentRequestBusiness = consignmentRequestBusiness;
+            _consignmentRequestService = consignmentRequestService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ConsignmentRequest>>> GetRequests()
+        [HttpPost]
+        public async Task<IActionResult> CreateConsignmentRequest([FromBody] ConsignmentRequestCreateDto consignmentRequestCreateDto)
         {
-            //return await _context.Orders.ToListAsync();
-
-            var requests = await _consignmentRequestBusiness.GetAllRequest();
-
-            if (requests == null)
-            {
-                return NotFound("No requests found.");
-            }
-
-            return Ok(requests);
+            var result = await _consignmentRequestService.CreateConsignmentRequestAsync(consignmentRequestCreateDto);
+            return CreatedAtAction(nameof(GetById), new { id = result.ConsignmentId }, result);
         }
 
-        // GET api/<ConsignmentRequestController>/5
-        [HttpGet("{id}/details")]
-        public async Task<ActionResult<IEnumerable<ConsignmentDetail>>> GetDetails(int requestId)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateConsignmentRequest(int id, [FromBody] ConsignmentRequestUpdateDto consignmentRequestUpdateDto)
         {
-            //return await _context.Orders.ToListAsync();
+            var result = await _consignmentRequestService.UpdateConsignmentRequestAsync(id, consignmentRequestUpdateDto);
+            return Ok(result);
+        }
 
-            var requestDetails = await _consignmentRequestBusiness.GetAllConsignmentDetail(requestId);
-
-            if (requestDetails == null)
-            {
-                return NotFound("No request details found in the request.");
-            }
-
-            return Ok(requestDetails);
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteConsignmentRequest(int id)
+        {
+            await _consignmentRequestService.DeleteConsignmentRequestAsync(id);
+            return NoContent();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ConsignmentRequest>> GetRequest(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-
-            var request = await _consignmentRequestBusiness.GetRequestById(id);
-
-            if (request == null)
-            {
-                return NotFound($"Request with ID {id} not found.");
-            }
-
-            return Ok(request);
-        }
-
-        // POST api/<ConsignmentRequestController>
-        [HttpPost]
-        public async Task<ActionResult<ConsignmentRequestDto>> PostRequest(ConsignmentRequest consignmentRequest)
-        {
-            var result = await _consignmentRequestBusiness.CreateConsignmentRequest(consignmentRequest);
+            var result = await _consignmentRequestService.GetConsignmentRequestByIdAsync(id);
             return Ok(result);
         }
 
-        [HttpPost("{requestId}/details")]
-        public async Task<ActionResult<Order>> PostRequestDetails(ConsignmentDetail consignmentDetail)
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
         {
-
-            var result = await _consignmentRequestBusiness.CreateConsignmentDetail(consignmentDetail);
+            var result = await _consignmentRequestService.GetAllConsignmentRequestsAsync();
             return Ok(result);
-
-        }
-
-        // PUT api/<ConsignmentRequestController>/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateRequest(int id, ConsignmentRequestDto requestDto)
-        {
-
-            if (_consignmentRequestBusiness.GetRequestById(id) == null)
-            {
-                return BadRequest("The ID in the URL does not match the ID in the entity.");
-            }
-
-            var result = await _consignmentRequestBusiness.UpdateRequest(requestDto);
-            return GenerateActionResult(result);
-        }
-
-        // DELETE api/<ConsignmentRequestController>/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRequest(int id)
-        {
-            var result = await _consignmentRequestBusiness.RemoveRequest(id);
-            return GenerateActionResult(result);
-        }
-
-        [HttpDelete("{requestId}/details/{detailId}")]
-        public async Task<IActionResult> DeleteDetails(int id)
-        {
-
-            var result = await _consignmentRequestBusiness.RemoveDetail(id);
-            return GenerateActionResult(result);
-        }
-
-        private IActionResult GenerateActionResult(IBusinessResult result)
-        {
-            return result.Status switch
-            {
-                200 => Ok(result.Data),
-                400 => BadRequest(result),
-                404 => NotFound(result),
-                _ => StatusCode(500, "An internal server error occurred. Please try again later.")
-            };
         }
     }
+
+
 }

@@ -1,213 +1,169 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using KoiFarmShop.Data.Models;
-using KoiFarmShop.Business.Business;
+﻿//using KoiFarmShop.Data.Models;
+//using Microsoft.AspNetCore.Mvc;
+
+//namespace KoiFarmShop.APIService.Controllers
+//{
+//    [Route("api/[controller]")]
+//    [ApiController]
+//    public class OrdersController : ControllerBase
+//    {
+//        private readonly FA_SE1854_SWP391_G3_KoiFarmShopContext _context;
+
+//        public OrdersController(FA_SE1854_SWP391_G3_KoiFarmShopContext context)
+//        {
+//            _context = context;
+//        }
+
+//        // GET: api/Orders
+//        [HttpGet]
+//        public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
+//        {
+//            return await _context.Orders.ToListAsync();
+//        }
+
+//        // GET: api/Orders/5
+//        [HttpGet("{id}")]
+//        public async Task<ActionResult<Order>> GetOrder(int id)
+//        {
+//            var order = await _context.Orders.FindAsync(id);
+
+//            if (order == null)
+//            {
+//                return NotFound();
+//            }
+
+//            return order;
+//        }
+
+//        // PUT: api/Orders/5
+//        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+//        [HttpPut("{id}")]
+//        public async Task<IActionResult> PutOrder(int id, Order order)
+//        {
+//            if (id != order.OrderId)
+//            {
+//                return BadRequest();
+//            }
+
+//            _context.Entry(order).State = EntityState.Modified;
+
+//            try
+//            {
+//                await _context.SaveChangesAsync();
+//            }
+//            catch (DbUpdateConcurrencyException)
+//            {
+//                if (!OrderExists(id))
+//                {
+//                    return NotFound();
+//                }
+//                else
+//                {
+//                    throw;
+//                }
+//            }
+
+//            return NoContent();
+//        }
+
+//        // POST: api/Orders
+//        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+//        [HttpPost]
+//        public async Task<ActionResult<Order>> PostOrder(Order order)
+//        {
+//            _context.Orders.Add(order);
+//            try
+//            {
+//                await _context.SaveChangesAsync();
+//            }
+//            catch (DbUpdateException)
+//            {
+//                if (OrderExists(order.OrderId))
+//                {
+//                    return Conflict();
+//                }
+//                else
+//                {
+//                    throw;
+//                }
+//            }
+
+//            return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
+//        }
+
+//        // DELETE: api/Orders/5
+//        [HttpDelete("{id}")]
+//        public async Task<IActionResult> DeleteOrder(int id)
+//        {
+//            var order = await _context.Orders.FindAsync(id);
+//            if (order == null)
+//            {
+//                return NotFound();
+//            }
+
+//            _context.Orders.Remove(order);
+//            await _context.SaveChangesAsync();
+
+//            return NoContent();
+//        }
+
+//        private bool OrderExists(int id)
+//        {
+//            return _context.Orders.Any(e => e.OrderId == id);
+//        }
+//    }
+//}
+
+using KoiFarmShop.Business.Business.OrderBusiness;
 using KoiFarmShop.Business.Dto;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KoiFarmShop.APIService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrdersController : ControllerBase
+    public class OrderController : ControllerBase
     {
-        //private readonly FA_SE1854_SWP391_G3_KoiFarmShopContext _context;
+        private readonly IOrderService _orderService;
 
-        //public OrdersController(FA_SE1854_SWP391_G3_KoiFarmShopContext context)
-        //{
-        //    _context = context;
-        //}
-
-        private readonly OrderBusiness _orderBusiness;
-
-        public OrdersController(OrderBusiness orderBusiness)
+        public OrderController(IOrderService orderService)
         {
-            _orderBusiness = orderBusiness;
+            _orderService = orderService;
         }
 
-        // GET: api/Orders
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
-        {
-            //return await _context.Orders.ToListAsync();
-
-            var orders = await _orderBusiness.GetAllOrder();
-
-            if (orders == null)
-            {
-                return NotFound("No orders found.");
-            }
-
-            return Ok(orders);
-        }
-
-        [HttpGet("{id}/items")]
-        public async Task<ActionResult<IEnumerable<Order>>> GetOrderItems(int orderId)
-        {
-            //return await _context.Orders.ToListAsync();
-
-            var orderItems = await _orderBusiness.GetAllOrderItem(orderId);
-
-            if (orderItems == null)
-            {
-                return NotFound("No order items found in the order.");
-            }
-
-            return Ok(orderItems);
-        }
-
-        // GET: api/Orders/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Order>> GetOrder(int id)
-        {
-            //var order = await _context.Orders.FindAsync(id);
-
-            //if (order == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //return order;
-
-            var order = await _orderBusiness.GetOrderById(id);
-
-            if (order == null)
-            {
-                return NotFound($"Order with ID {id} not found.");
-            }
-
-            return Ok(order);
-        }
-
-        // PUT: api/Orders/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrder(int id, OrderDto orderDto)
-        {
-            //if (id != order.OrderId)
-            //{
-            //    return BadRequest();
-            //}
-
-            //_context.Entry(order).State = EntityState.Modified;
-
-            //try
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!OrderExists(id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
-
-            //return NoContent();
-
-            if(_orderBusiness.GetOrderById(id) == null)
-            {
-                return BadRequest("The ID in the URL does not match the ID in the entity.");
-            }
-
-            var result = await _orderBusiness.UpdateOrder(orderDto);
-            return GenerateActionResult(result);
-        }
-
-        [HttpPut("{orderId}/items/{itemId}")]
-        public async Task<IActionResult> PutOrderItem(int id, OrderItemDto orderItemDto)
-        {
-
-            var result = await _orderBusiness.UpdateOrderItem(orderItemDto);
-            return GenerateActionResult(result);
-        }
-
-        // POST: api/Orders
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
+        public async Task<IActionResult> CreateOrder([FromBody] OrderCreateDto orderCreateDto)
         {
-            //_context.Orders.Add(order);
-            //try
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateException)
-            //{
-            //    if (OrderExists(order.OrderId))
-            //    {
-            //        return Conflict();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
-
-            //return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
-            var result = await _orderBusiness.CreateOrder(order);
-            return Ok(result);
-
+            var result = await _orderService.CreateOrderAsync(orderCreateDto);
+            return CreatedAtAction(nameof(GetOrderById), new { id = result.OrderId }, result);
         }
 
-        [HttpPost("{orderId}/items")]
-        public async Task<ActionResult<Order>> PostOrderItem(OrderItem orderItem)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateOrder(int id, [FromBody] OrderUpdateDto orderUpdateDto)
         {
-            
-            var result = await _orderBusiness.CreateOrderItem(orderItem);
+            var result = await _orderService.UpdateOrderAsync(id, orderUpdateDto);
             return Ok(result);
-
         }
 
-        // DELETE: api/Orders/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrder(int id)
         {
-            //var order = await _context.Orders.FindAsync(id);
-            //if (order == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //_context.Orders.Remove(order);
-            //await _context.SaveChangesAsync();
-
-            //return NoContent();
-            var result = await _orderBusiness.RemoveOrder(id);
-            return GenerateActionResult(result);
+            await _orderService.DeleteOrderAsync(id);
+            return NoContent();
         }
 
-        [HttpDelete("{orderId}/items/{itemId}")]
-        public async Task<IActionResult> DeleteOrderItem(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOrderById(int id)
         {
-            
-            var result = await _orderBusiness.RemoveOrderItem(id);
-            return GenerateActionResult(result);
+            var result = await _orderService.GetOrderByIdAsync(id);
+            return Ok(result);
         }
 
-        //private bool OrderExists(int id)
-        //{
-        //    return _context.Orders.Any(e => e.OrderId == id);
-        //}
-
-        private IActionResult GenerateActionResult(IBusinessResult result)
+        [HttpGet]
+        public async Task<IActionResult> GetAllOrder()
         {
-            return result.Status switch
-            {
-                200 => Ok(result.Data),
-                400 => BadRequest(result),
-                404 => NotFound(result),
-                _ => StatusCode(500, "An internal server error occurred. Please try again later.")
-            };
+            var result = await _orderService.GetAllOrderAsync();
+            return Ok(result);
         }
     }
 }

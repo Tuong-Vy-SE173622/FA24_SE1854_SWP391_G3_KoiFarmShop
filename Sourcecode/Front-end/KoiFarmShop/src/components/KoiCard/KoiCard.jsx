@@ -4,8 +4,10 @@ import { IoIosSearch } from "react-icons/io";
 import { TiShoppingCart } from "react-icons/ti";
 import { FaRegHeart } from "react-icons/fa";
 import { FaCodeCompare } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 function KoiCard() {
+  const nav = useNavigate();
   const koiSelectItems = [
     {
       key: 1,
@@ -28,11 +30,14 @@ function KoiCard() {
       lable: "So sánh",
     },
   ];
+
+  const handleDetailPage = () => nav("/koi-detail/1");
   return (
     <div className="koi-card-container">
       <img
         src="https://visinhcakoi.com/wp-content/uploads/2021/07/ca-koi-showa-2-600x874-1.jpg"
         alt="koi"
+        onClick={handleDetailPage}
       />
       <div className="koi-title">Koi Showa</div>
       <div className="koi-card-select">

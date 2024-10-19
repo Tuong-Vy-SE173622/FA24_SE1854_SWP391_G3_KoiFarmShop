@@ -159,8 +159,8 @@
 
 .koi-card-list {
   display: flex;
-  align-items: center;
-  /* justify-content: space-between; */
+  /* align-items: center; */
+  justify-content: space-evenly;
   row-gap: 20px;
   column-gap: 25px;
   width: 70%;
@@ -174,7 +174,8 @@
   height: auto;
   margin: 2.5rem auto;
   padding-top: 40px;
-  background: url("https://thumb.ac-illust.com/0c/0cbb5141beb4f97c7e7e0bb58af14edc_t.jpeg");
+  /* background: url("https://thumb.ac-illust.com/0c/0cbb5141beb4f97c7e7e0bb58af14edc_t.jpeg"); */
+  background: url("https://img.freepik.com/free-vector/pastel-blue-abstract-texture-background-with-watercolor_65186-3234.jpg");
   height: calc(100vh - 100px);
 }
 
@@ -183,28 +184,31 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  width: 70%;
+  width: 75%;
   gap: 18px;
 
   margin: 1.5rem auto;
 }
 
 .testimonial-wrapper {
-  width: 480px;
-  height: 150px;
+  width: 45%;
+  height: 160px;
   display: flex;
   background-color: white;
   border: 1px gray solid;
   box-shadow: 0 2px 4px rgba(0, 128, 255, 0.2);
+  border-radius: 8px;
 }
 
 .testimonial-wrapper > img {
-  width: 150px;
+  width: 160px;
   height: 100%;
   object-fit: cover;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 .testimonial-info {
-  padding: 15px 12px;
+  padding: 1.3rem;
 }
 .testimonial-info > p {
   font-size: 15px;

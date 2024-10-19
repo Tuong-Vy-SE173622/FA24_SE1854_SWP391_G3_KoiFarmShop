@@ -1,14 +1,17 @@
 .koi-card-container {
-  width: 240px;
-  height: 320px;
+  width: 200px;
+  height: 280px;
   border: 1px solid gray;
   position: relative;
   transition: all 0.3s ease-in-out;
+  border-radius: 8px;
 }
 .koi-card-container > img {
   width: 100%;
-  height: 240px;
+  height: 220px;
   cursor: pointer;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 .koi-card-container > .koi-title {
   font-size: 18px;
@@ -23,12 +26,12 @@
 .koi-card-select {
   position: absolute;
   background-color: white;
-  top: 240px;
+  top: 225px;
   height: 30px;
   display: flex;
   flex-direction: row;
-  width: 160px;
-  left: 40px;
+  width: 150px;
+  left: 20px;
   justify-content: space-around;
   border-radius: 50px;
   padding: 5px;

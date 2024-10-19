@@ -3,8 +3,10 @@ import "./HomePage.css";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Button, Carousel } from "antd";
 import KoiCard from "../../components/KoiCard/KoiCard";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
+  const nav = useNavigate();
   const KoiTypeIntroduction = [
     {
       key: 1,
@@ -72,7 +74,7 @@ function HomePage() {
     {
       key: 1,
       avatarImgUrl:
-        "https://img.freepik.com/premium-photo/anime-girl-with-long-hair_1108314-51771.jpg",
+        "https://avatarfiles.alphacoders.com/269/thumb-1920-269240.jpg",
       userName: "Nguyen Van A",
       testimonial:
         "Dịch vụ chăm sóc cá Koi rất chuyên nghiệp. Tôi gửi nuôi cá trong 6 tháng và chất lượng cá vẫn đảm bảo. Đội ngũ hỗ trợ tận tâm, giá cả hợp lý.",
@@ -80,15 +82,14 @@ function HomePage() {
     {
       key: 2,
       avatarImgUrl:
-        "https://img.freepik.com/premium-photo/anime-girl-with-long-hair_1108314-51771.jpg",
+        "https://image.cdn2.seaart.ai/2023-08-15/14402345680037893/ebb7660743ae922978839535239a1e36e97a446c_high.webp",
       userName: "Le Thi B",
       testimonial:
         "Tôi đã mua 2 con cá Koi từ trang web và chất lượng rất tốt. Cá đẹp, khoẻ mạnh, giao hàng nhanh chóng. Sẽ tiếp tục ủng hộ trong tương lai!",
     },
     {
       key: 3,
-      avatarImgUrl:
-        "https://img.freepik.com/premium-photo/anime-girl-with-long-hair_1108314-51771.jpg",
+      avatarImgUrl: "https://avatarfiles.alphacoders.com/173/173714.jpg",
       userName: "Tran Van C",
       testimonial:
         "Trang web bán cá Koi uy tín, đa dạng chủng loại cá. Dịch vụ gửi nuôi cũng rất tiện lợi, cá của tôi được chăm sóc tốt, tăng trưởng đều đặn.",
@@ -96,7 +97,7 @@ function HomePage() {
     {
       key: 4,
       avatarImgUrl:
-        "https://img.freepik.com/premium-photo/anime-girl-with-long-hair_1108314-51771.jpg",
+        "https://image.cdn2.seaart.ai/2023-08-27/15505772946398213/c90cf29b06062f61ee0785d0f8eb26f25defa070_high.webp",
       userName: "Pham Thi D",
       testimonial:
         "Tôi rất hài lòng với dịch vụ gửi nuôi cá Koi. Cá của tôi được chăm sóc kỹ lưỡng, sạch sẽ. Khi nhận lại cá, chúng vẫn khoẻ và phát triển tốt.",
@@ -350,14 +351,14 @@ function HomePage() {
           <h1>Tin tức mới nhất</h1>
           <img src="/icons/fish-line.png" alt="" />
         </div>
-        {/* <div
+        <div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           style={{
             width: "75%",
             marginTop: "1.5rem",
           }}
         >
-          {blogPosts.map((post) => (
+          {posts.map((post) => (
             <div
               key={post.id}
               className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-105"
@@ -379,8 +380,8 @@ function HomePage() {
               </div>
             </div>
           ))}
-        </div> */}
-        <div
+        </div>
+        {/* <div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 "
           style={{
             marginTop: "1.5rem",
@@ -408,16 +409,16 @@ function HomePage() {
                   <button className="text-blue-600 hover:text-blue-800">
                     Read More
                   </button>
-                  {/* <div className="flex space-x-2">
+                  <div className="flex space-x-2">
                     <button className="text-gray-600 hover:text-blue-600">
                       <FaShare />
                     </button>
-                  </div> */}
+                  </div>
                 </div>
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </section>
     </main>
   );

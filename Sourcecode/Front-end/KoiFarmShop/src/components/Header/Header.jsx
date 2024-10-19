@@ -20,7 +20,7 @@ function Header() {
     children,
   });
 
-  const navigateResearchPage = () => navigate("/search");
+  const navigateSearchPage = () => navigate("/search");
   const navigateHome = () => navigate("/");
   const navigateLink = (link) => navigate(link);
 
@@ -117,11 +117,11 @@ function Header() {
       "koi",
       KoiList.map((item) => ({ label: item.lable, key: item.key }))
     ),
-    createMenuItems(
-      "Thức ăn cá Koi",
-      "food",
-      FoodKoiList.map((item) => ({ label: item.lable, key: item.key }))
-    ),
+    // createMenuItems(
+    //   "Thức ăn cá Koi",
+    //   "food",
+    //   FoodKoiList.map((item) => ({ label: item.lable, key: item.key }))
+    // ),
   ];
 
   const taskList = [
@@ -135,6 +135,10 @@ function Header() {
       lable: "Register",
       link: "/register",
     },
+    // {
+    //   key: 3,
+    //   label
+    // }
   ];
 
   return (
@@ -177,7 +181,7 @@ function Header() {
                   </ul>
                 )}
               </div>
-              <div
+              {/* <div
                 className="header-item"
                 onMouseEnter={() => handleMouseEnter("food")}
                 onMouseLeave={handleMouseLeave}
@@ -190,7 +194,7 @@ function Header() {
                     })}
                   </ul>
                 )}
-              </div>
+              </div> */}
               <div className="header-item">Khuyến mãi</div>
             </div>
             <div className="header-search">
@@ -203,7 +207,7 @@ function Header() {
                   // className={`${isInputVisible ? "visible" : "hidden"}`}
                 />
                 <span className="search-icon">
-                  <IoSearch size={"18px"} onClick={navigateResearchPage} />
+                  <IoSearch size={"18px"} onClick={navigateSearchPage} />
                 </span>
               </div>
             </div>

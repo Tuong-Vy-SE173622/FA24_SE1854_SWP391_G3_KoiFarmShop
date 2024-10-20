@@ -18,8 +18,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
         }
 
         public async Task<IEnumerable<KoiDto>> GetAllKoisAsync()
-        {
-            //TODO: filtering and pagination
+        { 
 
             var kois = await _unitOfWork.KoiRepository.GetAllAsync();
        

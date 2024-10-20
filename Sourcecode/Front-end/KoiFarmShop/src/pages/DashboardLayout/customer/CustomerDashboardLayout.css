@@ -1,0 +1,87 @@
+.dashboard-layout-container {
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.customer-sidebar-container {
+  background-color: #0080ff;
+  width: 230px;
+  position: fixed;
+  top: 100px;
+  left: 0;
+  bottom: 0;
+}
+
+.dashboard-layout-main {
+  /* background-color: lightcoral; */
+  margin-left: 230px;
+  width: 100%;
+}
+
+.menu {
+  display: flex;
+  /* justify-content: space-around; */
+  flex-direction: column;
+  /* column-gap: 25px; */
+  /* background-color: #f0f0f0; */
+  padding: 10px;
+  padding-top: 40px;
+  gap: 10px;
+  /* width: 70%; */
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+.menu-item:hover {
+  color: #0575e6;
+}
+
+.menu-item:hover > .label {
+  color: #0575e6;
+}
+
+.menu-item:hover > .icon {
+  color: #0575e6;
+}
+
+.menu-item > .icon {
+  margin-right: 8px;
+  font-size: 20px;
+  width: 30px;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+}
+
+.menu-item > .label {
+  color: white;
+  font-weight: 600;
+}
+
+.active {
+  background-color: white;
+}
+
+.active > .label {
+  color: #0575e6;
+  font-weight: 700;
+}
+
+.active > .icon {
+  color: #0575e6;
+}
+
+.menu-item:hover {
+  background-color: #e0e0e0;
+}

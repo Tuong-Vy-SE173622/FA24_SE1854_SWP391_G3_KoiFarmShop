@@ -23,3 +23,15 @@ html {
   scrollbar-width: thin;
   scrollbar-color: darkgrey transparent;
 } */
+
+.page-container {
+  min-height: calc(100vh - 200px);
+  /* min-height: 200vh; */
+  margin-top: 100px;
+}
+
+@media (max-height: calc(100vh - 393px)) {
+  .page-container {
+    height: auto;
+  }
+}

@@ -47,18 +47,22 @@ function Header() {
 
   const IntroductionList = [
     {
+      key: 1,
       lable: "Giới thiệu",
       link: "",
     },
     {
+      key: 2,
       lable: "Giới thiệu sàn ký gửi",
       link: "",
     },
     {
+      key: 3,
       lable: "Đơn vị bán Koi",
       link: "",
     },
     {
+      key: 4,
       lable: "Nguồn Koi",
       link: "",
     },
@@ -66,45 +70,50 @@ function Header() {
 
   const KoiList = [
     {
+      key: 1,
       lable: "Koi Kohaku",
       link: "",
     },
     {
+      key: 2,
       lable: "Koi Ogon",
       link: "",
     },
     {
+      key: 3,
       lable: "Koi Showa",
       link: "",
     },
     {
+      key: 4,
       lable: "Koi Tancho",
       link: "",
     },
     {
+      key: 5,
       lable: "Koi Bekko",
       link: "",
     },
   ];
 
-  const FoodKoiList = [
-    {
-      lable: "Cám thương hiệu JDP",
-      link: "",
-    },
-    {
-      lable: "Cám thương hiệu Sakura",
-      link: "",
-    },
-    {
-      lable: "Cám thương hiệu Hikari",
-      link: "",
-    },
-    {
-      lable: "Cám thương hiệu Aqua Master",
-      link: "",
-    },
-  ];
+  // const FoodKoiList = [
+  //   {
+  //     lable: "Cám thương hiệu JDP",
+  //     link: "",
+  //   },
+  //   {
+  //     lable: "Cám thương hiệu Sakura",
+  //     link: "",
+  //   },
+  //   {
+  //     lable: "Cám thương hiệu Hikari",
+  //     link: "",
+  //   },
+  //   {
+  //     lable: "Cám thương hiệu Aqua Master",
+  //     link: "",
+  //   },
+  // ];
 
   const menuItems = [
     createMenuItems(
@@ -127,29 +136,35 @@ function Header() {
   const taskList = [
     {
       key: 1,
-      lable: "Login",
+      label: "Login",
       link: "/login",
     },
     {
       key: 2,
-      lable: "Register",
+      label: "Register",
       link: "/register",
     },
-    // {
-    //   key: 3,
-    //   label
-    // }
+    {
+      key: 3,
+      label: "Account",
+      link: "/dashboard/profile/stella",
+    },
   ];
 
   return (
     <>
       <header>
         <div className="header-container">
-          <div className="left-section">
+          {/* <div className="left-section">
             <GiHamburgerMenu size={"30px"} onClick={handleSideBar} />
-          </div>
+          </div> */}
           <div className="header-logo">
-            <img src="/logo-web/logo.png" alt="logo" onClick={navigateHome} />
+            <img
+              src="/logo-web/logo.png"
+              alt="logo"
+              onClick={navigateHome}
+              style={{ cursor: "pointer" }}
+            />
           </div>
           <div className="middle-section">
             <div className="header-items">
@@ -162,7 +177,11 @@ function Header() {
                 {hoveredItem === "introduction" && (
                   <ul className="dropdown">
                     {IntroductionList.map((item) => {
-                      return <li className="dropdown-item">{item.lable}</li>;
+                      return (
+                        <li className="dropdown-item" key={item.key}>
+                          {item.lable}
+                        </li>
+                      );
                     })}
                   </ul>
                 )}
@@ -176,7 +195,11 @@ function Header() {
                 {hoveredItem === "koi" && (
                   <ul className="dropdown">
                     {KoiList.map((item) => {
-                      return <li className="dropdown-item">{item.lable}</li>;
+                      return (
+                        <li className="dropdown-item" key={item.key}>
+                          {item.lable}
+                        </li>
+                      );
                     })}
                   </ul>
                 )}
@@ -228,13 +251,15 @@ function Header() {
               {hoveredItem === "user" && (
                 <ul className="dropdown">
                   {taskList.map((item) => {
+                    console.log(item);
+
                     return (
                       <li
                         key={item.key}
                         className="dropdown-item"
                         onClick={() => navigateLink(item.link)}
                       >
-                        {item.lable}
+                        {item.label}
                       </li>
                     );
                   })}

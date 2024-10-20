@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7coyqwW9wLw=",
+  "dgSpecHash": "hvFx+3ZIIDs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj",
+  "projectFilePath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\T14\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\T14\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

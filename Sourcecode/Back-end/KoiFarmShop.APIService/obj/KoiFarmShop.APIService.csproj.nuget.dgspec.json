@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj": {}
+    "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj": {
+    "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj",
+        "projectUniqueName": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj",
         "projectName": "KoiFarmShop.APIService",
-        "projectPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj",
+        "projectPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\KoiFarmShop.APIService.csproj",
         "packagesPath": "C:\\Users\\T14\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\obj\\",
+        "outputPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.APIService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,11 +33,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\KoiFarmShop.Business.csproj": {
-                "projectPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\KoiFarmShop.Business.csproj"
+              "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\KoiFarmShop.Business.csproj": {
+                "projectPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\KoiFarmShop.Business.csproj"
               },
-              "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj": {
-                "projectPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj"
+              "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj": {
+                "projectPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj"
               }
             }
           }
@@ -103,14 +103,14 @@
         }
       }
     },
-    "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\KoiFarmShop.Business.csproj": {
+    "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\KoiFarmShop.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\KoiFarmShop.Business.csproj",
+        "projectUniqueName": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\KoiFarmShop.Business.csproj",
         "projectName": "KoiFarmShop.Business",
-        "projectPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\KoiFarmShop.Business.csproj",
+        "projectPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\KoiFarmShop.Business.csproj",
         "packagesPath": "C:\\Users\\T14\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\obj\\",
+        "outputPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -132,8 +132,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj": {
-                "projectPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj"
+              "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj": {
+                "projectPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj"
               }
             }
           }
@@ -178,14 +178,14 @@
         }
       }
     },
-    "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj": {
+    "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj",
+        "projectUniqueName": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj",
         "projectName": "KoiFarmShop.Data",
-        "projectPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj",
+        "projectPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\KoiFarmShop.Data.csproj",
         "packagesPath": "C:\\Users\\T14\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\obj\\",
+        "outputPath": "C:\\Users\\T14\\source\\repos\\FA24_SE1854_SWP391_G3_KoiFarmShop(1)\\FA24_SE1854_SWP391_G3_KoiFarmShop\\FA24_SE1854_SWP391_G3_KoiFarmShop\\Sourcecode\\Back-end\\KoiFarmShop.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -79,9 +79,9 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
             entity.HasKey(e => e.RequestId).HasName("care_request_request_id_primary");
 
             entity.Property(e => e.RequestId).ValueGeneratedNever();
-            entity.Property(e => e.CreatedAt).HasDefaultValueSql("('GETDATE()')");
-            entity.Property(e => e.IsActive).HasDefaultValueSql("('DEFAULT TRUE')");
-            entity.Property(e => e.RequestedDate).HasDefaultValueSql("('GETDATE()')");
+            entity.Property(e => e.CreatedAt).ValueGeneratedNever().HasDefaultValueSql("('GETDATE()')");
+            entity.Property(e => e.IsActive).ValueGeneratedNever().HasDefaultValueSql("('DEFAULT TRUE')");
+            entity.Property(e => e.RequestedDate).ValueGeneratedNever().HasDefaultValueSql("('GETDATE()')");
 
             entity.HasOne(d => d.Customer).WithMany(p => p.CareRequests).HasConstraintName("care_request_customer_id_foreign");
         });

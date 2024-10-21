@@ -1,11 +1,6 @@
 ﻿using KoiFarmShop.Data.Basis;
 using KoiFarmShop.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KoiFarmShop.Data.Repositories
 {
@@ -36,7 +31,7 @@ namespace KoiFarmShop.Data.Repositories
                     Role = x.Role,
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy
-                   
+
                 })
                 .AsNoTracking()
                 .ToListAsync();

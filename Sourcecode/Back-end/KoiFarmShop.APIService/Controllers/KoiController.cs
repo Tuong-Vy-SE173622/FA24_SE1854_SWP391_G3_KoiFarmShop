@@ -13,7 +13,7 @@ namespace KoiFarmShop.APIService.Controllers
         public KoiController(IKoiService koiService)
         {
             _koiService = koiService;
-            
+
         }
 
         [HttpGet]

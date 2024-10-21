@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Consigments;
 using KoiFarmShop.Business.Dto.Kois;
@@ -21,10 +16,10 @@ namespace KoiFarmShop.Business.AutoMap
 
             CreateMap<Koi, KoiDto>().ForMember(dest => dest.KoiType, opt => opt.MapFrom(src => src.KoiType)).ReverseMap();
             CreateMap<KoiCreateDto, Koi>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
-            CreateMap<KoiUpdateDto, Koi>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null)); 
+            CreateMap<KoiUpdateDto, Koi>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
             CreateMap<KoiType, KoiTypeDto>().ReverseMap();
-            CreateMap<KoiTypeCreateDto, KoiType>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null)); 
-            CreateMap<KoiTypeUpdateDto, KoiType>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null)); 
+            CreateMap<KoiTypeCreateDto, KoiType>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+            CreateMap<KoiTypeUpdateDto, KoiType>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<Order, OrderDto>().ForMember(dest => dest.Customer, opt => opt.MapFrom(src => src.Customer)).ReverseMap();
 
@@ -42,7 +37,7 @@ namespace KoiFarmShop.Business.AutoMap
             CreateMap<ConsignmentRequestCreateDto, ConsignmentRequest>();
             CreateMap<ConsignmentRequestUpdateDto, ConsignmentRequest>().ForAllMembers(
                 opt => opt.Condition(
-                    (src, dest, srcMember) =>srcMember != null &&
+                    (src, dest, srcMember) => srcMember != null &&
                                             !(srcMember is int && (int)srcMember == 0) &&
                                             !(srcMember is double && (double)srcMember == 0)
                     )

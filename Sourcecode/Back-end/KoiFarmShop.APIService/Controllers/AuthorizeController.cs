@@ -202,8 +202,8 @@ namespace KoiFarmShop.APIService.Controllers
             };
                     // Compare the hashed input password with the stored hashed password
                     _tokenService.ResetRefreshToken();
-                var token = GenerateToken(user, null);
-                return Ok(token);
+                    var token = GenerateToken(user, null);
+                    return Ok(token);
                 }
             }
             return BadRequest(new ResultDto

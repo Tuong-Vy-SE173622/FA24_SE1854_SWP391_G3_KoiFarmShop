@@ -33,7 +33,7 @@ namespace KoiFarmShop.Business.Business.KoiTypeBusiness
         {
             var koiType = _mapper.Map<KoiType>(koiTypeCreateDto);
             await _unitOfWork.KoiTypeRepository.CreateAsync(koiType);
-            return koiType.KoiTypeId; 
+            return koiType.KoiTypeId;
         }
 
         public async Task<int> UpdateKoiTypeAsync(int koiTypeId, KoiTypeUpdateDto koiTypeUpdateDto)

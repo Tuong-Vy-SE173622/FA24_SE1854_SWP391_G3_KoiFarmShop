@@ -1,15 +1,17 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using KoiFarmShop.Data;
-using Microsoft.OpenApi.Models;
-using KoiFarmShop.Business.Business.TokenBusiness;
-using KoiFarmShop.Business.Business.UserBusiness;
+﻿using KoiFarmShop.Business.AutoMap;
 using KoiFarmShop.Business.Business.AccountBusiness;
-using KoiFarmShop.Business.AutoMap;
+using KoiFarmShop.Business.Business.ConsignmentBusiness;
 using KoiFarmShop.Business.Business.KoiBusiness;
 using KoiFarmShop.Business.Business.KoiTypeBusiness;
-using KoiFarmShop.Business.Business.ConsignmentBusiness;
 using KoiFarmShop.Business.Business.PromotionBusiness;
+using KoiFarmShop.Business.Business.TokenBusiness;
+using KoiFarmShop.Business.Business.UserBusiness;
+using KoiFarmShop.Business.Business.VNPay;
+using KoiFarmShop.Business.Config;
+using KoiFarmShop.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace KoiFarmShop.APIService
 {
@@ -163,6 +165,12 @@ namespace KoiFarmShop.APIService
                 };
             });
 
+            // Load VnpayConfig from appsettings.json
+            builder.Services.Configure<VnPayConfig>(builder.Configuration.GetSection("VnpayConfig"));
+
+            // Register VNPAY service
+            builder.Services.AddScoped<IVnPayService, VnpayService>();
+
 
             //add automapper
             builder.Services.AddAutoMapper(typeof(MappingProfile));
@@ -175,8 +183,8 @@ namespace KoiFarmShop.APIService
 
             builder.Services.AddScoped<IPromotionService, PromotionService>();
 
-            builder.Services.AddScoped<IKoiService,KoiService>();
-            builder.Services.AddScoped<IKoiTypeService ,KoiTypeService>();
+            builder.Services.AddScoped<IKoiService, KoiService>();
+            builder.Services.AddScoped<IKoiTypeService, KoiTypeService>();
 
             builder.Services.AddScoped<IConsignmentRequestService, ConsignmentRequestService>();
             builder.Services.AddScoped<IConsignmentDetailService, ConsignmentDetailService>();

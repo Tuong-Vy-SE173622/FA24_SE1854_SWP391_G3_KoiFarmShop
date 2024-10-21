@@ -18,10 +18,10 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
         }
 
         public async Task<IEnumerable<KoiDto>> GetAllKoisAsync()
-        { 
+        {
 
             var kois = await _unitOfWork.KoiRepository.GetAllAsync();
-       
+
             return _mapper.Map<IEnumerable<KoiDto>>(kois);
         }
 

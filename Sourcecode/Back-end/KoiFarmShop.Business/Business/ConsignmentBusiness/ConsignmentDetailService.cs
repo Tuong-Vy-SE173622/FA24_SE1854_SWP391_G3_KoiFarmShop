@@ -1,5 +1,4 @@
 using AutoMapper;
-using System.Linq;
 using KoiFarmShop.Business.Dto.Consigments;
 using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
@@ -22,7 +21,7 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
         public async Task<ConsignmentDetailResponseDto> CreateConsignmentDetailAsync(ConsignmentDetailCreateDto consignmentDetailCreateDto)
         {
             var koi = await _unitOfWork.KoiRepository.GetByIdAsync(consignmentDetailCreateDto.KoiId);
-            if (koi == null) 
+            if (koi == null)
                 throw new NotFoundException("Koi not found");
 
             var consignment = await _unitOfWork.ConsignmentRequestRepository.GetByIdAsync(consignmentDetailCreateDto.ConsignmentId);
@@ -41,25 +40,26 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
         public async Task<ConsignmentDetailResponseDto> UpdateConsignmentDetailAsync(int id, ConsignmentDetailUpdateDto consignmentDetailUpdateDto)
         {
             var consignmentDetail = await _unitOfWork.ConsignmentDetailRepository.GetByIdAsync(id);
-            if (consignmentDetail == null) 
+            if (consignmentDetail == null)
                 throw new KeyNotFoundException("Consignment Detail not found");
 
             _mapper.Map(consignmentDetailUpdateDto, consignmentDetail);
 
-            if(consignmentDetail.KoiId is not null) {
+            if (consignmentDetail.KoiId is not null)
+            {
                 var koi = await _unitOfWork.KoiRepository.GetByIdAsync((int)consignmentDetail.KoiId);
                 if (koi == null)
                     throw new NotFoundException("Koi not found");
             }
-            if(consignmentDetail.ConsignmentId is not null)
+            if (consignmentDetail.ConsignmentId is not null)
             {
                 var consignment = await _unitOfWork.ConsignmentRequestRepository.GetByIdAsync((int)consignmentDetail.ConsignmentId);
                 if (consignment == null)
                     throw new NotFoundException("Consignment not found");
                 await RecalculateConsignmentRequestTotalsAsync(consignment);
             }
-            
-            
+
+
             await _unitOfWork.ConsignmentDetailRepository.UpdateAsync(consignmentDetail);
             await _unitOfWork.SaveChangesAsync();
 
@@ -92,11 +92,11 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             double subAmount = 0;
             foreach (var detail in consignmentDetails)
             {
-                subAmount += detail.SoldPrice ?? 0; 
+                subAmount += detail.SoldPrice ?? 0;
             }
             consignment.SubAmount = subAmount;
-     
-            double vat = Constants.VAT; 
+
+            double vat = Constants.VAT;
             consignment.Vat = vat;
             consignment.VatAmount = subAmount * vat;
 

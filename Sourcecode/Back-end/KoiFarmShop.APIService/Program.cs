@@ -22,6 +22,19 @@ namespace KoiFarmShop.APIService
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            // ignore CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("app-cors",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                    });
+            });
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddAuthorization();
@@ -185,6 +198,7 @@ namespace KoiFarmShop.APIService
 
             app.UseAuthorization();
 
+            app.UseCors("app-cors");
 
             app.MapControllers();
 

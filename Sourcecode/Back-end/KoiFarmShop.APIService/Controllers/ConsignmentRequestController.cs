@@ -1,9 +1,11 @@
 ﻿using KoiFarmShop.Business.Business.ConsignmentBusiness;
 using KoiFarmShop.Business.Dto.Consigments;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KoiFarmShop.APIService.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ConsignmentRequestController : ControllerBase

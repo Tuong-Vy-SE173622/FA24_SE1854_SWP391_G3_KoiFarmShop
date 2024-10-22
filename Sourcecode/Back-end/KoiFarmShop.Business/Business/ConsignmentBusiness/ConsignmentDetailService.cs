@@ -4,6 +4,7 @@ using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace KoiFarmShop.Business.Business.ConsignmentBusiness
 {
@@ -18,7 +19,7 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             _mapper = mapper;
         }
 
-        public async Task<ConsignmentDetailResponseDto> CreateConsignmentDetailAsync(ConsignmentDetailCreateDto consignmentDetailCreateDto)
+        public async Task<ConsignmentDetailResponseDto> CreateConsignmentDetailAsync(ConsignmentDetailCreateDto consignmentDetailCreateDto, string currentUser)
         {
             var koi = await _unitOfWork.KoiRepository.GetByIdAsync(consignmentDetailCreateDto.KoiId);
             if (koi == null)
@@ -58,7 +59,6 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
                     throw new NotFoundException("Consignment not found");
                 await RecalculateConsignmentRequestTotalsAsync(consignment);
             }
-
 
             await _unitOfWork.ConsignmentDetailRepository.UpdateAsync(consignmentDetail);
             await _unitOfWork.SaveChangesAsync();

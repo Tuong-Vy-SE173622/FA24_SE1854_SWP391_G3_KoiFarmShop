@@ -1,9 +1,12 @@
 ﻿using KoiFarmShop.Business.Business.ConsignmentBusiness;
 using KoiFarmShop.Business.Dto.Consigments;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace KoiFarmShop.APIService.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ConsignmentDetailController : ControllerBase
@@ -19,7 +22,7 @@ namespace KoiFarmShop.APIService.Controllers
         public async Task<IActionResult> CreateConsignmentDetail([FromBody] ConsignmentDetailCreateDto consignmentDetailCreateDto)
         {
             var result = await _consignmentDetailService.CreateConsignmentDetailAsync(consignmentDetailCreateDto);
-            return CreatedAtAction(nameof(GetById), new { id = result.ConsignmentDetailId }, result);
+            return CreatedAtAction(nameof(GetById), new { consignmentRequestId = result.ConsignmentDetailId }, result);
         }
 
         [HttpPut("{id}")]
@@ -41,6 +44,12 @@ namespace KoiFarmShop.APIService.Controllers
         {
             var result = await _consignmentDetailService.GetDetailsByConsignmentRequestIdAsync(id);
             return Ok(result);
+        }
+        [HttpGet("test")]
+        public string Test()
+        {
+            var usernameClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
+             return usernameClaim?.Value;
         }
     }
 

@@ -171,12 +171,15 @@
 }
 
 .testimonial-container {
-  height: auto;
+  /* height: auto; */
   margin: 2.5rem auto;
   padding-top: 40px;
   /* background: url("https://thumb.ac-illust.com/0c/0cbb5141beb4f97c7e7e0bb58af14edc_t.jpeg"); */
-  background: url("https://img.freepik.com/free-vector/pastel-blue-abstract-texture-background-with-watercolor_65186-3234.jpg");
-  height: calc(100vh - 100px);
+  background: url("https://img.freepik.com/free-photo/blue_53876-88970.jpg");
+  /* background-repeat: repeat; */
+  background-size: cover;
+  z-index: 1;
+  height: 100vh;
 }
 
 .home-testimonial-items {

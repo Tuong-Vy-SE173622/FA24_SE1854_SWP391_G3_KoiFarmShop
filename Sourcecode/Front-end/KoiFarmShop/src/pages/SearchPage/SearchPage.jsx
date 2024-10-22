@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./SearchPage.css";
-import { fetchAllKois } from "../../config/KoiAxios";
+// import { fetchAllKois } from "../../config/KoiAxios";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { Checkbox, ConfigProvider, Pagination } from "antd";
 import KoiCard from "../../components/KoiCard/KoiCard";

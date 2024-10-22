@@ -1,9 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./HomePage.css";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Button, Carousel } from "antd";
 import KoiCard from "../../components/KoiCard/KoiCard";
 import { useNavigate } from "react-router-dom";
+// import { getAllKoi } from "../../config/axios";
 
 function HomePage() {
   const nav = useNavigate();
@@ -161,6 +162,15 @@ function HomePage() {
       image: "/thumb.png",
     },
   ]);
+
+  // useEffect(async () => {
+  //   try {
+  //     const res = await getAllKoi();
+  //     console.log(res.data);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // });
 
   const carouselRef = useRef();
 

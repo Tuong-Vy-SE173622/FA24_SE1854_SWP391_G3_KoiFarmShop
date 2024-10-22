@@ -3,7 +3,7 @@ import { API_URL } from "../constants";
 
 const config = {
   baseURL: API_URL,
-  timeout: 30000,
+  timeout: 90000,
   headers: {
     "Content-Type": "application/json",
   },

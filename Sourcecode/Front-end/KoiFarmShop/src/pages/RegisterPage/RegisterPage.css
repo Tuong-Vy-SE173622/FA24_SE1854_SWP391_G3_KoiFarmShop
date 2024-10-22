@@ -19,3 +19,11 @@
   justify-content: center;
   align-items: center;
 }
+
+.register-form > .form-wrapper {
+  /* width: 100%; */
+  /* background-color: lightblue; */
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}

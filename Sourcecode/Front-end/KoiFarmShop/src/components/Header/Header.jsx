@@ -5,11 +5,13 @@ import { IoSearch } from "react-icons/io5";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../services/authService";
+import { getAllKoiType } from "../../services/KoiTypeService";
 
 function Header() {
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [koiTypeLs, setKoiTypeLs] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,13 +34,13 @@ function Header() {
     { key: 4, label: "Nguồn Koi", link: "" },
   ];
 
-  const KoiList = [
-    { key: 1, label: "Koi Kohaku", link: "" },
-    { key: 2, label: "Koi Ogon", link: "" },
-    { key: 3, label: "Koi Showa", link: "" },
-    { key: 4, label: "Koi Tancho", link: "" },
-    { key: 5, label: "Koi Bekko", link: "" },
-  ];
+  // const KoiList = [
+  //   { key: 1, label: "Koi Kohaku", link: "" },
+  //   { key: 2, label: "Koi Ogon", link: "" },
+  //   { key: 3, label: "Koi Showa", link: "" },
+  //   { key: 4, label: "Koi Tancho", link: "" },
+  //   { key: 5, label: "Koi Bekko", link: "" },
+  // ];
 
   const taskList = [
     { key: 1, label: "Profile", link: "/profile" },
@@ -54,6 +56,20 @@ function Header() {
       console.error("Logout failed: ", err);
     }
   };
+
+  useEffect(() => {
+    const fetchKoiType = async () => {
+      try {
+        const data = await getAllKoiType();
+        setKoiTypeLs(data);
+        console.log("KoiType", koiTypeLs);
+      } catch (err) {
+        console.error("Failed to fetch Koi types", err);
+      }
+    };
+
+    fetchKoiType();
+  }, []);
 
   return (
     <header>
@@ -92,9 +108,9 @@ function Header() {
               Cá Koi Nhật
               {hoveredItem === "koi" && (
                 <ul className="dropdown">
-                  {KoiList.map((item) => (
-                    <li className="dropdown-item" key={item.key}>
-                      {item.label}
+                  {koiTypeLs.map((item) => (
+                    <li className="dropdown-item" key={item.koiTypeId}>
+                      {item.name}
                     </li>
                   ))}
                 </ul>

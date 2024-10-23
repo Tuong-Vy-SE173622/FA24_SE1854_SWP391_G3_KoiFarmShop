@@ -4,7 +4,6 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Button, Carousel } from "antd";
 import KoiCard from "../../components/KoiCard/KoiCard";
 import { useNavigate } from "react-router-dom";
-// import { getAllKoi } from "../../config/axios";
 
 function HomePage() {
   const nav = useNavigate();
@@ -13,62 +12,42 @@ function HomePage() {
       key: 1,
       urlImg: "/koi-types/asagi.jpg",
       title: "Koi Asagi",
-      info: "Koi Asagi là tổ tiên của Nishikigoi. Nguồn gốc từ cá chép đen suối. Được tiến hóa theo hướng chọn lọc những em Koi có màu trắng, đỏ và xanh dương để nuôi trong hồ.",
     },
     {
       key: 2,
       urlImg: "/koi-types/benigoi.jpg",
       title: "Koi Benigoi",
-      info: "Cá koi Benigoi là dòng cá có màu đơn sắc, toàn bộ vảy, vây cá đều mang màu đỏ trông như quả ớt khổng lồ. Nếu thả trong hồ koi thì cá nổi bật hơn hẳn so với dòng koi khác.",
     },
     {
       key: 3,
       urlImg: "/koi-types/karashi.jpg",
       title: "Koi Karashi",
-      info: "Koi Karashi là dòng Koi mới tại Nhật nên thừa hưởng nhiều phẩm chất vượt trội. Ưu điểm của Koi Karashi là kích thước phát triển nhanh trong 1 thời gian ngắn. Là Koi dẫn đàn, rất thân thiện, mạnh dạn với con người.",
     },
     {
       key: 4,
       urlImg: "/koi-types/showa-sanshouku.jpg",
       title: "Koi Showa Sanshouku",
-      info: "Cá Koi Showa là dòng Gosanke tiêu chuẩn, thuộc dòng cá Koi nhóm AAA của Nhật Koi Showa hấp dẫn người chơi bởi 3 màu đỏ-đen-trắng. Trong đó, màu trắng (Shiroji) là màu nền, tiếp theo là màu đỏ (Hi) và màu đen (Sumi).",
     },
     {
       key: 5,
       urlImg: "/koi-types/asagi.jpg",
       title: "Koi Asagi",
-      info: "Koi Asagi là tổ tiên của Nishikigoi. Nguồn gốc từ cá chép đen suối. Được tiến hóa theo hướng chọn lọc những em Koi có màu trắng, đỏ và xanh dương để nuôi trong hồ.",
     },
     {
       key: 6,
       urlImg: "/koi-types/benigoi.jpg",
       title: "Koi Benigoi",
-      info: "Cá koi Benigoi là dòng cá có màu đơn sắc, toàn bộ vảy, vây cá đều mang màu đỏ trông như quả ớt khổng lồ. Nếu thả trong hồ koi thì cá nổi bật hơn hẳn so với dòng koi khác.",
     },
     {
       key: 7,
       urlImg: "/koi-types/karashi.jpg",
       title: "Koi Karashi",
-      info: "Koi Karashi là dòng Koi mới tại Nhật nên thừa hưởng nhiều phẩm chất vượt trội. Ưu điểm của Koi Karashi là kích thước phát triển nhanh trong 1 thời gian ngắn. Là Koi dẫn đàn, rất thân thiện, mạnh dạn với con người.",
     },
     {
       key: 8,
       urlImg: "/koi-types/showa-sanshouku.jpg",
       title: "Koi Showa Sanshouku",
-      info: "Cá Koi Showa là dòng Gosanke tiêu chuẩn, thuộc dòng cá Koi nhóm AAA của Nhật Koi Showa hấp dẫn người chơi bởi 3 màu đỏ-đen-trắng. Trong đó, màu trắng (Shiroji) là màu nền, tiếp theo là màu đỏ (Hi) và màu đen (Sumi).",
     },
-    // {
-    //   key: 1,
-    //   urlImg: '',
-    //   title: '',
-    //   info: ''
-    // },
-    // {
-    //   key: 1,
-    //   urlImg: '',
-    //   title: '',
-    //   info: ''
-    // },
   ];
 
   const TestimonialsList = [
@@ -162,15 +141,6 @@ function HomePage() {
       image: "/thumb.png",
     },
   ]);
-
-  // useEffect(async () => {
-  //   try {
-  //     const res = await getAllKoi();
-  //     console.log(res.data);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // });
 
   const carouselRef = useRef();
 
@@ -284,7 +254,6 @@ function HomePage() {
             infinite
             draggable
             ref={carouselRef}
-            // className="introduction-koi-wrapper"
           >
             {KoiTypeIntroduction.map((koi) => (
               <KoiIntroductionCart
@@ -438,7 +407,7 @@ const KoiIntroductionCart = ({ koi }) => {
   return (
     <div className="koi-introduction-cart-container">
       <img src={koi.urlImg} alt={koi.title} />
-      <div className="content-koi">{koi.info}</div>
+      {/* <div className="content-koi">{koi.info}</div> */}
     </div>
   );
 };

@@ -13,61 +13,12 @@ function LoginPage() {
   const handleRegisterPage = () => navigate("/register");
   const handleHomePage = () => navigate("/");
 
-  // const handleLogin = async () => {
-  //   console.log("Login button clicked"); // Xem có vào hàm handleLogin không
-
-  //   try {
-  //     console.log("Username:", userName); // Kiểm tra giá trị username
-  //     console.log("Password:", password); // Kiểm tra giá trị password
-  //     const data = await login(userName, password);
-  //     const userData = await getUserInfo(userName);
-  //     console.log("user info: ", userData);
-
-  //     Modal.success({
-  //       title: "Đăng nhập thành công!",
-  //       content: (
-  //         <div>
-  //           <p>Bạn đã đăng nhập thành công.</p>
-  //         </div>
-  //       ),
-  //       onOk() {
-  //         handleHomePage(); // Chuyển hướng về trang chính khi nhấn OK
-  //       },
-  //       centered: true,
-  //     });
-  //     // message.success("Login successful!");
-  //     // handleHomePage();
-  //     console.log("Login successful", data);
-  //   } catch (error) {
-  //     console.error("Error during login: ", error);
-  //     setErrorMessage("Login failed. Please check your credentials.");
-  //     Modal.error({
-  //       title: "Đăng nhập thất bại!",
-  //       content: (
-  //         <div>
-  //           <p>Vui lòng kiểm tra thông tin đăng nhập của bạn.</p>
-  //         </div>
-  //       ),
-  //       onOk() {
-  //         setErrorMessage("Login failed. Please check your credentials.");
-  //       },
-  //       centered: true,
-  //     });
-  //     // message.error("Login failed. Please check your credentials.");
-  //   }
-  // };
-
   const handleLogin = async () => {
-    console.log("Login button clicked");
-
     try {
-      console.log("Username:", userName);
-      console.log("Password:", password);
       const data = await login(userName, password);
 
       // Gọi getUserInfo với username đã nhập
       const userData = await getUserInfo(userName);
-      console.log("user info: ", userData);
 
       // Chuyển đổi giá trị role
       let userRole;
@@ -82,7 +33,8 @@ function LoginPage() {
       // Lưu thông tin người dùng vào localStorage
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
-      localStorage.setItem("roles", JSON.stringify(userRole)); // Lưu role đã chuyển đổi
+      localStorage.setItem("roles", JSON.stringify(userRole));
+      localStorage.setItem("account", JSON.stringify(userData)); // Lưu role đã chuyển đổi
 
       Modal.success({
         title: "Đăng nhập thành công!",
@@ -96,11 +48,8 @@ function LoginPage() {
         },
         centered: true,
       });
-
-      console.log("Login successful", data);
     } catch (error) {
       console.error("Error during login: ", error);
-      // setErrorMessage("Login failed. Please check your credentials.");
       Modal.error({
         title: "Đăng nhập thất bại!",
         content: (
@@ -108,9 +57,6 @@ function LoginPage() {
             <p>Vui lòng kiểm tra thông tin đăng nhập của bạn.</p>
           </div>
         ),
-        // onOk() {
-        //   // setErrorMessage("Login failed. Please check your credentials.");
-        // },
         centered: true,
       });
     }
@@ -161,11 +107,6 @@ function LoginPage() {
                   autoComplete="current-password"
                 />
               </Form.Item>
-
-              {/* <span>
-                <Checkbox>Remember me</Checkbox>
-                <p>Forgot Password?</p>
-              </span> */}
 
               <Form.Item>
                 <Button

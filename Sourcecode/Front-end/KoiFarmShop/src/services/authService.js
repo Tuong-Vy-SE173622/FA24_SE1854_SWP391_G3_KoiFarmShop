@@ -5,23 +5,12 @@ export const login = async (username, password) => {
     userName: username,
     password: password,
   };
-  // const params = {}
-
-  console.log("Preparing to send login request"); // Đảm bảo log này xuất hiện
 
   try {
-    // console.log("API URL: /api/Authorize/Login");
-    // console.log("Sent Data: ", loginData); // Xem dữ liệu gửi có đúng không
-
-    console.log("/api/Authorize/Login", {
-      params,
-    });
-
     const res = await api.post("/api/Authorize/Login", null, {
       params: params,
     });
 
-    console.log("Response data", res.data); // Log dữ liệu trả về từ API
     return res.data;
   } catch (err) {
     console.error("Error during login: ", err);
@@ -63,6 +52,7 @@ export const logout = async () => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("roles");
+      localStorage.removeItem("account");
       console.log("Logout successful");
     } else {
       console.error("Logout failed: ", res.data.message);

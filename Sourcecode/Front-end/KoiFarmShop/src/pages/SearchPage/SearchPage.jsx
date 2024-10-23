@@ -4,6 +4,7 @@ import "./SearchPage.css";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { Checkbox, ConfigProvider, Pagination } from "antd";
 import KoiCard from "../../components/KoiCard/KoiCard";
+import { getAllKoiType } from "../../services/KoiTypeService";
 
 function SearchPage() {
   const [activeFilters, setActiveFilters] = useState({
@@ -11,16 +12,15 @@ function SearchPage() {
     Origin: false,
     Generation: false,
   });
-  const [koiList, setKoiList] = useState([]);
+  // const [koiList, setKoiList] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState({});
+  const [koiTypeLs, setKoiTypeLs] = useState([]);
 
   const filterOptions = {
-    Type: [
-      { label: "Koi  Asagi", value: "Koi  Asagi" },
-      { label: "Koi  Karashi", value: "Koi  Karashi" },
-      { label: "Koi  Ogon", value: "Koi  Ogon" },
-      { label: "Koi  Showa", value: "Koi  Showa" },
-    ],
+    Type: koiTypeLs.map((koi) => ({
+      label: koi.name,
+      value: koi.name,
+    })),
     Generation: [
       { label: "Thuần chủng", value: "Thuần chủng" },
       { label: "Thuần Việt", value: "Thuần Việt" },
@@ -60,11 +60,19 @@ function SearchPage() {
     }));
   };
 
-  // useEffect(() => {
-  //   const koiData = fetchAllKois();
-  //   setKoiList(koiData);
-  //   console.log(koiData);
-  // }, []);
+  useEffect(() => {
+    const fetchKoiType = async () => {
+      try {
+        const data = await getAllKoiType();
+        setKoiTypeLs(data);
+        console.log("KoiType search", koiTypeLs);
+      } catch (err) {
+        console.error("Failed to fetch Koi types", err);
+      }
+    };
+
+    fetchKoiType();
+  }, []);
 
   return (
     <div style={{ marginTop: 100 }} className="search-page-container">

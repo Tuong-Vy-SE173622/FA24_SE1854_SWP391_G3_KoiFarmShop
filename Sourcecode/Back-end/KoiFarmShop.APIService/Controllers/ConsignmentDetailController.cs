@@ -21,6 +21,7 @@ namespace KoiFarmShop.APIService.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateConsignmentDetail([FromBody] ConsignmentDetailCreateDto consignmentDetailCreateDto)
         {
+            var currentUser = HttpContext.User;
             var result = await _consignmentDetailService.CreateConsignmentDetailAsync(consignmentDetailCreateDto);
             return CreatedAtAction(nameof(GetById), new { consignmentRequestId = result.ConsignmentDetailId }, result);
         }

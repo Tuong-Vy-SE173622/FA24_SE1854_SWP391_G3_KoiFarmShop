@@ -34,6 +34,7 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
             var orderItem = await _unitOfWork.OrderItemRepository.GetByIdAsync(id);
             if (orderItem == null) return null;
 
+            updateDto.UpdatedAt = DateTime.Now;
             _mapper.Map(updateDto, orderItem);
             await _unitOfWork.SaveChangesAsync();
 

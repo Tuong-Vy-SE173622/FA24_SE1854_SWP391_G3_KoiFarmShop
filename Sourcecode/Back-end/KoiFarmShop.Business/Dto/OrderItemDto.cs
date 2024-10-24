@@ -48,7 +48,7 @@ namespace KoiFarmShop.Business.Dto
 
         public bool? IsActive { get; set; }
 
-        public string Note { get; set; }
+        public string? Note { get; set; }
     }
 
     public class OrderItemUpdateDto
@@ -61,7 +61,8 @@ namespace KoiFarmShop.Business.Dto
 
         public bool? IsActive { get; set; }
 
-        public string Note { get; set; }
+        public string? Note { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 
     public class OrderItemResponseDto

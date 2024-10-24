@@ -16,5 +16,7 @@ namespace KoiFarmShop.Business.Dto.CareRequests
         public string? Status { get; set; }
 
         public string? Note { get; set; }
+
+        public string? CreatedBy { get; set; }
     }
 }

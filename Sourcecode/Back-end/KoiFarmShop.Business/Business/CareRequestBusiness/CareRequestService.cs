@@ -46,7 +46,9 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
             var careRequest = await _unitOfWork.CareRequestRepository.GetByIdAsync(id);
             if (careRequest == null) return null;
 
+            
             _mapper.Map(updateDto, careRequest);
+            await _unitOfWork.CareRequestRepository.UpdateAsync(careRequest);
             await _unitOfWork.SaveChangesAsync();
 
             return _mapper.Map<CareRequestResponseDto>(careRequest);

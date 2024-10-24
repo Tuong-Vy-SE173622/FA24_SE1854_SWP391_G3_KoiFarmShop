@@ -36,6 +36,7 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
         public async Task<CareRequestDetailResponseDto> CreateCareRequestDetailAsync(CareRequestDetailCreateDto createDto)
         {
             var careRequestDetail = _mapper.Map<CareRequestDetail>(createDto);
+            
             await _unitOfWork.CareRequestDetailRepository.CreateAsync(careRequestDetail);
             await _unitOfWork.SaveChangesAsync();
             return _mapper.Map<CareRequestDetailResponseDto>(careRequestDetail);
@@ -47,6 +48,8 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
             if (careRequestDetail == null) return null;
 
             _mapper.Map(updateDto, careRequestDetail);
+            careRequestDetail.UpdatedAt = DateTime.Now;
+            await _unitOfWork.CareRequestDetailRepository.UpdateAsync(careRequestDetail);
             await _unitOfWork.SaveChangesAsync();
 
             return _mapper.Map<CareRequestDetailResponseDto>(careRequestDetail);

@@ -7,7 +7,7 @@ namespace KoiFarmShop.Business.Dto
         [Key]
         public int OrderId { get; set; }
 
-        public int? CustomerId { get; set; }
+        public int CustomerId { get; set; }
 
         public DateTime? OrderDate { get; set; }
 
@@ -27,9 +27,9 @@ namespace KoiFarmShop.Business.Dto
 
         public bool? IsActive { get; set; }
 
-        public string Note { get; set; }
+        public string? Note { get; set; }
 
-        public string Status { get; set; }
+        public string? Status { get; set; }
         public CustomerDto? Customer { get; set; }
     }
 
@@ -50,15 +50,15 @@ namespace KoiFarmShop.Business.Dto
 
         public double? TotalAmount { get; set; }
 
-        public string PaymentMethod { get; set; }
+        public string? PaymentMethod { get; set; }
 
-        public string PaymentStatus { get; set; }
+        public string? PaymentStatus { get; set; }
 
         public bool? IsActive { get; set; }
 
-        public string Note { get; set; }
+        public string? Note { get; set; }
 
-        public string Status { get; set; }
+        public string? Status { get; set; }
     }
 
     public class OrderUpdateDto
@@ -78,15 +78,16 @@ namespace KoiFarmShop.Business.Dto
 
         public double? TotalAmount { get; set; }
 
-        public string PaymentMethod { get; set; }
+        public string? PaymentMethod { get; set; }
 
-        public string PaymentStatus { get; set; }
+        public string? PaymentStatus { get; set; }
 
         public bool? IsActive { get; set; }
 
-        public string Note { get; set; }
+        public string? Note { get; set; }
 
         public string Status { get; set; }
+        public DateTime? UpdateAt { get; set; }
     }
 
     public class OrderResponseDto

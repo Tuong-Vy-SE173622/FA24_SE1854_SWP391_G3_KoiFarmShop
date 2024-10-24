@@ -1,5 +1,7 @@
 ﻿using KoiFarmShop.Business.Business.KoiBusiness;
+using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Kois;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KoiFarmShop.APIService.Controllers
@@ -63,6 +65,17 @@ namespace KoiFarmShop.APIService.Controllers
                 return NotFound();
             }
             return NoContent();
+        }
+
+        [AllowAnonymous]
+        [HttpGet("all-origins")]
+        public async Task<ResultDto> GetAllKoiOrigins()
+        {
+            var origins = await _koiService.GetAllKoiOrigins();
+
+            ResultDto result = new ResultDto();
+            result.success(origins);
+            return result;
         }
     }
 }

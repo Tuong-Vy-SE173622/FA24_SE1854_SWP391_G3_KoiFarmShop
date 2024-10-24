@@ -8,7 +8,7 @@ namespace KoiFarmShop.Business.Dto.Kois
         [Key]
         public int KoiId { get; set; }
 
-        public int? KoiTypeId { get; set; }
+        public string? KoiTypeName { get; set; }
 
         public string? Origin { get; set; }
 
@@ -43,6 +43,5 @@ namespace KoiFarmShop.Business.Dto.Kois
         public DateTime? UpdatedAt { get; set; }
 
         public string UpdatedBy { get; set; }
-        public KoiTypeDto? KoiType { get; set; }
     }
 }

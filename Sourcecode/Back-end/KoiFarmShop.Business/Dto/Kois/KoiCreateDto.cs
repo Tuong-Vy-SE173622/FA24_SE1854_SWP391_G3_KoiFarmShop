@@ -2,6 +2,7 @@
 {
     public class KoiCreateDto
     {
+        public int KoiTypeId { get; set; }
         public string Origin { get; set; }
         public int? Gender { get; set; }
         public int? Age { get; set; }

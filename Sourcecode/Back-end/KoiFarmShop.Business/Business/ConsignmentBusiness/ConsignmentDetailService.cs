@@ -30,6 +30,9 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
                 throw new NotFoundException("Consignment not found");
 
             var consignmentDetail = _mapper.Map<ConsignmentDetail>(consignmentDetailCreateDto);
+
+            if (currentUser == null) throw new UnauthorizedAccessException();
+            consignmentDetail.CreatedBy = currentUser;
             await _unitOfWork.ConsignmentDetailRepository.CreateAsync(consignmentDetail);
             await _unitOfWork.SaveChangesAsync();
 
@@ -38,7 +41,7 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             return _mapper.Map<ConsignmentDetailResponseDto>(consignmentDetail);
         }
 
-        public async Task<ConsignmentDetailResponseDto> UpdateConsignmentDetailAsync(int id, ConsignmentDetailUpdateDto consignmentDetailUpdateDto)
+        public async Task<ConsignmentDetailResponseDto> UpdateConsignmentDetailAsync(int id, ConsignmentDetailUpdateDto consignmentDetailUpdateDto, string currentUser)
         {
             var consignmentDetail = await _unitOfWork.ConsignmentDetailRepository.GetByIdAsync(id);
             if (consignmentDetail == null)
@@ -59,6 +62,9 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
                     throw new NotFoundException("Consignment not found");
                 await RecalculateConsignmentRequestTotalsAsync(consignment);
             }
+
+            if (currentUser == null) throw new UnauthorizedAccessException();
+            consignmentDetail.UpdatedBy = currentUser;
 
             await _unitOfWork.ConsignmentDetailRepository.UpdateAsync(consignmentDetail);
             await _unitOfWork.SaveChangesAsync();

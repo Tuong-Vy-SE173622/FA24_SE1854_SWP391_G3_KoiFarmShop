@@ -21,14 +21,16 @@ namespace KoiFarmShop.APIService.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateConsignmentDetail([FromBody] ConsignmentDetailCreateDto consignmentDetailCreateDto)
         {
-            var result = await _consignmentDetailService.CreateConsignmentDetailAsync(consignmentDetailCreateDto);
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var result = await _consignmentDetailService.CreateConsignmentDetailAsync(consignmentDetailCreateDto, currentUser);
             return CreatedAtAction(nameof(GetById), new { consignmentRequestId = result.ConsignmentDetailId }, result);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateConsignmentDetail(int id, [FromBody] ConsignmentDetailUpdateDto consignmentDetailUpdateDto)
         {
-            var result = await _consignmentDetailService.UpdateConsignmentDetailAsync(id, consignmentDetailUpdateDto);
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var result = await _consignmentDetailService.UpdateConsignmentDetailAsync(id, consignmentDetailUpdateDto, currentUser);
             return Ok(result);
         }
 
@@ -48,7 +50,7 @@ namespace KoiFarmShop.APIService.Controllers
         [HttpGet("test")]
         public string Test()
         {
-            var usernameClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
+            var usernameClaim = HttpContext.User.FindFirst("UserName");
              return usernameClaim?.Value;
         }
     }

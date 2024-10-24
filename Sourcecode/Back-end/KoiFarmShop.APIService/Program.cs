@@ -192,6 +192,15 @@ namespace KoiFarmShop.APIService
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();
 
+            using (var scope = app.Services.CreateScope())
+            {
+                var serviceProvider = scope.ServiceProvider;
+
+                var refreshHandler = serviceProvider.GetRequiredService<ITokenService>();
+
+                refreshHandler.RemoveAllRefreshToken();
+            }
+
             //exception handler
             app.UseMiddleware<GlobalExceptionHandler>();
 

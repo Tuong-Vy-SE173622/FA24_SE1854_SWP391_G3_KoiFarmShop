@@ -1,5 +1,6 @@
 ﻿using KoiFarmShop.Business.AutoMap;
 using KoiFarmShop.Business.Business.AccountBusiness;
+using KoiFarmShop.Business.Business.Cloudinary;
 using KoiFarmShop.Business.Business.ConsignmentBusiness;
 using KoiFarmShop.Business.Business.KoiBusiness;
 using KoiFarmShop.Business.Business.KoiTypeBusiness;
@@ -171,6 +172,9 @@ namespace KoiFarmShop.APIService
             // Register VNPAY service
             builder.Services.AddScoped<IVnPayService, VnpayService>();
 
+            //Load CloudinaryConfig from appsettings.json
+            builder.Services.Configure<CloudinaryConfig>(builder.Configuration.GetSection("CloudinaryConfig"));
+            builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
 
             //add automapper
             builder.Services.AddAutoMapper(typeof(MappingProfile));

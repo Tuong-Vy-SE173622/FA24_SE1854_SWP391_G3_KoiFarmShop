@@ -5,6 +5,7 @@ using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 using KoiFarmShop.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace KoiFarmShop.Business.Business.KoiBusiness
 {
@@ -39,6 +40,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     Gender = k.Gender,
                     Age = k.Age,
                     Size = k.Size,
+                    Price = k.Price,
                     Characteristics = k.Characteristics,
                     FeedingAmountPerDay = k.FeedingAmountPerDay,
                     ScreeningRate = k.ScreeningRate,
@@ -128,6 +130,27 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 query = query.Where(k => k.IsImported == filterDto.IsImport.Value);
             }
 
+            if (!string.IsNullOrEmpty(filterDto.KoiTypeName))
+            {
+                query = query.Where(k => k.KoiType.Name == filterDto.KoiTypeName);
+            }
+
+            if (filterDto.Gender.HasValue)
+            {
+                query = query.Where(k => k.Gender == filterDto.Gender);
+            }
+
+            if (!string.IsNullOrEmpty(filterDto.Origin))
+            {
+                query = query.Where(k => filterDto.Origin.Contains(k.Origin));
+            }
+
+            // Sorting
+            if (filterDto.IsSortedByPrice)
+                query = filterDto.IsAscending
+                    ? query.OrderBy(k => k.Price)
+                    : query.OrderByDescending(k => k.Price);
+
             // Get the total record count before pagination
             var totalRecords = await query.CountAsync();
 
@@ -138,11 +161,12 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 .Select(k => new KoiDto
                 {
                     KoiId = k.KoiId,
-                    KoiTypeName = k.KoiType.Name, // Mapping KoiType.Name directly
+                    KoiTypeName = k.KoiType.Name, // Mapping KoiType.Name directly :D
                     Origin = k.Origin,
                     Gender = k.Gender,
                     Age = k.Age,
                     Size = k.Size,
+                    Price = k.Price,
                     Characteristics = k.Characteristics,
                     FeedingAmountPerDay = k.FeedingAmountPerDay,
                     ScreeningRate = k.ScreeningRate,

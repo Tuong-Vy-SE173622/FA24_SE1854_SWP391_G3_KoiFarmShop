@@ -80,6 +80,9 @@ public partial class Koi
     [Unicode(false)]
     public string Image { get; set; }
 
+    [Column("price")]
+    public double? Price { get; set; }
+
     [InverseProperty("Koi")]
     public virtual ICollection<ConsignmentDetail> ConsignmentDetails { get; set; } = new List<ConsignmentDetail>();
 

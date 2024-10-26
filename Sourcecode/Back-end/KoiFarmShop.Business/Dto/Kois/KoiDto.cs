@@ -18,6 +18,8 @@ namespace KoiFarmShop.Business.Dto.Kois
 
         public double? Size { get; set; }
 
+        public double? Price { get; set; }
+
         public string Characteristics { get; set; }
 
         public double? FeedingAmountPerDay { get; set; }

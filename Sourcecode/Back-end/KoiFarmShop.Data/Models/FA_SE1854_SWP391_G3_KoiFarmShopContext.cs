@@ -9,12 +9,12 @@ namespace KoiFarmShop.Data.Models;
 
 public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
 {
-    public FA_SE1854_SWP391_G3_KoiFarmShopContext()
+    public FA_SE1854_SWP391_G3_KoiFarmShopContext(DbContextOptions<FA_SE1854_SWP391_G3_KoiFarmShopContext> options)
+        : base(options)
     {
     }
 
-    public FA_SE1854_SWP391_G3_KoiFarmShopContext(DbContextOptions<FA_SE1854_SWP391_G3_KoiFarmShopContext> options)
-        : base(options)
+    public FA_SE1854_SWP391_G3_KoiFarmShopContext()
     {
     }
 

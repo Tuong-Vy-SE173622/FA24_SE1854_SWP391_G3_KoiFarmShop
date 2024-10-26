@@ -13,6 +13,9 @@ namespace KoiFarmShop.Business.Dto.Consigments
         [StringLength(30, ErrorMessage = "ConsignmentType cannot be longer than 30 characters.")]
         public string? ConsignmentType { get; set; }
 
+        [Range(0, int.MaxValue, ErrorMessage = "Total month must be a positive value")]
+        public int? TotalMonths { get; set; }
+
         [Range(0, double.MaxValue, ErrorMessage = "MonthlyConsignmentFee must be a positive value.")]
         public double? MonthlyConsignmentFee { get; set; }
 

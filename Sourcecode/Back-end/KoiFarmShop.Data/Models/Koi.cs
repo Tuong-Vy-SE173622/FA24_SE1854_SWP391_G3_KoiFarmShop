@@ -19,8 +19,7 @@ public partial class Koi
     public int? KoiTypeId { get; set; }
 
     [Column("origin")]
-    [StringLength(100)]
-    [Unicode(false)]
+    [StringLength(255)]
     public string Origin { get; set; }
 
     [Column("gender")]
@@ -34,7 +33,6 @@ public partial class Koi
 
     [Column("characteristics")]
     [StringLength(255)]
-    [Unicode(false)]
     public string Characteristics { get; set; }
 
     [Column("feeding_amount_per_day")]
@@ -61,7 +59,6 @@ public partial class Koi
 
     [Column("note")]
     [StringLength(255)]
-    [Unicode(false)]
     public string Note { get; set; }
 
     [Column("created_at")]
@@ -69,7 +66,6 @@ public partial class Koi
 
     [Column("created_by")]
     [StringLength(255)]
-    [Unicode(false)]
     public string CreatedBy { get; set; }
 
     [Column("updated_at")]
@@ -77,7 +73,6 @@ public partial class Koi
 
     [Column("updated_by")]
     [StringLength(255)]
-    [Unicode(false)]
     public string UpdatedBy { get; set; }
 
     [Column("IMAGE")]

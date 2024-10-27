@@ -96,8 +96,23 @@
 
 .search-result-wrapper {
   display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  row-gap: 25px;
+  align-items: center;
+  flex-direction: column;
+
+  /* justify-content: space-evenly; */
+  /* flex-wrap: wrap; */
+  /* row-gap: 25px; */
+  /* background-color: lightblue; */
   margin: 1.8rem auto;
+  z-index: 10;
+}
+
+.search-result-list {
+  /* background-color: lightgreen; */
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  height: 580px;
+  /* justify-content: space-evenly; */
 }

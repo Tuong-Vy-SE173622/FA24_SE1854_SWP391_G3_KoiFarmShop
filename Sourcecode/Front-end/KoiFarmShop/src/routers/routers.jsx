@@ -11,6 +11,7 @@ import CustomerDashboardLayout from "../pages/DashboardLayout/customer/CustomerD
 import KoiBoughtPage from "../pages/Dashboard/CustomerDashboard/KoiBoughtPage/KoiBoughtPage";
 import DepositedKoiPage from "../pages/Dashboard/CustomerDashboard/DepositedKoiPage/DepositedKoiPage";
 import ScrollToTop from "../components/ScrollTop/ScrollToTop";
+import CompareBar from "../components/CompareBar/CompareBar";
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +27,12 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePage />,
+        element: (
+          <>
+            <HomePage />
+            <CompareBar />
+          </>
+        ),
       },
       {
         path: "/koi-detail/:id",
@@ -34,7 +40,12 @@ export const router = createBrowserRouter([
       },
       {
         path: "/search",
-        element: <SearchPage />,
+        element: (
+          <>
+            <SearchPage />
+            <CompareBar />
+          </>
+        ),
       },
     ],
   },

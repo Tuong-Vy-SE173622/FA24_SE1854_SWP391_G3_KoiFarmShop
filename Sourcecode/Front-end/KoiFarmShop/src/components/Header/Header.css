@@ -15,7 +15,7 @@
   right: 0;
   height: 100px;
   padding: 0 0.8rem;
-  z-index: 10000;
+  z-index: 30;
 }
 
 .header-container .header-logo {

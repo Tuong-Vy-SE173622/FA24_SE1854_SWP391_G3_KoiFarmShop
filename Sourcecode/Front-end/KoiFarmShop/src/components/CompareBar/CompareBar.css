@@ -1,0 +1,85 @@
+.compare-bar-container {
+  position: fixed;
+  /* background-color: lightblue; */
+  height: 130px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: -1;
+}
+
+.compare-wrapper {
+  height: 100%;
+  width: 60%;
+  /* box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2), -5px 0 10px rgba(0, 0, 0, 0.2),
+    5px 0 10px rgba(0, 0, 0, 0.2); */
+  box-shadow: 0 -5px 10px rgba(0, 128, 255, 0.2),
+    -5px 0 10px rgba(0, 128, 255, 0.2), 5px 0 10px rgba(0, 128, 255, 0.2);
+  background-color: white;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.compare-collapse {
+  position: absolute;
+  background-color: white;
+  top: -42px;
+  right: 0;
+  width: auto;
+  padding: 8px 10px;
+  border: 1px solid #0080ff63;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  box-shadow: -2px 0 15px rgba(0, 128, 255, 0.2),
+    5px 0 15px rgba(0, 128, 255, 0.2);
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.compare-item {
+  position: relative;
+  height: 100%;
+  width: 33.3%;
+  background-color: white;
+  border-right: 1px solid rgb(180, 180, 180);
+}
+
+.compare-item:last-child {
+  border-right: none;
+}
+
+.compare-collapse-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  right: 30px;
+  bottom: 50px;
+
+  border: 1px solid #0080ff71;
+  background-color: white;
+  border-radius: 25px;
+  padding: 8px 15px;
+  box-shadow: 0 -5px 10px rgba(0, 128, 255, 0.2),
+    -5px 0 10px rgba(0, 128, 255, 0.2), 5px 0 10px rgba(0, 128, 255, 0.2);
+
+  color: #0080ff;
+  cursor: pointer;
+  font-weight: 600;
+  z-index: 20;
+}
+
+.compare-item > span {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+
+  cursor: pointer;
+  color: gray;
+}

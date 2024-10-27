@@ -1,50 +1,46 @@
 import React, { useEffect, useState } from "react";
 import "./SearchPage.css";
-// import { fetchAllKois } from "../../config/KoiAxios";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { Checkbox, ConfigProvider, Pagination } from "antd";
 import KoiCard from "../../components/KoiCard/KoiCard";
 import { getAllKoiType } from "../../services/KoiTypeService";
+import { getAllKoi, getKoiOrigins } from "../../services/KoiService";
 
-function SearchPage() {
+const SearchPage = () => {
+  const [selectedFilters, setSelectedFilters] = useState({
+    Type: [],
+    Origin: [],
+    Gender: [],
+  });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [koiTypeLs, setKoiTypeLs] = useState([]);
+  const [koiLs, setKoiLs] = useState([]);
+  const [totalKoiCount, setTotalKoiCount] = useState(0);
+  const [originLs, setOriginLs] = useState([]);
+  const [sortOption, setSortOption] = useState("");
   const [activeFilters, setActiveFilters] = useState({
     Type: false,
     Origin: false,
-    Generation: false,
+    Gender: false,
   });
-  // const [koiList, setKoiList] = useState([]);
-  const [selectedFilters, setSelectedFilters] = useState({});
-  const [koiTypeLs, setKoiTypeLs] = useState([]);
+
+  const pageSize = 8;
 
   const filterOptions = {
-    Type: koiTypeLs.map((koi) => ({
-      label: koi.name,
-      value: koi.name,
+    Type: koiTypeLs.map((koi) => ({ label: koi.name, value: koi.name })),
+    Origin: originLs.map((origin) => ({
+      label: origin.charAt(0).toUpperCase() + origin.slice(1),
+      value: origin.charAt(0).toUpperCase() + origin.slice(1),
     })),
-    Generation: [
-      { label: "Thuần chủng", value: "Thuần chủng" },
-      { label: "Thuần Việt", value: "Thuần Việt" },
-      { label: "F1", value: "F1" },
-      { label: "F2", value: "F2" },
-    ],
-    Origin: [
-      { label: "Nhật Bản", value: "Nhật Bản" },
-      { label: "Việt Nam", value: "Việt Nam" },
+    Gender: [
+      { label: "Đực", value: 1 },
+      { label: "Cái", value: 0 },
     ],
   };
 
-  // const sortOptions = {
+  const handlePageChange = (page) => setCurrentPage(page);
 
-  // }
-
-  const [sortOption, setSortOption] = useState(null);
-
-  const handleSortChange = (event) => {
-    const value = event.target.value;
-    setSortOption(value);
-    console.log("Selected Sort Option:", value);
-    // Xử lý logic sắp xếp ở đây
-  };
+  const handleSortChange = (event) => setSortOption(event.target.value);
 
   const handleActiveFilter = (filterName) => {
     setActiveFilters((prevFilters) => ({
@@ -54,36 +50,87 @@ function SearchPage() {
   };
 
   const handleFilterChange = (title, selectedValues) => {
+    if (title === "Gender" || title === "Type") {
+      selectedValues = selectedValues.slice(-1); // Chỉ giữ giá trị cuối cùng
+    }
+
     setSelectedFilters((prevFilters) => ({
       ...prevFilters,
       [title]: selectedValues,
     }));
   };
 
-  useEffect(() => {
-    const fetchKoiType = async () => {
-      try {
-        const data = await getAllKoiType();
-        setKoiTypeLs(data);
-        console.log("KoiType search", koiTypeLs);
-      } catch (err) {
-        console.error("Failed to fetch Koi types", err);
-      }
+  const fetchKoiType = async () => {
+    try {
+      const data = await getAllKoiType();
+      setKoiTypeLs(data);
+    } catch (err) {
+      console.error("Failed to fetch Koi types", err);
+    }
+  };
+
+  const fetchKoi = async (page) => {
+    const params = {
+      PageNumber: page,
+      PageSize: pageSize,
+      IsSortedByPrice: sortOption.includes("price"),
+      IsAscending: sortOption === "price-desc",
+      KoiTypeName: selectedFilters.Type.join(","),
+      Gender: selectedFilters.Gender.length
+        ? selectedFilters.Gender[0]
+        : undefined,
+      Origin: selectedFilters.Origin.join(","),
     };
 
+    try {
+      const result = await getAllKoi(params);
+      setKoiLs(result.data);
+    } catch (err) {
+      console.error("Failed to fetch Koi data", err);
+    }
+  };
+
+  const fetchNumberKoi = async () => {
+    try {
+      const result = await getAllKoi({
+        PageSize: 100,
+        KoiTypeName: selectedFilters.Type.join(","),
+        Gender: selectedFilters.Gender.length
+          ? selectedFilters.Gender[0]
+          : undefined,
+        Origin: selectedFilters.Origin.join(","),
+      });
+      setTotalKoiCount(result.data.length);
+    } catch (err) {
+      console.error("Failed to fetch Koi data", err);
+    }
+  };
+
+  const fetchKoiOrigins = async () => {
+    try {
+      const result = await getKoiOrigins();
+      setOriginLs(result.data);
+    } catch (err) {
+      console.error("Failed to fetch Koi Origin Data", err);
+    }
+  };
+
+  useEffect(() => {
     fetchKoiType();
-  }, []);
+    fetchKoi(currentPage);
+    fetchNumberKoi();
+    fetchKoiOrigins();
+  }, []); // Run once on mount
+
+  useEffect(() => {
+    fetchKoi(currentPage);
+    fetchNumberKoi();
+  }, [currentPage, sortOption, selectedFilters]);
 
   return (
     <div style={{ marginTop: 100 }} className="search-page-container">
       <div className="filter-container">
-        <h1
-          style={{
-            fontSize: 25,
-            fontWeight: 600,
-            marginLeft: 16,
-          }}
-        >
+        <h1 style={{ fontSize: 25, fontWeight: 600, marginLeft: 16 }}>
           Filter
         </h1>
         {Object.entries(filterOptions).map(([filterName, options]) => (
@@ -100,13 +147,8 @@ function SearchPage() {
       </div>
       <div className="search-wrapper">
         <div className="nresult-sort">
-          <h2
-            style={{
-              fontSize: 22,
-              fontWeight: 500,
-            }}
-          >
-            4 kết quả
+          <h2 style={{ fontSize: 22, fontWeight: 500 }}>
+            {totalKoiCount} kết quả
           </h2>
           <select
             value={sortOption}
@@ -119,26 +161,32 @@ function SearchPage() {
               outline: "none",
             }}
           >
+            <option value="" disabled>
+              -- Select Sort Option --
+            </option>
+            <option value="views">Xem nhiều</option>
             <option value="price-asc">Giá Cao - Thấp</option>
             <option value="price-desc">Giá Thấp - Cao</option>
           </select>
         </div>
-
         <div className="search-result-wrapper">
-          {Array.from({ length: 12 }).map((_, index) => (
-            <KoiCard key={index} />
-          ))}
+          <div className="search-result-list">
+            {koiLs.map((koi) => (
+              <KoiCard key={koi.koiId} koi={koi} />
+            ))}
+          </div>
           <Pagination
-            align="center"
-            style={{ marginTop: 15 }}
-            defaultCurrent={1}
-            total={50}
+            current={currentPage}
+            style={{ marginTop: 25 }}
+            total={totalKoiCount}
+            pageSize={pageSize}
+            onChange={handlePageChange}
           />
         </div>
       </div>
     </div>
   );
-}
+};
 
 const FilterComponent = ({
   title,
@@ -176,7 +224,7 @@ const FilterComponent = ({
             options={options}
             onChange={handleCheckboxChange}
             className="checkbox-group"
-            value={selectedFilters}
+            value={selectedFilters || []}
           />
         </ConfigProvider>
       </div>

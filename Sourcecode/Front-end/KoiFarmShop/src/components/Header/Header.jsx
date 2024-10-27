@@ -43,7 +43,7 @@ function Header() {
   // ];
 
   const taskList = [
-    { key: 1, label: "Profile", link: "/profile" },
+    { key: 1, label: "Profile", link: "/dashboard/profile/stella" },
     { key: 2, label: "Logout", link: "" },
   ];
 
@@ -62,7 +62,7 @@ function Header() {
       try {
         const data = await getAllKoiType();
         setKoiTypeLs(data);
-        console.log("KoiType", koiTypeLs);
+        // console.log("KoiType", koiTypeLs);
       } catch (err) {
         console.error("Failed to fetch Koi types", err);
       }

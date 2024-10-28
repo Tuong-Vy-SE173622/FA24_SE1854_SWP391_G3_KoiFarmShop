@@ -100,22 +100,6 @@ namespace KoiFarmShop.Data
                 return _orderItemRepository ??= new OrderItemRepository(_context);
             }
         }
-        public AccountRepository AccountRepository
-        {
-            get
-            {
-                return _accountRepository ??= new AccountRepository(_context);
-            }
-        }
-
-
-        public PromotionRepository PromotionRepository
-        {
-            get
-            {
-                return _promotionRepository ??= new PromotionRepository(_context);
-            }
-        }
 
         public CareRequestRepository CareRequestRepository
         {
@@ -131,11 +115,6 @@ namespace KoiFarmShop.Data
             {
                 return _careRequestDetailRepository ??= new CareRequestDetailRepository(_context);
             }
-        }
-
-        public async Task<int> SaveChangesAsync()
-        {
-            return await _context.SaveChangesAsync();
         }
     }
 }

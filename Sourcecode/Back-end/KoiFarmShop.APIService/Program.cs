@@ -11,6 +11,9 @@ using KoiFarmShop.Business.Business.VNPay;
 using KoiFarmShop.Business.Config;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace KoiFarmShop.APIService
 {

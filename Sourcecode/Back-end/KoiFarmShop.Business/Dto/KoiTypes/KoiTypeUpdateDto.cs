@@ -1,4 +1,6 @@
-﻿namespace KoiFarmShop.Business.Dto.KoiTypes
+﻿using Microsoft.AspNetCore.Http;
+
+namespace KoiFarmShop.Business.Dto.KoiTypes
 {
     public class KoiTypeUpdateDto
     {
@@ -9,5 +11,6 @@
         public string FengShui { get; set; }
         public string RaisingCondition { get; set; }
         public string Note { get; set; }
+        public IFormFile Image { get; set; }
     }
 }

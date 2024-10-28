@@ -7,6 +7,7 @@ using KoiFarmShop.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using KoiFarmShop.Business.Business.Cloudinary;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace KoiFarmShop.Business.Business.KoiTypeBusiness
 {
@@ -89,18 +90,72 @@ namespace KoiFarmShop.Business.Business.KoiTypeBusiness
             }
         }
 
-        public async Task<int> UpdateKoiTypeAsync(int koiTypeId, KoiTypeUpdateDto koiTypeUpdateDto)
+        public async Task<ResultDto> UpdateKoiTypeAsync(int koiTypeId, KoiTypeUpdateDto koiTypeUpdateDto, ClaimsPrincipal userUpdate)
         {
-            var existingKoiType = await _unitOfWork.KoiTypeRepository.GetByIdAsync(koiTypeId);
-            if (existingKoiType == null)
+            ResultDto result = new ResultDto();
+            try
             {
-                return -1;
+                if (koiTypeUpdateDto == null)
+                {
+                    result.IsSuccess = false;
+                    result.Code = 400;
+                    result.Message = "Koi type request model is null.";
+                    return result;
+                }
+
+                var existingKoiType = _unitOfWork.KoiTypeRepository.Get(x => x.KoiTypeId == koiTypeId);
+                if (existingKoiType == null)
+                {
+                    result.IsSuccess = false;
+                    result.Code = 404;
+                    result.Message = "KoiType not found.";
+                    return result;
+                }
+
+                // Update food properties except image
+                _mapper.Map(koiTypeUpdateDto, existingKoiType);
+                existingKoiType.Name = koiTypeUpdateDto.Name;
+                existingKoiType.ShortDescription = koiTypeUpdateDto.ShortDescription;
+                existingKoiType.CategoryDescription = koiTypeUpdateDto.CategoryDescription;
+                existingKoiType.FengShui = koiTypeUpdateDto?.FengShui;
+                existingKoiType.RaisingCondition = koiTypeUpdateDto?.RaisingCondition;
+                existingKoiType.Note = koiTypeUpdateDto?.Note;
+
+                if (koiTypeUpdateDto.Image != null)
+                {
+                    // Upload new image and update the existing image URL
+                    existingKoiType.Image = await _cloudinaryService.UploadImageAsync(koiTypeUpdateDto.Image);
+                }
+
+                // Set modified by and date
+                var modifiedBy = userUpdate.FindFirst("UserName")?.Value;
+                if (string.IsNullOrEmpty(modifiedBy))
+                {
+                    result.IsSuccess = false;
+                    result.Code = 400;
+                    result.Message = "User name claim not found.";
+                    return result;
+                }
+
+                existingKoiType.UpdatedBy = modifiedBy;
+                existingKoiType.UpdatedAt = DateTime.Now;
+
+                // Update and save changes
+                _unitOfWork.KoiTypeRepository.Update(existingKoiType);
+                await _unitOfWork.KoiTypeRepository.SaveAsync();
+
+                result.IsSuccess = true;
+                result.Code = 200;
+                result.Message = "Update Koi Type Success";
+                return result;
             }
-
-            // Map the non-null fields from the DTO to the existing entity
-            _mapper.Map(koiTypeUpdateDto, existingKoiType);
-
-            return await _unitOfWork.KoiTypeRepository.UpdateAsync(existingKoiType);
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.Code = 500;
+                result.Message = $"Exception: {ex.Message}";
+                return result;
+            }
         }
 
         public async Task<bool> RemoveKoiTypeAsync(int id)

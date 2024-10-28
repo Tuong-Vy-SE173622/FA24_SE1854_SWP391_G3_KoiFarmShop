@@ -65,14 +65,26 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateKoiType(int id, [FromBody] KoiTypeUpdateDto koiTypeUpdateDto)
+        public async Task<IActionResult> UpdateKoiType(int id, [FromForm] KoiTypeUpdateDto koiTypeUpdateDto)
         {
-            var result = await _koiTypeService.UpdateKoiTypeAsync(id, koiTypeUpdateDto);
-            if (result < 0)
+            ClaimsPrincipal user = HttpContext.User;
+            try
             {
-                return NotFound();
+                var result = await _koiTypeService.UpdateKoiTypeAsync(id, koiTypeUpdateDto, user);
+
+                if (result.IsSuccess)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest(result);
+                }
             }
-            return Ok(result);
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
+            }
         }
 
         [HttpDelete("{id}")]

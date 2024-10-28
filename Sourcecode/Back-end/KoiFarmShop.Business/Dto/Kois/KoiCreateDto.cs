@@ -4,7 +4,6 @@ namespace KoiFarmShop.Business.Dto.Kois
 {
     public class KoiCreateDto
     {
-        public int KoiTypeId { get; set; }
         public string Origin { get; set; }
         public int? Gender { get; set; }
         public int? Age { get; set; }
@@ -18,5 +17,6 @@ namespace KoiFarmShop.Business.Dto.Kois
         public string Generation { get; set; }
         public bool? IsLocal { get; set; }
         public string Note { get; set; }
+        public IFormFile Image { get; set; }
     }
 }

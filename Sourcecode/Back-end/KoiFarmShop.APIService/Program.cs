@@ -10,9 +10,7 @@ using KoiFarmShop.Business.Business.UserBusiness;
 using KoiFarmShop.Business.Business.VNPay;
 using KoiFarmShop.Business.Config;
 using KoiFarmShop.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
+using KoiFarmShop.Data.Models;
 
 namespace KoiFarmShop.APIService
 {

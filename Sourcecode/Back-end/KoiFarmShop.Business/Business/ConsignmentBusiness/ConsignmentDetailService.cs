@@ -1,4 +1,5 @@
 using AutoMapper;
+using System.Linq;
 using KoiFarmShop.Business.Dto.Consigments;
 using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
@@ -22,7 +23,7 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
         public async Task<ConsignmentDetailResponseDto> CreateConsignmentDetailAsync(ConsignmentDetailCreateDto consignmentDetailCreateDto, string currentUser)
         {
             var koi = await _unitOfWork.KoiRepository.GetByIdAsync(consignmentDetailCreateDto.KoiId);
-            if (koi == null)
+            if (koi == null) 
                 throw new NotFoundException("Koi not found");
 
             var consignment = await _unitOfWork.ConsignmentRequestRepository.GetByIdAsync(consignmentDetailCreateDto.ConsignmentId);
@@ -44,7 +45,7 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
         public async Task<ConsignmentDetailResponseDto> UpdateConsignmentDetailAsync(int id, ConsignmentDetailUpdateDto consignmentDetailUpdateDto, string currentUser)
         {
             var consignmentDetail = await _unitOfWork.ConsignmentDetailRepository.GetByIdAsync(id);
-            if (consignmentDetail == null)
+            if (consignmentDetail == null) 
                 throw new KeyNotFoundException("Consignment Detail not found");
 
             _mapper.Map(consignmentDetailUpdateDto, consignmentDetail);
@@ -62,10 +63,10 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
                     throw new NotFoundException("Consignment not found");
                 await RecalculateConsignmentRequestTotalsAsync(consignment);
             }
-
+            
             if (currentUser == null) throw new UnauthorizedAccessException();
             consignmentDetail.UpdatedBy = currentUser;
-
+            
             await _unitOfWork.ConsignmentDetailRepository.UpdateAsync(consignmentDetail);
             await _unitOfWork.SaveChangesAsync();
 
@@ -98,11 +99,11 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             double subAmount = 0;
             foreach (var detail in consignmentDetails)
             {
-                subAmount += detail.SoldPrice ?? 0;
+                subAmount += detail.SoldPrice ?? 0; 
             }
             consignment.SubAmount = subAmount;
-
-            double vat = Constants.VAT;
+     
+            double vat = Constants.VAT; 
             consignment.Vat = vat;
             consignment.VatAmount = subAmount * vat;
 

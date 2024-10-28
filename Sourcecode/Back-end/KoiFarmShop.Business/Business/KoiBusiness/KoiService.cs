@@ -22,9 +22,10 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
 
         public async Task<IEnumerable<KoiDto>> GetAllKoisAsync()
         {
+            //TODO: filtering and pagination
 
             var kois = await _unitOfWork.KoiRepository.GetAllAsync();
-
+       
             return _mapper.Map<IEnumerable<KoiDto>>(kois);
         }
 
@@ -95,6 +96,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             var query = _unitOfWork.KoiRepository.GetQueryable();
 
             // Filtering logic
+
             if (!string.IsNullOrEmpty(filterDto.TypeName))
             {
                 query = query.Where(k => k.KoiType.Name == filterDto.TypeName);
@@ -182,6 +184,9 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     UpdatedBy = k.UpdatedBy
                 })
                 .ToListAsync();
+
+            // Mapping the result
+            var koiDtos = _mapper.Map<List<KoiDto>>(pagedKois);
 
             return new PaginatedResult<KoiDto>
             {

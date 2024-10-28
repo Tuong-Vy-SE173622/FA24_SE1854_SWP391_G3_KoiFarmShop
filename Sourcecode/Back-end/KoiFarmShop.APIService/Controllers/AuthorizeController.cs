@@ -202,8 +202,8 @@ namespace KoiFarmShop.APIService.Controllers
             };
                     // Compare the hashed input password with the stored hashed password
                     _tokenService.ResetRefreshToken();
-                    var token = GenerateToken(user, null);
-                    return Ok(token);
+                var token = GenerateToken(user, null);
+                return Ok(token);
                 }
             }
             return BadRequest(new ResultDto
@@ -251,6 +251,7 @@ namespace KoiFarmShop.APIService.Controllers
 
                 if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
                 {
+                    // Handle the case where the UserId claim is missing or invalid
                     return BadRequest(new ResultDto
                     {
                         IsSuccess = false,

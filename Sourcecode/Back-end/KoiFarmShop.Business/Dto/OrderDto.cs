@@ -7,7 +7,7 @@ namespace KoiFarmShop.Business.Dto
         [Key]
         public int OrderId { get; set; }
 
-        public int? CustomerId { get; set; }
+        public int CustomerId { get; set; }
 
         public DateTime? OrderDate { get; set; }
 
@@ -27,17 +27,88 @@ namespace KoiFarmShop.Business.Dto
 
         public bool? IsActive { get; set; }
 
-        public string Note { get; set; }
+        public string? Note { get; set; }
+
+        public string? Status { get; set; }
+        public CustomerDto? Customer { get; set; }
+    }
+
+    public class OrderCreateDto
+    {
+
+        public int? CustomerId { get; set; }
+
+        public DateTime? OrderDate { get; set; }
+
+        public double? SubAmount { get; set; }
+
+        public double? Vat { get; set; }
+
+        public double? VatAmount { get; set; }
+
+        public double? PromotionAmount { get; set; }
+
+        public double? TotalAmount { get; set; }
+
+        public string? PaymentMethod { get; set; }
+
+        public string? PaymentStatus { get; set; }
+
+        public bool? IsActive { get; set; }
+
+        public string? Note { get; set; }
+
+        public string? Status { get; set; }
+    }
+
+    public class OrderUpdateDto
+    {
+
+        public int? OrderId { get; set; }
+
+        public DateTime? OrderDate { get; set; }
+
+        public double? SubAmount { get; set; }
+
+        public double? Vat { get; set; }
+
+        public double? VatAmount { get; set; }
+
+        public double? PromotionAmount { get; set; }
+
+        public double? TotalAmount { get; set; }
+
+        public string? PaymentMethod { get; set; }
+
+        public string? PaymentStatus { get; set; }
+
+        public bool? IsActive { get; set; }
+
+        public string? Note { get; set; }
 
         public string Status { get; set; }
+        public DateTime? UpdateAt { get; set; }
+    }
 
-        public DateTime? CreatedAt { get; set; }
+    public class OrderResponseDto
+    {
 
-        public string CreatedBy { get; set; }
+        public int OrderId { get; set; }
 
-        public DateTime? UpdatedAt { get; set; }
+        public int? CustomerId { get; set; }
 
-        public string UpdatedBy { get; set; }
-        public CustomerDto? Customer { get; set; }
+        public double? SubAmount { get; set; }
+
+
+        public double? VatAmount { get; set; }
+
+        public double? PromotionAmount { get; set; }
+
+        public double? TotalAmount { get; set; }
+
+        public bool? IsActive { get; set; }
+
+        public string Status { get; set; }
+        public List<OrderItemDto> OrderItem { get; set; }
     }
 }

@@ -9,12 +9,15 @@ namespace KoiFarmShop.Data
         private KoiRepository _koiRepository;
         private KoiTypeRepository _koiTypeRepository;
         private OrderRepository _orderRepository;
+        private OrderItemRepository _orderItemRepository;
         private UserRepository _userRepository;
         private TokenRepository _tokenRepository;
         private AccountRepository _accountRepository;
         private ConsignmentDetailRepository _consignmentDetailRepository;
         private ConsignmentRequestRepository _consignmentRequestRepository;
         private PromotionRepository _promotionRepository;
+        private CareRequestRepository _careRequestRepository;
+        private CareRequestDetailRepository _careRequestDetailRepository;
 
         public UnitOfWork() => _context ??= new FA_SE1854_SWP391_G3_KoiFarmShopContext();
 
@@ -83,6 +86,50 @@ namespace KoiFarmShop.Data
             get
             {
                 return _promotionRepository ??= new PromotionRepository(_context);
+            }
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
+        public OrderItemRepository OrderItemRepository
+        {
+            get
+            {
+                return _orderItemRepository ??= new OrderItemRepository(_context);
+            }
+        }
+        public AccountRepository AccountRepository
+        {
+            get
+            {
+                return _accountRepository ??= new AccountRepository(_context);
+            }
+        }
+
+
+        public PromotionRepository PromotionRepository
+        {
+            get
+            {
+                return _promotionRepository ??= new PromotionRepository(_context);
+            }
+        }
+
+        public CareRequestRepository CareRequestRepository
+        {
+            get
+            {
+                return _careRequestRepository ??= new CareRequestRepository(_context);
+            }
+        }
+
+        public CareRequestDetailRepository CareRequestDetailRepository
+        {
+            get
+            {
+                return _careRequestDetailRepository ??= new CareRequestDetailRepository(_context);
             }
         }
 

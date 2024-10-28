@@ -54,6 +54,10 @@ public partial class OrderItem
     [InverseProperty("OrderItem")]
     public virtual ICollection<Certification> Certifications { get; set; } = new List<Certification>();
 
+    [ForeignKey("KoiId")]
+    [InverseProperty("OrderItems")]
+    public virtual Koi Koi { get; set; }
+
     [ForeignKey("OrderId")]
     [InverseProperty("OrderItems")]
     public virtual Order Order { get; set; }

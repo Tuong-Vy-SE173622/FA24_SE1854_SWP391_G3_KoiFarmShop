@@ -11,6 +11,5 @@ namespace KoiFarmShop.Business.Dto.KoiTypes
         public string FengShui { get; set; }
         public string RaisingCondition { get; set; }
         public string Note { get; set; }
-        public IFormFile Image { get; set; }
     }
 }

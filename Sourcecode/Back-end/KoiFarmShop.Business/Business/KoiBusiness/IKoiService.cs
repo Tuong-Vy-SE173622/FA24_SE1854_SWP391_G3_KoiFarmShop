@@ -9,7 +9,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
         Task<IEnumerable<KoiDto>> GetAllKoisAsync();
         Task<PaginatedResult<KoiDto>> GetAllKoisAsync(KoiFilterDto filterDto);
         Task<KoiDto> GetKoiByIdAsync(int id);
-        Task<ResultDto> CreateKoiAsync(int koiTypeId, List<KoiCreateDto> koiCreateDto, ClaimsPrincipal userCreate);
+        Task<int> CreateKoiAsync(KoiCreateDto koiDto);
         Task<int> UpdateKoiAsync(int id, KoiUpdateDto koiDto);
         Task<bool> RemoveKoiAsync(int id);
         Task<HashSet<string>> GetAllKoiOrigins();

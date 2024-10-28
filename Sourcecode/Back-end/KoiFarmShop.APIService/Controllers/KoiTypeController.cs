@@ -40,53 +40,23 @@ namespace KoiFarmShop.APIService.Controllers
                 return NotFound();
             return Ok(koiType);
         }
-
         [HttpPost]
-        public async Task<IActionResult> CreateKoiType([FromForm] KoiTypeCreateDto koiTypeCreateDto)
+        public async Task<ActionResult<int>> CreateKoiType(KoiTypeCreateDto koiTypeCreateDto)
         {
-            ClaimsPrincipal user = HttpContext.User;
-            try
-            {
-                var result = await _koiTypeService.CreateKoiTypeAsync(koiTypeCreateDto, user);
-
-                if (result.IsSuccess)
-                {
-                    return Ok(result);
-                }
-                else
-                {
-                    return BadRequest(result);
-                }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
-            }
+            var id = await _koiTypeService.CreateKoiTypeAsync(koiTypeCreateDto);
+            return CreatedAtAction(nameof(GetKoiTypeById), new { id }, id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateKoiType(int id, [FromForm] KoiTypeUpdateDto koiTypeUpdateDto)
+        public async Task<IActionResult> UpdateKoiType(int id, [FromBody] KoiTypeUpdateDto koiTypeUpdateDto)
         {
-            ClaimsPrincipal user = HttpContext.User;
-            try
+            var result = await _koiTypeService.UpdateKoiTypeAsync(id, koiTypeUpdateDto);
+            if (result < 0)
             {
-                var result = await _koiTypeService.UpdateKoiTypeAsync(id, koiTypeUpdateDto, user);
-
-                if (result.IsSuccess)
-                {
-                    return Ok(result);
-                }
-                else
-                {
-                    return BadRequest(result);
-                }
+                return NotFound();
             }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
-            }
+            return Ok(result);
         }
-
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> RemoveKoiType(int id)
         {

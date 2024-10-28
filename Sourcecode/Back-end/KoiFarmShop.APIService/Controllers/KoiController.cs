@@ -38,53 +38,12 @@ namespace KoiFarmShop.APIService.Controllers
             return Ok(koi);
         }
 
-        [HttpPost("{koiTypeId}")]
-        public async Task<IActionResult> CreateKoiAsync(int koiTypeId, [FromForm] KoiCreateDto koiCreateDto)
+        [HttpPost]
+        public async Task<IActionResult> CreateKoi([FromBody] KoiCreateDto koiCreateDto)
         {
-            ClaimsPrincipal user = HttpContext.User;
-
-            try
-            {
-                var koiViewModels = new List<KoiCreateDto>()
-            {
-                new KoiCreateDto
-                {
-                    Origin = koiCreateDto.Origin,
-                    Gender = koiCreateDto.Gender,
-                    Age = koiCreateDto.Age,
-                    Size = koiCreateDto.Size,
-                    Price = koiCreateDto.Price,
-                    Characteristics = koiCreateDto.Characteristics,
-                    FeedingAmountPerDay = koiCreateDto.FeedingAmountPerDay,
-                    ScreeningRate = koiCreateDto.ScreeningRate,
-                    IsOwnedByFarm = koiCreateDto.IsOwnedByFarm,
-                    IsImported = koiCreateDto.IsImported,
-                    Generation = koiCreateDto.Generation,
-                    IsLocal = koiCreateDto.IsLocal,
-                    Note = koiCreateDto.Note,
-                    Image = koiCreateDto.Image
-            }
-            };
-
-                // Call the addFood method from the service layer
-                var result = await _koiService.CreateKoiAsync(koiTypeId, koiViewModels, user);
-
-                if (result.IsSuccess)
-                {
-                    return Ok(result);
-                }
-                else
-                {
-                    return BadRequest(result);
-                }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
-            }
+            var createdId = await _koiService.CreateKoiAsync(koiCreateDto);
+            return CreatedAtAction(nameof(GetKoiById), new { id = createdId }, koiCreateDto);
         }
-
-
 
 
         [HttpPut("{id}")]

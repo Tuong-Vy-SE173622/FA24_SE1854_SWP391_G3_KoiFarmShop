@@ -28,6 +28,5 @@ namespace KoiFarmShop.Business.Dto.KoiTypes
         public DateTime? UpdatedAt { get; set; }
 
         public string UpdatedBy { get; set; }
-        public string Image {  get; set; }
     }
 }

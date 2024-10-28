@@ -561,7 +561,25 @@ FodyWeavers.xsd
 /Sourcecode/Back-end/KoiFarmShop.APIService/obj/project.assets.json
 /Sourcecode/Back-end/KoiFarmShop.Business/bin/Debug/net8.0/KoiFarmShop.Business.deps.json
 /Sourcecode/Back-end/KoiFarmShop.Data/efpt.config.json
+<<<<<<< HEAD
 /Sourcecode/Back-end/KoiFarmShop.Business/obj/Debug/net8.0/KoiFarmShop.Business.csproj.CoreCompileInputs.cache
 /Sourcecode/Back-end/KoiFarmShop.Business/obj/Debug/net8.0/KoiFarmShop.Business.csproj.FileListAbsolute.txt
 /Sourcecode/Back-end/KoiFarmShop.Business/obj/Debug/net8.0/KoiFarmShop.Business.sourcelink.json
 /Sourcecode/Back-end/KoiFarmShop.Data/Models/FA_SE1854_SWP391_G3_KoiFarmShopContext.cs
+=======
+/Sourcecode/Back-end/KoiFarmShop.APIService/appsettings.json
+/Sourcecode/Back-end/KoiFarmShop.APIService/bin/Debug/net8.0/KoiFarmShop.Business.dll
+/Sourcecode/Back-end/KoiFarmShop.APIService/bin/Debug/net8.0/KoiFarmShop.Business.pdb
+/Sourcecode/Back-end/KoiFarmShop.Business/bin/Debug/net8.0/KoiFarmShop.Business.deps.json
+/Sourcecode/Back-end/KoiFarmShop.Business/bin/Debug/net8.0/KoiFarmShop.Business.dll
+/Sourcecode/Back-end/KoiFarmShop.Business/bin/Debug/net8.0/KoiFarmShop.Business.pdb
+/Sourcecode/Back-end/KoiFarmShop.Business/bin/Debug/net8.0/KoiFarmShop.Data.dll
+/Sourcecode/Back-end/KoiFarmShop.Business/bin/Debug/net8.0/KoiFarmShop.Data.pdb
+/Sourcecode/Back-end/KoiFarmShop.Business/obj/Debug/net8.0/KoiFarmShop.Business.csproj.CoreCompileInputs.cache
+/Sourcecode/Back-end/KoiFarmShop.Business/obj/Debug/net8.0/KoiFarmShop.Business.csproj.FileListAbsolute.txt
+/Sourcecode/Back-end/KoiFarmShop.Business/obj/Debug/net8.0/KoiFarmShop.Business.dll
+/Sourcecode/Back-end/KoiFarmShop.Business/obj/Debug/net8.0/KoiFarmShop.Business.pdb
+/Sourcecode/Back-end/KoiFarmShop.Business/obj/Debug/net8.0/KoiFarmShop.Business.sourcelink.json
+/Sourcecode/Back-end/KoiFarmShop.Business/obj/Debug/net8.0/ref/KoiFarmShop.Business.dll
+/Sourcecode/Back-end/KoiFarmShop.Business/obj/Debug/net8.0/refint/KoiFarmShop.Business.dll
+>>>>>>> f60b43d50768ad45cc0f5e6a374ee0d207769ec3

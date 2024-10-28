@@ -21,7 +21,7 @@ public partial class CareRequest
     [Column("koi_id")]
     public int? KoiId { get; set; }
 
-    [Column("requested_date", TypeName = "datetime")]
+    [Column("requested_date")]
     public DateTime? RequestedDate { get; set; }
 
     [Column("status")]
@@ -36,7 +36,7 @@ public partial class CareRequest
     [Unicode(false)]
     public string Note { get; set; }
 
-    [Column("created_at", TypeName = "datetime")]
+    [Column("created_at")]
     public DateTime? CreatedAt { get; set; }
 
     [Column("created_by")]
@@ -44,7 +44,7 @@ public partial class CareRequest
     [Unicode(false)]
     public string CreatedBy { get; set; }
 
-    [Column("updated_at", TypeName = "datetime")]
+    [Column("updated_at")]
     public DateTime? UpdatedAt { get; set; }
 
     [Column("updated_by")]
@@ -58,8 +58,4 @@ public partial class CareRequest
     [ForeignKey("CustomerId")]
     [InverseProperty("CareRequests")]
     public virtual Customer Customer { get; set; }
-
-    [ForeignKey("KoiId")]
-    [InverseProperty("CareRequests")]
-    public virtual Koi Koi { get; set; }
 }

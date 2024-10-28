@@ -12,6 +12,7 @@ import KoiBoughtPage from "../pages/Dashboard/CustomerDashboard/KoiBoughtPage/Ko
 import DepositedKoiPage from "../pages/Dashboard/CustomerDashboard/DepositedKoiPage/DepositedKoiPage";
 import ScrollToTop from "../components/ScrollTop/ScrollToTop";
 import CompareBar from "../components/CompareBar/CompareBar";
+import ComparePage from "../pages/ComparePage/ComparePage";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
             <CompareBar />
           </>
         ),
+      },
+      {
+        path: "/compare",
+        element: <ComparePage />,
       },
     ],
   },

@@ -1,0 +1,29 @@
+.compare-page-container {
+  display: flex;
+  justify-content: center;
+}
+
+.compare-page-wrapper {
+  width: 90%;
+  margin: 50px auto;
+  /* background-color: lightblue; */
+}
+
+.compare-table {
+  border: 1px solid #d9d9d9;
+}
+
+.compare-table .ant-table-tbody > tr > td {
+  border: 1px solid #d9d9d9;
+}
+
+.compare-table .ant-table-thead > tr > th {
+  background-color: #1890ff;
+  color: white;
+  text-align: center;
+}
+
+.compare-table .attribute-cell {
+  background-color: #e6f7ff;
+  font-weight: bold;
+}

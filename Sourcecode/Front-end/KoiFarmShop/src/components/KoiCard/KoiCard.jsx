@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Modal, Row } from "antd";
 import { IoIosSearch } from "react-icons/io";
 import { TiShoppingCart } from "react-icons/ti";
@@ -10,6 +10,7 @@ import "./KoiCard.css";
 function KoiCard({ koi }) {
   const nav = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [compareData, setCompareData] = useState([]);
 
   const koiSelectItems = [
     {
@@ -32,13 +33,69 @@ function KoiCard({ koi }) {
       key: 4,
       icon: <FaCodeCompare />,
       label: "So sánh",
+      onClick: () => addtoCompare(koi),
     },
   ];
+
+  const showWarning = () => {
+    Modal.warning({
+      title: "Danh sách so sánh đã đầy",
+      content: "Vui lòng xóa bớt phần tử trước khi thêm mới.",
+      okButtonProps: {
+        style: { backgroundColor: "red", borderColor: "red", color: "white" },
+      },
+      okText: "Đóng",
+    });
+  };
 
   const handleDetailPage = () => nav(`/koi-detail/${koi.koiId}`);
   const handleModalCancel = () => setIsModalOpen(false);
 
   if (!koi) return <div>Loading...</div>;
+
+  const addtoCompare = (koi) => {
+    let compareList = JSON.parse(localStorage.getItem("Compare")) || [];
+
+    // Kiểm tra nếu phần tử đã có trong Compare
+    if (compareList.some((item) => item.koiId === koi.koiId)) {
+      Modal.warning({
+        title: "Phần tử đã tồn tại",
+        content: "Phần tử này đã có trong danh sách so sánh.",
+        okButtonProps: {
+          style: { backgroundColor: "red", borderColor: "red", color: "white" },
+        },
+        okText: "Đóng",
+      });
+      return;
+    }
+
+    // Kiểm tra nếu Compare đã đạt giới hạn 2 phần tử
+    if (compareList.length >= 2) {
+      showWarning();
+      return;
+    }
+
+    // Thêm phần tử mới vào Compare
+    compareList.push(koi);
+    localStorage.setItem("Compare", JSON.stringify(compareList));
+    setCompareData(compareList);
+  };
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const storedCompareData =
+        JSON.parse(localStorage.getItem("Compare")) || [];
+      setCompareData(storedCompareData);
+    };
+
+    // Lắng nghe sự kiện `storage`
+    window.addEventListener("storage", handleStorageChange);
+
+    // Xóa lắng nghe khi component bị unmount
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, [compareData]);
 
   return (
     <div className="koi-card-container">

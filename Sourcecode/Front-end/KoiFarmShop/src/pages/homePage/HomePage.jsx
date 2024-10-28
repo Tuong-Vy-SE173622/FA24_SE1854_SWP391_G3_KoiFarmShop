@@ -4,9 +4,11 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Button, Carousel } from "antd";
 import KoiCard from "../../components/KoiCard/KoiCard";
 import { useNavigate } from "react-router-dom";
+import { getAllKoi } from "../../services/KoiService";
 
 function HomePage() {
   const nav = useNavigate();
+  const [koiLs, setKoiLs] = useState([]);
   const KoiTypeIntroduction = [
     {
       key: 1,
@@ -162,6 +164,24 @@ function HomePage() {
     carouselRef.current.next();
   };
 
+  const fetchKoi = async (page) => {
+    const params = {
+      PageNumber: 1,
+      PageSize: 8,
+    };
+
+    try {
+      const result = await getAllKoi(params);
+      setKoiLs(result.data);
+    } catch (err) {
+      console.error("Failed to fetch Koi data", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchKoi();
+  }, []);
+
   return (
     <main>
       <section
@@ -287,14 +307,9 @@ function HomePage() {
           <img src="/icons/fish-line.png" alt="" />
         </div>
         <div className="koi-card-list">
-          <KoiCard />
-          <KoiCard />
-          <KoiCard />
-          <KoiCard />
-          <KoiCard />
-          <KoiCard />
-          <KoiCard />
-          <KoiCard />
+          {koiLs.map((koi) => (
+            <KoiCard key={koi.koiId} koi={koi} />
+          ))}
         </div>
       </section>
 

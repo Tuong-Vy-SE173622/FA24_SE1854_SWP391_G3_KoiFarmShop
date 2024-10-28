@@ -1,8 +1,12 @@
 ﻿using AutoMapper;
+using KoiFarmShop.Business.Dto.Kois;
+using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.KoiTypes;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using KoiFarmShop.Business.Business.Cloudinary;
 
 namespace KoiFarmShop.Business.Business.KoiTypeBusiness
 {
@@ -10,11 +14,13 @@ namespace KoiFarmShop.Business.Business.KoiTypeBusiness
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ICloudinaryService _cloudinaryService;
 
-        public KoiTypeService(UnitOfWork unitOfWork, IMapper mapper)
+        public KoiTypeService(UnitOfWork unitOfWork, IMapper mapper, ICloudinaryService cloudinaryService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _cloudinaryService = cloudinaryService;
         }
 
         public async Task<IEnumerable<KoiTypeDto>> GetAllKoiTypesAsync()
@@ -29,11 +35,58 @@ namespace KoiFarmShop.Business.Business.KoiTypeBusiness
             return _mapper.Map<KoiTypeDto>(koiType);
         }
 
-        public async Task<int> CreateKoiTypeAsync(KoiTypeCreateDto koiTypeCreateDto)
+        public async Task<ResultDto> CreateKoiTypeAsync(KoiTypeCreateDto koiTypeCreateDto, ClaimsPrincipal userCreate)
         {
-            var koiType = _mapper.Map<KoiType>(koiTypeCreateDto);
-            await _unitOfWork.KoiTypeRepository.CreateAsync(koiType);
-            return koiType.KoiTypeId;
+            ResultDto result = new ResultDto();
+            try
+            {
+                if (koiTypeCreateDto == null)
+                {
+                    result.IsSuccess = false;
+                    result.Code = 400;
+                    result.Message = "koi type request model is null.";
+                    return result;
+                }
+
+
+                var newKoi = _mapper.Map<KoiType>(koiTypeCreateDto);
+                newKoi.Name = koiTypeCreateDto.Name;
+                newKoi.ShortDescription = koiTypeCreateDto.ShortDescription;
+                newKoi.OriginHistory = koiTypeCreateDto.OriginHistory;
+                newKoi.CategoryDescription = koiTypeCreateDto.CategoryDescription;
+                newKoi.FengShui = koiTypeCreateDto.FengShui;
+                newKoi.RaisingCondition = koiTypeCreateDto.RaisingCondition;
+                newKoi.Note = koiTypeCreateDto.Note;
+                newKoi.CreatedBy = userCreate.FindFirst("UserName")?.Value;
+                newKoi.CreatedAt = DateTime.Now;
+
+                if (koiTypeCreateDto.Image != null)
+                {
+                    var imageUrl = await _cloudinaryService.UploadImageAsync(koiTypeCreateDto.Image);
+                    newKoi.Image = imageUrl; // Assuming Koi has an ImageUrl property
+                }
+
+
+                await _unitOfWork.KoiTypeRepository.CreateAsync(newKoi);
+
+                //koiIdCounter++; // Tăng biến đếm sau mỗi lần thêm món ăn
+
+
+
+                _unitOfWork.KoiTypeRepository.Save();
+
+                result.IsSuccess = true;
+                result.Code = 200;
+                result.Message = "Add Koi Type Success";
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.Code = 400;
+                result.Message = ex.Message;
+                return result;
+            }
         }
 
         public async Task<int> UpdateKoiTypeAsync(int koiTypeId, KoiTypeUpdateDto koiTypeUpdateDto)

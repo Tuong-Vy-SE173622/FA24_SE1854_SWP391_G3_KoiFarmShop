@@ -1,6 +1,7 @@
 ﻿using KoiFarmShop.Business.Business.KoiTypeBusiness;
 using KoiFarmShop.Business.Dto.KoiTypes;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 
 namespace KoiFarmShop.APIService.Controllers
@@ -41,10 +42,26 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> CreateKoiType(KoiTypeCreateDto koiTypeCreateDto)
+        public async Task<IActionResult> CreateKoiType([FromForm] KoiTypeCreateDto koiTypeCreateDto)
         {
-            var id = await _koiTypeService.CreateKoiTypeAsync(koiTypeCreateDto);
-            return CreatedAtAction(nameof(GetKoiTypeById), new { id }, id);
+            ClaimsPrincipal user = HttpContext.User;
+            try
+            {
+                var result = await _koiTypeService.CreateKoiTypeAsync(koiTypeCreateDto, user);
+
+                if (result.IsSuccess)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
+            }
         }
 
         [HttpPut("{id}")]

@@ -3,6 +3,7 @@ using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Kois;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace KoiFarmShop.APIService.Controllers
 {
@@ -42,6 +43,7 @@ namespace KoiFarmShop.APIService.Controllers
             var createdId = await _koiService.CreateKoiAsync(koiCreateDto);
             return CreatedAtAction(nameof(GetKoiById), new { id = createdId }, koiCreateDto);
         }
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateKoi(int id, [FromBody] KoiUpdateDto koiUpdateDto)

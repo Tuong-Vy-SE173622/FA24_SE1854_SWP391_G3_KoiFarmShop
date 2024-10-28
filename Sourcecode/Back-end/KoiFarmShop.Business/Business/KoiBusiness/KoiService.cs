@@ -72,7 +72,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
         {
             var existingKoi = await _unitOfWork.KoiRepository.GetByIdAsync(id);
             if (existingKoi == null)
-                throw new NotFoundException("Koi not found"); 
+                throw new NotFoundException("Koi not found");
 
             _mapper.Map(koiUpdateDto, existingKoi); // only update non-null fields :3
             return await _unitOfWork.KoiRepository.UpdateAsync(existingKoi);
@@ -185,7 +185,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
 
             return new PaginatedResult<KoiDto>
             {
-                Data = pagedKois,  
+                Data = pagedKois,
                 TotalRecords = totalRecords,
                 PageNumber = filterDto.PageNumber,
                 PageSize = filterDto.PageSize

@@ -1,4 +1,6 @@
-﻿namespace KoiFarmShop.Business.Dto.Kois
+﻿using Microsoft.AspNetCore.Http;
+
+namespace KoiFarmShop.Business.Dto.Kois
 {
     public class KoiCreateDto
     {

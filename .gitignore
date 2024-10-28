@@ -561,3 +561,7 @@ FodyWeavers.xsd
 /Sourcecode/Back-end/KoiFarmShop.APIService/obj/project.assets.json
 /Sourcecode/Back-end/KoiFarmShop.Business/bin/Debug/net8.0/KoiFarmShop.Business.deps.json
 /Sourcecode/Back-end/KoiFarmShop.Data/efpt.config.json
+/Sourcecode/Back-end/KoiFarmShop.Business/obj/Debug/net8.0/KoiFarmShop.Business.csproj.CoreCompileInputs.cache
+/Sourcecode/Back-end/KoiFarmShop.Business/obj/Debug/net8.0/KoiFarmShop.Business.csproj.FileListAbsolute.txt
+/Sourcecode/Back-end/KoiFarmShop.Business/obj/Debug/net8.0/KoiFarmShop.Business.sourcelink.json
+/Sourcecode/Back-end/KoiFarmShop.Data/Models/FA_SE1854_SWP391_G3_KoiFarmShopContext.cs

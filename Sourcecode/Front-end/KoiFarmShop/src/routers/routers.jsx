@@ -6,12 +6,20 @@ import Footer from "../components/Footer/Footer";
 import KoiDetailPage from "../pages/KoiDetailPage/KoiDetailPage";
 import HomePage from "../pages/homePage/HomePage";
 import SearchPage from "../pages/SearchPage/SearchPage";
+import ProfilePage from "../pages/Dashboard/CustomerDashboard/ProfilePage/ProfilePage";
+import CustomerDashboardLayout from "../pages/DashboardLayout/customer/CustomerDashboardLayout";
+import KoiBoughtPage from "../pages/Dashboard/CustomerDashboard/KoiBoughtPage/KoiBoughtPage";
+import DepositedKoiPage from "../pages/Dashboard/CustomerDashboard/DepositedKoiPage/DepositedKoiPage";
+import ScrollToTop from "../components/ScrollTop/ScrollToTop";
+import CompareBar from "../components/CompareBar/CompareBar";
+import ComparePage from "../pages/ComparePage/ComparePage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
+        <ScrollToTop />
         <Header />
         <Outlet />
         <Footer />
@@ -20,7 +28,12 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePage />,
+        element: (
+          <>
+            <HomePage />
+            <CompareBar />
+          </>
+        ),
       },
       {
         path: "/koi-detail/:id",
@@ -28,7 +41,40 @@ export const router = createBrowserRouter([
       },
       {
         path: "/search",
-        element: <SearchPage />,
+        element: (
+          <>
+            <SearchPage />
+            <CompareBar />
+          </>
+        ),
+      },
+      {
+        path: "/compare",
+        element: <ComparePage />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <>
+        <ScrollToTop />
+        <Header />
+        <CustomerDashboardLayout />
+      </>
+    ),
+    children: [
+      {
+        path: "profile/:username",
+        element: <ProfilePage />,
+      },
+      {
+        path: "purchase",
+        element: <KoiBoughtPage />,
+      },
+      {
+        path: "deposite",
+        element: <DepositedKoiPage />,
       },
     ],
   },

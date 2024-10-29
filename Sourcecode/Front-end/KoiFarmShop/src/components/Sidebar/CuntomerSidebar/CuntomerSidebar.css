@@ -1,0 +1,9 @@
+.cus-slidebar-container {
+  background-color: #0080ff;
+  position: absolute;
+  top: 0;
+  /* bottom: 0; */
+  left: 0;
+  width: 250px;
+  height: 100%;
+}

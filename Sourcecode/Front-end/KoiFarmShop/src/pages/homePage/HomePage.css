@@ -122,24 +122,24 @@
   transition: 200ms ease-in-out;
   /* aspect-ratio: 1/1; */
 }
-.koi-introduction-cart-container > .content-koi {
+/* .koi-introduction-cart-container > .content-koi {
   position: absolute;
-  /* inset: 1; */
+  inset: 1;
   top: 0;
   left: 0;
   width: 90%;
   height: 100%;
   font-size: 1.2rem;
   padding: 1rem;
-  /* color: #0080ff; */
+  color: #0080ff;
   background: rgba(255, 255, 255, 0.3);
   justify-content: center;
   align-items: center;
   opacity: 0;
   font-weight: 600;
-  /* color: aliceblue; */
+  color: aliceblue;
   transition: opacity 200ms ease-in-out;
-  /* width: 100%; */
+  width: 100%;
 }
 .koi-introduction-cart-container > img,
 .koi-introduction-cart-container > .content-koi {
@@ -151,7 +151,7 @@
 }
 .koi-introduction-cart-container:hover > .content-koi {
   opacity: 1;
-}
+} */
 .koi-feature-container {
   height: fit-content;
   margin: 2rem auto;
@@ -159,8 +159,8 @@
 
 .koi-card-list {
   display: flex;
-  align-items: center;
-  /* justify-content: space-between; */
+  /* align-items: center; */
+  justify-content: space-evenly;
   row-gap: 20px;
   column-gap: 25px;
   width: 70%;
@@ -171,11 +171,15 @@
 }
 
 .testimonial-container {
-  height: auto;
+  /* height: auto; */
   margin: 2.5rem auto;
   padding-top: 40px;
-  background: url("https://thumb.ac-illust.com/0c/0cbb5141beb4f97c7e7e0bb58af14edc_t.jpeg");
-  height: calc(100vh - 100px);
+  /* background: url("https://thumb.ac-illust.com/0c/0cbb5141beb4f97c7e7e0bb58af14edc_t.jpeg"); */
+  background: url("https://img.freepik.com/free-photo/blue_53876-88970.jpg");
+  /* background-repeat: repeat; */
+  background-size: cover;
+  z-index: 1;
+  height: 100vh;
 }
 
 .home-testimonial-items {
@@ -183,28 +187,31 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  width: 70%;
+  width: 75%;
   gap: 18px;
 
   margin: 1.5rem auto;
 }
 
 .testimonial-wrapper {
-  width: 480px;
-  height: 150px;
+  width: 45%;
+  height: 160px;
   display: flex;
   background-color: white;
   border: 1px gray solid;
   box-shadow: 0 2px 4px rgba(0, 128, 255, 0.2);
+  border-radius: 8px;
 }
 
 .testimonial-wrapper > img {
-  width: 150px;
+  width: 160px;
   height: 100%;
   object-fit: cover;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 .testimonial-info {
-  padding: 15px 12px;
+  padding: 1.3rem;
 }
 .testimonial-info > p {
   font-size: 15px;

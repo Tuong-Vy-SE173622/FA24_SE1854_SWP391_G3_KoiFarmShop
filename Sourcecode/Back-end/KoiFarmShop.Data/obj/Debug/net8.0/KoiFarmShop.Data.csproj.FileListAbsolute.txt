@@ -1,0 +1,14 @@
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\KoiFarmShop.Data\bin\Debug\net8.0\KoiFarmShop.Data.deps.json
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\KoiFarmShop.Data\bin\Debug\net8.0\KoiFarmShop.Data.runtimeconfig.json
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\KoiFarmShop.Data\bin\Debug\net8.0\KoiFarmShop.Data.dll
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\KoiFarmShop.Data\bin\Debug\net8.0\KoiFarmShop.Data.pdb
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\KoiFarmShop.Data\obj\Debug\net8.0\KoiFarmShop.Data.csproj.AssemblyReference.cache
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\KoiFarmShop.Data\obj\Debug\net8.0\KoiFarmShop.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\KoiFarmShop.Data\obj\Debug\net8.0\KoiFarmShop.Data.AssemblyInfoInputs.cache
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\KoiFarmShop.Data\obj\Debug\net8.0\KoiFarmShop.Data.AssemblyInfo.cs
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\KoiFarmShop.Data\obj\Debug\net8.0\KoiFarmShop.Data.csproj.CoreCompileInputs.cache
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\KoiFarmShop.Data\obj\Debug\net8.0\KoiFarmShop.Data.dll
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\KoiFarmShop.Data\obj\Debug\net8.0\refint\KoiFarmShop.Data.dll
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\KoiFarmShop.Data\obj\Debug\net8.0\KoiFarmShop.Data.pdb
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\KoiFarmShop.Data\obj\Debug\net8.0\KoiFarmShop.Data.genruntimeconfig.cache
+C:\Users\T14\source\repos\FA24_SE1854_SWP391_G3_KoiFarmShop\KoiFarmShop.Data\obj\Debug\net8.0\ref\KoiFarmShop.Data.dll

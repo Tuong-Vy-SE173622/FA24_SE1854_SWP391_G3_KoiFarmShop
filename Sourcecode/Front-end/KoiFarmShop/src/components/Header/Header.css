@@ -5,7 +5,7 @@
 
 .header-container {
   background-color: white;
-  box-shadow: 0 5px 3px rgba(0, 128, 255, 0.1);
+  box-shadow: 0 6px 10px rgba(0, 128, 255, 0.274);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -15,7 +15,7 @@
   right: 0;
   height: 100px;
   padding: 0 0.8rem;
-  z-index: 10000;
+  z-index: 30;
 }
 
 .header-container .header-logo {
@@ -50,7 +50,7 @@
 }
 
 .header-container .header-items .header-item {
-  width: 22%;
+  width: 25%;
   height: 100px;
   display: flex;
   justify-content: center;
@@ -165,7 +165,8 @@
   justify-content: space-between;
   padding-right: 10px;
   /* gap: 5px; */
-  width: 139px;
+  /* width: 139px; */
+  flex: 0.1;
   height: 100%;
   position: relative;
   /* margin-right: 20px; */

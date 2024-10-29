@@ -1,0 +1,118 @@
+.search-page-container {
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: row;
+  /* gap: 2.5rem; */
+  justify-content: space-around;
+}
+
+.filter-container {
+  /* background-color: lightskyblue; */
+  width: 30%;
+  padding: 2rem;
+  padding-left: 5rem;
+  padding-right: 2rem;
+}
+
+.search-wrapper {
+  /* background-color: lime; */
+  width: 65%;
+}
+
+.filters {
+  width: 340px;
+}
+
+.filters .filter-title {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0.4rem;
+  border-bottom: 1px #c8c8c8 solid;
+  margin-bottom: 0.5rem;
+}
+
+.filters .filters-title-item {
+  color: #000000;
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+@media (max-height: calc(100vh - 393px)) {
+  .search-page-container {
+    height: auto;
+  }
+}
+
+.item-filter {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding: 0.8rem;
+  font-weight: 600;
+}
+
+.item-filter .filter-name {
+  font-size: 1.2rem;
+}
+
+.item-filter .filter-btn {
+  cursor: pointer;
+  padding-right: 0.2rem;
+  background: none;
+  border: none;
+}
+
+.item-checkbox {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+}
+
+.item-checkbox.active {
+  max-height: 500px; /* Adjust based on the actual height of the content */
+  transition: max-height 0.5s ease-in;
+}
+
+.filter {
+  border-bottom: 1px #c8c8c8 solid;
+}
+
+.checkbox-group {
+  flex-direction: column;
+  padding: 0 0.5rem;
+  padding-bottom: 12px;
+}
+
+.nresult-sort {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  /* background-color: lightcoral; */
+  margin-left: 5%;
+  margin-top: 2rem;
+}
+
+.search-result-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  /* justify-content: space-evenly; */
+  /* flex-wrap: wrap; */
+  /* row-gap: 25px; */
+  /* background-color: lightblue; */
+  margin: 1.8rem auto;
+  z-index: 10;
+}
+
+.search-result-list {
+  /* background-color: lightgreen; */
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  height: 580px;
+  /* justify-content: space-evenly; */
+}

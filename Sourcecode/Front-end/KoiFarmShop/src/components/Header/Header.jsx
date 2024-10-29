@@ -1,217 +1,138 @@
 import React, { useEffect, useState } from "react";
 import "./Header.css";
-import { FiSearch } from "react-icons/fi";
 import { TiShoppingCart } from "react-icons/ti";
 import { IoSearch } from "react-icons/io5";
-import { GiHamburgerMenu } from "react-icons/gi";
-// import { Menu } from "antd";
+import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../services/authService";
+import { getAllKoiType } from "../../services/KoiTypeService";
 
 function Header() {
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-  const [isSticky, setIsSticky] = useState(false);
-  const [openKeys, setOpenKeys] = useState(["introduction", "koi", "food"]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [koiTypeLs, setKoiTypeLs] = useState([]);
   const navigate = useNavigate();
-  const createMenuItems = (label, key, children = []) => ({
-    key,
-    label,
-    children,
-  });
 
-  const navigateResearchPage = () => navigate("/search");
-  const navigateHome = () => navigate("/");
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   const navigateLink = (link) => navigate(link);
-
-  const handleMouseEnter = (item) => {
-    setHoveredItem(item);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredItem(null);
-  };
-
-  const toggleInputVisibility = () => {
-    setIsInputVisible(!isInputVisible);
-  };
-
-  const handleSideBar = () => {
-    setIsSideBarOpen(!isSideBarOpen);
-  };
-  const onOpenChange = (keys) => {
-    setOpenKeys(keys);
-  };
-
-  // y
+  const handleMouseEnter = (item) => setHoveredItem(item);
+  const handleMouseLeave = () => setHoveredItem(null);
+  const navigateLogin = () => navigate("/login");
+  const navigateRegister = () => navigate("/register");
 
   const IntroductionList = [
-    {
-      lable: "Giới thiệu",
-      link: "",
-    },
-    {
-      lable: "Giới thiệu sàn ký gửi",
-      link: "",
-    },
-    {
-      lable: "Đơn vị bán Koi",
-      link: "",
-    },
-    {
-      lable: "Nguồn Koi",
-      link: "",
-    },
+    { key: 1, label: "Giới thiệu", link: "" },
+    { key: 2, label: "Giới thiệu sàn ký gửi", link: "" },
+    { key: 3, label: "Đơn vị bán Koi", link: "" },
+    { key: 4, label: "Nguồn Koi", link: "" },
   ];
 
-  const KoiList = [
-    {
-      lable: "Koi Kohaku",
-      link: "",
-    },
-    {
-      lable: "Koi Ogon",
-      link: "",
-    },
-    {
-      lable: "Koi Showa",
-      link: "",
-    },
-    {
-      lable: "Koi Tancho",
-      link: "",
-    },
-    {
-      lable: "Koi Bekko",
-      link: "",
-    },
-  ];
-
-  const FoodKoiList = [
-    {
-      lable: "Cám thương hiệu JDP",
-      link: "",
-    },
-    {
-      lable: "Cám thương hiệu Sakura",
-      link: "",
-    },
-    {
-      lable: "Cám thương hiệu Hikari",
-      link: "",
-    },
-    {
-      lable: "Cám thương hiệu Aqua Master",
-      link: "",
-    },
-  ];
-
-  const menuItems = [
-    createMenuItems(
-      "Giới thiệu",
-      "introduction",
-      IntroductionList.map((item) => ({ label: item.lable, key: item.key }))
-    ),
-    createMenuItems(
-      "Cá Koi Nhật",
-      "koi",
-      KoiList.map((item) => ({ label: item.lable, key: item.key }))
-    ),
-    createMenuItems(
-      "Thức ăn cá Koi",
-      "food",
-      FoodKoiList.map((item) => ({ label: item.lable, key: item.key }))
-    ),
-  ];
+  // const KoiList = [
+  //   { key: 1, label: "Koi Kohaku", link: "" },
+  //   { key: 2, label: "Koi Ogon", link: "" },
+  //   { key: 3, label: "Koi Showa", link: "" },
+  //   { key: 4, label: "Koi Tancho", link: "" },
+  //   { key: 5, label: "Koi Bekko", link: "" },
+  // ];
 
   const taskList = [
-    {
-      key: 1,
-      lable: "Login",
-      link: "/login",
-    },
-    {
-      key: 2,
-      lable: "Register",
-      link: "/register",
-    },
+    { key: 1, label: "Profile", link: "/dashboard/profile/stella" },
+    { key: 2, label: "Logout", link: "" },
   ];
 
+  const handleLogout = async () => {
+    try {
+      await logout(); // Gọi hàm logout
+      setIsLoggedIn(false); // Cập nhật trạng thái đăng nhập
+      navigate("/login"); // Chuyển hướng đến trang login
+    } catch (err) {
+      console.error("Logout failed: ", err);
+    }
+  };
+
+  useEffect(() => {
+    const fetchKoiType = async () => {
+      try {
+        const data = await getAllKoiType();
+        setKoiTypeLs(data);
+        // console.log("KoiType", koiTypeLs);
+      } catch (err) {
+        console.error("Failed to fetch Koi types", err);
+      }
+    };
+
+    fetchKoiType();
+  }, []);
+
   return (
-    <>
-      <header>
-        <div className="header-container">
-          <div className="left-section">
-            <GiHamburgerMenu size={"30px"} onClick={handleSideBar} />
-          </div>
-          <div className="header-logo">
-            <img src="/logo-web/logo.png" alt="logo" onClick={navigateHome} />
-          </div>
-          <div className="middle-section">
-            <div className="header-items">
-              <div
-                className="header-item"
-                onMouseEnter={() => handleMouseEnter("introduction")}
-                onMouseLeave={handleMouseLeave}
-              >
-                Giới thiệu
-                {hoveredItem === "introduction" && (
-                  <ul className="dropdown">
-                    {IntroductionList.map((item) => {
-                      return <li className="dropdown-item">{item.lable}</li>;
-                    })}
-                  </ul>
-                )}
-              </div>
-              <div
-                className="header-item"
-                onMouseEnter={() => handleMouseEnter("koi")}
-                onMouseLeave={handleMouseLeave}
-              >
-                Cá Koi Nhật
-                {hoveredItem === "koi" && (
-                  <ul className="dropdown">
-                    {KoiList.map((item) => {
-                      return <li className="dropdown-item">{item.lable}</li>;
-                    })}
-                  </ul>
-                )}
-              </div>
-              <div
-                className="header-item"
-                onMouseEnter={() => handleMouseEnter("food")}
-                onMouseLeave={handleMouseLeave}
-              >
-                Thức ăn cá Koi
-                {hoveredItem === "food" && (
-                  <ul className="dropdown">
-                    {FoodKoiList.map((item) => {
-                      return <li className="dropdown-item">{item.lable}</li>;
-                    })}
-                  </ul>
-                )}
-              </div>
-              <div className="header-item">Khuyến mãi</div>
+    <header>
+      <div className="header-container">
+        <div className="header-logo">
+          <img
+            src="/logo-web/logo.png"
+            alt="logo"
+            onClick={() => navigate("/")}
+            style={{ cursor: "pointer" }}
+          />
+        </div>
+        <div className="middle-section">
+          <div className="header-items">
+            <div
+              className="header-item"
+              onMouseEnter={() => handleMouseEnter("introduction")}
+              onMouseLeave={handleMouseLeave}
+            >
+              Giới thiệu
+              {hoveredItem === "introduction" && (
+                <ul className="dropdown">
+                  {IntroductionList.map((item) => (
+                    <li className="dropdown-item" key={item.key}>
+                      {item.label}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
-            <div className="header-search">
-              <div className={`search ${isInputVisible ? "show-input" : ""}`}>
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  placeholder="Tìm kiếm"
-                  // className={`${isInputVisible ? "visible" : "hidden"}`}
-                />
-                <span className="search-icon">
-                  <IoSearch size={"18px"} onClick={navigateResearchPage} />
-                </span>
-              </div>
+            <div
+              className="header-item"
+              onMouseEnter={() => handleMouseEnter("koi")}
+              onMouseLeave={handleMouseLeave}
+            >
+              Cá Koi Nhật
+              {hoveredItem === "koi" && (
+                <ul className="dropdown">
+                  {koiTypeLs.map((item) => (
+                    <li className="dropdown-item" key={item.koiTypeId}>
+                      {item.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div className="header-item">Khuyến mãi</div>
+          </div>
+          <div className="header-search">
+            <div className={`search ${isInputVisible ? "show-input" : ""}`}>
+              <input type="text" placeholder="Tìm kiếm" />
+              <span className="search-icon">
+                <IoSearch size={"18px"} onClick={() => navigate("/search")} />
+              </span>
             </div>
           </div>
-          <div className="header-account">
-            <div className="cart-icon">
-              <TiShoppingCart size={"30px"} />
-            </div>
+        </div>
+        <div className="header-account">
+          <div className="cart-icon">
+            <TiShoppingCart size={"30px"} />
+          </div>
+
+          {isLoggedIn ? (
             <div
               className="header-item header-avatar"
               onMouseEnter={() => handleMouseEnter("user")}
@@ -223,24 +144,46 @@ function Header() {
               />
               {hoveredItem === "user" && (
                 <ul className="dropdown">
-                  {taskList.map((item) => {
-                    return (
-                      <li
-                        key={item.key}
-                        className="dropdown-item"
-                        onClick={() => navigateLink(item.link)}
-                      >
-                        {item.lable}
-                      </li>
-                    );
-                  })}
+                  {taskList.map((item) => (
+                    <li
+                      key={item.key}
+                      className="dropdown-item"
+                      onClick={
+                        item.label === "Logout"
+                          ? handleLogout
+                          : () => navigateLink(item.link)
+                      }
+                    >
+                      {item.label}
+                    </li>
+                  ))}
                 </ul>
               )}
             </div>
-          </div>
+          ) : (
+            <div
+              className="header-item"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <Button
+                type="primary"
+                onClick={navigateLogin}
+                style={{ marginRight: "10px" }}
+              >
+                Login
+              </Button>
+              <Button
+                type="primary"
+                onClick={navigateRegister}
+                style={{ marginRight: "10px" }}
+              >
+                Register
+              </Button>
+            </div>
+          )}
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
 }
 

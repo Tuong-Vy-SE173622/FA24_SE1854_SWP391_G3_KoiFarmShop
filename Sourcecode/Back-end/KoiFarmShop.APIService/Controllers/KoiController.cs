@@ -3,6 +3,7 @@ using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Kois;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace KoiFarmShop.APIService.Controllers
 {
@@ -76,6 +77,49 @@ namespace KoiFarmShop.APIService.Controllers
             ResultDto result = new ResultDto();
             result.success(origins);
             return result;
+        }
+
+        [HttpPost("{koiTypeId}")]
+        public async Task<IActionResult> CreateKoiAsync(int koiTypeId, [FromForm] KoiCreateWithImageDto koiCreateDto)
+        {
+            ClaimsPrincipal user = HttpContext.User;
+            try
+            {
+                var koiViewModels = new List<KoiCreateWithImageDto>()
+            {
+                new KoiCreateWithImageDto
+                {
+                    Origin = koiCreateDto.Origin,
+                    Gender = koiCreateDto.Gender,
+                    Age = koiCreateDto.Age,
+                    Size = koiCreateDto.Size,
+                    Price = koiCreateDto.Price,
+                    Characteristics = koiCreateDto.Characteristics,
+                    FeedingAmountPerDay = koiCreateDto.FeedingAmountPerDay,
+                    ScreeningRate = koiCreateDto.ScreeningRate,
+                    IsOwnedByFarm = koiCreateDto.IsOwnedByFarm,
+                    IsImported = koiCreateDto.IsImported,
+                    Generation = koiCreateDto.Generation,
+                    IsLocal = koiCreateDto.IsLocal,
+                    Note = koiCreateDto.Note,
+                    Image = koiCreateDto.Image
+            }
+            };
+                // Call the addFood method from the service layer
+                var result = await _koiService.CreateKoiWithImageAsync(koiTypeId, koiViewModels, user);
+                if (result.IsSuccess)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
+            }
         }
     }
 }

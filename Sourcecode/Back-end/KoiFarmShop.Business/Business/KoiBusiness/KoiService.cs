@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using KoiFarmShop.Business.Business.Cloudinary;
+using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Kois;
 using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
@@ -6,6 +8,7 @@ using KoiFarmShop.Data.Models;
 using KoiFarmShop.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 namespace KoiFarmShop.Business.Business.KoiBusiness
 {
@@ -13,11 +16,13 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ICloudinaryService _cloudinaryService;
 
-        public KoiService(UnitOfWork unitOfWork, IMapper mapper)
+        public KoiService(UnitOfWork unitOfWork, IMapper mapper, ICloudinaryService cloudinaryService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _cloudinaryService = cloudinaryService;
         }
 
         public async Task<IEnumerable<KoiDto>> GetAllKoisAsync()
@@ -208,7 +213,58 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             return koiOrigins;
         }
 
+
+        public async Task<ResultDto> CreateKoiWithImageAsync(int koiTypeId, List<KoiCreateWithImageDto> koiCreateDto, ClaimsPrincipal userCreate)
+        {
+            ResultDto result = new ResultDto();
+            try
+            {
+                if (koiCreateDto == null)
+                {
+                    result.IsSuccess = false;
+                    result.Code = 400;
+                    result.Message = "Koi request model is null.";
+                    return result;
+                }
+                foreach (var koi in koiCreateDto)
+                {
+                    var newKoi = _mapper.Map<Koi>(koi);
+                    newKoi.KoiTypeId = koiTypeId;
+                    newKoi.Origin = koi.Origin;
+                    newKoi.Gender = koi.Gender;
+                    newKoi.Age = koi.Age;
+                    newKoi.Size = koi.Size;
+                    newKoi.Price = koi.Price;
+                    newKoi.Characteristics = koi.Characteristics;
+                    newKoi.FeedingAmountPerDay = koi.FeedingAmountPerDay;
+                    newKoi.ScreeningRate = koi.ScreeningRate;
+                    newKoi.IsOwnedByFarm = koi.IsOwnedByFarm;
+                    newKoi.IsImported = koi.IsImported;
+                    newKoi.Generation = koi.Generation;
+                    newKoi.IsLocal = koi.IsLocal;
+                    newKoi.Note = koi.Note;
+                    newKoi.CreatedBy = userCreate.FindFirst("UserName")?.Value;
+                    newKoi.CreatedAt = DateTime.Now;
+                    if (koi.Image != null)
+                    {
+                        var imageUrl = await _cloudinaryService.UploadImageAsync(koi.Image);
+                        newKoi.Image = imageUrl; // Assuming Koi has an ImageUrl property
+                    }
+                    _unitOfWork.KoiRepository.Create(newKoi);
+                }
+                _unitOfWork.KoiRepository.Save();
+                result.IsSuccess = true;
+                result.Code = 200;
+                result.Message = "Add Koi Success";
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.Code = 400;
+                result.Message = ex.Message;
+                return result;
+            }
+        }
     }
-
-
 }

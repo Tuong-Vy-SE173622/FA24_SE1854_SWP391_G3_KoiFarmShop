@@ -1,4 +1,6 @@
-﻿using KoiFarmShop.Business.Dto.Kois;
+﻿using KoiFarmShop.Business.Dto;
+using KoiFarmShop.Business.Dto.Kois;
+using System.Security.Claims;
 
 namespace KoiFarmShop.Business.Business.KoiBusiness
 {
@@ -11,5 +13,6 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
         Task<int> UpdateKoiAsync(int id, KoiUpdateDto koiDto);
         Task<bool> RemoveKoiAsync(int id);
         Task<HashSet<string>> GetAllKoiOrigins();
+        Task<ResultDto> CreateKoiWithImageAsync(int koiTypeId, List<KoiCreateWithImageDto> koiCreateDto, ClaimsPrincipal userCreate);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using KoiFarmShop.Business.Business.KoiTypeBusiness;
 using KoiFarmShop.Business.Dto.KoiTypes;
+using KoiFarmShop.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -88,5 +89,28 @@ namespace KoiFarmShop.APIService.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
             }
         }
+
+        [HttpPut("/update-with-image/{id}")]
+        public async Task<IActionResult> UpdateKoiTypeWithImage(int id, [FromForm] KoiTypeUpdateWithImageDto koiTypeUpdateDto)
+        {
+                ClaimsPrincipal user = HttpContext.User;
+            try
+            {
+                var result = await _koiTypeService.UpdateKoiTypeWithImageAsync(id, koiTypeUpdateDto, user);
+                if (result.IsSuccess)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
+            }
+        }
+
     }
 }

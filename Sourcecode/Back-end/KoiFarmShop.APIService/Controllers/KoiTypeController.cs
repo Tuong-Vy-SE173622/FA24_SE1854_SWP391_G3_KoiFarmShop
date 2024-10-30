@@ -1,6 +1,7 @@
 ﻿using KoiFarmShop.Business.Business.KoiTypeBusiness;
 using KoiFarmShop.Business.Dto.KoiTypes;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 
 namespace KoiFarmShop.APIService.Controllers
@@ -64,6 +65,28 @@ namespace KoiFarmShop.APIService.Controllers
             var result = await _koiTypeService.RemoveKoiTypeAsync(id);
             if (!result) return NotFound();
             return Ok(result);
+        }
+
+        [HttpPost("/create-with-image")]
+        public async Task<IActionResult> CreateKoiTypeWithImage([FromForm] KoiTypeCreateWithImageDto koiTypeCreateDto)
+        {
+            ClaimsPrincipal user = HttpContext.User;
+            try
+            {
+                var result = await _koiTypeService.CreateKoiTypeWithImageAsync(koiTypeCreateDto, user);
+                if (result.IsSuccess)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
+            }
         }
     }
 }

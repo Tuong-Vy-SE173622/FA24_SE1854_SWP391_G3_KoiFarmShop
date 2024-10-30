@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace KoiFarmShop.Business.Dto.Kois
 {
-    public class KoiCreateWithImageDto
+    public class KoiUpdateWithImageDto
     {
+        public int? KoiTypeId { get; set; }
         public string Origin { get; set; }
         public int? Gender { get; set; }
         public int? Age { get; set; }
@@ -21,6 +22,7 @@ namespace KoiFarmShop.Business.Dto.Kois
         public bool? IsImported { get; set; }
         public string Generation { get; set; }
         public bool? IsLocal { get; set; }
+        public bool? IsActive { get; set; }
         public string Note { get; set; }
         public IFormFile Image { get; set; }
     }

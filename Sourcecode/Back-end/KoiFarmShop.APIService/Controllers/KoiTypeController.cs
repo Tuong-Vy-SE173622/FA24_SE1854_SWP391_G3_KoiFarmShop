@@ -90,7 +90,7 @@ namespace KoiFarmShop.APIService.Controllers
             }
         }
 
-        [HttpPut("/update-with-image/{id}")]
+        [HttpPut("/update-koi-type-with-image/{id}")]
         public async Task<IActionResult> UpdateKoiTypeWithImage(int id, [FromForm] KoiTypeUpdateWithImageDto koiTypeUpdateDto)
         {
                 ClaimsPrincipal user = HttpContext.User;

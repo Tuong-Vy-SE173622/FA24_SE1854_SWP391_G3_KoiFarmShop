@@ -2,6 +2,7 @@
 using KoiFarmShop.Business.Business.Cloudinary;
 using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Kois;
+using KoiFarmShop.Business.Dto.KoiTypes;
 using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
@@ -30,7 +31,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             //TODO: filtering and pagination
 
             var kois = await _unitOfWork.KoiRepository.GetAllAsync();
-       
+
             return _mapper.Map<IEnumerable<KoiDto>>(kois);
         }
 
@@ -78,7 +79,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
         {
             var existingKoi = await _unitOfWork.KoiRepository.GetByIdAsync(id);
             if (existingKoi == null)
-                throw new NotFoundException("Koi not found"); 
+                throw new NotFoundException("Koi not found");
 
             _mapper.Map(koiUpdateDto, existingKoi); // only update non-null fields :3
             return await _unitOfWork.KoiRepository.UpdateAsync(existingKoi);
@@ -195,7 +196,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
 
             return new PaginatedResult<KoiDto>
             {
-                Data = pagedKois,  
+                Data = pagedKois,
                 TotalRecords = totalRecords,
                 PageNumber = filterDto.PageNumber,
                 PageSize = filterDto.PageSize
@@ -263,6 +264,75 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 result.IsSuccess = false;
                 result.Code = 400;
                 result.Message = ex.Message;
+                return result;
+            }
+        }
+        public async Task<ResultDto> UpdateKoiWithImageAsync(int koiId, KoiUpdateWithImageDto koiUpdateDto, ClaimsPrincipal userUpdate)
+        {
+            ResultDto result = new ResultDto();
+            try
+            {
+                if (koiUpdateDto == null)
+                {
+                    result.IsSuccess = false;
+                    result.Code = 400;
+                    result.Message = "Koi request model is null.";
+                    return result;
+                }
+
+                var existingKoi = _unitOfWork.KoiRepository.Get(x => x.KoiId == koiId);
+                if (existingKoi == null)
+                {
+                    result.IsSuccess = false;
+                    result.Code = 404;
+                    result.Message = "Koi not found.";
+                    return result;
+                }
+                // Update food properties except image
+                _mapper.Map(koiUpdateDto, existingKoi);
+                existingKoi.Origin = koiUpdateDto.Origin;
+                existingKoi.Gender = koiUpdateDto.Gender;
+                existingKoi.Age = koiUpdateDto.Age;
+                existingKoi.Size = koiUpdateDto.Size;
+                existingKoi.Characteristics = koiUpdateDto.Characteristics;
+                existingKoi.FeedingAmountPerDay = koiUpdateDto.FeedingAmountPerDay;
+                existingKoi.ScreeningRate = koiUpdateDto.ScreeningRate;
+                existingKoi.IsOwnedByFarm = koiUpdateDto.IsOwnedByFarm;
+                existingKoi.IsImported = koiUpdateDto.IsImported;
+                existingKoi.Generation = koiUpdateDto.Generation;
+                existingKoi.IsLocal = koiUpdateDto.IsLocal;
+                existingKoi.Note = koiUpdateDto.Note;
+
+
+                if (koiUpdateDto.Image != null)
+                {
+                    // Upload new image and update the existing image URL
+                    existingKoi.Image = await _cloudinaryService.UploadImageAsync(koiUpdateDto.Image);
+                }
+                // Set modified by and date
+                var modifiedBy = userUpdate.FindFirst("UserName")?.Value;
+                if (string.IsNullOrEmpty(modifiedBy))
+                {
+                    result.IsSuccess = false;
+                    result.Code = 400;
+                    result.Message = "User name claim not found.";
+                    return result;
+                }
+                existingKoi.UpdatedBy = modifiedBy;
+                existingKoi.UpdatedAt = DateTime.Now;
+                // Update and save changes
+                _unitOfWork.KoiRepository.Update(existingKoi);
+                await _unitOfWork.KoiRepository.SaveAsync();
+                result.IsSuccess = true;
+                result.Code = 200;
+                result.Message = "Update Koi Success";
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.Code = 500;
+                result.Message = $"Exception: {ex.Message}";
                 return result;
             }
         }

@@ -1,6 +1,7 @@
 ﻿using KoiFarmShop.Business.Business.KoiBusiness;
 using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Kois;
+using KoiFarmShop.Business.Dto.KoiTypes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -107,6 +108,28 @@ namespace KoiFarmShop.APIService.Controllers
             };
                 // Call the addFood method from the service layer
                 var result = await _koiService.CreateKoiWithImageAsync(koiTypeId, koiViewModels, user);
+                if (result.IsSuccess)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("/update-koi-with-image/{id}")]
+        public async Task<IActionResult> UpdateKoiWithImage(int id, [FromForm] KoiUpdateWithImageDto koiUpdateDto)
+        {
+            ClaimsPrincipal user = HttpContext.User;
+            try
+            {
+                var result = await _koiService.UpdateKoiWithImageAsync(id, koiUpdateDto, user);
                 if (result.IsSuccess)
                 {
                     return Ok(result);

@@ -215,7 +215,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
         }
 
 
-        public async Task<ResultDto> CreateKoiWithImageAsync(int koiTypeId, List<KoiCreateWithImageDto> koiCreateDto, ClaimsPrincipal userCreate)
+        public async Task<ResultDto> CreateKoiWithImageAsync(List<KoiCreateWithImageDto> koiCreateDto, ClaimsPrincipal userCreate)
         {
             ResultDto result = new ResultDto();
             try
@@ -230,7 +230,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 foreach (var koi in koiCreateDto)
                 {
                     var newKoi = _mapper.Map<Koi>(koi);
-                    newKoi.KoiTypeId = koiTypeId;
+                    newKoi.KoiTypeId = koi.KoiTypeId;
                     newKoi.Origin = koi.Origin;
                     newKoi.Gender = koi.Gender;
                     newKoi.Age = koi.Age;

@@ -80,8 +80,8 @@ namespace KoiFarmShop.APIService.Controllers
             return result;
         }
 
-        [HttpPost("{koiTypeId}")]
-        public async Task<IActionResult> CreateKoiAsync(int koiTypeId, [FromForm] KoiCreateWithImageDto koiCreateDto)
+        [HttpPost("/create-koi-with-image")]
+        public async Task<IActionResult> CreateKoiAsync([FromForm] KoiCreateWithImageDto koiCreateDto)
         {
             ClaimsPrincipal user = HttpContext.User;
             try
@@ -90,6 +90,7 @@ namespace KoiFarmShop.APIService.Controllers
             {
                 new KoiCreateWithImageDto
                 {
+                    KoiTypeId = koiCreateDto.KoiTypeId,
                     Origin = koiCreateDto.Origin,
                     Gender = koiCreateDto.Gender,
                     Age = koiCreateDto.Age,
@@ -107,7 +108,7 @@ namespace KoiFarmShop.APIService.Controllers
             }
             };
                 // Call the addFood method from the service layer
-                var result = await _koiService.CreateKoiWithImageAsync(koiTypeId, koiViewModels, user);
+                var result = await _koiService.CreateKoiWithImageAsync(koiViewModels, user);
                 if (result.IsSuccess)
                 {
                     return Ok(result);

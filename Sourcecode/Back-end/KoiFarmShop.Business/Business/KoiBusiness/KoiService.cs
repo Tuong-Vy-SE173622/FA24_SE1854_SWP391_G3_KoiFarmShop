@@ -99,7 +99,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
 
             if (!string.IsNullOrEmpty(filterDto.TypeName))
             {
-                query = query.Where(k => k.KoiType.Name == filterDto.TypeName);
+                query = query.Where(k => k.KoiType.Name.Contains(filterDto.TypeName));
             }
 
             if (filterDto.MinAge.HasValue)
@@ -144,7 +144,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
 
             if (!string.IsNullOrEmpty(filterDto.Origin))
             {
-                query = query.Where(k => filterDto.Origin.Contains(k.Origin));
+                query = query.Where(k => k.Origin.Contains(filterDto.Origin));
             }
 
             // Sorting

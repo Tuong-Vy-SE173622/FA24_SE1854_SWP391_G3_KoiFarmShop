@@ -1,17 +1,19 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using KoiFarmShop.Data;
-using Microsoft.OpenApi.Models;
-using KoiFarmShop.Business.Business.TokenBusiness;
-using KoiFarmShop.Business.Business.UserBusiness;
+﻿using KoiFarmShop.Business.AutoMap;
 using KoiFarmShop.Business.Business.AccountBusiness;
-using KoiFarmShop.Business.AutoMap;
+using KoiFarmShop.Business.Business.Cloudinary;
+using KoiFarmShop.Business.Business.ConsignmentBusiness;
 using KoiFarmShop.Business.Business.KoiBusiness;
 using KoiFarmShop.Business.Business.KoiTypeBusiness;
-using KoiFarmShop.Business.Business.ConsignmentBusiness;
 using KoiFarmShop.Business.Business.PromotionBusiness;
-using KoiFarmShop.Business.Business.CareRequestBusiness;
-using KoiFarmShop.Business.Business.OrderBusiness;
+using KoiFarmShop.Business.Business.TokenBusiness;
+using KoiFarmShop.Business.Business.UserBusiness;
+using KoiFarmShop.Business.Business.VNPay;
+using KoiFarmShop.Business.Config;
+using KoiFarmShop.Data;
+using KoiFarmShop.Data.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace KoiFarmShop.APIService
 {
@@ -24,6 +26,19 @@ namespace KoiFarmShop.APIService
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            // ignore CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("app-cors",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                    });
+            });
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddAuthorization();
@@ -152,6 +167,15 @@ namespace KoiFarmShop.APIService
                 };
             });
 
+            // Load VnpayConfig from appsettings.json
+            builder.Services.Configure<VnPayConfig>(builder.Configuration.GetSection("VnpayConfig"));
+
+            // Register VNPAY service
+            builder.Services.AddScoped<IVnPayService, VnpayService>();
+
+            //Load CloudinaryConfig from appsettings.json
+            builder.Services.Configure<CloudinaryConfig>(builder.Configuration.GetSection("CloudinaryConfig"));
+            builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
 
             //add automapper
             builder.Services.AddAutoMapper(typeof(MappingProfile));
@@ -164,20 +188,23 @@ namespace KoiFarmShop.APIService
 
             builder.Services.AddScoped<IPromotionService, PromotionService>();
 
-            builder.Services.AddScoped<IKoiService,KoiService>();
-            builder.Services.AddScoped<IKoiTypeService ,KoiTypeService>();
+            builder.Services.AddScoped<IKoiService, KoiService>();
+            builder.Services.AddScoped<IKoiTypeService, KoiTypeService>();
 
             builder.Services.AddScoped<IConsignmentRequestService, ConsignmentRequestService>();
             builder.Services.AddScoped<IConsignmentDetailService, ConsignmentDetailService>();
 
-            builder.Services.AddScoped<ICareRequestService, CareRequestService>();
-            builder.Services.AddScoped<ICareRequestDetailService, CareRequestDetailService>();
-
-            builder.Services.AddScoped<IOrderService, OrderService>();
-            builder.Services.AddScoped<IOrderItemService, OrderItemService>();
-
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var serviceProvider = scope.ServiceProvider;
+
+                var refreshHandler = serviceProvider.GetRequiredService<ITokenService>();
+
+                refreshHandler.RemoveAllRefreshToken();
+            }
 
             //exception handler
             app.UseMiddleware<GlobalExceptionHandler>();
@@ -191,8 +218,10 @@ namespace KoiFarmShop.APIService
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseCors("app-cors");
 
             app.MapControllers();
 

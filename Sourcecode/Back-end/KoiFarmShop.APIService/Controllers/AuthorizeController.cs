@@ -224,9 +224,18 @@ namespace KoiFarmShop.APIService.Controllers
             try
             {
                 string token = HttpContext.Request.Headers["Authorization"];
+                if (string.IsNullOrEmpty(token) || !token.StartsWith("Bearer "))
+                {
+                    return BadRequest(new ResultDto
+                    {
+                        IsSuccess = false,
+                        Message = "Invalid token format."
+                    });
+                }
+
                 token = token.Split(' ')[1];
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var TokenValidationParameters = new TokenValidationParameters()
+                var tokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("c2VydmVwZXJmZWN0bHljaGVlc2VxdWlja2NvYWNoY29sbGVjdHNsb3Bld2lzZWNhbWU=")),
@@ -237,24 +246,22 @@ namespace KoiFarmShop.APIService.Controllers
                 };
 
                 SecurityToken validatedToken;
-                var claimsPrincipal = tokenHandler.ValidateToken(token, TokenValidationParameters, out validatedToken);
+                var claimsPrincipal = tokenHandler.ValidateToken(token, tokenValidationParameters, out validatedToken);
                 var userIdClaim = claimsPrincipal.FindFirst("UserId");
 
-                if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
-                {
-                    var _refreshToken = _tokenService.GetRefreshTokenByUserID(userId);
-                    _tokenService.UpdateRefreshToken(_refreshToken);
-                    _tokenService.ResetRefreshToken();
-                }
-                else
+                if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
                 {
                     // Handle the case where the UserId claim is missing or invalid
                     return BadRequest(new ResultDto
                     {
                         IsSuccess = false,
-                        Message = "User ID not found or invalid."
+                        Message = "Invalid UserId."
                     });
                 }
+
+                var refreshToken = _tokenService.GetRefreshTokenByUserID(userId);
+                _tokenService.UpdateRefreshToken(refreshToken);
+                _tokenService.ResetRefreshToken();
 
                 if (HttpContext.Request.Headers.ContainsKey("Authorization"))
                 {

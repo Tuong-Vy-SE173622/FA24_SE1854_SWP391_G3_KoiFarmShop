@@ -53,7 +53,7 @@ namespace KoiFarmShop.APIService.Controllers
             var result = await _koiTypeService.UpdateKoiTypeAsync(id, koiTypeUpdateDto);
             if (result < 0)
             {
-                return NotFound(); 
+                return NotFound();
             }
             return Ok(result);
         }

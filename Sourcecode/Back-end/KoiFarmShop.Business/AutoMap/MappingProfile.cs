@@ -20,7 +20,8 @@ namespace KoiFarmShop.Business.AutoMap
         {
             CreateMap<Customer, CustomerDto>().ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User)).ReverseMap();
 
-            CreateMap<Koi, KoiDto>().ForMember(dest => dest.KoiType, opt => opt.MapFrom(src => src.KoiType)).ReverseMap();
+            CreateMap<Koi, KoiDto>()
+                .ForMember(dest => dest.KoiTypeName, opt => opt.MapFrom(src => src.KoiType.Name));
             CreateMap<KoiCreateDto, Koi>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
             CreateMap<KoiUpdateDto, Koi>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null)); 
             CreateMap<KoiType, KoiTypeDto>().ReverseMap();
@@ -43,7 +44,7 @@ namespace KoiFarmShop.Business.AutoMap
             CreateMap<ConsignmentRequestCreateDto, ConsignmentRequest>();
             CreateMap<ConsignmentRequestUpdateDto, ConsignmentRequest>().ForAllMembers(
                 opt => opt.Condition(
-                    (src, dest, srcMember) =>srcMember != null &&
+                    (src, dest, srcMember) => srcMember != null &&
                                             !(srcMember is int && (int)srcMember == 0) &&
                                             !(srcMember is double && (double)srcMember == 0)
                     )

@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 namespace KoiFarmShop.Data.Models;
 
 [Table("User")]
+[Index("Email", Name = "user_email_unique", IsUnique = true)]
+[Index("Username", Name = "user_username_unique", IsUnique = true)]
 public partial class User
 {
     [Key]
@@ -48,11 +50,6 @@ public partial class User
     [Unicode(false)]
     public string Phone { get; set; }
 
-    [Required]
-    [Column("role")]
-    [StringLength(50)]
-    public string Role { get; set; }
-
     [Column("is_active")]
     public bool? IsActive { get; set; }
 
@@ -65,15 +62,21 @@ public partial class User
     public DateTime? CreatedAt { get; set; }
 
     [Column("created_by")]
-    [StringLength(50)]
+    [StringLength(55)]
+    [Unicode(false)]
     public string CreatedBy { get; set; }
 
     [Column("updated_at")]
     public DateTime? UpdatedAt { get; set; }
 
     [Column("updated_by")]
-    [StringLength(50)]
+    [StringLength(55)]
+    [Unicode(false)]
     public string UpdatedBy { get; set; }
+
+    [StringLength(55)]
+    [Unicode(false)]
+    public string Role { get; set; }
 
     [InverseProperty("User")]
     public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();

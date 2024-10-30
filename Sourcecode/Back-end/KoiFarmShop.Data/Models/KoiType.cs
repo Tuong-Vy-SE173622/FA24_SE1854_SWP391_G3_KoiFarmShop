@@ -58,6 +58,11 @@ public partial class KoiType
     [StringLength(255)]
     public string UpdatedBy { get; set; }
 
+    [Column("IMAGE")]
+    [StringLength(255)]
+    [Unicode(false)]
+    public string Image { get; set; }
+
     [InverseProperty("KoiType")]
     public virtual ICollection<Koi> Kois { get; set; } = new List<Koi>();
 }

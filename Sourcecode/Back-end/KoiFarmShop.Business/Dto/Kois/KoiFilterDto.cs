@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KoiFarmShop.Business.Dto.Kois
+﻿namespace KoiFarmShop.Business.Dto.Kois
 {
     public class KoiFilterDto
     {
@@ -15,6 +9,11 @@ namespace KoiFarmShop.Business.Dto.Kois
         public double? MaxSize { get; set; }
         public bool? IsOwnedByFarm { get; set; }
         public bool? IsImport { get; set; }
+        public string? KoiTypeName { get; set; }
+        public int? Gender { get; set; } // 0 = male , 1 = female
+        public string? Origin { get; set; }
+        public bool IsSortedByPrice { get; set; } = true;
+        public bool IsAscending { get; set; } = true;
         public int PageNumber { get; set; } = 1; // Default to page 1
         public int PageSize { get; set; } = 10; // Default to 10 records per page
     }

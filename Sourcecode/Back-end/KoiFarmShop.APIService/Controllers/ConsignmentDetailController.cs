@@ -1,9 +1,12 @@
 ﻿using KoiFarmShop.Business.Business.ConsignmentBusiness;
 using KoiFarmShop.Business.Dto.Consigments;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace KoiFarmShop.APIService.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ConsignmentDetailController : ControllerBase
@@ -18,14 +21,16 @@ namespace KoiFarmShop.APIService.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateConsignmentDetail([FromBody] ConsignmentDetailCreateDto consignmentDetailCreateDto)
         {
-            var result = await _consignmentDetailService.CreateConsignmentDetailAsync(consignmentDetailCreateDto);
-            return CreatedAtAction(nameof(GetById), new { id = result.ConsignmentDetailId }, result);
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var result = await _consignmentDetailService.CreateConsignmentDetailAsync(consignmentDetailCreateDto, currentUser);
+            return CreatedAtAction(nameof(GetById), new { consignmentRequestId = result.ConsignmentDetailId }, result);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateConsignmentDetail(int id, [FromBody] ConsignmentDetailUpdateDto consignmentDetailUpdateDto)
         {
-            var result = await _consignmentDetailService.UpdateConsignmentDetailAsync(id, consignmentDetailUpdateDto);
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var result = await _consignmentDetailService.UpdateConsignmentDetailAsync(id, consignmentDetailUpdateDto, currentUser);
             return Ok(result);
         }
 
@@ -41,6 +46,12 @@ namespace KoiFarmShop.APIService.Controllers
         {
             var result = await _consignmentDetailService.GetDetailsByConsignmentRequestIdAsync(id);
             return Ok(result);
+        }
+        [HttpGet("test")]
+        public string Test()
+        {
+            var usernameClaim = HttpContext.User.FindFirst("UserName");
+             return usernameClaim?.Value;
         }
     }
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KoiFarmShop.Business.Dto.Consigments
+﻿namespace KoiFarmShop.Business.Dto.Consigments
 {
     public class ConsignmentDetailResponseDto
     {
@@ -12,6 +6,7 @@ namespace KoiFarmShop.Business.Dto.Consigments
         public int ConsignmentId { get; set; }
         public int? KoiId { get; set; }
         public string? ConsignmentType { get; set; }
+        public int? TotalMonths { get; set; }
         public double? MonthlyConsignmentFee { get; set; }
         public double? SoldPrice { get; set; }
         public string? HealthDescription { get; set; }

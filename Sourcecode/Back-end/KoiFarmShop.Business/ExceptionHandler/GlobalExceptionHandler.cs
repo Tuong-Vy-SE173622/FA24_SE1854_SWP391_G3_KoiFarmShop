@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Net;
-using System;
 
 public class GlobalExceptionHandler
 {
@@ -61,7 +60,7 @@ public class GlobalExceptionHandler
         var response = new
         {
             StatusCode = context.Response.StatusCode,
-            Message = $"An unexpected error occurred. Please try again later. Error is:, {ex.InnerException?.Message ?? ex.Message}",
+            Message = "An unexpected error occurred. Please try again later.",
         };
 
         return context.Response.WriteAsJsonAsync(response);

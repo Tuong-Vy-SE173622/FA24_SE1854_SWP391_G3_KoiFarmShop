@@ -67,6 +67,9 @@ public partial class ConsignmentDetail
     [Unicode(false)]
     public string UpdatedBy { get; set; }
 
+    [Column("total_months")]
+    public int? TotalMonths { get; set; }
+
     [ForeignKey("ConsignmentId")]
     [InverseProperty("ConsignmentDetails")]
     public virtual ConsignmentRequest Consignment { get; set; }

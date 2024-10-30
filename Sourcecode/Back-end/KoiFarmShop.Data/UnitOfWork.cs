@@ -1,10 +1,5 @@
 ﻿using KoiFarmShop.Data.Models;
 using KoiFarmShop.Data.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KoiFarmShop.Data
 {
@@ -62,13 +57,6 @@ namespace KoiFarmShop.Data
                 return _orderRepository ??= new OrderRepository(_context);
             }
         }
-        public OrderItemRepository OrderItemRepository
-        {
-            get
-            {
-                return _orderItemRepository ??= new OrderItemRepository(_context);
-            }
-        }
         public AccountRepository AccountRepository
         {
             get
@@ -101,6 +89,18 @@ namespace KoiFarmShop.Data
             }
         }
 
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
+        public OrderItemRepository OrderItemRepository
+        {
+            get
+            {
+                return _orderItemRepository ??= new OrderItemRepository(_context);
+            }
+        }
+
         public CareRequestRepository CareRequestRepository
         {
             get
@@ -115,11 +115,6 @@ namespace KoiFarmShop.Data
             {
                 return _careRequestDetailRepository ??= new CareRequestDetailRepository(_context);
             }
-        }
-
-        public async Task<int> SaveChangesAsync()
-        {
-            return await _context.SaveChangesAsync();
         }
     }
 }

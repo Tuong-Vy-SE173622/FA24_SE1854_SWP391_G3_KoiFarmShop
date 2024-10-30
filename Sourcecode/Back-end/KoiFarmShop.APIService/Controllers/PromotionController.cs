@@ -1,8 +1,6 @@
 ﻿using KoiFarmShop.Business.Business.PromotionBusiness;
-using KoiFarmShop.Business.Business.UserBusiness;
 using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Promotion;
-using KoiFarmShop.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KoiFarmShop.APIService.Controllers

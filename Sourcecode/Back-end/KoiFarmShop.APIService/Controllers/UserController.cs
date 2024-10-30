@@ -16,11 +16,6 @@ namespace KoiFarmShop.APIService.Controllers
             _userService = userService;
         }
 
-        //public KoisController(FA_SE1854_SWP391_G3_KoiFarmShopContext context)
-        //{
-        //    _context = context;
-        //}
-
 
         #region Get list user filter
         /// <summary>

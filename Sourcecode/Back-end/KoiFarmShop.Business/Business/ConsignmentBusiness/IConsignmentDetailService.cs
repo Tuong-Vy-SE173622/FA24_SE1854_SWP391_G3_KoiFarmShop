@@ -5,8 +5,8 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
 {
     public interface IConsignmentDetailService
     {
-        Task<ConsignmentDetailResponseDto> CreateConsignmentDetailAsync(ConsignmentDetailCreateDto consignmentDetailCreateDto, string currentUser);
-        Task<ConsignmentDetailResponseDto> UpdateConsignmentDetailAsync(int id, ConsignmentDetailUpdateDto consignmentDetailUpdateDto, string currentUser);
+        Task<ConsignmentDetailResponseDto> CreateConsignmentDetailAsync(ConsignmentDetailCreateDto consignmentDetailCreateDto, string? currentUser);
+        Task<ConsignmentDetailResponseDto> UpdateConsignmentDetailAsync(int id, ConsignmentDetailUpdateDto consignmentDetailUpdateDto, string? currentUser);
         Task DeleteConsignmentDetailAsync(int id);
         Task<IEnumerable<ConsignmentDetailResponseDto>> GetDetailsByConsignmentRequestIdAsync(int consignmentRequestId);
     }

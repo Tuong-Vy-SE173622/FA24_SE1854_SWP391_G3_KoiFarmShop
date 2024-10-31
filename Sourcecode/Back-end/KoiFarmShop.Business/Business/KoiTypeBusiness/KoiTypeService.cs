@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using KoiFarmShop.Business.Business.Cloudinary;
+using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.KoiTypes;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace KoiFarmShop.Business.Business.KoiTypeBusiness
 {
@@ -10,11 +13,13 @@ namespace KoiFarmShop.Business.Business.KoiTypeBusiness
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ICloudinaryService _cloudinaryService;
 
-        public KoiTypeService(UnitOfWork unitOfWork, IMapper mapper)
+        public KoiTypeService(UnitOfWork unitOfWork, IMapper mapper, ICloudinaryService cloudinaryService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _cloudinaryService = cloudinaryService;
         }
 
         public async Task<IEnumerable<KoiTypeDto>> GetAllKoiTypesAsync()
@@ -29,15 +34,24 @@ namespace KoiFarmShop.Business.Business.KoiTypeBusiness
             return _mapper.Map<KoiTypeDto>(koiType);
         }
 
-        public async Task<int> CreateKoiTypeAsync(KoiTypeCreateDto koiTypeCreateDto)
+        public async Task<int> CreateKoiTypeAsync(KoiTypeCreateDto koiTypeCreateDto, string? currentUser)
         {
+            if (String.IsNullOrEmpty(currentUser)) 
+                throw new UnauthorizedAccessException("current user is invalid or might not login");
+
             var koiType = _mapper.Map<KoiType>(koiTypeCreateDto);
+            koiType.CreatedBy = currentUser;
+            koiType.CreatedAt = DateTime.Now;
+
             await _unitOfWork.KoiTypeRepository.CreateAsync(koiType);
             return koiType.KoiTypeId;
         }
 
-        public async Task<int> UpdateKoiTypeAsync(int koiTypeId, KoiTypeUpdateDto koiTypeUpdateDto)
+        public async Task<int> UpdateKoiTypeAsync(int koiTypeId, KoiTypeUpdateDto koiTypeUpdateDto, string? currentUser)
         {
+            if (String.IsNullOrEmpty(currentUser))
+                throw new UnauthorizedAccessException("current user is invalid or might not login");
+
             var existingKoiType = await _unitOfWork.KoiTypeRepository.GetByIdAsync(koiTypeId);
             if (existingKoiType == null)
             {
@@ -46,6 +60,8 @@ namespace KoiFarmShop.Business.Business.KoiTypeBusiness
 
             // Map the non-null fields from the DTO to the existing entity
             _mapper.Map(koiTypeUpdateDto, existingKoiType);
+            existingKoiType.UpdatedBy = currentUser;
+            existingKoiType.UpdatedAt = DateTime.Now;
 
             return await _unitOfWork.KoiTypeRepository.UpdateAsync(existingKoiType);
         }
@@ -88,6 +104,5 @@ namespace KoiFarmShop.Business.Business.KoiTypeBusiness
                 PageSize = filterDto.PageSize
             };
         }
-
     }
 }

@@ -43,14 +43,16 @@ namespace KoiFarmShop.APIService.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> CreateKoiType(KoiTypeCreateDto koiTypeCreateDto)
         {
-            var id = await _koiTypeService.CreateKoiTypeAsync(koiTypeCreateDto);
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var id = await _koiTypeService.CreateKoiTypeAsync(koiTypeCreateDto, currentUser);
             return CreatedAtAction(nameof(GetKoiTypeById), new { id }, id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateKoiType(int id, [FromBody] KoiTypeUpdateDto koiTypeUpdateDto)
+        public async Task<IActionResult> UpdateKoiType(int id, KoiTypeUpdateDto koiTypeUpdateDto)
         {
-            var result = await _koiTypeService.UpdateKoiTypeAsync(id, koiTypeUpdateDto);
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var result = await _koiTypeService.UpdateKoiTypeAsync(id, koiTypeUpdateDto, currentUser);
             if (result < 0)
             {
                 return NotFound();

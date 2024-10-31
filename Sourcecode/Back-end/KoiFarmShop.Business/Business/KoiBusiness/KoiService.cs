@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using CloudinaryDotNet;
+
 using KoiFarmShop.Business.Business.Cloudinary;
+
 using KoiFarmShop.Business.Dto.Kois;
+using KoiFarmShop.Business.Dto.KoiTypes;
 using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
-using KoiFarmShop.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 namespace KoiFarmShop.Business.Business.KoiBusiness
 {
@@ -163,7 +163,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             return koiDto;
         }
 
-        public async Task<int> CreateKoiAsync(KoiCreateDto koiCreateDto, string currentUser)
+        public async Task<int> CreateKoiAsync(KoiCreateDto koiCreateDto, string? currentUser)
         {
             //should check their role instead .-.
             if (String.IsNullOrEmpty(currentUser)) throw new UnauthorizedAccessException("current user is invalid or might not login");
@@ -182,7 +182,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             return koi.KoiId;
         }
 
-        public async Task<int> UpdateKoiAsync(int id, KoiUpdateDto koiUpdateDto, string currentUser)
+        public async Task<int> UpdateKoiAsync(int id, KoiUpdateDto koiUpdateDto, string? currentUser)
         {
             if (String.IsNullOrEmpty(currentUser)) throw new UnauthorizedAccessException("current user is invalid or might not login");
             var existingKoi = await _unitOfWork.KoiRepository.GetByIdAsync(id);
@@ -325,7 +325,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
 
             return new PaginatedResult<KoiDto>
             {
-                Data = pagedKois,  
+                Data = pagedKois,
                 TotalRecords = totalRecords,
                 PageNumber = filterDto.PageNumber,
                 PageSize = filterDto.PageSize
@@ -343,7 +343,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             return koiOrigins;
         }
 
+
+        
     }
-
-
 }

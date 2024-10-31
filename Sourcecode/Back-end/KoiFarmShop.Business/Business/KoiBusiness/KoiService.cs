@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using CloudinaryDotNet;
+using KoiFarmShop.Business.Business.Cloudinary;
 using KoiFarmShop.Business.Dto.Kois;
 using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
@@ -13,93 +15,24 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ICloudinaryService _cloudinaryService;
 
-        public KoiService(UnitOfWork unitOfWork, IMapper mapper)
+        public KoiService(UnitOfWork unitOfWork, IMapper mapper, ICloudinaryService cloudinaryService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _cloudinaryService = cloudinaryService;
         }
 
-        public async Task<IEnumerable<KoiDto>> GetAllKoisAsync()
-        {
-            //TODO: filtering and pagination
-
-            var kois = await _unitOfWork.KoiRepository.GetAllAsync();
-       
-            return _mapper.Map<IEnumerable<KoiDto>>(kois);
-        }
-
-        public async Task<KoiDto> GetKoiByIdAsync(int koiId)
-        {
-            var koiDto = await _unitOfWork.KoiRepository.GetQueryable()
-                .Where(k => k.KoiId == koiId)
-                .Select(k => new KoiDto
-                {
-                    KoiId = k.KoiId,
-                    KoiTypeName = k.KoiType.Name, // mapping directly since i got tired about automapper '-'
-                    Origin = k.Origin,
-                    Gender = k.Gender,
-                    Age = k.Age,
-                    Size = k.Size,
-                    Price = k.Price,
-                    Characteristics = k.Characteristics,
-                    FeedingAmountPerDay = k.FeedingAmountPerDay,
-                    ScreeningRate = k.ScreeningRate,
-                    IsOwnedByFarm = k.IsOwnedByFarm,
-                    IsImported = k.IsImported,
-                    Generation = k.Generation,
-                    IsLocal = k.IsLocal,
-                    IsActive = k.IsActive,
-                    Note = k.Note,
-                    CreatedAt = k.CreatedAt,
-                    CreatedBy = k.CreatedBy,
-                    UpdatedAt = k.UpdatedAt,
-                    UpdatedBy = k.UpdatedBy
-                })
-                .FirstOrDefaultAsync();
-
-
-            return koiDto;
-        }
-
-        public async Task<int> CreateKoiAsync(KoiCreateDto koiCreateDto)
-        {
-            var koi = _mapper.Map<Koi>(koiCreateDto);
-            await _unitOfWork.KoiRepository.CreateAsync(koi);
-            return koi.KoiId;
-        }
-
-        public async Task<int> UpdateKoiAsync(int id, KoiUpdateDto koiUpdateDto)
-        {
-            var existingKoi = await _unitOfWork.KoiRepository.GetByIdAsync(id);
-            if (existingKoi == null)
-                throw new NotFoundException("Koi not found"); 
-
-            _mapper.Map(koiUpdateDto, existingKoi); // only update non-null fields :3
-            return await _unitOfWork.KoiRepository.UpdateAsync(existingKoi);
-        }
-
-
-        public async Task<bool> RemoveKoiAsync(int id)
-        {
-            var koi = await _unitOfWork.KoiRepository.GetByIdAsync(id);
-            if (koi != null)
-            {
-                await _unitOfWork.KoiRepository.RemoveAsync(koi);
-                return true;
-            }
-            return false;
-        }
-
-        public async Task<PaginatedResult<KoiDto>> GetAllKoisAsync(KoiFilterDto filterDto)
+        public async Task<PaginatedResult<KoiDto>> GetAllKoisForAdminAsync(KoiFilterDto filterDto)
         {
             var query = _unitOfWork.KoiRepository.GetQueryable();
 
             // Filtering logic
 
-            if (!string.IsNullOrEmpty(filterDto.TypeName))
+            if (!string.IsNullOrEmpty(filterDto.SearchByTypeName))
             {
-                query = query.Where(k => k.KoiType.Name.Contains(filterDto.TypeName));
+                query = query.Where(k => k.KoiType.Name.Contains(filterDto.SearchByTypeName));
             }
 
             if (filterDto.MinAge.HasValue)
@@ -176,7 +109,209 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     IsImported = k.IsImported,
                     Generation = k.Generation,
                     IsLocal = k.IsLocal,
+                    IsActive = true,  // only unsold kois (is active = true means unsold)
+                    Note = k.Note,
+                    CreatedAt = k.CreatedAt,
+                    CreatedBy = k.CreatedBy,
+                    UpdatedAt = k.UpdatedAt,
+                    UpdatedBy = k.UpdatedBy
+                })
+                .ToListAsync();
+
+            // Mapping the result
+            var koiDtos = _mapper.Map<List<KoiDto>>(pagedKois);
+
+            return new PaginatedResult<KoiDto>
+            {
+                Data = pagedKois,
+                TotalRecords = totalRecords,
+                PageNumber = filterDto.PageNumber,
+                PageSize = filterDto.PageSize
+            };
+        }
+
+        public async Task<KoiDto> GetKoiByIdAsync(int koiId)
+        {
+            var koiDto = await _unitOfWork.KoiRepository.GetQueryable()
+                .Where(k => k.KoiId == koiId)
+                .Select(k => new KoiDto
+                {
+                    KoiId = k.KoiId,
+                    KoiTypeName = k.KoiType.Name, // mapping directly since i got tired about automapper '-'
+                    Origin = k.Origin,
+                    Gender = k.Gender,
+                    Age = k.Age,
+                    Size = k.Size,
+                    Price = k.Price,
+                    Characteristics = k.Characteristics,
+                    FeedingAmountPerDay = k.FeedingAmountPerDay,
+                    ScreeningRate = k.ScreeningRate,
+                    IsOwnedByFarm = k.IsOwnedByFarm,
+                    IsImported = k.IsImported,
+                    Generation = k.Generation,
+                    IsLocal = k.IsLocal,
                     IsActive = k.IsActive,
+                    Note = k.Note,
+                    CreatedAt = k.CreatedAt,
+                    CreatedBy = k.CreatedBy,
+                    UpdatedAt = k.UpdatedAt,
+                    UpdatedBy = k.UpdatedBy
+                })
+                .FirstOrDefaultAsync();
+
+
+            return koiDto;
+        }
+
+        public async Task<int> CreateKoiAsync(KoiCreateDto koiCreateDto, string currentUser)
+        {
+            //should check their role instead .-.
+            if (String.IsNullOrEmpty(currentUser)) throw new UnauthorizedAccessException("current user is invalid or might not login");
+
+            var koi = _mapper.Map<Koi>(koiCreateDto);
+
+            koi.CreatedBy = currentUser;
+            koi.CreatedAt = DateTime.Now;
+
+            var image = koiCreateDto.Image;
+            if (image != null) { 
+                koi.Image = _cloudinaryService.UploadImageAsync(image).ToString(); 
+            }
+
+            await _unitOfWork.KoiRepository.CreateAsync(koi);
+            return koi.KoiId;
+        }
+
+        public async Task<int> UpdateKoiAsync(int id, KoiUpdateDto koiUpdateDto, string currentUser)
+        {
+            if (String.IsNullOrEmpty(currentUser)) throw new UnauthorizedAccessException("current user is invalid or might not login");
+            var existingKoi = await _unitOfWork.KoiRepository.GetByIdAsync(id);
+            if (existingKoi == null)
+                throw new NotFoundException("Koi not found"); 
+
+            _mapper.Map(koiUpdateDto, existingKoi); // only update non-null fields :3
+
+            existingKoi.UpdatedBy = currentUser;
+            existingKoi.UpdatedAt = DateTime.Now;
+
+            var image = koiUpdateDto.Image;
+            if (image != null)
+            {
+                existingKoi.Image = _cloudinaryService.UploadImageAsync(image).ToString();
+            }
+            return await _unitOfWork.KoiRepository.UpdateAsync(existingKoi);
+        }
+
+
+        public async Task<bool> RemoveKoiAsync(int id)
+        {
+            var koi = await _unitOfWork.KoiRepository.GetByIdAsync(id);
+            if (koi != null)
+            {
+                await _unitOfWork.KoiRepository.RemoveAsync(koi);
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> UpdateForSoldKoiAsync(int id)
+        {
+            var koi = await _unitOfWork.KoiRepository.GetByIdAsync(id);
+            if (koi != null)
+            {
+                koi.IsActive = false;
+                await _unitOfWork.KoiRepository.UpdateAsync(koi);
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<PaginatedResult<KoiDto>> GetAllKoisAsync(KoiFilterDto filterDto)
+        {
+            var query = _unitOfWork.KoiRepository.GetQueryable();
+
+            // Filtering logic
+
+            if (!string.IsNullOrEmpty(filterDto.SearchByTypeName))
+            {
+                query = query.Where(k => k.KoiType.Name.Contains(filterDto.SearchByTypeName));
+            }
+
+            if (filterDto.MinAge.HasValue)
+            {
+                query = query.Where(k => k.Age >= filterDto.MinAge.Value);
+            }
+
+            if (filterDto.MaxAge.HasValue)
+            {
+                query = query.Where(k => k.Age <= filterDto.MaxAge.Value);
+            }
+
+            if (filterDto.MinSize.HasValue)
+            {
+                query = query.Where(k => k.Size >= filterDto.MinSize.Value);
+            }
+
+            if (filterDto.MaxSize.HasValue)
+            {
+                query = query.Where(k => k.Size <= filterDto.MaxSize.Value);
+            }
+
+            if (filterDto.IsOwnedByFarm.HasValue)
+            {
+                query = query.Where(k => k.IsOwnedByFarm == filterDto.IsOwnedByFarm.Value);
+            }
+
+            if (filterDto.IsImport.HasValue)
+            {
+                query = query.Where(k => k.IsImported == filterDto.IsImport.Value);
+            }
+
+            if (!string.IsNullOrEmpty(filterDto.KoiTypeName))
+            {
+                query = query.Where(k => k.KoiType.Name == filterDto.KoiTypeName);
+            }
+
+            if (filterDto.Gender.HasValue)
+            {
+                query = query.Where(k => k.Gender == filterDto.Gender);
+            }
+
+            if (!string.IsNullOrEmpty(filterDto.Origin))
+            {
+                query = query.Where(k => k.Origin.Contains(filterDto.Origin));
+            }
+
+            // Sorting
+            if (filterDto.IsSortedByPrice)
+                query = filterDto.IsAscending
+                    ? query.OrderBy(k => k.Price)
+                    : query.OrderByDescending(k => k.Price);
+
+            // Get the total record count before pagination
+            var totalRecords = await query.CountAsync();
+
+            // Perform the Select() method to project the KoiDto fields at the query level
+            var pagedKois = await query
+                .Skip((filterDto.PageNumber - 1) * filterDto.PageSize)
+                .Take(filterDto.PageSize)
+                .Select(k => new KoiDto
+                {
+                    KoiId = k.KoiId,
+                    KoiTypeName = k.KoiType.Name, // Mapping KoiType.Name directly :D
+                    Origin = k.Origin,
+                    Gender = k.Gender,
+                    Age = k.Age,
+                    Size = k.Size,
+                    Price = k.Price,
+                    Characteristics = k.Characteristics,
+                    FeedingAmountPerDay = k.FeedingAmountPerDay,
+                    ScreeningRate = k.ScreeningRate,
+                    IsOwnedByFarm = k.IsOwnedByFarm,
+                    IsImported = k.IsImported,
+                    Generation = k.Generation,
+                    IsLocal = k.IsLocal,
+                    IsActive = true,  // only unsold kois (is active = true means unsold)
                     Note = k.Note,
                     CreatedAt = k.CreatedAt,
                     CreatedBy = k.CreatedBy,

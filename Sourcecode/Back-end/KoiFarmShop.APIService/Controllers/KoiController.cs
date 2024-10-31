@@ -40,7 +40,7 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateKoi([FromBody] KoiCreateDto koiCreateDto)
+        public async Task<IActionResult> CreateKoi(KoiCreateDto koiCreateDto)
         {
             var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
             var createdId = await _koiService.CreateKoiAsync(koiCreateDto, currentUser);
@@ -48,7 +48,7 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateKoi(int id, [FromBody] KoiUpdateDto koiUpdateDto)
+        public async Task<IActionResult> UpdateKoi(int id, KoiUpdateDto koiUpdateDto)
         {
             if (koiUpdateDto == null)
                 return BadRequest("Invalid data.");

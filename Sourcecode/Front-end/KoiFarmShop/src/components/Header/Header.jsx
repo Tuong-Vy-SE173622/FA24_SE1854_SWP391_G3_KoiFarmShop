@@ -57,6 +57,7 @@ function Header() {
     { key: 3, label: "Logout", link: "" },
   ];
 
+
   const handleLogout = async () => {
     try {
       await logout(); // Gọi hàm logout
@@ -154,6 +155,7 @@ function Header() {
               />
               {hoveredItem === "user" && (
                 <ul className="dropdown">
+
                   {(role === "Admin" ? adminMenu : userList).map((item) => (
                     <li
                       key={item.key}

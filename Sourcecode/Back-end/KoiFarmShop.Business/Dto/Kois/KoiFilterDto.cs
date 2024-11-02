@@ -2,7 +2,7 @@
 {
     public class KoiFilterDto
     {
-        public string? TypeName { get; set; }
+        public string? SearchByTypeName { get; set; }
         public int? MinAge { get; set; }
         public int? MaxAge { get; set; }
         public double? MinSize { get; set; }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KoiFarmShop.APIService.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class KoiController : ControllerBase
@@ -18,6 +19,7 @@ namespace KoiFarmShop.APIService.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAllKois([FromQuery] KoiFilterDto filterDto)
         {
@@ -25,6 +27,7 @@ namespace KoiFarmShop.APIService.Controllers
             return Ok(kois);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetKoiById(int id)
         {
@@ -37,19 +40,21 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateKoi([FromBody] KoiCreateDto koiCreateDto)
+        public async Task<IActionResult> CreateKoi(KoiCreateDto koiCreateDto)
         {
-            var createdId = await _koiService.CreateKoiAsync(koiCreateDto);
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var createdId = await _koiService.CreateKoiAsync(koiCreateDto, currentUser);
             return CreatedAtAction(nameof(GetKoiById), new { id = createdId }, koiCreateDto);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateKoi(int id, [FromBody] KoiUpdateDto koiUpdateDto)
+        public async Task<IActionResult> UpdateKoi(int id, KoiUpdateDto koiUpdateDto)
         {
             if (koiUpdateDto == null)
                 return BadRequest("Invalid data.");
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
 
-            var result = await _koiService.UpdateKoiAsync(id, koiUpdateDto);
+            var result = await _koiService.UpdateKoiAsync(id, koiUpdateDto,currentUser);
             if (result >= 0)
                 return Ok("Koi updated successfully.");
             return NotFound("Koi not found.");
@@ -76,6 +81,6 @@ namespace KoiFarmShop.APIService.Controllers
             ResultDto result = new ResultDto();
             result.success(origins);
             return result;
-        }
+        } 
     }
 }

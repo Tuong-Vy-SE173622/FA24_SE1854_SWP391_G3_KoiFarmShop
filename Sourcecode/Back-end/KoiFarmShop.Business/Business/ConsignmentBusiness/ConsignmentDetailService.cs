@@ -20,7 +20,7 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             _mapper = mapper;
         }
 
-        public async Task<ConsignmentDetailResponseDto> CreateConsignmentDetailAsync(ConsignmentDetailCreateDto consignmentDetailCreateDto, string currentUser)
+        public async Task<ConsignmentDetailResponseDto> CreateConsignmentDetailAsync(ConsignmentDetailCreateDto consignmentDetailCreateDto, string? currentUser)
         {
             var koi = await _unitOfWork.KoiRepository.GetByIdAsync(consignmentDetailCreateDto.KoiId);
             if (koi == null) 
@@ -42,7 +42,7 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             return _mapper.Map<ConsignmentDetailResponseDto>(consignmentDetail);
         }
 
-        public async Task<ConsignmentDetailResponseDto> UpdateConsignmentDetailAsync(int id, ConsignmentDetailUpdateDto consignmentDetailUpdateDto, string currentUser)
+        public async Task<ConsignmentDetailResponseDto> UpdateConsignmentDetailAsync(int id, ConsignmentDetailUpdateDto consignmentDetailUpdateDto, string? currentUser)
         {
             var consignmentDetail = await _unitOfWork.ConsignmentDetailRepository.GetByIdAsync(id);
             if (consignmentDetail == null) 

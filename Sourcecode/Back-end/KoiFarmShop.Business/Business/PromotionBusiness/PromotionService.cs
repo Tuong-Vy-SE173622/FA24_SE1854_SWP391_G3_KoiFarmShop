@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿ using AutoMapper;
 using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Promotion;
 using KoiFarmShop.Data;
@@ -44,16 +44,16 @@ namespace KoiFarmShop.Business.Business.PromotionBusiness
                 throw new Exception(ex.Message);
             }
         }
-        public async Task<ResultDto> GetPromotionList(int? promotionId)
+        public async Task<ResultDto> GetPromotionList(bool? isActive)
         {
             var result = new ResultDto();
             try
             {
                 var p = await _unitOfWork.PromotionRepository.GetPromotions();
 
-                if (promotionId.HasValue)
+                if (isActive.HasValue)
                 {
-                    p = p.Where(u => u.PromotionId == promotionId.Value).ToList();
+                    p = p.Where(u => u.IsActive == isActive.Value).ToList();
                 }
 
                 if (!p.Any())
@@ -64,14 +64,14 @@ namespace KoiFarmShop.Business.Business.PromotionBusiness
                 }
                 else
                 {
-                    p = p.OrderByDescending(u => u.PromotionId).ToList();
+                    //p = p.OrderByDescending(u => u.PromotionId).ToList();
 
                     var promotionViewModels = p.Select(u => new PromotionDto
                     {
                         PromotionId = u.PromotionId,
                         Description = u.Description,
-                        StartDate = DateTime.Now,
-                        EndDate = DateTime.Now,
+                        StartDate = u.StartDate,
+                        EndDate = u.EndDate,
                         IsActive = u.IsActive,
                         Note = u.Note,
                         CreatedAt = u.CreatedAt,
@@ -112,6 +112,8 @@ namespace KoiFarmShop.Business.Business.PromotionBusiness
                 p.PromotionId = await _unitOfWork.PromotionRepository.GenerateNewPromotionId();
 
                 // Set other properties (e.g., CreatedDate, Status, etc.)
+                p.StartDate = DateTime.Now;
+                p.EndDate = model.EndDate;
                 p.CreatedBy = userCreate.FindFirst("UserName")?.Value;
                 p.CreatedAt = DateTime.UtcNow;
 
@@ -151,6 +153,8 @@ namespace KoiFarmShop.Business.Business.PromotionBusiness
                 // Update the additional fields
                 existingPromotion.Description = promotionDto.Description;
                 existingPromotion.DiscountPercentage = promotionDto.DiscountPercentage;
+                existingPromotion.StartDate = promotionDto.StartDate;
+                existingPromotion.EndDate = promotionDto.EndDate;
                 existingPromotion.Note = promotionDto.Note;
                 existingPromotion.UpdatedBy = userUpdate.FindFirst("UserName").Value;
                 existingPromotion.UpdatedAt = DateTime.Now;

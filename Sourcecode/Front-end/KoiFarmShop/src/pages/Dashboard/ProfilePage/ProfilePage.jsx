@@ -1,6 +1,6 @@
 import React from "react";
 import "./ProfilePage.css";
-import KoiCard from "../../../../components/KoiCard/KoiCard";
+// import KoiCard from "../../../../components/KoiCard/KoiCard";
 import { Button, Checkbox, Form, Input, Upload } from "antd";
 
 function ProfilePage() {

@@ -12,12 +12,16 @@ function Header() {
   const [hoveredItem, setHoveredItem] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [koiTypeLs, setKoiTypeLs] = useState([]);
+  const [role, setRole] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
+    const role = JSON.parse(localStorage.getItem("roles"));
+    console.log("Role from storage:", role);
     if (accessToken) {
       setIsLoggedIn(true);
+      setRole(role);
     }
   }, []);
 
@@ -42,9 +46,15 @@ function Header() {
   //   { key: 5, label: "Koi Bekko", link: "" },
   // ];
 
-  const taskList = [
+  const userList = [
     { key: 1, label: "Profile", link: "/dashboard/profile/stella" },
     { key: 2, label: "Logout", link: "" },
+  ];
+
+  const adminMenu = [
+    { key: 1, label: "Dashboard", link: "/admin/dashboard" },
+    { key: 2, label: "Profile", link: "/admin/profile/stella" },
+    { key: 3, label: "Logout", link: "" },
   ];
 
   const handleLogout = async () => {
@@ -116,7 +126,7 @@ function Header() {
                 </ul>
               )}
             </div>
-            <div className="header-item">Khuyến mãi</div>
+            {/* <div className="header-item">Khuyến mãi</div> */}
           </div>
           <div className="header-search">
             <div className={`search ${isInputVisible ? "show-input" : ""}`}>
@@ -144,7 +154,7 @@ function Header() {
               />
               {hoveredItem === "user" && (
                 <ul className="dropdown">
-                  {taskList.map((item) => (
+                  {(role === "Admin" ? adminMenu : userList).map((item) => (
                     <li
                       key={item.key}
                       className="dropdown-item"

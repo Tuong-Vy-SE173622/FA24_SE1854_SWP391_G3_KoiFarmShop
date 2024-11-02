@@ -26,6 +26,7 @@ function Header() {
   const handleMouseLeave = () => setHoveredItem(null);
   const navigateLogin = () => navigate("/login");
   const navigateRegister = () => navigate("/register");
+  const handleCartClick = () => navigate("/cart-Page");
 
   const IntroductionList = [
     { key: 1, label: "Giới thiệu", link: "" },
@@ -128,7 +129,7 @@ function Header() {
           </div>
         </div>
         <div className="header-account">
-          <div className="cart-icon">
+          <div className="cart-icon" onClick={handleCartClick} style={{ cursor: "pointer" }}>
             <TiShoppingCart size={"30px"} />
           </div>
 

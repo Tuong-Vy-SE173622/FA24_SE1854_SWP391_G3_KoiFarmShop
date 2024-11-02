@@ -3,7 +3,6 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import KoiDetailPage from "../pages/KoiDetailPage/KoiDetailPage";
 import HomePage from "../pages/homePage/HomePage";
 import SearchPage from "../pages/SearchPage/SearchPage";
 import ProfilePage from "../pages/Dashboard/CustomerDashboard/ProfilePage/ProfilePage";
@@ -13,6 +12,10 @@ import DepositedKoiPage from "../pages/Dashboard/CustomerDashboard/DepositedKoiP
 import ScrollToTop from "../components/ScrollTop/ScrollToTop";
 import CompareBar from "../components/CompareBar/CompareBar";
 import ComparePage from "../pages/ComparePage/ComparePage";
+import CartPage from "../pages/cartPage/CartPage";
+import KoiDetail from "../pages/KoiDetailPage/KoiDetail";
+import ConsignmentRequestForm from "../components/Consignment/ConsignmentRequestForm";
+import ConsignmentDetail from "../pages/ConsignmentDetailPage/ConsignmentDetailPage";
 
 export const router = createBrowserRouter([
   {
@@ -36,8 +39,8 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/koi-detail/:id",
-        element: <KoiDetailPage />,
+        path: "/koi/:koiId",
+        element: <KoiDetail />,
       },
       {
         path: "/search",
@@ -51,6 +54,18 @@ export const router = createBrowserRouter([
       {
         path: "/compare",
         element: <ComparePage />,
+      },
+      {
+        path: "/cart-Page",
+        element: <CartPage />,
+      },
+      {
+        path: "/consignment-request",
+        element: <ConsignmentRequestForm />, // Trang gửi yêu cầu consignments
+      },
+      {
+        path: "/consignment-detail/:consignmentId",
+        element: <ConsignmentDetail />, // Trang chi tiết consignments
       },
     ],
   },
@@ -76,6 +91,7 @@ export const router = createBrowserRouter([
         path: "deposite",
         element: <DepositedKoiPage />,
       },
+
     ],
   },
   {

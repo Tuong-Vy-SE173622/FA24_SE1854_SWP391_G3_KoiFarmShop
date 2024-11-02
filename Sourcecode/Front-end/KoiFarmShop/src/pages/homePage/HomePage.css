@@ -7,27 +7,32 @@
   /* height: calc(100vh - 100px); */
   /* background-color: lightblue; */
 }
-.item-home > .item-home-title {
+
+.item-home>.item-home-title {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.item-home > .item-home-title > h2 {
+
+.item-home>.item-home-title>h2 {
   font-family: "Handlee", Arial, Helvetica, sans-serif;
   font-size: 28px;
   font-style: italic;
 }
-.item-home-title > h1 {
+
+.item-home-title>h1 {
   font-weight: 600;
   font-size: 34px;
   margin-top: -10px;
 }
-.item-home-title > img {
+
+.item-home-title>img {
   height: 45px;
   width: 150px;
   margin-top: -5px;
 }
-.item-home-title > p {
+
+.item-home-title>p {
   font-size: 14px;
   font-family: "Poppins", Arial, Helvetica, sans-serif;
   width: 850px;
@@ -35,6 +40,7 @@
   text-align: center;
   margin-top: 15px;
 }
+
 .about-us-info {
   display: flex;
   justify-content: space-between;
@@ -42,32 +48,38 @@
   margin-top: 30px;
   /* height: calc(100vh - 100px); */
 }
-.about-us-info > .info-item {
+
+.about-us-info>.info-item {
   width: 22%;
 }
-.info-item > span {
+
+.info-item>span {
   /* width: 80%; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.info-item > span > img {
+
+.info-item>span>img {
   width: 50%;
   padding: 30px 0;
   padding-top: 10px;
   transition: transform 0.8s;
 }
-.info-item > span > img:hover {
+
+.info-item>span>img:hover {
   transform: scale(1.2);
 }
-.info-item > .item-title {
+
+.info-item>.item-title {
   font-size: 18px;
   font-weight: 600;
   text-align: center;
   margin-bottom: 25px;
   position: relative;
 }
-.info-item > .item-title::before {
+
+.info-item>.item-title::before {
   content: "";
   width: 40px;
   height: 2px;
@@ -77,7 +89,8 @@
   transform: translateX(-50%);
   left: calc(50% - 1.5px);
 }
-.info-item > .item-title::after {
+
+.info-item>.item-title::after {
   content: "";
   width: 2px;
   height: 2px;
@@ -87,7 +100,8 @@
   transform: translateX(-50%);
   left: calc(50% + 23px);
 }
-.info-item > .item-info {
+
+.info-item>.item-info {
   color: rgb(139, 139, 153);
   font-size: 14px;
   text-align: center;
@@ -104,17 +118,19 @@
   align-items: center;
   background: url("../../../public/ocean-background-repeat.jpeg");
 }
+
 .introduntion-koi-wrapper {
   width: 90%;
   margin-left: 2%;
 }
+
 .koi-introduction-cart-container {
   position: relative;
   overflow: hidden;
   width: fit-content;
 }
 
-.koi-introduction-cart-container > img {
+.koi-introduction-cart-container>img {
   /* height: 0%; */
   width: 88%;
   object-fit: cover;
@@ -122,6 +138,7 @@
   transition: 200ms ease-in-out;
   /* aspect-ratio: 1/1; */
 }
+
 /* .koi-introduction-cart-container > .content-koi {
   position: absolute;
   inset: 1;
@@ -158,16 +175,44 @@
 }
 
 .koi-card-list {
-  display: flex;
-  /* align-items: center; */
-  justify-content: space-evenly;
-  row-gap: 20px;
-  column-gap: 25px;
-  width: 70%;
-  flex-wrap: wrap;
-  margin-top: 10px;
-  margin-left: 15px;
-  /* background-color: lightblue; */
+  width: 90%;
+  /* Full width for the list */
+  padding: 20px;
+  /* Add some padding around the section */
+  position: relative;
+  /* Required for positioning buttons */
+}
+
+.carousel__button {
+  position: absolute;
+  /* Position buttons absolutely */
+  top: 50%;
+  /* Center vertically */
+  transform: translateY(-50%);
+  /* Adjust vertical alignment */
+  border: none;
+  /* Remove default button border */
+  color: white;
+  /* White text for contrast */
+  font-size: 24px;
+  /* Size of the icons */
+  padding: 10px;
+  /* Padding around the button */
+  border-radius: 50%;
+  /* Make buttons circular */
+  cursor: pointer;
+  /* Change cursor to pointer */
+  transition: background-color 0.3s, transform 0.3s;
+  /* Smooth transition effects */
+  z-index: 1;
+  /* Ensure buttons are above carousel */
+}
+
+.carousel {
+  width: calc(100% - 80px);
+  /* Adjust width to accommodate buttons */
+  margin: 0 auto;
+  /* Center carousel within container */
 }
 
 .testimonial-container {
@@ -203,21 +248,24 @@
   border-radius: 8px;
 }
 
-.testimonial-wrapper > img {
+.testimonial-wrapper>img {
   width: 160px;
   height: 100%;
   object-fit: cover;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
 }
+
 .testimonial-info {
   padding: 1.3rem;
 }
-.testimonial-info > p {
+
+.testimonial-info>p {
   font-size: 15px;
   color: gray;
 }
-.testimonial-info > h3 {
+
+.testimonial-info>h3 {
   font-size: 15px;
   font-weight: 550;
   text-align: right;

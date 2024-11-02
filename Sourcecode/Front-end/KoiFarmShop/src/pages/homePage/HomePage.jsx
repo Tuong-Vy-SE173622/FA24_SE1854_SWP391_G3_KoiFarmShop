@@ -1,14 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Routes, Route } from 'react-router-dom';
 import "./HomePage.css";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Button, Carousel } from "antd";
 import KoiCard from "../../components/KoiCard/KoiCard";
 import { useNavigate } from "react-router-dom";
 import { getAllKoi } from "../../services/KoiService";
+import KoiDetail from "../KoiDetailPage/KoiDetail";
 
 function HomePage() {
   const nav = useNavigate();
-  const [koiLs, setKoiLs] = useState([]);
+  const [koiLs, setKoiLs] = useState([]); // Danh sách cá Koi
+  const [cart, setCart] = useState([]); // Giỏ hàng
+  const carouselRef = React.useRef(null);
+
   const KoiTypeIntroduction = [
     {
       key: 1,
@@ -114,6 +119,75 @@ function HomePage() {
     // },
   ];
 
+  const sampleKoiLs = [
+    {
+      koiId: 1,
+      koiTypeName: "Koi Đỏ",
+      price: 500000,
+      size: 30,
+      age: 2,
+      origin: "Nhật Bản",
+      characteristics: "Màu đỏ rực",
+      note: "Loại cá phổ biến",
+      image: "https://minhxuankoifarm.com/wp-content/uploads/2020/09/Screen-Shot-2020-09-29-at-06.59.58-510x732.png",
+    },
+    {
+      koiId: 2,
+      koiTypeName: "Koi Vàng",
+      price: 450000,
+      size: 28,
+      age: 1,
+      origin: "Nhật Bản",
+      characteristics: "Màu vàng tươi",
+      note: "Thích hợp cho bể nhỏ",
+      image: "https://minhxuankoifarm.com/wp-content/uploads/2020/09/Screen-Shot-2020-09-29-at-06.59.58-510x732.png",
+    },
+    {
+      koiId: 1,
+      koiTypeName: "Koi Đỏ",
+      price: 500000,
+      size: 30,
+      age: 2,
+      origin: "Nhật Bản",
+      characteristics: "Màu đỏ rực",
+      note: "Loại cá phổ biến",
+      image: "https://minhxuankoifarm.com/wp-content/uploads/2020/09/Screen-Shot-2020-09-29-at-06.59.58-510x732.png",
+    },
+    {
+      koiId: 2,
+      koiTypeName: "Koi Vàng",
+      price: 450000,
+      size: 28,
+      age: 1,
+      origin: "Nhật Bản",
+      characteristics: "Màu vàng tươi",
+      note: "Thích hợp cho bể nhỏ",
+      image: "https://minhxuankoifarm.com/wp-content/uploads/2020/09/Screen-Shot-2020-09-29-at-06.59.58-510x732.png",
+    }, {
+      koiId: 1,
+      koiTypeName: "Koi Đỏ",
+      price: 500000,
+      size: 30,
+      age: 2,
+      origin: "Nhật Bản",
+      characteristics: "Màu đỏ rực",
+      note: "Loại cá phổ biến",
+      image: "https://minhxuankoifarm.com/wp-content/uploads/2020/09/Screen-Shot-2020-09-29-at-06.59.58-510x732.png",
+    },
+    {
+      koiId: 2,
+      koiTypeName: "Koi Vàng",
+      price: 450000,
+      size: 28,
+      age: 1,
+      origin: "Nhật Bản",
+      characteristics: "Màu vàng tươi",
+      note: "Thích hợp cho bể nhỏ",
+      image: "https://minhxuankoifarm.com/wp-content/uploads/2020/09/Screen-Shot-2020-09-29-at-06.59.58-510x732.png",
+    },
+    // Thêm các đối tượng mẫu khác nếu cần
+  ];
+
   const [posts] = useState([
     {
       id: 1,
@@ -144,7 +218,7 @@ function HomePage() {
     },
   ]);
 
-  const carouselRef = useRef();
+
 
   const chunkArray = (array, chunkSize) => {
     const result = [];
@@ -164,12 +238,9 @@ function HomePage() {
     carouselRef.current.next();
   };
 
-  const fetchKoi = async (page) => {
-    const params = {
-      PageNumber: 1,
-      PageSize: 8,
-    };
-
+  // Hàm lấy dữ liệu cá Koi từ API
+  const fetchKoi = async () => {
+    const params = { PageNumber: 1, PageSize: 8 };
     try {
       const result = await getAllKoi(params);
       setKoiLs(result.data);
@@ -181,6 +252,19 @@ function HomePage() {
   useEffect(() => {
     fetchKoi();
   }, []);
+
+  // Hàm xử lý thêm cá vào giỏ hàng
+  const handleAddToCart = (koi) => {
+    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const updatedCart = [...existingCart, koi];
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    alert(`Đã thêm ${koi.koiTypeName} vào giỏ hàng!`);
+  };
+
+  // Hàm điều hướng
+  const handleCardClick = (koiId) => {
+    nav(`/koi/${koiId}`);
+  };
 
   return (
     <main>
@@ -279,11 +363,11 @@ function HomePage() {
               <KoiIntroductionCart
                 key={koi.key}
                 koi={koi}
-                // onClick={() =>
-                //     handleItemClick(
-                //         course.courseId,
-                //     )
-                // }
+              // onClick={() =>
+              //     handleItemClick(
+              //         course.courseId,
+              //     )
+              // }
               />
             ))}
           </Carousel>
@@ -300,6 +384,7 @@ function HomePage() {
         </div>
       </section>
 
+
       <section className="item-home koi-feature-container">
         <div className="item-home-title">
           <h2>Koi</h2>
@@ -307,11 +392,39 @@ function HomePage() {
           <img src="/icons/fish-line.png" alt="" />
         </div>
         <div className="koi-card-list">
-          {koiLs.map((koi) => (
-            <KoiCard key={koi.koiId} koi={koi} />
-          ))}
+          <Carousel
+            dots={false}
+            slidesToScroll={1}
+            slidesToShow={4} // Adjust based on your design needs
+            infinite
+            draggable
+            ref={carouselRef}
+          >
+            {sampleKoiLs.map((koi) => (
+              <KoiCard
+                key={koi.koiId}
+                koi={koi}
+                onAddToCart={handleAddToCart}
+                onClick={() => handleCardClick(koi.koiId)}
+              />
+            ))}
+          </Carousel>
+
+          <div
+            className="carousel__button"
+            style={{
+              textAlign: "center",
+              marginTop: "20px",
+            }}
+          >
+            <Button onClick={handlePrev} icon={<LeftOutlined />} />
+            <Button onClick={handleNext} icon={<RightOutlined />} />
+          </div>
         </div>
       </section>
+      <Routes>
+        <Route path="/koi/:koiId" element={<KoiDetail koiList={sampleKoiLs} />} />
+      </Routes>
 
       <section className="item-home testimonial-container">
         <div className="item-home-title">

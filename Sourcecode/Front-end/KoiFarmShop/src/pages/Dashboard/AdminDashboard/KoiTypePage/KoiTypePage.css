@@ -1,0 +1,31 @@
+.custom-table {
+  border: 0.5px solid #d9d9d9;
+}
+
+.custom-table .ant-table-tbody > tr > td {
+  border: 1px solid #d9d9d9;
+}
+
+.custom-table .ant-table-thead > tr > th {
+  background-color: #0575e6;
+  color: white;
+  text-align: center;
+}
+
+.custom-table .attribute-cell {
+  background-color: #e6f7ff;
+  font-weight: bold;
+}
+
+.custom-table .ant-table-body {
+  height: 250px;
+}
+
+.custom-table .ant-table-tbody > tr > td {
+  height: 50px; /* Điều chỉnh chiều cao mỗi hàng nếu cần */
+}
+
+.table-style {
+  display: flex;
+  justify-content: center;
+}

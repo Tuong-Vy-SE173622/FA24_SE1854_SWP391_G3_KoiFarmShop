@@ -33,6 +33,7 @@ function AdminDashboardLayout() {
   ];
 
   const currentMenuItem = menuItems.find((item) => item.path === pathname);
+  const handleHome = () => navigate("/");
 
   useEffect(() => {
     const isAuthenticated = localStorage.getItem("accessToken");
@@ -44,7 +45,12 @@ function AdminDashboardLayout() {
   return (
     <div className="adl-layout-container-l1">
       <div className="adl-sidebar-wrapper">
-        <img src="/logo-web/logo3.png" alt="logo" />
+        <img
+          src="/logo-web/logo3.png"
+          alt="logo"
+          style={{ cursor: "pointer" }}
+          onClick={handleHome}
+        />
         <div className="adl-menu">
           {menuItems.map(({ path, label, icon }) => (
             <div

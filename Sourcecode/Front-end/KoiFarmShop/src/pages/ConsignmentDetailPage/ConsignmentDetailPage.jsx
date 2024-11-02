@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import './ConsignmentDetail.css'; // Import CSS cho ConsignmentDetail
+import './ConsignmentDetail.css';
 
 function ConsignmentDetail() {
     const { consignmentId } = useParams();
@@ -18,19 +18,22 @@ function ConsignmentDetail() {
     });
 
     useEffect(() => {
-        const fetchConsignmentDetail = async () => {
-            try {
-                const response = await fetch(`https://localhost:7226/api/ConsignmentDetail/${consignmentId}`);
-                if (!response.ok) throw new Error('Không lấy được thông tin chi tiết');
-
-                const data = await response.json();
-                setConsignmentDetail(data);
-            } catch (error) {
-                console.error("Lỗi khi lấy thông tin chi tiết consignment:", error);
-            }
+        // Hardcoded data for testing
+        const mockData = {
+            koiId: '001',
+            consignmentType: 'Long-term',
+            totalMonths: 12,
+            monthlyConsignmentFee: 200,
+            soldPrice: 1500,
+            healthDescription: 'Good health, no visible issues',
+            weight: 3.5,
+            status: 'Active',
+            isActive: true,
+            note: 'Special care instructions',
         };
 
-        fetchConsignmentDetail();
+        console.log("Mock consignment detail:", mockData);
+        setConsignmentDetail(mockData);
     }, [consignmentId]);
 
     const handleChange = (e) => {
@@ -41,20 +44,10 @@ function ConsignmentDetail() {
         }));
     };
 
-    const handleUpdate = async () => {
-        try {
-            const response = await fetch(`https://localhost:7226/api/ConsignmentDetail/${consignmentId}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(consignmentDetail),
-            });
-
-            if (!response.ok) throw new Error('Cập nhật thông tin chi tiết không thành công');
-
-            alert('Cập nhật thông tin chi tiết thành công.');
-        } catch (error) {
-            console.error("Lỗi khi cập nhật thông tin chi tiết:", error);
-        }
+    const handleUpdate = () => {
+        // Mock update functionality
+        console.log("Updated consignment detail:", consignmentDetail);
+        alert('Cập nhật thông tin chi tiết thành công.');
     };
 
     return (

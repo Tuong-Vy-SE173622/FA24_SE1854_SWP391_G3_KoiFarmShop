@@ -84,7 +84,7 @@ namespace KoiFarmShop.Business.Business.AccountBusiness
             {
                 result.IsSuccess = false;
                 result.Code = 400;
-                result.Message = e.Message;
+                result.Message = e.InnerException.Message;
                 return result;
             }
         }

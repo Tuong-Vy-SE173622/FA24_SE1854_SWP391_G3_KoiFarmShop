@@ -36,7 +36,9 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
         public async Task<CareRequestDetailResponseDto> CreateCareRequestDetailAsync(CareRequestDetailCreateDto createDto)
         {
             var careRequestDetail = _mapper.Map<CareRequestDetail>(createDto);
-            
+
+            careRequestDetail.RequestDetailId = _unitOfWork.CareRequestDetailRepository.GetAll().OrderByDescending(crd => crd.RequestDetailId).Select(crd => crd.RequestDetailId).FirstOrDefault() + 1;
+
             await _unitOfWork.CareRequestDetailRepository.CreateAsync(careRequestDetail);
             await _unitOfWork.SaveChangesAsync();
             return _mapper.Map<CareRequestDetailResponseDto>(careRequestDetail);

@@ -113,7 +113,7 @@ function HomePage() {
     //     "Trang web bán cá Koi này thực sự có uy tín, cá chất lượng cao và dịch vụ nuôi hộ rất tiện lợi. Tôi đã gửi nuôi trong 4 tháng và rất hài lòng.",
     // },
   ];
-
+  
   const [posts] = useState([
     {
       id: 1,
@@ -346,6 +346,7 @@ function HomePage() {
           <img src="/icons/fish-line.png" alt="" />
         </div>
         <div
+
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           style={{
             width: "75%",
@@ -353,6 +354,7 @@ function HomePage() {
           }}
         >
           {posts.map((post) => (
+
             <div
               key={post.id}
               className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-105"
@@ -376,6 +378,7 @@ function HomePage() {
           ))}
         </div>
         {/* <div
+
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 "
           style={{
             marginTop: "1.5rem",
@@ -403,11 +406,13 @@ function HomePage() {
                   <button className="text-blue-600 hover:text-blue-800">
                     Read More
                   </button>
+
                   <div className="flex space-x-2">
                     <button className="text-gray-600 hover:text-blue-600">
                       <FaShare />
                     </button>
                   </div>
+
                 </div>
               </div>
             </div>

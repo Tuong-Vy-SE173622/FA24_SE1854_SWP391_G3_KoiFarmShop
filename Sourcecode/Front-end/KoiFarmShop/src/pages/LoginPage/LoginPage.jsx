@@ -36,18 +36,19 @@ function LoginPage() {
       localStorage.setItem("roles", JSON.stringify(userRole));
       localStorage.setItem("account", JSON.stringify(userData)); // Lưu role đã chuyển đổi
 
-      Modal.success({
-        title: "Đăng nhập thành công!",
-        content: (
-          <div>
-            <p>Bạn đã đăng nhập thành công.</p>
-          </div>
-        ),
-        onOk() {
-          handleHomePage(); // Chuyển hướng về trang chính khi nhấn OK
-        },
-        centered: true,
-      });
+      // Modal.success({
+      //   title: "Đăng nhập thành công!",
+      //   content: (
+      //     <div>
+      //       <p>Bạn đã đăng nhập thành công.</p>
+      //     </div>
+      //   ),
+      //   onOk() {
+      //     handleHomePage(); // Chuyển hướng về trang chính khi nhấn OK
+      //   },
+      //   centered: true,
+      // });
+      handleHomePage();
     } catch (error) {
       console.error("Error during login: ", error);
       Modal.error({

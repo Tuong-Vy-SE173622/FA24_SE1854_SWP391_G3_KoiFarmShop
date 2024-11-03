@@ -18,6 +18,7 @@ namespace KoiFarmShop.Data
         private PromotionRepository _promotionRepository;
         private CareRequestRepository _careRequestRepository;
         private CareRequestDetailRepository _careRequestDetailRepository;
+        private CustomerRepository _customerRepository;
 
         public UnitOfWork() => _context ??= new FA_SE1854_SWP391_G3_KoiFarmShopContext();
 
@@ -114,6 +115,14 @@ namespace KoiFarmShop.Data
             get
             {
                 return _careRequestDetailRepository ??= new CareRequestDetailRepository(_context);
+            }
+        }
+
+        public CustomerRepository CustomerRepository
+        {
+            get
+            {
+                return _customerRepository ??= new CustomerRepository(_context);
             }
         }
     }

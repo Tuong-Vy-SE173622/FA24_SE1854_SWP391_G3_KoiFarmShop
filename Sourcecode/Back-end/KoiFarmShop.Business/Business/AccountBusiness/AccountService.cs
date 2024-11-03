@@ -88,5 +88,67 @@ namespace KoiFarmShop.Business.Business.AccountBusiness
                 return result;
             }
         }
+
+        public async Task<ResultDto> AddNewCustomer(CustomerDto model, ClaimsPrincipal userCreate)
+        {
+            ResultDto result = new ResultDto();
+            try
+            {
+                // Check if the user has the required role (role ID = 2)
+                var userRoleClaim = userCreate.FindFirst("Role"); // Assuming role is stored in a claim
+                if (userRoleClaim == null || userRoleClaim.Value != "2")
+                {
+                    result.IsSuccess = false;
+                    result.Code = 403; // Forbidden
+                    result.Message = "You do not have permission to create a customer";
+                    return result;
+                }
+
+                // Check if user exists
+                var user = _unitOfWork.AccountRepository.Get(u => u.UserId == model.UserId);
+                if (user == null)
+                {
+                    result.IsSuccess = false;
+                    result.Code = 400;
+                    result.Message = "User does not exist";
+                    return result;
+                }
+
+                // Check if the customer already exists for the user
+                var existingCustomer = _unitOfWork.CustomerRepository.Get(c => c.UserId == model.UserId);
+                if (existingCustomer != null)
+                {
+                    result.IsSuccess = false;
+                    result.Code = 400;
+                    result.Message = "Customer already exists for this user";
+                    return result;
+                }
+                // Map the DTO to the Customer entity
+                var customer = _mapper.Map<Customer>(model);
+
+                // Generate the next customer ID if needed
+                //customer.CustomerId = await _unitOfWork.CustomerRepository.GenerateNewCustomerId();
+
+                // Set other properties (e.g., CreatedDate, CreatedBy, etc.)
+                customer.CreatedBy = userCreate.FindFirst("UserName")?.Value;
+                customer.CreatedAt = DateTime.UtcNow;
+
+                // Add the customer to the repository and save changes
+                _unitOfWork.CustomerRepository.Create(customer);
+                _unitOfWork.CustomerRepository.Save(); // Ensure to await the save method if it's async
+
+                result.IsSuccess = true;
+                result.Code = 200;
+                result.Message = "Add New Customer Success";
+                return result;
+            }
+            catch (Exception e)
+            {
+                result.IsSuccess = false;
+                result.Code = 400;
+                result.Message = e.InnerException?.Message ?? e.Message;
+                return result;
+            }
+        }
     }
 }

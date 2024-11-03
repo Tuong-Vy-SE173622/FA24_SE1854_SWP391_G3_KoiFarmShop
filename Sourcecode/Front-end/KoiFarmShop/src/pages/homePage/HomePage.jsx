@@ -10,7 +10,7 @@ import KoiDetail from "../KoiDetailPage/KoiDetail";
 
 function HomePage() {
   const nav = useNavigate();
-  const [koiLs, setKoiLs] = useState([]); // Danh sách cá Koi
+  const [koiLs, setKoiLs] = useState([]); // Danh sách cá Koi lấy từ API
   const [cart, setCart] = useState([]); // Giỏ hàng
   const carouselRef = React.useRef(null);
 
@@ -119,75 +119,6 @@ function HomePage() {
     // },
   ];
 
-  const sampleKoiLs = [
-    {
-      koiId: 1,
-      koiTypeName: "Koi Đỏ",
-      price: 500000,
-      size: 30,
-      age: 2,
-      origin: "Nhật Bản",
-      characteristics: "Màu đỏ rực",
-      note: "Loại cá phổ biến",
-      image: "https://minhxuankoifarm.com/wp-content/uploads/2020/09/Screen-Shot-2020-09-29-at-06.59.58-510x732.png",
-    },
-    {
-      koiId: 2,
-      koiTypeName: "Koi Vàng",
-      price: 450000,
-      size: 28,
-      age: 1,
-      origin: "Nhật Bản",
-      characteristics: "Màu vàng tươi",
-      note: "Thích hợp cho bể nhỏ",
-      image: "https://minhxuankoifarm.com/wp-content/uploads/2020/09/Screen-Shot-2020-09-29-at-06.59.58-510x732.png",
-    },
-    {
-      koiId: 1,
-      koiTypeName: "Koi Đỏ",
-      price: 500000,
-      size: 30,
-      age: 2,
-      origin: "Nhật Bản",
-      characteristics: "Màu đỏ rực",
-      note: "Loại cá phổ biến",
-      image: "https://minhxuankoifarm.com/wp-content/uploads/2020/09/Screen-Shot-2020-09-29-at-06.59.58-510x732.png",
-    },
-    {
-      koiId: 2,
-      koiTypeName: "Koi Vàng",
-      price: 450000,
-      size: 28,
-      age: 1,
-      origin: "Nhật Bản",
-      characteristics: "Màu vàng tươi",
-      note: "Thích hợp cho bể nhỏ",
-      image: "https://minhxuankoifarm.com/wp-content/uploads/2020/09/Screen-Shot-2020-09-29-at-06.59.58-510x732.png",
-    }, {
-      koiId: 1,
-      koiTypeName: "Koi Đỏ",
-      price: 500000,
-      size: 30,
-      age: 2,
-      origin: "Nhật Bản",
-      characteristics: "Màu đỏ rực",
-      note: "Loại cá phổ biến",
-      image: "https://minhxuankoifarm.com/wp-content/uploads/2020/09/Screen-Shot-2020-09-29-at-06.59.58-510x732.png",
-    },
-    {
-      koiId: 2,
-      koiTypeName: "Koi Vàng",
-      price: 450000,
-      size: 28,
-      age: 1,
-      origin: "Nhật Bản",
-      characteristics: "Màu vàng tươi",
-      note: "Thích hợp cho bể nhỏ",
-      image: "https://minhxuankoifarm.com/wp-content/uploads/2020/09/Screen-Shot-2020-09-29-at-06.59.58-510x732.png",
-    },
-    // Thêm các đối tượng mẫu khác nếu cần
-  ];
-
   const [posts] = useState([
     {
       id: 1,
@@ -240,17 +171,17 @@ function HomePage() {
 
   // Hàm lấy dữ liệu cá Koi từ API
   const fetchKoi = async () => {
-    const params = { PageNumber: 1, PageSize: 8 };
+    const params = { PageNumber: 1, PageSize: 8 }; // Tùy chỉnh tham số nếu cần
     try {
       const result = await getAllKoi(params);
-      setKoiLs(result.data);
+      setKoiLs(result.data); // Giả định rằng `result.data` chứa danh sách cá Koi
     } catch (err) {
       console.error("Failed to fetch Koi data", err);
     }
   };
 
   useEffect(() => {
-    fetchKoi();
+    fetchKoi(); // Gọi hàm khi component được mount
   }, []);
 
   // Hàm xử lý thêm cá vào giỏ hàng
@@ -400,7 +331,7 @@ function HomePage() {
             draggable
             ref={carouselRef}
           >
-            {sampleKoiLs.map((koi) => (
+            {koiLs.map((koi) => (
               <KoiCard
                 key={koi.koiId}
                 koi={koi}

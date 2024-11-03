@@ -63,16 +63,8 @@ export const router = createBrowserRouter([
         element: <ComparePage />,
       },
       {
-        path: "/cart-Page",
+        path: "/cart",
         element: <CartPage />,
-      },
-      {
-        path: "/consignment-request",
-        element: <ConsignmentRequestForm />, // Trang gửi yêu cầu consignments
-      },
-      {
-        path: "/consignment-detail/:consignmentId",
-        element: <ConsignmentDetail />, // Trang chi tiết consignments
       },
     ],
   },
@@ -98,7 +90,6 @@ export const router = createBrowserRouter([
         path: "deposite",
         element: <DepositedKoiPage />,
       },
-
     ],
   },
   {

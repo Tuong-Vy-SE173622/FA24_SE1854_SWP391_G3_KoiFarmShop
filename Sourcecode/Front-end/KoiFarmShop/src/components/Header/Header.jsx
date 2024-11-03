@@ -232,7 +232,7 @@ function Header() {
   const handleMouseLeave = () => setHoveredItem(null);
   const navigateLogin = () => navigate("/login");
   const navigateRegister = () => navigate("/register");
-  const handleCartClick = () => navigate("/cart-Page");
+  const handleCartClick = () => navigate("/cart");
 
   const IntroductionList = [
     { key: 1, label: "Giới thiệu", link: "" },

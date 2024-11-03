@@ -21,7 +21,6 @@ namespace KoiFarmShop.Business.Dto.Kois
 
         [Range(0, double.MaxValue, ErrorMessage = "Price must be a positive value.")]
         public double? Price { get; set; }
-
         public IFormFile? Image { get; set; }
 
         [MaxLength(500, ErrorMessage = "Characteristics cannot exceed 500 characters.")]

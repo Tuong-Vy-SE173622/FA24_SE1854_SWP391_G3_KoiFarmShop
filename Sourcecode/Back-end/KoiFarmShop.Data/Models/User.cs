@@ -77,7 +77,4 @@ public partial class User
     [StringLength(55)]
     [Unicode(false)]
     public string Role { get; set; }
-
-    [InverseProperty("User")]
-    public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
 }

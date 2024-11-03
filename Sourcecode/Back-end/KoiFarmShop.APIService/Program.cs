@@ -1,4 +1,5 @@
-﻿using KoiFarmShop.Business.AutoMap;
+﻿using KoiFarmShop.Business;
+using KoiFarmShop.Business.AutoMap;
 using KoiFarmShop.Business.Business.AccountBusiness;
 using KoiFarmShop.Business.Business.Cloudinary;
 using KoiFarmShop.Business.Business.ConsignmentBusiness;
@@ -148,6 +149,7 @@ namespace KoiFarmShop.APIService
                         Array.Empty<string>()
                     }
                 });
+                options.OperationFilter<FileUploadOperationFilter>();
             });
             builder.Services.AddAuthentication(item =>
             {

@@ -40,9 +40,12 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateKoi(KoiCreateDto koiCreateDto)
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> CreateKoi([FromBody] KoiCreateDto koiCreateDto, IFormFile image)
         {
             var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            if(image == null) return NotFound();
+            koiCreateDto.Image = image;
             var createdId = await _koiService.CreateKoiAsync(koiCreateDto, currentUser);
             return CreatedAtAction(nameof(GetKoiById), new { id = createdId }, koiCreateDto);
         }

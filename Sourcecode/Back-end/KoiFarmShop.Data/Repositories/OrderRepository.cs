@@ -19,5 +19,12 @@ namespace KoiFarmShop.Data.Repositories
                 .Include(c => c.OrderItems)
                 .FirstOrDefaultAsync(c => c.OrderId == orderId);
         }
+
+        public async Task<double?> SumOfOrderItem(int orderId)
+        {
+            return await _context.OrderItems
+                .Where(item => item.OrderId == orderId)
+                .SumAsync(item => item.Price * item.Amount);
+        }
     }
 }

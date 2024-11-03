@@ -1,10 +1,12 @@
 ﻿using KoiFarmShop.Business;
 using KoiFarmShop.Business.AutoMap;
 using KoiFarmShop.Business.Business.AccountBusiness;
+using KoiFarmShop.Business.Business.CareRequestBusiness;
 using KoiFarmShop.Business.Business.Cloudinary;
 using KoiFarmShop.Business.Business.ConsignmentBusiness;
 using KoiFarmShop.Business.Business.KoiBusiness;
 using KoiFarmShop.Business.Business.KoiTypeBusiness;
+using KoiFarmShop.Business.Business.OrderBusiness;
 using KoiFarmShop.Business.Business.PromotionBusiness;
 using KoiFarmShop.Business.Business.TokenBusiness;
 using KoiFarmShop.Business.Business.UserBusiness;
@@ -195,6 +197,11 @@ namespace KoiFarmShop.APIService
 
             builder.Services.AddScoped<IConsignmentRequestService, ConsignmentRequestService>();
             builder.Services.AddScoped<IConsignmentDetailService, ConsignmentDetailService>();
+
+            builder.Services.AddScoped<IOrderItemService, OrderItemService>();
+            builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<ICareRequestDetailService, CareRequestDetailService>();
+            builder.Services.AddScoped<ICareRequestService, CareRequestService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();

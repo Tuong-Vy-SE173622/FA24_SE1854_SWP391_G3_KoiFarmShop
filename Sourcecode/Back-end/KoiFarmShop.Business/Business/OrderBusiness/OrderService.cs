@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KoiFarmShop.Business.Dto;
+using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 using System;
@@ -23,6 +24,8 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
 
         public async Task<OrderResponseDto> CreateOrderAsync(OrderCreateDto createDto)
         {
+            createDto.OrderDate = DateTime.Now;
+            createDto.IsActive = true;
             var order = _mapper.Map<Order>(createDto);
             await _unitOfWork.OrderRepository.CreateAsync(order);
             await _unitOfWork.SaveChangesAsync();
@@ -32,10 +35,19 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
         public async Task<OrderResponseDto> UpdateOrderAsync(int id, OrderUpdateDto updateDto)
         {
             var order = await _unitOfWork.OrderRepository.GetByIdAsync(id);
-            if (order == null) return null;
+            if (order == null)
+            {
+                throw new NotFoundException("Order not found.");
+            }
+            var orderItems = await _unitOfWork.OrderItemRepository.GetByIdAsync(id);
+            if (orderItems == null)
+                throw new NotFoundException("No items found for this order.");
+
+            updateDto.SubAmount = await _unitOfWork.OrderRepository.SumOfOrderItem(id);
 
             updateDto.UpdateAt = DateTime.Now;
             _mapper.Map(updateDto, order);
+            order.TotalAmount = order.SubAmount + order.VatAmount - order.TotalAmount;
             await _unitOfWork.SaveChangesAsync();
 
             return _mapper.Map<OrderResponseDto>(order);

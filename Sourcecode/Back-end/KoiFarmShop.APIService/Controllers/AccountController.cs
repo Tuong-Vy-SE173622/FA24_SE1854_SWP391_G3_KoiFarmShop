@@ -52,5 +52,43 @@ namespace KoiFarmShop.APIService.Controllers
             }
         }
         #endregion
+
+        #region Add a new customer
+        /// <summary>
+        /// Add a new customer associated with a user
+        /// </summary>
+        /// <returns>Status of action</returns>
+        [HttpPost("/add-new-customer")]
+        public async Task<ActionResult> AddNewCustomer(CustomerDto model)
+        {
+            try
+            {
+                var currentUser = HttpContext.User;
+                var addCustomerResult = await _accountService.AddNewCustomer(model, currentUser);
+
+                if (!addCustomerResult.IsSuccess)
+                {
+                    return BadRequest(addCustomerResult);
+                }
+
+                return Ok(new ResultDto
+                {
+                    IsSuccess = true,
+                    Code = 200,
+                    Data = addCustomerResult
+                });
+            }
+            catch (Exception ex)
+            {
+                var result = new ResultDto
+                {
+                    IsSuccess = false,
+                    Code = 500,
+                    Message = ex.Message
+                };
+                return StatusCode(500, result);
+            }
+        }
+        #endregion
     }
 }

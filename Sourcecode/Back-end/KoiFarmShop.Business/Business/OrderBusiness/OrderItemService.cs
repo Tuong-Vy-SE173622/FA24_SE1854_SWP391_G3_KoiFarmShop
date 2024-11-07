@@ -34,6 +34,9 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
                 throw new NotFoundException("Koi not found");
 
             var orderItem = _mapper.Map<OrderItem>(createDto);
+
+            orderItem.OrderItemId = _unitOfWork.OrderItemRepository.GetAll().OrderByDescending(ot => ot.OrderItemId).Select(ot => ot.OrderItemId).FirstOrDefault() + 1;
+
             await _unitOfWork.OrderItemRepository.CreateAsync(orderItem);
             await _unitOfWork.SaveChangesAsync();
             return _mapper.Map<OrderItemResponseDto>(orderItem);

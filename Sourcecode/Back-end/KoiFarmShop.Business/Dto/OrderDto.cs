@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using KoiFarmShop.Data.Models;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace KoiFarmShop.Business.Dto
 {
@@ -31,12 +33,12 @@ namespace KoiFarmShop.Business.Dto
 
         public string? Status { get; set; }
         public CustomerDto? Customer { get; set; }
+        public OrderDto? OrderItems { get; set; }
     }
 
     public class OrderCreateDto
     {
-
-        public DateTime? OrderDate { get; set; }
+        //public DateTime? OrderDate { get; set; }
         public string? customerId { get; set; }
 
         //public double? SubAmount { get; set; }
@@ -49,8 +51,7 @@ namespace KoiFarmShop.Business.Dto
 
         //public double? TotalAmount { get; set; }
 
-        public string? PaymentMethod { get; set; }
-
+        //public string? PaymentMethod { get; set; }
         public string? PaymentStatus { get; set; }
 
         public bool? IsActive { get; set; }
@@ -67,7 +68,7 @@ namespace KoiFarmShop.Business.Dto
 
         public double? Vat { get; set; }
 
-        public double? VatAmount { get; set; }
+        //public double? VatAmount { get; set; }
 
         public double? PromotionAmount { get; set; }
 
@@ -80,7 +81,16 @@ namespace KoiFarmShop.Business.Dto
         public string? Note { get; set; }
 
         public string? Status { get; set; }
-        public DateTime? UpdateAt { get; set; }
+        //public DateTime? UpdateAt { get; set; }
+    }
+
+    public class OrderUpdateStatusDto
+    {
+
+        public string? PaymentStatus { get; set; }
+        public bool? IsActive { get; set; }
+        public string? Status { get; set; }
+        //public DateTime? UpdateAt { get; set; }
     }
 
     public class OrderResponseDto
@@ -112,5 +122,18 @@ namespace KoiFarmShop.Business.Dto
 
         public string? Status { get; set; }
         public CustomerDto? Customer { get; set; }
+    }
+
+    public class OrderStatusResponseDto
+    {
+
+        public int OrderId { get; set; }
+
+        public int CustomerId { get; set; }
+        public string PaymentStatus { get; set; }
+
+        public bool? IsActive { get; set; }
+
+        public string? Status { get; set; }
     }
 }

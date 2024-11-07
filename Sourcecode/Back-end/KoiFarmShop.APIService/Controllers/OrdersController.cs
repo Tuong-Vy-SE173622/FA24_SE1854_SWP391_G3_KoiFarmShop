@@ -1,5 +1,6 @@
 ﻿using KoiFarmShop.Business.Business.OrderBusiness;
 using KoiFarmShop.Business.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KoiFarmShop.APIService.Controllers
@@ -29,10 +30,24 @@ namespace KoiFarmShop.APIService.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOrder(int id)
+        [HttpPut("{id}/status")]
+        public async Task<IActionResult> UpdateOrderStatus(int id, [FromBody] OrderUpdateStatusDto orderUpdateStatusDto)
         {
-            await _orderService.DeleteOrderAsync(id);
+            var result = await _orderService.UpdateOrderStatusAsync(id, orderUpdateStatusDto);
+            return Ok(result);
+        }
+
+        [HttpPut("deactivate/{id}")]
+        public async Task<IActionResult> SoftDeleteOrder(int id)
+        {
+            var result = await _orderService.SoftDeleteOrderAsync(id);
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> HardDeleteOrder(int id)
+        {
+            await _orderService.HardDeleteOrderAsync(id);
             return NoContent();
         }
 
@@ -44,10 +59,25 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAllOrder()
         {
             var result = await _orderService.GetAllOrderAsync();
             return Ok(result);
         }
+
+        [HttpGet("customer/{id}/active")]
+        public async Task<IActionResult> GetAllActiveOrderById(int id)
+        {
+            var result = await _orderService.GetAllActiveOrderByIdAsync(id);
+            return Ok(result);
+        }
+        [HttpGet("{id}/status")]
+        public async Task<IActionResult> GetOrderStatusById(int id)
+        {
+            var result = await _orderService.GetOrderStatusByIdAsync(id);
+            return Ok(result);
+        }
+
     }
 }

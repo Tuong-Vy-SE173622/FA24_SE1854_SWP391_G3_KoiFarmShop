@@ -130,7 +130,7 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
         {
             entity.HasKey(e => e.CustomerId).HasName("customer_customer_id_primary");
 
-            entity.Property(e => e.CustomerId).ValueGeneratedNever();
+            entity.Property(e => e.CustomerId).HasColumnName("customer_id");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("('GETDATE()')");
         });
 

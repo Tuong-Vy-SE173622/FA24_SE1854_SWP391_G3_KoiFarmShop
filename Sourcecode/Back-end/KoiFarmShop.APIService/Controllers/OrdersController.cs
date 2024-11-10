@@ -19,7 +19,8 @@ namespace KoiFarmShop.APIService.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] OrderCreateDto orderCreateDto)
         {
-            var result = await _orderService.CreateOrderAsync(orderCreateDto);
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var result = await _orderService.CreateOrderAsync(orderCreateDto, currentUser);
             return CreatedAtAction(nameof(GetOrderById), new { id = result.OrderId }, result);
         }
 

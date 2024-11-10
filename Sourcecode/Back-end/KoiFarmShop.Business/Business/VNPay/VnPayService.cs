@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using KoiFarmShop.Business.Config;
 using KoiFarmShop.Business.Dto;
+using KoiFarmShop.Business.Dto.Kois;
 using KoiFarmShop.Business.Dto.Payment;
 using KoiFarmShop.Business.Utils.VNPAYAPI.Areas.VNPayAPI.Util;
 using KoiFarmShop.Data;
@@ -95,6 +96,16 @@ namespace KoiFarmShop.Business.Business.VNPay
                         Status = "",
                     };
                     _mapper.Map(orderUpdateStatus, order);
+
+                    foreach (var orderItem in order.OrderItems)
+                    {
+                        var koi = _unitOfWork.KoiRepository.GetById((int)orderItem.KoiId);
+                        var koiStatusUpdate = new KoiStatusUpdateDto()
+                        {
+                            IsActive = false
+                        };
+                        _mapper.Map(koiStatusUpdate, koi);
+                    }
                     await _unitOfWork.SaveChangesAsync();
                     isSuccessful = true;
                 } 

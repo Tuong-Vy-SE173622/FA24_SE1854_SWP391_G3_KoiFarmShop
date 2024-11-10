@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using KoiFarmShop.Business.Dto;
+using KoiFarmShop.Business.Dto.Consigments;
 using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,14 +24,24 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
             _mapper = mapper;
         }
 
-        public async Task<OrderResponseDto> CreateOrderAsync(OrderCreateDto createDto)
+        public async Task<OrderResponseDto> CreateOrderAsync(OrderCreateDto createDto, string? currentUser)
         {
+            var user = _unitOfWork.UserRepository.GetById(createDto.customerId);
+            if (user == null)
+            {
+                throw new NotFoundException("Customer Id does not exist");
+            }
+
             var order = _mapper.Map<Order>(createDto);
+            if (currentUser == null) throw new UnauthorizedAccessException();
+            order.CreatedBy = currentUser;
 
             order.OrderId = _unitOfWork.OrderRepository.GetAll().OrderByDescending(o => o.OrderId).Select(o => o.OrderId).FirstOrDefault() + 1;
             //order.OrderDate = DateTime.Now;
             //order.IsActive = true;
             order.PaymentStatus = "Pending";
+            order.IsActive = true;
+            order.Status = null;
 
             await _unitOfWork.OrderRepository.CreateAsync(order);
             await _unitOfWork.SaveChangesAsync();

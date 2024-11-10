@@ -46,4 +46,9 @@ namespace KoiFarmShop.Business.Dto.Kois
         [MaxLength(500, ErrorMessage = "Note cannot exceed 500 characters.")]
         public string? Note { get; set; }
     }
+
+    public class KoiStatusUpdateDto
+    {
+        public bool IsActive { get; set; }
+    }
 }

@@ -14,6 +14,7 @@ namespace KoiFarmShop.Business.AutoMap
         public MappingProfile()
         {
             CreateMap<Customer, CustomerDto>().ReverseMap();
+            CreateMap<Customer, ListCustomerDto>().ReverseMap();
 
             CreateMap<Koi, KoiDto>()
                 .ForMember(dest => dest.KoiTypeName, opt => opt.MapFrom(src => src.KoiType.Name));

@@ -4,6 +4,7 @@ using KoiFarmShop.Business.Business.AccountBusiness;
 using KoiFarmShop.Business.Business.CareRequestBusiness;
 using KoiFarmShop.Business.Business.Cloudinary;
 using KoiFarmShop.Business.Business.ConsignmentBusiness;
+using KoiFarmShop.Business.Business.CustomerBusiness;
 using KoiFarmShop.Business.Business.KoiBusiness;
 using KoiFarmShop.Business.Business.KoiTypeBusiness;
 using KoiFarmShop.Business.Business.OrderBusiness;
@@ -202,6 +203,8 @@ namespace KoiFarmShop.APIService
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<ICareRequestDetailService, CareRequestDetailService>();
             builder.Services.AddScoped<ICareRequestService, CareRequestService>();
+
+            builder.Services.AddScoped<ICustomerService, CustomerService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();

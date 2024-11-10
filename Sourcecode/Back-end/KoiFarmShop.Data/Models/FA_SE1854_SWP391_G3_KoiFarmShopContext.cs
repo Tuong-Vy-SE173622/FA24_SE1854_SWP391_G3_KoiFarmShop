@@ -62,7 +62,6 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
         .AddJsonFile("appsettings.json", true, true).Build();
         return configuration["ConnectionStrings:DefaultConnection"];
     }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<BlogPost>(entity =>
@@ -130,7 +129,7 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
         {
             entity.HasKey(e => e.CustomerId).HasName("customer_customer_id_primary");
 
-            entity.Property(e => e.CustomerId).HasColumnName("customer_id");
+            entity.Property(e => e.CustomerId).ValueGeneratedNever();
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("('GETDATE()')");
         });
 
@@ -171,8 +170,8 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
             entity.HasKey(e => e.OrderId).HasName("order_order_id_primary");
 
             entity.Property(e => e.OrderId).ValueGeneratedNever();
-            entity.Property(e => e.CreatedAt).HasDefaultValueSql("('GETDATE()')");
-            entity.Property(e => e.IsActive).HasDefaultValueSql("('DEFAULT TRUE')");
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.OrderDate).HasDefaultValueSql("('GETDATE()')");
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Orders).HasConstraintName("order_customer_id_foreign");
@@ -183,8 +182,8 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
             entity.HasKey(e => e.OrderItemId).HasName("order_item_order_item_id_primary");
 
             entity.Property(e => e.OrderItemId).ValueGeneratedNever();
-            entity.Property(e => e.CreatedAt).HasDefaultValueSql("('GETDATE()')");
-            entity.Property(e => e.IsActive).HasDefaultValueSql("('DEFAULT TRUE')");
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
 
             entity.HasOne(d => d.Order).WithMany(p => p.OrderItems).HasConstraintName("order_item_order_id_foreign");
         });

@@ -31,7 +31,7 @@ namespace KoiFarmShop.APIService.Controllers
         {
             if (Request.QueryString.HasValue)
             {
-                var response = _vnpayService.VerifyPaymentResponse(Request.QueryString);
+                var response = _vnpayService.VerifyPaymentResponseAsync(Request.QueryString);
                 return Ok(response);
             }
             return NoContent();

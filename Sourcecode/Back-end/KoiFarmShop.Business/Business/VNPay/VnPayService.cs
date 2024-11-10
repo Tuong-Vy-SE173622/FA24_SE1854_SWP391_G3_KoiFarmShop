@@ -1,6 +1,11 @@
-﻿using KoiFarmShop.Business.Config;
+﻿using AutoMapper;
+using KoiFarmShop.Business.Config;
+using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Payment;
 using KoiFarmShop.Business.Utils.VNPAYAPI.Areas.VNPayAPI.Util;
+using KoiFarmShop.Data;
+using KoiFarmShop.Data.Models;
+using KoiFarmShop.Data.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System.Web;
@@ -9,11 +14,16 @@ namespace KoiFarmShop.Business.Business.VNPay
 {
     public class VnpayService : IVnPayService
     {
+        private const string RESPONSE_CODE_SUCCESS = "00";
         private readonly VnPayConfig _vnpayConfig;
+        private readonly UnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public VnpayService(IOptions<VnPayConfig> vnpayConfig)
+        public VnpayService(IOptions<VnPayConfig> vnpayConfig, UnitOfWork unitOfWork, IMapper mapper)
         {
             _vnpayConfig = vnpayConfig.Value;
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
         //TODO: save into order in database 
 
@@ -49,14 +59,14 @@ namespace KoiFarmShop.Business.Business.VNPay
         }
 
         // Verify Payment Response
-        public PaymentResponse? VerifyPaymentResponse(QueryString queryString)
+        public async Task<PaymentResponse?> VerifyPaymentResponseAsync(QueryString queryString)
         {
             if (queryString.HasValue)
             {
                 var json = HttpUtility.ParseQueryString(queryString.Value);
 
                 long orderId = Convert.ToInt64(json["vnp_TxnRef"]);
-                string orderInfor = json["vnp_OrderInfo"].ToString();
+                string orderInfo = json["vnp_OrderInfo"].ToString();
                 long vnpayTranId = Convert.ToInt64(json["vnp_TransactionNo"]);
                 string vnp_ResponseCode = json["vnp_ResponseCode"].ToString();
                 string vnp_SecureHash = json["vnp_SecureHash"].ToString();
@@ -65,11 +75,38 @@ namespace KoiFarmShop.Business.Business.VNPay
 
                 bool checkSignature = ValidateSignature(queryString.Value.Substring(1, pos - 1), vnp_SecureHash, _vnpayConfig.HashSecret); //check signature
                 bool checkTmnCode = _vnpayConfig.TmnCode == json["vnp_TmnCode"].ToString();
+
+                var isSuccessful = false;
+
+                if (checkSignature && checkTmnCode && vnp_ResponseCode.Equals(RESPONSE_CODE_SUCCESS))
+                {
+                    var order = _unitOfWork.OrderRepository.GetById( (int) orderId);
+                    //check order exist
+                    if (order == null)
+                    {
+                        throw new Exception("Order does not exist at server!");
+                    }
+
+                    //update order status
+                    var orderUpdateStatus = new OrderUpdateStatusDto()
+                    {
+                        PaymentStatus = "Paid",
+                        IsActive = true,
+                        Status = "",
+                    };
+                    _mapper.Map(orderUpdateStatus, order);
+                    await _unitOfWork.SaveChangesAsync();
+                    isSuccessful = true;
+                } 
+
                 return new PaymentResponse()
                 {
+                    OrderId = orderId,
+                    OrderInfo = orderInfo,
                     checkSignature = checkSignature,
                     checkTmnCode = checkTmnCode,
-                    ResponseCode = vnp_ResponseCode
+                    ResponseCode = vnp_ResponseCode,
+                    isSuccessful = isSuccessful
                 };
             }
             return null;
@@ -80,6 +117,8 @@ namespace KoiFarmShop.Business.Business.VNPay
             string myChecksum = PayLib.HmacSHA512(secretKey, rspraw);
             return myChecksum.Equals(inputHash, StringComparison.InvariantCultureIgnoreCase);
         }
+
+
 
     }
 }

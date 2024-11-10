@@ -6,6 +6,6 @@ namespace KoiFarmShop.Business.Business.VNPay
     public interface IVnPayService
     {
         string GeneratePaymentUrl(PaymentRequest request);
-        PaymentResponse? VerifyPaymentResponse(QueryString query);
+        Task<PaymentResponse?> VerifyPaymentResponseAsync(QueryString query);
     }
 }

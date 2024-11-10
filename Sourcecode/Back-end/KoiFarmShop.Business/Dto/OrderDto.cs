@@ -39,7 +39,7 @@ namespace KoiFarmShop.Business.Dto
     public class OrderCreateDto
     {
         //public DateTime? OrderDate { get; set; }
-        public string? customerId { get; set; }
+        public int? customerId { get; set; }
 
         //public double? SubAmount { get; set; }
 
@@ -51,14 +51,14 @@ namespace KoiFarmShop.Business.Dto
 
         //public double? TotalAmount { get; set; }
 
-        //public string? PaymentMethod { get; set; }
-        public string? PaymentStatus { get; set; }
+        public string? PaymentMethod { get; set; }
+        //public string? PaymentStatus { get; set; }
 
-        public bool? IsActive { get; set; }
+        //public bool? IsActive { get; set; }
 
         public string? Note { get; set; }
 
-        public string? Status { get; set; }
+        //public string? Status { get; set; }
     }
 
     public class OrderUpdateDto

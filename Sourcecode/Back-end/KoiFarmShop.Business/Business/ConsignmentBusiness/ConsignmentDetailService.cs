@@ -101,12 +101,11 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             {
                 subAmount += detail.SoldPrice ?? 0; 
             }
+
             consignment.SubAmount = subAmount;
-     
             double vat = Constants.VAT; 
             consignment.Vat = vat;
             consignment.VatAmount = subAmount * vat;
-
             consignment.TotalAmount = subAmount + consignment.VatAmount;
 
             _unitOfWork.ConsignmentRequestRepository.Update(consignment);

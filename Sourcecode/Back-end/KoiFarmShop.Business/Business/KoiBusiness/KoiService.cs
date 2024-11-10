@@ -3,7 +3,6 @@
 using KoiFarmShop.Business.Business.Cloudinary;
 
 using KoiFarmShop.Business.Dto.Kois;
-using KoiFarmShop.Business.Dto.KoiTypes;
 using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
@@ -101,6 +100,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     Gender = k.Gender,
                     Age = k.Age,
                     Size = k.Size,
+                    Image =k.Image,
                     Price = k.Price,
                     Characteristics = k.Characteristics,
                     FeedingAmountPerDay = k.FeedingAmountPerDay,
@@ -142,6 +142,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     Gender = k.Gender,
                     Age = k.Age,
                     Size = k.Size,
+                    Image = k.Image,
                     Price = k.Price,
                     Characteristics = k.Characteristics,
                     FeedingAmountPerDay = k.FeedingAmountPerDay,
@@ -174,8 +175,9 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             koi.CreatedAt = DateTime.Now;
 
             var image = koiCreateDto.Image;
-            if (image != null) { 
-                koi.Image = _cloudinaryService.UploadImageAsync(image).ToString(); 
+            if (image != null)
+            {
+                koi.Image = _cloudinaryService.UploadImageAsync(image).ToString();
             }
 
             await _unitOfWork.KoiRepository.CreateAsync(koi);
@@ -187,7 +189,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             if (String.IsNullOrEmpty(currentUser)) throw new UnauthorizedAccessException("current user is invalid or might not login");
             var existingKoi = await _unitOfWork.KoiRepository.GetByIdAsync(id);
             if (existingKoi == null)
-                throw new NotFoundException("Koi not found"); 
+                throw new NotFoundException("Koi not found");
 
             _mapper.Map(koiUpdateDto, existingKoi); // only update non-null fields :3
 
@@ -201,7 +203,6 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             }
             return await _unitOfWork.KoiRepository.UpdateAsync(existingKoi);
         }
-
 
         public async Task<bool> RemoveKoiAsync(int id)
         {
@@ -303,6 +304,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     Gender = k.Gender,
                     Age = k.Age,
                     Size = k.Size,
+                    Image = k.Image,
                     Price = k.Price,
                     Characteristics = k.Characteristics,
                     FeedingAmountPerDay = k.FeedingAmountPerDay,
@@ -332,7 +334,6 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             };
         }
 
-
         public async Task<HashSet<string>> GetAllKoiOrigins()
         {
             var list = await _unitOfWork.KoiRepository.GetAllAsync();
@@ -343,7 +344,5 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             return koiOrigins;
         }
 
-
-        
     }
 }

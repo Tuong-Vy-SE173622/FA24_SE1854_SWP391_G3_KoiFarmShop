@@ -41,7 +41,7 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> CreateKoiType(KoiTypeCreateDto koiTypeCreateDto)
+        public async Task<ActionResult<int>> CreateKoiType([FromForm] KoiTypeCreateDto koiTypeCreateDto)
         {
             var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
             var id = await _koiTypeService.CreateKoiTypeAsync(koiTypeCreateDto, currentUser);
@@ -49,7 +49,7 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateKoiType(int id, KoiTypeUpdateDto koiTypeUpdateDto)
+        public async Task<IActionResult> UpdateKoiType(int id, [FromForm] KoiTypeUpdateDto koiTypeUpdateDto)
         {
             var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
             var result = await _koiTypeService.UpdateKoiTypeAsync(id, koiTypeUpdateDto, currentUser);

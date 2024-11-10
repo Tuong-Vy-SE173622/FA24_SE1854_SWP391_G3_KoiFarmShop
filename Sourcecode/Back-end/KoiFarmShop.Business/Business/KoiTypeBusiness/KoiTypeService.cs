@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using KoiFarmShop.Business.Business.Cloudinary;
-using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.KoiTypes;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace KoiFarmShop.Business.Business.KoiTypeBusiness
 {
@@ -36,7 +34,7 @@ namespace KoiFarmShop.Business.Business.KoiTypeBusiness
 
         public async Task<int> CreateKoiTypeAsync(KoiTypeCreateDto koiTypeCreateDto, string? currentUser)
         {
-            if (String.IsNullOrEmpty(currentUser)) 
+            if (String.IsNullOrEmpty(currentUser))
                 throw new UnauthorizedAccessException("current user is invalid or might not login");
 
             var koiType = _mapper.Map<KoiType>(koiTypeCreateDto);

@@ -19,9 +19,8 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
 
         public async Task<ConsignmentRequestResponseDto> CreateConsignmentRequestAsync(ConsignmentRequestCreateDto consignmentRequestCreateDto)
         {
-            //need to check customerId (here still uses userId)
-            var user = _unitOfWork.UserRepository.GetById(consignmentRequestCreateDto.CustomerId);
-            if (user == null)
+            var customer = _unitOfWork.CustomerRepository.GetById(consignmentRequestCreateDto.CustomerId);
+            if (customer == null)
             {
                 throw new NotFoundException("Customer Id does not exist");
             }

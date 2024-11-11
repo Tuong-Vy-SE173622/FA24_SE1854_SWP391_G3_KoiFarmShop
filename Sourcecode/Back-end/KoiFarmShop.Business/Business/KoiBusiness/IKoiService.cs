@@ -11,6 +11,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
         Task<KoiDto> GetKoiByIdAsync(int id);
         Task<int> CreateKoiAsync(KoiCreateDto koiDto, string? currentUser);
         Task<int> UpdateKoiAsync(int id, KoiUpdateDto koiDto, string? currentUser);
+        Task<bool> UpdateForListSoldKoisAsynce(ListSoldKois list);
         Task<bool> RemoveKoiAsync(int id);
         Task<HashSet<string>> GetAllKoiOrigins();
     }

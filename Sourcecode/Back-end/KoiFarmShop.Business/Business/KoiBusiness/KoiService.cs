@@ -169,6 +169,13 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             //should check their role instead .-.
             if (String.IsNullOrEmpty(currentUser)) throw new UnauthorizedAccessException("current user is invalid or might not login");
 
+            //check koi type exist
+            var koiType = await _unitOfWork.KoiTypeRepository.GetByIdAsync(koiCreateDto.KoiTypeId);
+            if (koiType == null)
+            {
+                throw new NotFoundException("KoiType not found");
+            }
+
             var koi = _mapper.Map<Koi>(koiCreateDto);
 
             koi.CreatedBy = currentUser;
@@ -190,8 +197,17 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             var existingKoi = await _unitOfWork.KoiRepository.GetByIdAsync(id);
             if (existingKoi == null)
                 throw new NotFoundException("Koi not found");
+            if(koiUpdateDto.KoiTypeId != null)
+            {
+                var koiType = await _unitOfWork.KoiTypeRepository.GetByIdAsync((int)koiUpdateDto.KoiTypeId);
+                if (koiType == null)
+                {
+                    throw new NotFoundException("KoiType not found");
+                }
+            }
 
             _mapper.Map(koiUpdateDto, existingKoi); // only update non-null fields :3
+
 
             existingKoi.UpdatedBy = currentUser;
             existingKoi.UpdatedAt = DateTime.Now;
@@ -225,6 +241,21 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 return true;
             }
             return false;
+        }
+
+        public async Task<bool> UpdateForListSoldKoisAsynce(ListSoldKois list)
+        {
+            var isUpdateSuccessful = true;
+            foreach (var koiId in list.ListKoiId) {
+                var koi = await _unitOfWork.KoiRepository.GetByIdAsync(koiId);
+                if (koi != null)
+                {
+                    koi.IsActive = false;
+                    await _unitOfWork.KoiRepository.UpdateAsync(koi);
+                } 
+                else return isUpdateSuccessful = false;  
+            }
+            return isUpdateSuccessful;
         }
 
         public async Task<PaginatedResult<KoiDto>> GetAllKoisAsync(KoiFilterDto filterDto)

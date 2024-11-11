@@ -27,6 +27,13 @@ namespace KoiFarmShop.APIService.Controllers
             return Ok(kois);
         }
 
+        [HttpGet("admin")]
+        public async Task<IActionResult> GetAllKoisForAdmin([FromQuery] KoiFilterDto filterDto)
+        {
+            var kois = await _koiService.GetAllKoisForAdminAsync(filterDto);
+            return Ok(kois);
+        }
+
         [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetKoiById(int id)
@@ -48,13 +55,13 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateKoi(int id,[FromForm] KoiUpdateDto koiUpdateDto)
+        public async Task<IActionResult> UpdateKoi(int id, [FromForm] KoiUpdateDto koiUpdateDto)
         {
             if (koiUpdateDto == null)
                 return BadRequest("Invalid data.");
             var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
 
-            var result = await _koiService.UpdateKoiAsync(id, koiUpdateDto,currentUser);
+            var result = await _koiService.UpdateKoiAsync(id, koiUpdateDto, currentUser);
             if (result >= 0)
                 return Ok("Koi updated successfully.");
             return NotFound("Koi not found.");
@@ -78,9 +85,31 @@ namespace KoiFarmShop.APIService.Controllers
         {
             var origins = await _koiService.GetAllKoiOrigins();
 
-            ResultDto result = new ResultDto();
+            ResultDto result = new();
             result.success(origins);
             return result;
-        } 
+        }
+        [HttpPut("update-for-list-sold-kois")]
+        public async Task<ResultDto> UpdateStatusForSoldKoi([FromForm] ListSoldKois list)
+        {
+            ResultDto result = new();
+            if (list == null)
+            {
+                result.error("Empty List of Koi ids !");
+                return result;
+            }
+            var isUpdateSuccessful = await _koiService.UpdateForListSoldKoisAsynce(list);
+            if (isUpdateSuccessful)
+            {
+                result.success();
+                return result;
+            }
+            else
+            {
+                result.error("Update failed!");
+                return result;
+            }
+        }
     }
 }
+

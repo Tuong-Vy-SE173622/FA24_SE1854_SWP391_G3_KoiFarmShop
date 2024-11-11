@@ -113,7 +113,7 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.IsActive).HasDefaultValue(true);
 
-            entity.HasOne(d => d.Consignment).WithMany(p => p.ConsignmentDetails).HasConstraintName("FK_Consignment_Detail_Consignment_Request");
+            entity.HasOne(d => d.Consignment).WithMany(p => p.ConsignmentDetails).HasConstraintName("FK_Consignment_Detail_Consignment_Request").OnDelete(DeleteBehavior.Cascade); 
 
             entity.HasOne(d => d.Koi).WithMany(p => p.ConsignmentDetails).HasConstraintName("consignment_item_koi_id_foreign");
         });

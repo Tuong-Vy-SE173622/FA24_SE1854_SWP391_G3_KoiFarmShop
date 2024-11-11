@@ -84,5 +84,8 @@ namespace KoiFarmShop.Business.Dto
         public DateTime? UpdatedAt { get; set; }
 
         public string? UpdatedBy { get; set; }
+        public OrderDto? Order { get; set; }
+        public KoiDto? Koi { get; set; }
+
     }
 }

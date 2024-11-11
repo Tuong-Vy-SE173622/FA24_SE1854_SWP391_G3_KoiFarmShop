@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KoiFarmShop.Business.Dto.CareRequests;
+using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 using System;
@@ -33,8 +34,18 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
             return _mapper.Map<IEnumerable<CareRequestResponseDto>>(careRequests);
         }
 
-        public async Task<CareRequestResponseDto> CreateCareRequestAsync(CareRequestCreateDto createDto)
+        public async Task<CareRequestResponseDto> CreateCareRequestAsync(CareRequestCreateDto createDto, string? currentUser)
         {
+            var user = _unitOfWork.UserRepository.GetById((int)createDto.CustomerId);
+            if (user == null)
+            {
+                throw new NotFoundException("Customer Id does not exist");
+            }
+
+            var koi = await _unitOfWork.KoiRepository.GetByIdAsync((int)createDto.KoiId);
+            if (koi == null)
+                throw new NotFoundException("Koi not found");
+
             var careRequest = _mapper.Map<CareRequest>(createDto);
 
             careRequest.RequestId = _unitOfWork.CareRequestRepository.GetAll().OrderByDescending(cr => cr.RequestId).Select(cr => cr.RequestId).FirstOrDefault() + 1;

@@ -9,7 +9,7 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
 {
     public interface IOrderService
     {
-        Task<OrderResponseDto> CreateOrderAsync(OrderCreateDto createDto);
+        Task<OrderResponseDto> CreateOrderAsync(OrderCreateDto createDto, string? currentUser);
         Task<OrderResponseDto> UpdateOrderAsync(int id, OrderUpdateDto updateDto);
         Task<OrderResponseDto> UpdateOrderStatusAsync(int id, OrderUpdateStatusDto updateStatusDto);
         Task<OrderResponseDto> SoftDeleteOrderAsync(int id);

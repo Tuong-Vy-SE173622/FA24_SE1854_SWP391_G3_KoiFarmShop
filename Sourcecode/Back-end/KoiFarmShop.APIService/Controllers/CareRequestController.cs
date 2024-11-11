@@ -34,15 +34,16 @@ namespace KoiFarmShop.APIService.Controllers
 
         // POST api/<CareRequestController>
         [HttpPost]
-        public async Task<ActionResult<CareRequestResponseDto>> CreateCareRequest(CareRequestCreateDto createDto)
+        public async Task<ActionResult<CareRequestResponseDto>> CreateCareRequest([FromBody] CareRequestCreateDto createDto)
         {
-            var result = await _careRequestService.CreateCareRequestAsync(createDto);
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var result = await _careRequestService.CreateCareRequestAsync(createDto, currentUser);
             return CreatedAtAction(nameof(GetCareRequestById), new { id = result.RequestId }, result);
         }
 
         // PUT api/<CareRequestController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<CareRequestResponseDto>> UpdateCareRequest(int id, CareRequestUpdateDto updateDto)
+        public async Task<ActionResult<CareRequestResponseDto>> UpdateCareRequest(int id, [FromBody] CareRequestUpdateDto updateDto)
         {
             var result = await _careRequestService.UpdateCareRequestAsync(id, updateDto);
             if (result == null) return NotFound();

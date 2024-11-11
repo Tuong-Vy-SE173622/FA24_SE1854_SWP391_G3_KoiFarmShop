@@ -49,6 +49,11 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             var consignmentRequest = await _unitOfWork.ConsignmentRequestRepository.GetByIdAsync(id);
             if (consignmentRequest == null) throw new KeyNotFoundException("Consignment Request not found");
 
+            //if(await _unitOfWork.ConsignmentRequestRepository.HasAnyAssociatedDetails(id))
+            //{
+            //    throw new Exception("Consignment details with this consignment request still exist");
+            //}
+
             await _unitOfWork.ConsignmentRequestRepository.RemoveAsync(consignmentRequest);
             await _unitOfWork.SaveChangesAsync();
         }

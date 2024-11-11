@@ -14,5 +14,9 @@ namespace KoiFarmShop.Data.Repositories
                 .Include(c => c.ConsignmentDetails)
                 .FirstOrDefaultAsync(c => c.ConsignmentId == consignmentId);
         }
+        public async Task<bool> HasAnyAssociatedDetails(int consignmentId)
+        {
+            return await _context.ConsignmentDetails.AnyAsync(c => c.ConsignmentId == c.ConsignmentId);
+        }
     }
 }

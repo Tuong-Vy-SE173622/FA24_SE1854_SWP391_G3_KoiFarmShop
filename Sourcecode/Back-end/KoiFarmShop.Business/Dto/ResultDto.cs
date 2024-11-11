@@ -40,7 +40,14 @@ namespace KoiFarmShop.Business.Dto
             Data = null;
             Message = message;
         }
-        
+
+        public void error(string message)
+        {
+            IsSuccess = false;
+            Data = null;
+            Message = message;
+        }
+
     }
 
     

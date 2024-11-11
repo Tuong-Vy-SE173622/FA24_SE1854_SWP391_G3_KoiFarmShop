@@ -19,3 +19,18 @@ export const getKoiOrigins = async () => {
     throw err;
   }
 };
+
+export const getKoiByID = async (id) => {
+  try {
+    const token = localStorage.getItem("accessToken");
+    const res = await api.get(`/api/Koi/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.error("Error fetching Koi Data by ID", err);
+    throw err;
+  }
+};

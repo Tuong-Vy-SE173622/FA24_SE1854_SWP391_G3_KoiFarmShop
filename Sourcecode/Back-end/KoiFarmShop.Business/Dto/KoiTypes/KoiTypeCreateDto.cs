@@ -12,6 +12,8 @@ namespace KoiFarmShop.Business.Dto.KoiTypes
         [MaxLength(250, ErrorMessage = "Short Description cannot exceed 250 characters.")]
         public string? ShortDescription { get; set; }
 
+        public IFormFile? Image { get; set; }
+
         [MaxLength(500, ErrorMessage = "Origin History cannot exceed 500 characters.")]
         public string? OriginHistory { get; set; }
 
@@ -27,6 +29,6 @@ namespace KoiFarmShop.Business.Dto.KoiTypes
         [MaxLength(500, ErrorMessage = "Note cannot exceed 500 characters.")]
         public string? Note { get; set; }
 
-        public IFormFile? Image { get; set; }
+
     }
 }

@@ -41,6 +41,12 @@ namespace KoiFarmShop.Business.Business.KoiTypeBusiness
             koiType.CreatedBy = currentUser;
             koiType.CreatedAt = DateTime.Now;
 
+            var image = koiTypeCreateDto.Image;
+            if (image != null)
+            {
+                koiType.Image = await _cloudinaryService.UploadImageAsync(image);
+            }
+
             await _unitOfWork.KoiTypeRepository.CreateAsync(koiType);
             return koiType.KoiTypeId;
         }
@@ -61,6 +67,12 @@ namespace KoiFarmShop.Business.Business.KoiTypeBusiness
             existingKoiType.UpdatedBy = currentUser;
             existingKoiType.UpdatedAt = DateTime.Now;
 
+            var image = koiTypeUpdateDto.Image;
+            if (image != null)
+            {
+                existingKoiType.Image = await _cloudinaryService.UploadImageAsync(image);
+            }
+
             return await _unitOfWork.KoiTypeRepository.UpdateAsync(existingKoiType);
         }
 
@@ -69,8 +81,11 @@ namespace KoiFarmShop.Business.Business.KoiTypeBusiness
             var koiType = await _unitOfWork.KoiTypeRepository.GetByIdAsync(id);
             if (koiType != null)
             {
-                await _unitOfWork.KoiTypeRepository.RemoveAsync(koiType);
-                return true;
+                if (!await _unitOfWork.KoiTypeRepository.HasAssociatedKoi(id)) 
+                { 
+                    await _unitOfWork.KoiTypeRepository.RemoveAsync(koiType);
+                    return true; 
+                }
             }
             return false;
         }

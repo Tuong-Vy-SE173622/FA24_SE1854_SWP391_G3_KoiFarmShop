@@ -27,11 +27,12 @@ namespace KoiFarmShop.APIService.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateOrder(int id, [FromBody] OrderUpdateDto orderUpdateDto)
         {
-            var result = await _orderService.UpdateOrderAsync(id, orderUpdateDto);
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var result = await _orderService.UpdateOrderAsync(id, orderUpdateDto, currentUser);
             return Ok(result);
         }
 
-        [HttpPut("{id}/status")]
+        [HttpPut("{id}/update-order-status-after-payment")]
         public async Task<IActionResult> UpdateOrderStatus(int id, [FromBody] OrderUpdateStatusDto orderUpdateStatusDto)
         {
             var result = await _orderService.UpdateOrderStatusAsync(id, orderUpdateStatusDto);
@@ -68,15 +69,15 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpGet("customer/{id}/active")]
-        public async Task<IActionResult> GetAllActiveOrderById(int id)
+        public async Task<IActionResult> GetAllActiveOrderById(int customerId)
         {
-            var result = await _orderService.GetAllActiveOrderByIdAsync(id);
+            var result = await _orderService.GetAllActiveOrderByIdAsync(customerId);
             return Ok(result);
         }
         [HttpGet("{id}/status")]
-        public async Task<IActionResult> GetOrderStatusById(int id)
+        public async Task<IActionResult> GetOrderStatusById(int orderId)
         {
-            var result = await _orderService.GetOrderStatusByIdAsync(id);
+            var result = await _orderService.GetOrderStatusByIdAsync(orderId);
             return Ok(result);
         }
 

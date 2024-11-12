@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using KoiFarmShop.Business.Business.CareRequestBusiness;
 using KoiFarmShop.Business.Dto.CareRequests;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,7 +26,16 @@ namespace KoiFarmShop.APIService.Controllers
             return Ok(result);
         }
 
+        [HttpGet("customer/{id}")]
+        public async Task<ActionResult<CareRequestResponseDto>> GetCareRequestByCustomerId(int customerId)
+        {
+            var result = await _careRequestService.GetCareRequestByCustomerIdAsync(customerId);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<CareRequestResponseDto>>> GetAllCareRequests()
         {
             var results = await _careRequestService.GetAllCareRequestAsync();
@@ -45,7 +55,8 @@ namespace KoiFarmShop.APIService.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<CareRequestResponseDto>> UpdateCareRequest(int id, [FromBody] CareRequestUpdateDto updateDto)
         {
-            var result = await _careRequestService.UpdateCareRequestAsync(id, updateDto);
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var result = await _careRequestService.UpdateCareRequestAsync(id, updateDto, currentUser);
             if (result == null) return NotFound();
             return Ok(result);
         }

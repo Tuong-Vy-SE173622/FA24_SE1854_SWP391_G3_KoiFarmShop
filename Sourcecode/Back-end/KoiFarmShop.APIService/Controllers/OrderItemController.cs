@@ -16,16 +16,23 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateOrderItem([FromBody] OrderItemCreateDto orderItemCreateDto)
+        public async Task<IActionResult> CreateOrderItem([FromBody] List<OrderItemCreateDto> orderItemCreateDtos)
         {
-            var result = await _orderItemService.CreateOrderItemAsync(orderItemCreateDto);
-            return CreatedAtAction(nameof(GetOrderItemById), new { id = result.OrderItemId }, result);
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            if (orderItemCreateDtos == null || !orderItemCreateDtos.Any())
+            {
+                return BadRequest("No items to add.");
+            }
+            var result = await _orderItemService.CreateOrderItemsAsync(orderItemCreateDtos, currentUser);
+            //return CreatedAtAction(nameof(GetOrderItemById), new { id = result.OrderItemId }, result);
+            return Ok(result);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateOrderItem(int id, [FromBody] OrderItemUpdateDto orderUpdateDto)
         {
-            var result = await _orderItemService.UpdateOrderItemAsync(id, orderUpdateDto);
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var result = await _orderItemService.UpdateOrderItemAsync(id, orderUpdateDto, currentUser);
             return Ok(result);
         }
 

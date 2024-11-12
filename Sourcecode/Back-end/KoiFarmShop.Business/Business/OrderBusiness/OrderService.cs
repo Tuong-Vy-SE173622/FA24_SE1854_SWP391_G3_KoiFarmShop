@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Consigments;
+using KoiFarmShop.Business.Dto.Kois;
 using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,7 +50,7 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
             return _mapper.Map<OrderResponseDto>(order);
         }
 
-        public async Task<OrderResponseDto> UpdateOrderAsync(int id, OrderUpdateDto updateDto)
+        public async Task<OrderResponseDto> UpdateOrderAsync(int id, OrderUpdateDto updateDto, string? currentUser)
         {
             var order = await _unitOfWork.OrderRepository.GetByIdAsync(id);
             if (order == null)
@@ -59,11 +61,12 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
             if (orderItems == null)
                 throw new NotFoundException("No items found for this order.");
 
-            updateDto.SubAmount = await _unitOfWork.OrderRepository.SumOfOrderItem(id);
-
             
             _mapper.Map(updateDto, order);
-            order.VatAmount = updateDto.SubAmount * updateDto.Vat;
+            if (currentUser == null) throw new UnauthorizedAccessException();
+            order.SubAmount = await _unitOfWork.OrderRepository.SumOfOrderItem(id);
+            order.UpdatedBy = currentUser;
+            order.VatAmount = order.SubAmount * order.Vat;
             order.TotalAmount = order.SubAmount + order.VatAmount - order.PromotionAmount;
             order.UpdatedAt = DateTime.Now;
             await _unitOfWork.SaveChangesAsync();
@@ -73,12 +76,27 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
 
         public async Task<OrderResponseDto> UpdateOrderStatusAsync(int id, OrderUpdateStatusDto updateStatusDto)
         {
-            var order = await _unitOfWork.OrderRepository.GetByIdAsync(id);
+            var order = await _unitOfWork.OrderRepository.GetOrderWithDetailsAsync(id);
             if (order == null)
             {
                 throw new NotFoundException("Order not found.");
             }
             _mapper.Map(updateStatusDto, order);
+            if(order.PaymentStatus == "Paid")
+            {
+                foreach (var orderItem in order.OrderItems)
+                {
+                    var koi = _unitOfWork.KoiRepository.GetById((int)orderItem.KoiId);
+                    //var koiStatusUpdate = new KoiStatusUpdateDto()
+                    //{
+                    //    IsActive = false
+                    //};
+                    //_mapper.Map(koiStatusUpdate, koi);
+                    koi.IsActive = false;
+                    await _unitOfWork.KoiRepository.UpdateAsync(koi);
+
+                }
+            }
             await _unitOfWork.SaveChangesAsync();
 
             return _mapper.Map<OrderResponseDto>(order);
@@ -113,7 +131,7 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
 
         public async Task<OrderResponseDto> GetOrderByIdAsync(int id)
         {
-            var order = await _unitOfWork.OrderRepository.GetByIdAsync(id);
+            var order = await _unitOfWork.OrderRepository.GetOrderWithDetailsAsync(id);
             return order != null ? _mapper.Map<OrderResponseDto>(order) : null;
         }
 
@@ -123,16 +141,16 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
             return _mapper.Map<IEnumerable<OrderResponseDto>>(order);
         }
 
-        public async Task<IEnumerable<OrderResponseDto>> GetAllActiveOrderByIdAsync(int id)
+        public async Task<IEnumerable<OrderResponseDto>> GetAllActiveOrderByIdAsync(int customerId)
         {
             var order = await _unitOfWork.OrderRepository.GetAllAsync();
-            var activeOrder = order.Where(o => o.IsActive == true && o.CustomerId == id);
+            var activeOrder = order.Where(o => o.IsActive == true && o.CustomerId == customerId);
             return _mapper.Map<IEnumerable<OrderResponseDto>>(activeOrder);
         }
 
-        public async Task<OrderStatusResponseDto> GetOrderStatusByIdAsync(int id)
+        public async Task<OrderStatusResponseDto> GetOrderStatusByIdAsync(int orderId)
         {
-            var order = await _unitOfWork.OrderRepository.GetByIdAsync(id);
+            var order = await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
             return order != null ? _mapper.Map<OrderStatusResponseDto>(order) : null;
         }
     }

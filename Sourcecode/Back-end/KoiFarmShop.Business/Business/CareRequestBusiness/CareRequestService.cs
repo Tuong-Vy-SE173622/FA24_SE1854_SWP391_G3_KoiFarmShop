@@ -28,6 +28,12 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
             return careRequest != null ? _mapper.Map<CareRequestResponseDto>(careRequest) : null;
         }
 
+        public async Task<CareRequestResponseDto> GetCareRequestByCustomerIdAsync(int customerId)
+        {
+            var careRequest = _unitOfWork.CareRequestRepository.GetAll().Where(cr => cr.CustomerId == customerId);
+            return careRequest != null ? _mapper.Map<CareRequestResponseDto>(careRequest) : null;
+        }
+
         public async Task<IEnumerable<CareRequestResponseDto>> GetAllCareRequestAsync()
         {
             var careRequests = await _unitOfWork.CareRequestRepository.GetAllAsync();
@@ -49,19 +55,25 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
             var careRequest = _mapper.Map<CareRequest>(createDto);
 
             careRequest.RequestId = _unitOfWork.CareRequestRepository.GetAll().OrderByDescending(cr => cr.RequestId).Select(cr => cr.RequestId).FirstOrDefault() + 1;
+            if (currentUser == null) throw new UnauthorizedAccessException();
+            careRequest.CreatedBy = currentUser;
+            careRequest.CreatedAt = DateTime.UtcNow;
 
             await _unitOfWork.CareRequestRepository.CreateAsync(careRequest);
             await _unitOfWork.SaveChangesAsync();
             return _mapper.Map<CareRequestResponseDto>(careRequest);
         }
 
-        public async Task<CareRequestResponseDto> UpdateCareRequestAsync(int id, CareRequestUpdateDto updateDto)
+        public async Task<CareRequestResponseDto> UpdateCareRequestAsync(int id, CareRequestUpdateDto updateDto, string? currentUser)
         {
             var careRequest = await _unitOfWork.CareRequestRepository.GetByIdAsync(id);
             if (careRequest == null) return null;
 
-            updateDto.UpdatedAt = DateTime.UtcNow;
+            
             _mapper.Map(updateDto, careRequest);
+            careRequest.UpdatedAt = DateTime.UtcNow;
+            if (currentUser == null) throw new UnauthorizedAccessException();
+            careRequest.UpdatedBy = currentUser;
             await _unitOfWork.CareRequestRepository.UpdateAsync(careRequest);
             await _unitOfWork.SaveChangesAsync();
 

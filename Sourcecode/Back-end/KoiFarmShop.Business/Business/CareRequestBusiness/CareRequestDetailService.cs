@@ -33,24 +33,31 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
             return _mapper.Map<IEnumerable<CareRequestDetailResponseDto>>(careRequestDetails);
         }
 
-        public async Task<CareRequestDetailResponseDto> CreateCareRequestDetailAsync(CareRequestDetailCreateDto createDto)
+        public async Task<CareRequestDetailResponseDto> CreateCareRequestDetailAsync(CareRequestDetailCreateDto createDto, string? currentUser)
         {
             var careRequestDetail = _mapper.Map<CareRequestDetail>(createDto);
 
             careRequestDetail.RequestDetailId = _unitOfWork.CareRequestDetailRepository.GetAll().OrderByDescending(crd => crd.RequestDetailId).Select(crd => crd.RequestDetailId).FirstOrDefault() + 1;
+            if (currentUser == null) throw new UnauthorizedAccessException();
+            careRequestDetail.CreatedBy = currentUser;
+            careRequestDetail.CreatedAt = DateTime.UtcNow;
 
             await _unitOfWork.CareRequestDetailRepository.CreateAsync(careRequestDetail);
             await _unitOfWork.SaveChangesAsync();
             return _mapper.Map<CareRequestDetailResponseDto>(careRequestDetail);
         }
 
-        public async Task<CareRequestDetailResponseDto> UpdateCareRequestDetailAsync(int id, CareRequestDetailUpdateDto updateDto)
+        public async Task<CareRequestDetailResponseDto> UpdateCareRequestDetailAsync(int id, CareRequestDetailUpdateDto updateDto, string? currentUser)
         {
             var careRequestDetail = await _unitOfWork.CareRequestDetailRepository.GetByIdAsync(id);
             if (careRequestDetail == null) return null;
 
             _mapper.Map(updateDto, careRequestDetail);
             careRequestDetail.UpdatedAt = DateTime.Now;
+
+            if (currentUser == null) throw new UnauthorizedAccessException();
+            careRequestDetail.UpdatedBy = currentUser;
+
             await _unitOfWork.CareRequestDetailRepository.UpdateAsync(careRequestDetail);
             await _unitOfWork.SaveChangesAsync();
 

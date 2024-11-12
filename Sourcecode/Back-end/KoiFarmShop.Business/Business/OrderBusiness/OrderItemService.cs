@@ -22,33 +22,88 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
             _mapper = mapper;
         }
 
-        public async Task<OrderItemResponseDto> CreateOrderItemAsync(OrderItemCreateDto createDto)
+        public async Task<List<OrderItemResponseDto>> CreateOrderItemsAsync(List<OrderItemCreateDto> createDtos, string? currentUser)
         {
-            var order = await _unitOfWork.OrderRepository.GetByIdAsync(createDto.OrderId);
+            if (createDtos == null || !createDtos.Any())
+            {
+                throw new ArgumentException("No items to add.");
+            }
+
+            var orderId = createDtos.First().OrderId; // Assuming all items belong to the same order
+            var order = await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
             if (order == null)
             {
                 throw new NotFoundException("Order not found.");
             }
-            var koi = await _unitOfWork.KoiRepository.GetByIdAsync(createDto.KoiId);
-            if (koi == null)
-                throw new NotFoundException("Koi not found");
 
-            var orderItem = _mapper.Map<OrderItem>(createDto);
+            var existingKoiIds = _unitOfWork.OrderItemRepository.GetAll()
+                              .Where(oi => oi.OrderId == orderId)
+                              .Select(oi => oi.KoiId)
+                              .ToHashSet();
+            var addedKoiIds = new HashSet<int>();
 
-            orderItem.OrderItemId = _unitOfWork.OrderItemRepository.GetAll().OrderByDescending(ot => ot.OrderItemId).Select(ot => ot.OrderItemId).FirstOrDefault() + 1;
+            double? totalAddedAmount = 0;
+            var orderItems = new List<OrderItem>();
 
-            await _unitOfWork.OrderItemRepository.CreateAsync(orderItem);
+            foreach (var createDto in createDtos)
+            {
+                // Skip if the KoiId is a duplicate in the request or already exists in the order
+                if (addedKoiIds.Contains(createDto.KoiId) || existingKoiIds.Contains(createDto.KoiId))
+                {
+                    continue;
+                }
+
+                var koi = await _unitOfWork.KoiRepository.GetByIdAsync(createDto.KoiId);
+                if (koi == null)
+                {
+                    continue;
+                }
+
+                var orderItem = _mapper.Map<OrderItem>(createDto);
+                orderItem.OrderItemId = _unitOfWork.OrderItemRepository
+                    .GetAll()
+                    .OrderByDescending(ot => ot.OrderItemId)
+                    .Select(ot => ot.OrderItemId)
+                    .FirstOrDefault() + 1;
+                orderItem.Amount = 1;
+                orderItem.Price = koi.Price;
+
+                totalAddedAmount += orderItem.Price;
+                if (currentUser == null) throw new UnauthorizedAccessException();
+                orderItem.CreatedBy = currentUser;
+                await _unitOfWork.OrderItemRepository.CreateAsync(orderItem);
+                // Add the orderItems list for returning
+                orderItems.Add(orderItem);
+                // Add to the addedKoiIds set to prevent re-adding within this batch
+                addedKoiIds.Add(createDto.KoiId);
+            }
+            
+
+            // Update the order's SubAmount
+            order.SubAmount = (order.SubAmount ?? 0) + totalAddedAmount;
+            _unitOfWork.OrderRepository.Update(order);
+
             await _unitOfWork.SaveChangesAsync();
-            return _mapper.Map<OrderItemResponseDto>(orderItem);
+
+            // Map each order item to its response DTO
+            return orderItems.Select(item => _mapper.Map<OrderItemResponseDto>(item)).ToList();
         }
 
-        public async Task<OrderItemResponseDto> UpdateOrderItemAsync(int id, OrderItemUpdateDto updateDto)
+
+        public async Task<OrderItemResponseDto> UpdateOrderItemAsync(int id, OrderItemUpdateDto updateDto, string? currentUser)
         {
             var orderItem = await _unitOfWork.OrderItemRepository.GetByIdAsync(id);
             if (orderItem == null) return null;
 
-            updateDto.UpdatedAt = DateTime.Now;
             _mapper.Map(updateDto, orderItem);
+            var order = await _unitOfWork.OrderRepository.GetByIdAsync((int)orderItem.OrderId);
+            order.UpdatedAt = DateTime.Now;
+
+            if (currentUser == null) throw new UnauthorizedAccessException();
+            orderItem.UpdatedBy = currentUser;
+
+            await _unitOfWork.OrderRepository.UpdateAsync(order);
+
             await _unitOfWork.SaveChangesAsync();
 
             return _mapper.Map<OrderItemResponseDto>(orderItem);
@@ -59,7 +114,13 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
             var orderItem = await _unitOfWork.OrderItemRepository.GetByIdAsync(id);
             if (orderItem == null) return false;
 
+            var order = await _unitOfWork.OrderRepository.GetByIdAsync((int)orderItem.OrderId);
+
             await _unitOfWork.OrderItemRepository.RemoveAsync(orderItem);
+
+            order.SubAmount = order.SubAmount - orderItem.Price;
+            _unitOfWork.OrderRepository.Update(order);
+
             await _unitOfWork.SaveChangesAsync();
 
             return true;

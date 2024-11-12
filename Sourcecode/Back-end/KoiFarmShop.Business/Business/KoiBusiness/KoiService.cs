@@ -95,6 +95,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 .Select(k => new KoiDto
                 {
                     KoiId = k.KoiId,
+                    KoiTypeId = k.KoiTypeId,
                     KoiTypeName = k.KoiType.Name, // Mapping KoiType.Name directly :D
                     Origin = k.Origin,
                     Gender = k.Gender,
@@ -137,6 +138,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 .Select(k => new KoiDto
                 {
                     KoiId = k.KoiId,
+                    KoiTypeId = k.KoiTypeId,
                     KoiTypeName = k.KoiType.Name, // mapping directly since i got tired about automapper '-'
                     Origin = k.Origin,
                     Gender = k.Gender,
@@ -330,6 +332,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 .Select(k => new KoiDto
                 {
                     KoiId = k.KoiId,
+                    KoiTypeId = k.KoiTypeId,
                     KoiTypeName = k.KoiType.Name, // Mapping KoiType.Name directly :D
                     Origin = k.Origin,
                     Gender = k.Gender,

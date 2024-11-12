@@ -39,7 +39,7 @@ namespace KoiFarmShop.Business.Dto
     public class OrderCreateDto
     {
         //public DateTime? OrderDate { get; set; }
-        public int? customerId { get; set; }
+        public int customerId { get; set; }
 
         //public double? SubAmount { get; set; }
 

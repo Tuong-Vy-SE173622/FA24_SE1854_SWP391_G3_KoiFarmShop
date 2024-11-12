@@ -5,8 +5,6 @@ using KoiFarmShop.Business.Dto.Kois;
 using KoiFarmShop.Business.Dto.Payment;
 using KoiFarmShop.Business.Utils.VNPAYAPI.Areas.VNPayAPI.Util;
 using KoiFarmShop.Data;
-using KoiFarmShop.Data.Models;
-using KoiFarmShop.Data.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System.Web;

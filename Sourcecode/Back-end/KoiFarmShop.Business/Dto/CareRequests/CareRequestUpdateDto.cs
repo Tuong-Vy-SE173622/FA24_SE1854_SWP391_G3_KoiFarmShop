@@ -10,7 +10,7 @@ namespace KoiFarmShop.Business.Dto.CareRequests
     {
         //public int RequestId { get; set; }
 
-        public string? Status { get; set; }d
+        public string? Status { get; set; }
         public bool? IsActive { get; set; }
         public string? Note { get; set; }
         public DateTime? UpdatedAt { get; set; }

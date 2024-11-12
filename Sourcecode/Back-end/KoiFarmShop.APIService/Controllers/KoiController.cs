@@ -67,7 +67,6 @@ namespace KoiFarmShop.APIService.Controllers
             return NotFound("Koi not found.");
         }
 
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveKoi(int id)
         {

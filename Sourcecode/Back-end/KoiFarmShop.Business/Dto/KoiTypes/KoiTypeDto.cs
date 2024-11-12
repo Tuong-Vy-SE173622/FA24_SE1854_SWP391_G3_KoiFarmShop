@@ -11,6 +11,8 @@ namespace KoiFarmShop.Business.Dto.KoiTypes
 
         public string ShortDescription { get; set; }
 
+        public string Image { get; set; }
+
         public string OriginHistory { get; set; }
 
         public string CategoryDescription { get; set; }

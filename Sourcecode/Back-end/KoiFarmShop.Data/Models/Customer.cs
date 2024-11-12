@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace KoiFarmShop.Data.Models;
 
 [Table("Customer")]
+[Index("UserId", Name = "UQ_Customer_UserID", IsUnique = true)]
 public partial class Customer
 {
     [Key]
@@ -56,8 +57,4 @@ public partial class Customer
 
     [InverseProperty("Customer")]
     public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
-
-    [ForeignKey("UserId")]
-    [InverseProperty("Customers")]
-    public virtual User User { get; set; }
 }

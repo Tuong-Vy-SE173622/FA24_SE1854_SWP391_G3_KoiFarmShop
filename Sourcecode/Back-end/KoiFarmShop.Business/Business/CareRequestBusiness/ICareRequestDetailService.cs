@@ -11,8 +11,8 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
     {
         Task<IEnumerable<CareRequestDetailResponseDto>> GetAllCareRequestDetailAsync();
         Task<CareRequestDetailResponseDto> GetCareRequestDetailByIdAsync(int id);
-        Task<CareRequestDetailResponseDto> CreateCareRequestDetailAsync(CareRequestDetailCreateDto createDto);
-        Task<CareRequestDetailResponseDto> UpdateCareRequestDetailAsync(int id, CareRequestDetailUpdateDto updateDto);
+        Task<CareRequestDetailResponseDto> CreateCareRequestDetailAsync(CareRequestDetailCreateDto createDto, string? currentUser);
+        Task<CareRequestDetailResponseDto> UpdateCareRequestDetailAsync(int id, CareRequestDetailUpdateDto updateDto, string? currentUser);
         Task<bool> DeleteCareRequestDetailAsync(int id);
     }
 }

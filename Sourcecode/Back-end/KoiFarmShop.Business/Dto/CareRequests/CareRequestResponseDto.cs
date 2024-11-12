@@ -27,7 +27,8 @@ namespace KoiFarmShop.Business.Dto.CareRequests
         public string CreatedBy { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public string UpdatedBy { get; set; }
+        public CustomerDto? Customer { get; set; }
 
-        public List<CareRequestDetailDto> CareRequestDetailsDto { get; set; }
+        public List<CareRequestDetailDto> CareRequestDetailsDto { get; set; } = null!;
     }
 }

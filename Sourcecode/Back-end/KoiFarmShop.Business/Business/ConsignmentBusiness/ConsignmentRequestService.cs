@@ -19,9 +19,8 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
 
         public async Task<ConsignmentRequestResponseDto> CreateConsignmentRequestAsync(ConsignmentRequestCreateDto consignmentRequestCreateDto)
         {
-            //need to check customerId (here still uses userId)
-            var user = _unitOfWork.UserRepository.GetById(consignmentRequestCreateDto.CustomerId);
-            if (user == null)
+            var customer = _unitOfWork.CustomerRepository.GetById(consignmentRequestCreateDto.CustomerId);
+            if (customer == null)
             {
                 throw new NotFoundException("Customer Id does not exist");
             }
@@ -49,6 +48,11 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
         {
             var consignmentRequest = await _unitOfWork.ConsignmentRequestRepository.GetByIdAsync(id);
             if (consignmentRequest == null) throw new KeyNotFoundException("Consignment Request not found");
+
+            //if(await _unitOfWork.ConsignmentRequestRepository.HasAnyAssociatedDetails(id))
+            //{
+            //    throw new Exception("Consignment details with this consignment request still exist");
+            //}
 
             await _unitOfWork.ConsignmentRequestRepository.RemoveAsync(consignmentRequest);
             await _unitOfWork.SaveChangesAsync();

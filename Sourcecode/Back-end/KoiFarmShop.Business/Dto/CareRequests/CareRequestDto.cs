@@ -26,6 +26,15 @@ namespace KoiFarmShop.Business.Dto.CareRequests
 
         public string? Note { get; set; }
 
+        public DateTime? CreatedAt { get; set; }
+
+        public string CreatedBy { get; set; }
+
+        public DateTime? UpdatedAt { get; set; }
+
+        public string UpdatedBy { get; set; }
+        public CustomerDto? Customer { get; set; }
+
         public List<CareRequestDetailDto> CareRequestDetailsDto { get; set; }
 
     }

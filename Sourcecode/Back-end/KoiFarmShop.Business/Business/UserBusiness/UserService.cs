@@ -212,7 +212,6 @@ namespace KoiFarmShop.Business.Business.UserBusiness
                 result.Message = ex.Message;
                 return result;
             }
-            return result;
         }
         public async Task<ResultDto> EditUser(int userId, EditUserDto edit, ClaimsPrincipal userUpdate)
         {

@@ -5,6 +5,7 @@ namespace KoiFarmShop.Business.Business.AccountBusiness
 {
     public interface IAccountService
     {
-        public Task<ResultDto> AddNewUser(RegisterDto model, ClaimsPrincipal userCreate);
+        Task<ResultDto> AddNewUser(RegisterDto model, ClaimsPrincipal userCreate);
+        Task<ResultDto> AddNewCustomer(CustomerDto model, ClaimsPrincipal userCreate);
     }
 }

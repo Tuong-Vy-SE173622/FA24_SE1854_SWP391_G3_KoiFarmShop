@@ -41,10 +41,10 @@ namespace KoiFarmShop.APIService.Controllers
         /// Get list of promotions by filter
         /// </summary>
         /// <returns>A list of users</returns>
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetPromotionList(int? promotionId)
+        [HttpGet("/filterByisActive")]
+        public async Task<IActionResult> GetPromotionList(bool? isActive)
         {
-            var result = await _promotionService.GetPromotionList(promotionId);
+            var result = await _promotionService.GetPromotionList(isActive);
             return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
         #endregion
@@ -89,7 +89,7 @@ namespace KoiFarmShop.APIService.Controllers
         /// Update a promotion
         /// </summary>
         /// <returns>Status of action</returns>
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<ActionResult> UpdatePromotion(int promotionId, PromotionCreateDto promotionDto)
         {
             var currentUser = HttpContext.User;

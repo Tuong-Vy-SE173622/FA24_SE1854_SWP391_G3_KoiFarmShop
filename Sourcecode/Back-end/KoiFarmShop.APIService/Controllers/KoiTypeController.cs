@@ -1,10 +1,12 @@
 ﻿using KoiFarmShop.Business.Business.KoiTypeBusiness;
 using KoiFarmShop.Business.Dto.KoiTypes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace KoiFarmShop.APIService.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class KoiTypeController : ControllerBase
@@ -16,6 +18,7 @@ namespace KoiFarmShop.APIService.Controllers
             _koiTypeService = koiTypeService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<KoiTypeDto>>> GetAllKoiTypes()
         {
@@ -23,6 +26,7 @@ namespace KoiFarmShop.APIService.Controllers
             return Ok(koiTypes);
         }
 
+        [AllowAnonymous]
         [HttpGet("koitypes")]
         public async Task<IActionResult> GetFilteredKoiTypes([FromQuery] KoiTypeFilterDto filterDto)
         {
@@ -30,7 +34,7 @@ namespace KoiFarmShop.APIService.Controllers
             return Ok(result);
         }
 
-
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<KoiTypeDto>> GetKoiTypeById(int id)
         {
@@ -41,16 +45,18 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> CreateKoiType(KoiTypeCreateDto koiTypeCreateDto)
+        public async Task<ActionResult<int>> CreateKoiType([FromForm] KoiTypeCreateDto koiTypeCreateDto)
         {
-            var id = await _koiTypeService.CreateKoiTypeAsync(koiTypeCreateDto);
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var id = await _koiTypeService.CreateKoiTypeAsync(koiTypeCreateDto, currentUser);
             return CreatedAtAction(nameof(GetKoiTypeById), new { id }, id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateKoiType(int id, [FromBody] KoiTypeUpdateDto koiTypeUpdateDto)
+        public async Task<IActionResult> UpdateKoiType(int id, [FromForm] KoiTypeUpdateDto koiTypeUpdateDto)
         {
-            var result = await _koiTypeService.UpdateKoiTypeAsync(id, koiTypeUpdateDto);
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var result = await _koiTypeService.UpdateKoiTypeAsync(id, koiTypeUpdateDto, currentUser);
             if (result < 0)
             {
                 return NotFound();

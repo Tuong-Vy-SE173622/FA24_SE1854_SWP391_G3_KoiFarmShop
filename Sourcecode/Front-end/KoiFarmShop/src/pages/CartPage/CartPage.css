@@ -1,0 +1,112 @@
+/* CartPage.css */
+
+/* Container cho toàn bộ giỏ hàng */
+.cart-page-container {
+  /* margin-top: 120px; */
+  padding: 20px;
+  width: 70%;
+}
+
+/* Tiêu đề giỏ hàng */
+.cart-page-title {
+  text-align: center;
+  color: #0080ff;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Khi giỏ hàng trống */
+.cart-page-empty {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #999;
+}
+
+/* Các item trong giỏ hàng */
+.cart-page-items {
+  margin-top: 20px;
+}
+
+/* Mỗi koi trong giỏ hàng */
+.cart-page-item {
+  padding: 10px 0;
+  /* border-bottom: 1px solid #ccc; */
+  border: 1px solid #0080ff;
+  border-radius: 8px;
+  padding: 1rem 1rem;
+  margin-bottom: 15px;
+  height: 200px;
+}
+
+.cart-page-item > .ant-row {
+  height: 100%;
+  /* display: flex;
+  align-items: center; */
+}
+
+/* Hình ảnh koi */
+.cart-page-item-image {
+  width: 120px;
+  height: 100%;
+  object-fit: cover;
+  /* max-width: 120px; */
+  /* height: auto; */
+  border-radius: 8px;
+  /* object-fit: cover; */
+}
+
+/* Chi tiết của từng koi */
+.cart-page-item-details {
+  padding-left: 15px;
+  margin-top: 25px;
+  /* background-color: lightblue; */
+}
+
+/* Phần tên koi */
+.cart-page-item-name {
+  color: #0080ff;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Cột trái (Nguồn gốc và Tuổi) */
+.cart-page-item-left p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+/* Cột phải (Kích cỡ và Giá) */
+.cart-page-item-right p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+/* Nút Xóa */
+.cart-page-item-delete {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.cart-page-delete-button {
+  width: 100%;
+  background-color: #ff4d4f;
+  border-color: #ff4d4f;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+/* Hiển thị tổng cộng */
+.cart-page-total {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.5rem;
+}
+
+.cart-page-total h3 {
+  font-weight: bold;
+}

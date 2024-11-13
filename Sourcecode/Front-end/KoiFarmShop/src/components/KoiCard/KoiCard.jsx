@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Col, Modal, Row } from "antd";
 import { IoIosSearch } from "react-icons/io";
 import { TiShoppingCart } from "react-icons/ti";
@@ -6,11 +6,14 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaCodeCompare } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import "./KoiCard.css";
+import { CartContext } from "../../contexts/CartContext";
 
 function KoiCard({ koi }) {
   const nav = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [compareData, setCompareData] = useState([]);
+
+  const { addToCart } = useContext(CartContext);
 
   const koiSelectItems = [
     {
@@ -23,6 +26,7 @@ function KoiCard({ koi }) {
       key: 2,
       icon: <TiShoppingCart />,
       label: "Thêm vào giỏ hàng",
+      onClick: () => addToCart(koi),
     },
     {
       key: 3,
@@ -99,11 +103,7 @@ function KoiCard({ koi }) {
 
   return (
     <div className="koi-card-container">
-      <img
-        src="https://5.imimg.com/data5/QH/WR/MY-47947495/koi-carp-aquarium-fish.jpg"
-        alt="koi"
-        onClick={handleDetailPage}
-      />
+      <img src={koi.image} alt="koi" onClick={handleDetailPage} />
       <div className="koi-title">{koi.koiTypeName}</div>
       <div className="koi-card-select">
         {koiSelectItems.map((item) => (
@@ -150,10 +150,7 @@ function KoiCard({ koi }) {
         <div className="popup-koi-detail-container">
           <div className="popup-koi-detail-p1">
             <div className="popup-koi-detail-left">
-              <img
-                src="https://5.imimg.com/data5/QH/WR/MY-47947495/koi-carp-aquarium-fish.jpg"
-                alt="koi"
-              />
+              <img src={koi.image} alt="koi" />
             </div>
             <div className="popup-koi-detail-right">
               <div className="popup-koi-detail-items">

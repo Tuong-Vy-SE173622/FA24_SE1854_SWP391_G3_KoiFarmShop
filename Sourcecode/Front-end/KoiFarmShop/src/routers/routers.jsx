@@ -25,16 +25,21 @@ import ConsignmentRequestForm from "../pages/Dashboard/CustomerDashboard/Consign
 import ConsignmentDetail from "../pages/Dashboard/CustomerDashboard/ConsignmentDetail/ConsignmentDetail";
 import CareRequestForm from "../pages/Dashboard/CustomerDashboard/CareRequestForm/CareRequestForm";
 import CareRequestDetailForm from "../pages/Dashboard/CustomerDashboard/CareRequestDetailForm/CareRequestDetailForm";
+// import { CartProvider } from "../contexts/CartContext";
+import CartPage from "../pages/CartPage/CartPage";
+import { CartProvider } from "../contexts/CartContext";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
-        <ScrollToTop />
-        <Header />
-        <Outlet />
-        <Footer />
+        <CartProvider>
+          <ScrollToTop />
+          <Header />
+          <Outlet />
+          <Footer />
+        </CartProvider>
       </>
     ),
     children: [
@@ -48,7 +53,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/koi-detail/:id",
+        path: "/koi-detail/:KoiID",
         element: <KoiDetailPage />,
       },
       {
@@ -64,15 +69,21 @@ export const router = createBrowserRouter([
         path: "/compare",
         element: <ComparePage />,
       },
+      {
+        path: "/cart",
+        element: <CartPage />,
+      },
     ],
   },
   {
     path: "/dashboard",
     element: (
       <>
-        <ScrollToTop />
-        <Header />
-        <CustomerDashboardLayout />
+        <CartProvider>
+          <ScrollToTop />
+          <Header />
+          <CustomerDashboardLayout />
+        </CartProvider>
       </>
     ),
     children: [

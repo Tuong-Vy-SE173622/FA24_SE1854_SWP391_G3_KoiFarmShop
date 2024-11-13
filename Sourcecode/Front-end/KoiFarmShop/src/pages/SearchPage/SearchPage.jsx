@@ -143,7 +143,7 @@ const SearchPage = () => {
   useEffect(() => {
     fetchKoi(currentPage);
     // fetchNumberKoi();
-  }, [currentPage, sortOption, selectedFilters]);
+  }, [currentPage, sortOption, selectedFilters, queryParams.searchData]);
 
   // console.log("koi", koiLs);
   return (

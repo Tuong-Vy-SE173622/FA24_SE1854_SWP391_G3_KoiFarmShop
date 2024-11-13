@@ -66,6 +66,7 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
             if (currentUser == null) throw new UnauthorizedAccessException();
             order.SubAmount = await _unitOfWork.OrderRepository.SumOfOrderItem(id);
             order.UpdatedBy = currentUser;
+            order.Vat = Constants.VAT;
             order.VatAmount = order.SubAmount * order.Vat;
             order.TotalAmount = order.SubAmount + order.VatAmount - order.PromotionAmount;
             order.UpdatedAt = DateTime.Now;

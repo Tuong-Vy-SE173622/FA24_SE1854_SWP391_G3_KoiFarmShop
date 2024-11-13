@@ -64,7 +64,6 @@ namespace KoiFarmShop.Business.Dto
     {
 
         public double? PromotionAmount { get; set; }
-        public double? Vat { get; set; }
         public string? PaymentMethod { get; set; }
         public string? Note { get; set; }
     }

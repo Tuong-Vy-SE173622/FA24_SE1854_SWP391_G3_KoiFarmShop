@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 
 using KoiFarmShop.Business.Business.Cloudinary;
-
+using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Kois;
 using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
@@ -79,6 +79,16 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 query = query.Where(k => k.Origin.Contains(filterDto.Origin));
             }
 
+            if (filterDto.Status.HasValue)
+            {
+                query = query.Where(k => k.Status == filterDto.Status);
+            }
+
+            if (filterDto.IsActive.HasValue)
+            {
+                query = query.Where(k  => k.IsActive == filterDto.IsActive);
+            }
+
             // Sorting
             if (filterDto.IsSortedByPrice)
                 query = filterDto.IsAscending
@@ -101,7 +111,8 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     Gender = k.Gender,
                     Age = k.Age,
                     Size = k.Size,
-                    Image =k.Image,
+                    Image = k.Image,
+                    Certificate = k.Certificate, 
                     Price = k.Price,
                     Characteristics = k.Characteristics,
                     FeedingAmountPerDay = k.FeedingAmountPerDay,
@@ -110,7 +121,8 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     IsImported = k.IsImported,
                     Generation = k.Generation,
                     IsLocal = k.IsLocal,
-                    IsActive = true,  // only unsold kois (is active = true means unsold)
+                    IsActive = k.IsActive,  // only unsold kois (is active = true means unsold)
+                    Status = k.Status,
                     Note = k.Note,
                     CreatedAt = k.CreatedAt,
                     CreatedBy = k.CreatedBy,
@@ -145,6 +157,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     Age = k.Age,
                     Size = k.Size,
                     Image = k.Image,
+                    Certificate = k.Certificate,
                     Price = k.Price,
                     Characteristics = k.Characteristics,
                     FeedingAmountPerDay = k.FeedingAmountPerDay,
@@ -154,6 +167,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     Generation = k.Generation,
                     IsLocal = k.IsLocal,
                     IsActive = k.IsActive,
+                    Status = k.Status,
                     Note = k.Note,
                     CreatedAt = k.CreatedAt,
                     CreatedBy = k.CreatedBy,
@@ -182,6 +196,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
 
             koi.CreatedBy = currentUser;
             koi.CreatedAt = DateTime.Now;
+            koi.Status = Koi.KoiStatus.APPROVED;
 
             var image = koiCreateDto.Image;
             if (image != null)
@@ -189,8 +204,49 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 koi.Image = _cloudinaryService.UploadImageAsync(image).ToString();
             }
 
+            var certificate = koiCreateDto.Certificate;
+            if (certificate != null)
+            {
+                koi.Certificate = _cloudinaryService.UploadFileAsync(certificate).ToString();
+            }
+
             await _unitOfWork.KoiRepository.CreateAsync(koi);
             return koi.KoiId;
+        }
+
+        public async Task<int> CreateKoiForCustomerAsync(KoiCreateForCustomerDto koiCreateDto, string? currentUser)
+        {
+            if (String.IsNullOrEmpty(currentUser)) throw new UnauthorizedAccessException("current user is invalid or might not login");
+
+            //check koi type exist
+            var koiType = await _unitOfWork.KoiTypeRepository.GetByIdAsync(koiCreateDto.KoiTypeId);
+            if (koiType == null)
+            {
+                throw new NotFoundException("KoiType not found");
+            }
+
+            var koi = _mapper.Map<Koi>(koiCreateDto);
+
+            koi.CreatedBy = currentUser;
+            koi.CreatedAt = DateTime.Now;
+            koi.Status = Koi.KoiStatus.PENDING;
+            koi.IsOwnedByFarm = false;
+
+            var image = koiCreateDto.Image;
+            if (image != null)
+            {
+                koi.Image = _cloudinaryService.UploadImageAsync(image).ToString();
+            }
+
+            var certificate = koiCreateDto.Certificate;
+            if (certificate != null)
+            {
+                koi.Certificate = _cloudinaryService.UploadFileAsync(certificate).ToString();
+            }
+
+            await _unitOfWork.KoiRepository.CreateAsync(koi);
+            return koi.KoiId;
+
         }
 
         public async Task<int> UpdateKoiAsync(int id, KoiUpdateDto koiUpdateDto, string? currentUser)
@@ -213,11 +269,18 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
 
             existingKoi.UpdatedBy = currentUser;
             existingKoi.UpdatedAt = DateTime.Now;
+            existingKoi.Status = Koi.KoiStatus.APPROVED; // might need to change 
 
             var image = koiUpdateDto.Image;
             if (image != null)
             {
                 existingKoi.Image = _cloudinaryService.UploadImageAsync(image).ToString();
+            }
+
+            var certificate = koiUpdateDto.Certificate;
+            if (certificate != null)
+            {
+                existingKoi.Certificate = _cloudinaryService.UploadFileAsync(certificate).ToString();
             }
             return await _unitOfWork.KoiRepository.UpdateAsync(existingKoi);
         }
@@ -339,6 +402,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     Age = k.Age,
                     Size = k.Size,
                     Image = k.Image,
+                    Certificate = k.Certificate,
                     Price = k.Price,
                     Characteristics = k.Characteristics,
                     FeedingAmountPerDay = k.FeedingAmountPerDay,
@@ -348,6 +412,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     Generation = k.Generation,
                     IsLocal = k.IsLocal,
                     IsActive = true,  // only unsold kois (is active = true means unsold)
+                    Status = Koi.KoiStatus.APPROVED,
                     Note = k.Note,
                     CreatedAt = k.CreatedAt,
                     CreatedBy = k.CreatedBy,
@@ -376,6 +441,46 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 .Where(origin => !string.IsNullOrEmpty(origin))
                 .ToHashSet();
             return koiOrigins;
+        }
+
+        public async Task<ResultDto> ApproveOrRejectKoiForCareRequest(KoiApproveRequest request, string? currentUser)
+        {
+            if (String.IsNullOrEmpty(currentUser)) throw new UnauthorizedAccessException("current user is invalid or might not login");
+            var existingKoi = await _unitOfWork.KoiRepository.GetByIdAsync(request.KoiId);
+            if (existingKoi == null)
+                throw new NotFoundException("Koi not found");
+            if(request.IsApproved == true)
+            {
+                existingKoi.Status = Koi.KoiStatus.APPROVED;
+            }
+            else existingKoi.Status = Koi.KoiStatus.REJECTED;
+            existingKoi.IsActive = false; // being in care request means the koi ain't for sale
+
+            return new ResultDto
+            {
+                IsSuccess = true,
+                Data = existingKoi
+            };
+        }
+
+        public async Task<ResultDto> ApproveOrRejectKoiForConsignment(KoiApproveRequest request, string? currentUser)
+        {
+            if (String.IsNullOrEmpty(currentUser)) throw new UnauthorizedAccessException("current user is invalid or might not login");
+            var existingKoi = await _unitOfWork.KoiRepository.GetByIdAsync(request.KoiId);
+            if (existingKoi == null)
+                throw new NotFoundException("Koi not found");
+            if (request.IsApproved == true)
+            {
+                existingKoi.Status = Koi.KoiStatus.APPROVED;
+            }
+            else existingKoi.Status = Koi.KoiStatus.REJECTED;
+            existingKoi.IsActive = true; // being in consignment means the koi is for sale
+
+            return new ResultDto
+            {
+                IsSuccess = true,
+                Data = existingKoi
+            };
         }
 
     }

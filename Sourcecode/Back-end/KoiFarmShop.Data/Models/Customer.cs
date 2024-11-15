@@ -44,12 +44,6 @@ public partial class Customer
     public string UpdatedBy { get; set; }
 
     [InverseProperty("Customer")]
-    public virtual ICollection<CareRequest> CareRequests { get; set; } = new List<CareRequest>();
-
-    [InverseProperty("Customer")]
-    public virtual ICollection<ConsignmentRequest> ConsignmentRequests { get; set; } = new List<ConsignmentRequest>();
-
-    [InverseProperty("Customer")]
     public virtual ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();
 
     [InverseProperty("Customer")]

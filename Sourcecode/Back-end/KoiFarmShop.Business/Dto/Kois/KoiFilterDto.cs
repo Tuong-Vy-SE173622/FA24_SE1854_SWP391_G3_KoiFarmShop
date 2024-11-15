@@ -1,4 +1,6 @@
-﻿namespace KoiFarmShop.Business.Dto.Kois
+﻿using static KoiFarmShop.Data.Models.Koi;
+
+namespace KoiFarmShop.Business.Dto.Kois
 {
     public class KoiFilterDto
     {
@@ -9,6 +11,8 @@
         public double? MaxSize { get; set; }
         public bool? IsOwnedByFarm { get; set; }
         public bool? IsImport { get; set; }
+        public KoiStatus? Status { get; set; }
+        public bool? IsActive { get; set; }
         public string? KoiTypeName { get; set; }
         public int? Gender { get; set; } // 0 = male , 1 = female
         public string? Origin { get; set; }

@@ -23,7 +23,9 @@ namespace KoiFarmShop.Business.Dto.Kois
 
         public IFormFile? Image { get; set; }
 
-        [Range(0, double.MaxValue, ErrorMessage = "Price must be a positive value.")]
+        public IFormFile? Certificate { get; set; }
+
+        [Range(0, double.MaxValue, ErrorMessage = "Price must be a positive value.")] 
         public double? Price { get; set; }
 
         [MaxLength(500)]

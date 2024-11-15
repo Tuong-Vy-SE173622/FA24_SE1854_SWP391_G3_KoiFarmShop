@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 
 namespace KoiFarmShop.Data.Models;
@@ -83,8 +84,15 @@ public partial class Koi
     [Column("price")]
     public double? Price { get; set; }
 
-    [InverseProperty("Koi")]
-    public virtual ICollection<ConsignmentDetail> ConsignmentDetails { get; set; } = new List<ConsignmentDetail>();
+    [Column("certificate")]
+    [StringLength(255)]
+    [Unicode(false)]
+    public string Certificate { get; set; }
+
+    [Column("status")]
+    [StringLength(50)]
+    [Unicode(false)]
+    public KoiStatus Status { get; set; } 
 
     [ForeignKey("KoiTypeId")]
     [InverseProperty("Kois")]
@@ -92,4 +100,11 @@ public partial class Koi
 
     [InverseProperty("Koi")]
     public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
+
+    public enum KoiStatus
+    {
+        PENDING,
+        APPROVED,
+        REJECTED
+    }
 }

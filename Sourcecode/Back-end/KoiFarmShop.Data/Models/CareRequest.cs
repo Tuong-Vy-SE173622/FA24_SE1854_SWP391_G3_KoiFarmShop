@@ -12,8 +12,8 @@ namespace KoiFarmShop.Data.Models;
 public partial class CareRequest
 {
     [Key]
-    [Column("request_id")]
-    public int RequestId { get; set; }
+    [Column("care_request_id")]
+    public int CareRequestId { get; set; }
 
     [Column("customer_id")]
     public int? CustomerId { get; set; }
@@ -21,41 +21,31 @@ public partial class CareRequest
     [Column("koi_id")]
     public int? KoiId { get; set; }
 
-    [Column("requested_date")]
-    public DateTime? RequestedDate { get; set; }
+    [Column("care_plan_id")]
+    public int? CarePlanId { get; set; }
+
+    [Column("start_date", TypeName = "datetime")]
+    public DateTime? StartDate { get; set; }
 
     [Column("status")]
-    [StringLength(255)]
+    [StringLength(50)]
     public string Status { get; set; }
 
-    [Column("is_active")]
-    public bool? IsActive { get; set; }
-
-    [Column("note")]
-    [StringLength(255)]
-    [Unicode(false)]
-    public string Note { get; set; }
-
-    [Column("created_at")]
-    public DateTime? CreatedAt { get; set; }
+    [Column("total_amount", TypeName = "decimal(10, 2)")]
+    public decimal? TotalAmount { get; set; }
 
     [Column("created_by")]
     [StringLength(255)]
-    [Unicode(false)]
     public string CreatedBy { get; set; }
-
-    [Column("updated_at")]
-    public DateTime? UpdatedAt { get; set; }
 
     [Column("updated_by")]
     [StringLength(255)]
-    [Unicode(false)]
     public string UpdatedBy { get; set; }
 
-    [InverseProperty("Request")]
-    public virtual ICollection<CareRequestDetail> CareRequestDetails { get; set; } = new List<CareRequestDetail>();
-
-    [ForeignKey("CustomerId")]
+    [ForeignKey("CarePlanId")]
     [InverseProperty("CareRequests")]
-    public virtual Customer Customer { get; set; }
+    public virtual CarePlan CarePlan { get; set; }
+
+    [InverseProperty("CareRequest")]
+    public virtual ICollection<CareRequestDetail> CareRequestDetails { get; set; } = new List<CareRequestDetail>();
 }

@@ -9,16 +9,18 @@ namespace KoiFarmShop.Data.Models;
 
 public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
 {
+    public FA_SE1854_SWP391_G3_KoiFarmShopContext()
+    {
+    }
+
     public FA_SE1854_SWP391_G3_KoiFarmShopContext(DbContextOptions<FA_SE1854_SWP391_G3_KoiFarmShopContext> options)
         : base(options)
     {
     }
 
-    public FA_SE1854_SWP391_G3_KoiFarmShopContext()
-    {
-    }
-
     public virtual DbSet<BlogPost> BlogPosts { get; set; }
+
+    public virtual DbSet<CarePlan> CarePlans { get; set; }
 
     public virtual DbSet<CareRequest> CareRequests { get; set; }
 
@@ -26,9 +28,9 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
 
     public virtual DbSet<Certification> Certifications { get; set; }
 
-    public virtual DbSet<ConsignmentDetail> ConsignmentDetails { get; set; }
-
     public virtual DbSet<ConsignmentRequest> ConsignmentRequests { get; set; }
+
+    public virtual DbSet<ConsignmentTransaction> ConsignmentTransactions { get; set; }
 
     public virtual DbSet<Customer> Customers { get; set; }
 
@@ -73,28 +75,29 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
             entity.Property(e => e.IsActive).HasDefaultValueSql("('DEFAULT TRUE')");
         });
 
+        modelBuilder.Entity<CarePlan>(entity =>
+        {
+            entity.HasKey(e => e.CarePlanId).HasName("PK__Care_Pla__1AE639AEE48BAF16");
+
+            entity.Property(e => e.CarePlanId).ValueGeneratedNever();
+        });
+
         modelBuilder.Entity<CareRequest>(entity =>
         {
-            entity.HasKey(e => e.RequestId).HasName("care_request_request_id_primary");
+            entity.HasKey(e => e.CareRequestId).HasName("PK__Care_Req__60ADF019247783DC");
 
-            entity.Property(e => e.RequestId).ValueGeneratedNever();
-            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
-            entity.Property(e => e.IsActive).HasDefaultValue(true);
-            entity.Property(e => e.RequestedDate).HasDefaultValueSql("('GETDATE()')");
+            entity.Property(e => e.CareRequestId).ValueGeneratedNever();
 
-            entity.HasOne(d => d.Customer).WithMany(p => p.CareRequests).HasConstraintName("care_request_customer_id_foreign");
+            entity.HasOne(d => d.CarePlan).WithMany(p => p.CareRequests).HasConstraintName("FK__Care_Requ__care___2D7CBDC4");
         });
 
         modelBuilder.Entity<CareRequestDetail>(entity =>
         {
-            entity.HasKey(e => e.RequestDetailId).HasName("care_request_detail_request_detail_id_primary");
+            entity.HasKey(e => e.CareRequestDetailId).HasName("PK__Care_Req__4E3C0C8E650C40E7");
 
-            entity.Property(e => e.RequestDetailId).ValueGeneratedNever();
-            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.CareRequestDetailId).ValueGeneratedNever();
 
-            entity.HasOne(d => d.Request).WithMany(p => p.CareRequestDetails)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("care_request_detail_request_id_foreign");
+            entity.HasOne(d => d.CareRequest).WithMany(p => p.CareRequestDetails).HasConstraintName("FK__Care_Requ__care___314D4EA8");
         });
 
         modelBuilder.Entity<Certification>(entity =>
@@ -106,23 +109,24 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
                 .HasConstraintName("FK_Certification_Order_Item");
         });
 
-        modelBuilder.Entity<ConsignmentDetail>(entity =>
-        {
-            entity.HasKey(e => e.ConsignmentDetailId).HasName("consignment_item_consignment_id_primary");
-
-            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
-            entity.Property(e => e.IsActive).HasDefaultValue(true);
-
-            entity.HasOne(d => d.Consignment).WithMany(p => p.ConsignmentDetails).HasConstraintName("FK_Consignment_Detail_Consignment_Request").OnDelete(DeleteBehavior.Cascade); 
-
-            entity.HasOne(d => d.Koi).WithMany(p => p.ConsignmentDetails).HasConstraintName("consignment_item_koi_id_foreign");
-        });
-
         modelBuilder.Entity<ConsignmentRequest>(entity =>
         {
-            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.HasKey(e => e.ConsignmentId).HasName("PK__Consignm__3114B3D0EC8A66E7");
 
-            entity.HasOne(d => d.Customer).WithMany(p => p.ConsignmentRequests).HasConstraintName("FK_Consignment_Request_Customer");
+            entity.ToTable("Consignment_Request", tb => tb.HasTrigger("trg_UpdateIsActive"));
+
+            entity.Property(e => e.ConsignmentId).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<ConsignmentTransaction>(entity =>
+        {
+            entity.HasKey(e => e.TransactionId).HasName("PK__Consignm__85C600AFD7044212");
+
+            entity.Property(e => e.TransactionId).ValueGeneratedNever();
+            entity.Property(e => e.CommissionAmount).HasComputedColumnSql("([sale_price]*(0.05))", false);
+            entity.Property(e => e.Earnings).HasComputedColumnSql("([sale_price]-[commission_fee])", false);
+
+            entity.HasOne(d => d.Consignment).WithMany(p => p.ConsignmentTransactions).HasConstraintName("FK__Consignme__consi__27C3E46E");
         });
 
         modelBuilder.Entity<Customer>(entity =>
@@ -172,7 +176,7 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
             entity.Property(e => e.OrderId).ValueGeneratedNever();
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.IsActive).HasDefaultValue(true);
-            entity.Property(e => e.OrderDate).HasDefaultValueSql("('GETDATE()')");
+            entity.Property(e => e.OrderDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Orders).HasConstraintName("order_customer_id_foreign");
         });

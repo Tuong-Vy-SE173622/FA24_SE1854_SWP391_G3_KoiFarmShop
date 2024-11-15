@@ -12,44 +12,34 @@ namespace KoiFarmShop.Data.Models;
 public partial class CareRequestDetail
 {
     [Key]
-    [Column("request_detail_id")]
-    public int RequestDetailId { get; set; }
+    [Column("care_request_detail_id")]
+    public int CareRequestDetailId { get; set; }
 
-    [Column("request_id")]
-    public int RequestId { get; set; }
+    [Column("care_request_id")]
+    public int? CareRequestId { get; set; }
 
-    [Column("image")]
-    public int? Image { get; set; }
+    [Column("koi_image")]
+    public string KoiImage { get; set; }
 
-    [Column("care_method")]
-    public int? CareMethod { get; set; }
+    [Column("service_description")]
+    public string ServiceDescription { get; set; }
 
     [Column("status")]
-    [StringLength(255)]
+    [StringLength(50)]
     public string Status { get; set; }
 
     [Column("note")]
-    [StringLength(255)]
-    [Unicode(false)]
     public string Note { get; set; }
-
-    [Column("created_at")]
-    public DateTime? CreatedAt { get; set; }
 
     [Column("created_by")]
     [StringLength(255)]
-    [Unicode(false)]
     public string CreatedBy { get; set; }
-
-    [Column("updated_at")]
-    public DateTime? UpdatedAt { get; set; }
 
     [Column("updated_by")]
     [StringLength(255)]
-    [Unicode(false)]
     public string UpdatedBy { get; set; }
 
-    [ForeignKey("RequestId")]
+    [ForeignKey("CareRequestId")]
     [InverseProperty("CareRequestDetails")]
-    public virtual CareRequest Request { get; set; }
+    public virtual CareRequest CareRequest { get; set; }
 }

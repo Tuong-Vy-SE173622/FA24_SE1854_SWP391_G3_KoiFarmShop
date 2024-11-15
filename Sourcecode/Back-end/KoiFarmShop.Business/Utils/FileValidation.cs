@@ -14,7 +14,7 @@ namespace KoiFarmShop.Business.Utils
             if (file == null || file.Length == 0)
                 throw new ArgumentException("File cannot be null or empty.");
 
-            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".mp4", ".mov" };
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".mp4", ".mov", ".pdf" };
             var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
 
             if (!allowedExtensions.Contains(fileExtension))

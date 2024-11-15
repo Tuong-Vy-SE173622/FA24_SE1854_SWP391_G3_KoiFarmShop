@@ -18,48 +18,38 @@ public partial class ConsignmentRequest
     [Column("customer_id")]
     public int? CustomerId { get; set; }
 
-    [Column("sub_amount")]
-    public double? SubAmount { get; set; }
+    [Column("koi_id")]
+    public int? KoiId { get; set; }
 
-    [Column("VAT")]
-    public double? Vat { get; set; }
+    [Column("argred_sale_price", TypeName = "decimal(10, 2)")]
+    public decimal? ArgredSalePrice { get; set; }
 
-    [Column("VAT_amount")]
-    public double? VatAmount { get; set; }
+    [Column("start_date", TypeName = "datetime")]
+    public DateTime? StartDate { get; set; }
 
-    [Column("promotion_amount")]
-    public double? PromotionAmount { get; set; }
-
-    [Column("total_amount")]
-    public double? TotalAmount { get; set; }
-
-    [Column("payment_method")]
-    [StringLength(255)]
-    public string PaymentMethod { get; set; }
-
-    [Column("payment_status")]
-    [StringLength(50)]
-    public string PaymentStatus { get; set; }
+    [Column("end_date", TypeName = "datetime")]
+    public DateTime? EndDate { get; set; }
 
     [Column("is_active")]
     public bool? IsActive { get; set; }
 
-    [Column("note")]
-    [StringLength(255)]
-    [Unicode(false)]
-    public string Note { get; set; }
-
     [Column("status")]
-    [StringLength(255)]
+    [StringLength(50)]
     public string Status { get; set; }
 
-    [Column("is_online")]
-    public bool? IsOnline { get; set; }
+    [Column("note")]
+    public string Note { get; set; }
+
+    [Column("created_at", TypeName = "datetime")]
+    public DateTime? CreatedAt { get; set; }
+
+    [Column("updated_at", TypeName = "datetime")]
+    public DateTime? UpdatedAt { get; set; }
+
+    [Column("updated_by")]
+    [StringLength(255)]
+    public string UpdatedBy { get; set; }
 
     [InverseProperty("Consignment")]
-    public virtual ICollection<ConsignmentDetail> ConsignmentDetails { get; set; } = new List<ConsignmentDetail>();
-
-    [ForeignKey("CustomerId")]
-    [InverseProperty("ConsignmentRequests")]
-    public virtual Customer Customer { get; set; }
+    public virtual ICollection<ConsignmentTransaction> ConsignmentTransactions { get; set; } = new List<ConsignmentTransaction>();
 }

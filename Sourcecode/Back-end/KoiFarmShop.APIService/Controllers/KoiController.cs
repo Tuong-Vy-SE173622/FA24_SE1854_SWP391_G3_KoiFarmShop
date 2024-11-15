@@ -96,6 +96,7 @@ namespace KoiFarmShop.APIService.Controllers
             result.success(origins);
             return result;
         }
+
         [HttpPut("update-for-list-sold-kois")]
         public async Task<ResultDto> UpdateStatusForSoldKoi([FromForm] ListSoldKois list)
         {
@@ -116,6 +117,32 @@ namespace KoiFarmShop.APIService.Controllers
                 result.error("Update failed!");
                 return result;
             }
+        }
+
+        [HttpPut("approve-for-care-request")]
+        public async Task<ResultDto> ApproveKoiForCareRequest([FromForm] KoiApproveRequest request)
+        {
+            ResultDto result = new();
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            if (currentUser == null) 
+            {
+                result.error("user not login or invalid user role to access this endpoint");
+                return result;
+            }
+            return await _koiService.ApproveOrRejectKoiForCareRequest(request, currentUser);
+        }
+
+        [HttpPut("approve-for-consignment")]
+        public async Task<ResultDto> ApproveKoiForConsignment([FromForm] KoiApproveRequest request)
+        {
+            ResultDto result = new();
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            if (currentUser == null)
+            {
+                result.error("user not login or invalid user role to access this endpoint");
+                return result;
+            }
+            return await _koiService.ApproveOrRejectKoiForConsignment(request, currentUser);
         }
     }
 }

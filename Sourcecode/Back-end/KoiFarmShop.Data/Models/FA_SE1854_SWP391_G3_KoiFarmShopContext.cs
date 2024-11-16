@@ -126,7 +126,7 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
             entity.Property(e => e.CommissionAmount).HasComputedColumnSql("([sale_price]*(0.05))", false);
             entity.Property(e => e.Earnings).HasComputedColumnSql("([sale_price]-[commission_fee])", false);
 
-            entity.HasOne(d => d.Consignment).WithMany(p => p.ConsignmentTransactions).HasConstraintName("FK__Consignme__consi__27C3E46E");
+            entity.HasOne(d => d.Consignment).WithOne(p => p.ConsignmentTransaction).HasConstraintName("FK_Consignment_Transaction_ConsignmentID");
         });
 
         modelBuilder.Entity<Customer>(entity =>

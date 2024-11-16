@@ -35,7 +35,7 @@ public partial class ConsignmentRequest
 
     [Column("status")]
     [StringLength(50)]
-    public string Status { get; set; }
+    public ConsignmentStatus Status { get; set; }
 
     [Column("note")]
     public string Note { get; set; }
@@ -51,5 +51,10 @@ public partial class ConsignmentRequest
     public string UpdatedBy { get; set; }
 
     [InverseProperty("Consignment")]
-    public virtual ICollection<ConsignmentTransaction> ConsignmentTransactions { get; set; } = new List<ConsignmentTransaction>();
+    public virtual ConsignmentTransaction ConsignmentTransaction { get; set; }
+
+    public enum ConsignmentStatus
+    {
+        pending, rejected, approved, complete
+    }
 }

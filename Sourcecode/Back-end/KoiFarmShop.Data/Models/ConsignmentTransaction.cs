@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace KoiFarmShop.Data.Models;
 
 [Table("Consignment_Transaction")]
+[Index("ConsignmentId", Name = "UQ_Consignment_Transaction_ConsignmentID", IsUnique = true)]
 public partial class ConsignmentTransaction
 {
     [Key]
@@ -34,6 +35,6 @@ public partial class ConsignmentTransaction
     public DateTime? SoldAt { get; set; }
 
     [ForeignKey("ConsignmentId")]
-    [InverseProperty("ConsignmentTransactions")]
+    [InverseProperty("ConsignmentTransaction")]
     public virtual ConsignmentRequest Consignment { get; set; }
 }

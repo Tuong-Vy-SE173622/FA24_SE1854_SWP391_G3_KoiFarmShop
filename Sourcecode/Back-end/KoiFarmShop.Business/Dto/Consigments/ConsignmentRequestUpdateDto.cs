@@ -4,23 +4,13 @@ namespace KoiFarmShop.Business.Dto.Consigments
 {
     public class ConsignmentRequestUpdateDto
     {
-        public int? CustomerId { get; set; }
+        public decimal? ArgredSalePrice { get; set; }
 
-        [StringLength(50, ErrorMessage = "PaymentMethod cannot be longer than 50 characters.")]
-        public string? PaymentMethod { get; set; }
+        public DateTime? StartDate { get; set; }
 
-        [StringLength(50, ErrorMessage = "PaymentStatus cannot be longer than 50 characters.")]
-        public string? PaymentStatus { get; set; }
+        public DateTime? EndDate { get; set; }
 
-        public bool? IsActive { get; set; }
-
-        [StringLength(255, ErrorMessage = "Note cannot be longer than 255 characters.")]
         public string? Note { get; set; }
-
-        [StringLength(255, ErrorMessage = "Status cannot be longer than 255 characters.")]
-        public string? Status { get; set; }
-
-        public bool? IsOnline { get; set; }
     }
 
 }

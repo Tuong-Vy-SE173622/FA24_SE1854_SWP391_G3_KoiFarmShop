@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 
 namespace KoiFarmShop.Data.Models;
@@ -92,7 +91,7 @@ public partial class Koi
     [Column("status")]
     [StringLength(50)]
     [Unicode(false)]
-    public KoiStatus Status { get; set; } 
+    public KoiStatus Status { get; set; }
 
     [ForeignKey("KoiTypeId")]
     [InverseProperty("Kois")]

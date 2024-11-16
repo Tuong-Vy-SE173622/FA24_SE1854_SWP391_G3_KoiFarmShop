@@ -8,15 +8,11 @@ namespace KoiFarmShop.Data.Repositories
     {
         public ConsignmentRequestRepository(FA_SE1854_SWP391_G3_KoiFarmShopContext context) => _context = context;
 
-        public async Task<ConsignmentRequest> GetRequestWithDetailsAsync(int consignmentId)
+        public async Task<ConsignmentRequest> GetRequestWithTransactionAsync(int consignmentId)
         {
             return await _context.ConsignmentRequests
-                .Include(c => c.ConsignmentDetails)
+                .Include(c => c.ConsignmentTransaction)
                 .FirstOrDefaultAsync(c => c.ConsignmentId == consignmentId);
-        }
-        public async Task<bool> HasAnyAssociatedDetails(int consignmentId)
-        {
-            return await _context.ConsignmentDetails.AnyAsync(c => c.ConsignmentId == c.ConsignmentId);
         }
     }
 }

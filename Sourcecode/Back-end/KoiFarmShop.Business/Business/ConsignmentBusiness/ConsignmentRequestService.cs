@@ -26,8 +26,12 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             }
 
             var consignmentRequest = _mapper.Map<ConsignmentRequest>(consignmentRequestCreateDto);
+
+            consignmentRequest.CreatedAt = DateTime.Now;
+
             await _unitOfWork.ConsignmentRequestRepository.CreateAsync(consignmentRequest);
             await _unitOfWork.SaveChangesAsync();
+
             return _mapper.Map<ConsignmentRequestResponseDto>(consignmentRequest);
         }
 
@@ -38,6 +42,9 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
 
             //need to check customer id
             _mapper.Map(consignmentRequestUpdateDto, consignmentRequest);
+
+            consignmentRequest.UpdatedAt = DateTime.Now;
+
             await _unitOfWork.ConsignmentRequestRepository.UpdateAsync(consignmentRequest);
             await _unitOfWork.SaveChangesAsync();
 
@@ -60,7 +67,7 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
 
         public async Task<ConsignmentRequestResponseDto> GetConsignmentRequestByIdAsync(int id)
         {
-            var consignmentRequest = await _unitOfWork.ConsignmentRequestRepository.GetRequestWithDetailsAsync(id);
+            var consignmentRequest = await _unitOfWork.ConsignmentRequestRepository.GetRequestWithTransactionAsync(id);
             return _mapper.Map<ConsignmentRequestResponseDto>(consignmentRequest);
         }
 

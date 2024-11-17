@@ -12,14 +12,9 @@ namespace KoiFarmShop.Business.Dto.CareRequests
 {
     public class CareRequestDetailCreateDto
     {
-        public int RequestId { get; set; }
-        public int? Image { get; set; }
-
-        public int? CareMethod { get; set; }
-
-        public string? Status { get; set; }
-
+        public int CareRequestId { get; set; }
+        public int? KoiImage { get; set; }
+        public string? ServiceDescription { get; set; }
         public string? Note { get; set; }
-        public string? CreatedBy { get; set; }
     }
 }

@@ -65,6 +65,10 @@ namespace KoiFarmShop.Business.AutoMap
             CreateMap<OrderItemCreateDto, OrderItem>();
             CreateMap<OrderItemUpdateDto, OrderItem>();
             CreateMap<OrderItem, OrderItemResponseDto>();
+
+            CreateMap<CarePlanCreateDto, CarePlan>();
+            CreateMap<CarePlanUpdateDto, CarePlan>();
+            CreateMap<CarePlan, CarePlanResponseDto>();
         }
     }
 }

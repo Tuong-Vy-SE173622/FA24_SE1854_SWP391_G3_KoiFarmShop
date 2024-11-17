@@ -6,6 +6,6 @@ namespace KoiFarmShop.Business.Dto
     {
         public int? UserId { get; set; }
 
-        public string Address { get; set; }
+        public string? Address { get; set; }
     }
 }

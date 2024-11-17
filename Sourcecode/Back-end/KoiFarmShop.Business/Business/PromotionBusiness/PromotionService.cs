@@ -173,7 +173,6 @@ namespace KoiFarmShop.Business.Business.PromotionBusiness
                 result.Message = ex.Message;
                 return result;
             }
-            return result;
         }
         public async Task<ResultDto> DeletePromotion(DeletePromotionDto request, ClaimsPrincipal userDelete)
         {

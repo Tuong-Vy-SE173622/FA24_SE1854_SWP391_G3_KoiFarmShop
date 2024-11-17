@@ -29,7 +29,7 @@ public partial class CareRequest
 
     [Column("status")]
     [StringLength(50)]
-    public string Status { get; set; }
+    public CareRequestStatus Status { get; set; }
 
     [Column("total_amount", TypeName = "decimal(10, 2)")]
     public decimal? TotalAmount { get; set; }
@@ -48,4 +48,12 @@ public partial class CareRequest
 
     [InverseProperty("CareRequest")]
     public virtual ICollection<CareRequestDetail> CareRequestDetails { get; set; } = new List<CareRequestDetail>();
+
+    public enum CareRequestStatus
+    {
+        PendingApproval,
+        Active,
+        Completed,
+        Rejected
+    }
 }

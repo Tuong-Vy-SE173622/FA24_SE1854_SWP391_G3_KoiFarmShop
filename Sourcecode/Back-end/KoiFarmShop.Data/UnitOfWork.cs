@@ -13,7 +13,6 @@ namespace KoiFarmShop.Data
         private UserRepository _userRepository;
         private TokenRepository _tokenRepository;
         private AccountRepository _accountRepository;
-        private ConsignmentDetailRepository _consignmentDetailRepository;
         private ConsignmentRequestRepository _consignmentRequestRepository;
         private PromotionRepository _promotionRepository;
         private CareRequestRepository _careRequestRepository;
@@ -63,14 +62,6 @@ namespace KoiFarmShop.Data
             get
             {
                 return _accountRepository ??= new AccountRepository(_context);
-            }
-        }
-
-        public ConsignmentDetailRepository ConsignmentDetailRepository
-        {
-            get
-            {
-                return _consignmentDetailRepository ??= new ConsignmentDetailRepository(_context);
             }
         }
 

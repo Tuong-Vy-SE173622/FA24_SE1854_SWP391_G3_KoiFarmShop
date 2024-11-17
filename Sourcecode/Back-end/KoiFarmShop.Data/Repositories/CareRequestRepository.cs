@@ -17,7 +17,7 @@ namespace KoiFarmShop.Data.Repositories
         {
             return await _context.CareRequests
                 .Include(c => c.CareRequestDetails)
-                .FirstOrDefaultAsync(c => c.RequestId == careId);
+                .FirstOrDefaultAsync(c => c.CareRequestId == careId);
         }
     }
 }

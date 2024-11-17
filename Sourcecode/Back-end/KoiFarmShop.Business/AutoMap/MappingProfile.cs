@@ -49,15 +49,6 @@ namespace KoiFarmShop.Business.AutoMap
                 );
 
             CreateMap<ConsignmentRequest, ConsignmentRequestResponseDto>();
-            //considement detail MAPPER
-            CreateMap<ConsignmentDetailCreateDto, ConsignmentDetail>();
-            CreateMap<ConsignmentDetailUpdateDto, ConsignmentDetail>().ForAllMembers(opt => opt.Condition(
-                    (src, dest, srcMember) => srcMember != null &&
-                                            !(srcMember is int && (int)srcMember == 0) &&
-                                            !(srcMember is double && (double)srcMember == 0)
-                    )
-                );
-            CreateMap<ConsignmentDetail, ConsignmentDetailResponseDto>();
 
             CreateMap<CareRequestCreateDto, CareRequest>();
             CreateMap<CareRequestUpdateDto, CareRequest>();

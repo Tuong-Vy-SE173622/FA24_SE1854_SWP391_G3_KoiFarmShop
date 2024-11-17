@@ -54,10 +54,10 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
 
             var careRequest = _mapper.Map<CareRequest>(createDto);
 
-            careRequest.RequestId = _unitOfWork.CareRequestRepository.GetAll().OrderByDescending(cr => cr.RequestId).Select(cr => cr.RequestId).FirstOrDefault() + 1;
+            //careRequest.RequestId = _unitOfWork.CareRequestRepository.GetAll().OrderByDescending(cr => cr.RequestId).Select(cr => cr.RequestId).FirstOrDefault() + 1;
             if (currentUser == null) throw new UnauthorizedAccessException();
             careRequest.CreatedBy = currentUser;
-            careRequest.CreatedAt = DateTime.UtcNow;
+            //careRequest.CreatedAt = DateTime.UtcNow;
 
             await _unitOfWork.CareRequestRepository.CreateAsync(careRequest);
             await _unitOfWork.SaveChangesAsync();
@@ -71,7 +71,7 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
 
             
             _mapper.Map(updateDto, careRequest);
-            careRequest.UpdatedAt = DateTime.UtcNow;
+            //careRequest.UpdatedAt = DateTime.UtcNow;
             if (currentUser == null) throw new UnauthorizedAccessException();
             careRequest.UpdatedBy = currentUser;
             await _unitOfWork.CareRequestRepository.UpdateAsync(careRequest);

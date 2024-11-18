@@ -197,7 +197,6 @@ namespace KoiFarmShop.APIService
             builder.Services.AddScoped<IKoiTypeService, KoiTypeService>();
 
             builder.Services.AddScoped<IConsignmentRequestService, ConsignmentRequestService>();
-            builder.Services.AddScoped<IConsignmentDetailService, ConsignmentDetailService>();
 
             builder.Services.AddScoped<IOrderItemService, OrderItemService>();
             builder.Services.AddScoped<IOrderService, OrderService>();

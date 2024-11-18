@@ -40,7 +40,7 @@ namespace KoiFarmShop.APIService.Controllers
         {
             var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
             var result = await _careRequestDetailService.CreateCareRequestDetailAsync(createDto, currentUser);
-            return CreatedAtAction(nameof(GetCareRequestDetailById), new { id = result.RequestDetailId }, result);
+            return CreatedAtAction(nameof(GetCareRequestDetailById), new { id = result.CareRequestDetailId }, result);
         }
 
         // PUT api/<CareRequestDetailController>/5

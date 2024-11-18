@@ -2,6 +2,7 @@
 using KoiFarmShop.Business.Business.CareRequestBusiness;
 using KoiFarmShop.Business.Dto.CareRequests;
 using Microsoft.AspNetCore.Authorization;
+using KoiFarmShop.Business.Dto.Kois;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -36,9 +37,9 @@ namespace KoiFarmShop.APIService.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<CareRequestResponseDto>>> GetAllCareRequests()
+        public async Task<ActionResult<IEnumerable<CareRequestResponseDto>>> GetAllCareRequests([FromQuery] CareRequestFilterDto filterDto)
         {
-            var results = await _careRequestService.GetAllCareRequestAsync();
+            var results = await _careRequestService.GetAllCareRequestAsync(filterDto);
             return Ok(results);
         }
 
@@ -48,7 +49,7 @@ namespace KoiFarmShop.APIService.Controllers
         {
             var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
             var result = await _careRequestService.CreateCareRequestAsync(createDto, currentUser);
-            return CreatedAtAction(nameof(GetCareRequestById), new { id = result.RequestId }, result);
+            return CreatedAtAction(nameof(GetCareRequestById), new { id = result.CareRequestId }, result);
         }
 
         // PUT api/<CareRequestController>/5
@@ -57,6 +58,26 @@ namespace KoiFarmShop.APIService.Controllers
         {
             var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
             var result = await _careRequestService.UpdateCareRequestAsync(id, updateDto, currentUser);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
+        [HttpPut("reject")]
+        [Authorize]
+        public async Task<ActionResult<CareRequestResponseDto>> ApproveCareRequest(int careRequestId)
+        {
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var result = await _careRequestService.ApproveCareRequestAsync(careRequestId, currentUser);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
+        [HttpPut("approve")]
+        [Authorize]
+        public async Task<ActionResult<CareRequestResponseDto>> RejectCareRequest(int careRequestId)
+        {
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var result = await _careRequestService.RejectCareRequestAsync(careRequestId, currentUser);
             if (result == null) return NotFound();
             return Ok(result);
         }

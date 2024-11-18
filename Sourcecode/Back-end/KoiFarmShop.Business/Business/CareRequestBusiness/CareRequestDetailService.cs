@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static KoiFarmShop.Data.Models.CareRequestDetail;
 
 namespace KoiFarmShop.Business.Business.CareRequestBusiness
 {
@@ -37,10 +38,11 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
         {
             var careRequestDetail = _mapper.Map<CareRequestDetail>(createDto);
 
-            careRequestDetail.RequestDetailId = _unitOfWork.CareRequestDetailRepository.GetAll().OrderByDescending(crd => crd.RequestDetailId).Select(crd => crd.RequestDetailId).FirstOrDefault() + 1;
+            careRequestDetail.CareRequestDetailId = _unitOfWork.CareRequestDetailRepository.GetAll().OrderByDescending(crd => crd.CareRequestDetailId).Select(crd => crd.CareRequestDetailId).FirstOrDefault() + 1;
+            careRequestDetail.Status = CareRequestDetailStatus.InProgress;
             if (currentUser == null) throw new UnauthorizedAccessException();
             careRequestDetail.CreatedBy = currentUser;
-            careRequestDetail.CreatedAt = DateTime.UtcNow;
+            //careRequestDetail.CreatedAt = DateTime.UtcNow;
 
             await _unitOfWork.CareRequestDetailRepository.CreateAsync(careRequestDetail);
             await _unitOfWork.SaveChangesAsync();
@@ -53,7 +55,7 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
             if (careRequestDetail == null) return null;
 
             _mapper.Map(updateDto, careRequestDetail);
-            careRequestDetail.UpdatedAt = DateTime.Now;
+            //careRequestDetail.UpdatedAt = DateTime.Now;
 
             if (currentUser == null) throw new UnauthorizedAccessException();
             careRequestDetail.UpdatedBy = currentUser;

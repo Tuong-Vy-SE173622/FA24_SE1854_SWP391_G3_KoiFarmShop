@@ -13,12 +13,12 @@ namespace KoiFarmShop.Data
         private UserRepository _userRepository;
         private TokenRepository _tokenRepository;
         private AccountRepository _accountRepository;
-        private ConsignmentDetailRepository _consignmentDetailRepository;
         private ConsignmentRequestRepository _consignmentRequestRepository;
         private PromotionRepository _promotionRepository;
         private CareRequestRepository _careRequestRepository;
         private CareRequestDetailRepository _careRequestDetailRepository;
         private CustomerRepository _customerRepository;
+        private CarePlanRepository _carePlanRepository;
 
         public UnitOfWork() => _context ??= new FA_SE1854_SWP391_G3_KoiFarmShopContext();
 
@@ -63,14 +63,6 @@ namespace KoiFarmShop.Data
             get
             {
                 return _accountRepository ??= new AccountRepository(_context);
-            }
-        }
-
-        public ConsignmentDetailRepository ConsignmentDetailRepository
-        {
-            get
-            {
-                return _consignmentDetailRepository ??= new ConsignmentDetailRepository(_context);
             }
         }
 
@@ -123,6 +115,14 @@ namespace KoiFarmShop.Data
             get
             {
                 return _customerRepository ??= new CustomerRepository(_context);
+            }
+        }
+
+        public CarePlanRepository CarePlanRepository
+        {
+            get
+            {
+                return _carePlanRepository ??= new CarePlanRepository(_context);
             }
         }
     }

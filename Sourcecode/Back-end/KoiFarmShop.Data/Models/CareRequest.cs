@@ -28,7 +28,7 @@ public partial class CareRequest
     [Column("start_date", TypeName = "datetime")]
     public DateTime? StartDate { get; set; }
 
-    [Column("status")]
+    [Column("status", TypeName = "varchar(50)")]
     [StringLength(50)]
     public CareRequestStatus Status { get; set; }
 

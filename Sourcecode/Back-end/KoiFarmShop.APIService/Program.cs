@@ -18,6 +18,7 @@ using KoiFarmShop.Data.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 namespace KoiFarmShop.APIService
 {
@@ -29,7 +30,11 @@ namespace KoiFarmShop.APIService
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            }); 
 
             // ignore CORS
             builder.Services.AddCors(options =>

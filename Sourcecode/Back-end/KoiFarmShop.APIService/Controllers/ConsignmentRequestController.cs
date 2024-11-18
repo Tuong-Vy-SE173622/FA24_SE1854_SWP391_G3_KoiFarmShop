@@ -53,10 +53,13 @@ namespace KoiFarmShop.APIService.Controllers
             return Ok(result);
         }
 
+        [HttpGet("get-all-by-customer")]
         public async Task<ResultDto> GetAllConsigmentByCustomer(int customerId)
         {
             ResultDto result = new();
-            var consignments = await k
+            var consignments = await _consignmentRequestService.GetAllConsignmentsByCustomer(customerId);
+            result.success(consignments);
+            return result;
         }
     }
 

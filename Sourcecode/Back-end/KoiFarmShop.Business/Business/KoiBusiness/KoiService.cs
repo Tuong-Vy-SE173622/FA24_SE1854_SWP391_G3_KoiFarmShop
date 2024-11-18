@@ -86,7 +86,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
 
             if (filterDto.IsActive.HasValue)
             {
-                query = query.Where(k  => k.IsActive == filterDto.IsActive);
+                query = query.Where(k => k.IsActive == filterDto.IsActive);
             }
 
             // Sorting
@@ -112,7 +112,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     Age = k.Age,
                     Size = k.Size,
                     Image = k.Image,
-                    Certificate = k.Certificate, 
+                    Certificate = k.Certificate,
                     Price = k.Price,
                     Characteristics = k.Characteristics,
                     FeedingAmountPerDay = k.FeedingAmountPerDay,
@@ -157,7 +157,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     Age = k.Age,
                     Size = k.Size,
                     Image = k.Image,
-                    Certificate = k.Certificate,
+                    Certificate = k.Certificate ?? string.Empty,
                     Price = k.Price,
                     Characteristics = k.Characteristics,
                     FeedingAmountPerDay = k.FeedingAmountPerDay,
@@ -167,7 +167,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     Generation = k.Generation,
                     IsLocal = k.IsLocal,
                     IsActive = k.IsActive,
-                    Status = k.Status,
+                    Status = k.Status ?? Koi.KoiStatus.PENDING,
                     Note = k.Note,
                     CreatedAt = k.CreatedAt,
                     CreatedBy = k.CreatedBy,
@@ -255,7 +255,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             var existingKoi = await _unitOfWork.KoiRepository.GetByIdAsync(id);
             if (existingKoi == null)
                 throw new NotFoundException("Koi not found");
-            if(koiUpdateDto.KoiTypeId != null)
+            if (koiUpdateDto.KoiTypeId != null)
             {
                 var koiType = await _unitOfWork.KoiTypeRepository.GetByIdAsync((int)koiUpdateDto.KoiTypeId);
                 if (koiType == null)
@@ -311,14 +311,15 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
         public async Task<bool> UpdateForListSoldKoisAsynce(ListSoldKois list)
         {
             var isUpdateSuccessful = true;
-            foreach (var koiId in list.ListKoiId) {
+            foreach (var koiId in list.ListKoiId)
+            {
                 var koi = await _unitOfWork.KoiRepository.GetByIdAsync(koiId);
                 if (koi != null)
                 {
                     koi.IsActive = false;
                     await _unitOfWork.KoiRepository.UpdateAsync(koi);
-                } 
-                else return isUpdateSuccessful = false;  
+                }
+                else return isUpdateSuccessful = false;
             }
             return isUpdateSuccessful;
         }
@@ -449,7 +450,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             var existingKoi = await _unitOfWork.KoiRepository.GetByIdAsync(request.KoiId);
             if (existingKoi == null)
                 throw new NotFoundException("Koi not found");
-            if(request.IsApproved == true)
+            if (request.IsApproved == true)
             {
                 existingKoi.Status = Koi.KoiStatus.APPROVED;
             }

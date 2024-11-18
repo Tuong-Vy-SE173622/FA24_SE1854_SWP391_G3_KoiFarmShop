@@ -124,7 +124,7 @@ namespace KoiFarmShop.APIService.Controllers
         {
             ResultDto result = new();
             var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
-            if (currentUser == null) 
+            if (currentUser == null)
             {
                 result.error("user not login or invalid user role to access this endpoint");
                 return result;

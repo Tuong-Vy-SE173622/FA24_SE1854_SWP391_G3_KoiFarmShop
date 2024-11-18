@@ -91,7 +91,7 @@ public partial class Koi
     [Column("status")]
     [StringLength(50)]
     [Unicode(false)]
-    public KoiStatus Status { get; set; }
+    public KoiStatus? Status { get; set; }
 
     [ForeignKey("KoiTypeId")]
     [InverseProperty("Kois")]

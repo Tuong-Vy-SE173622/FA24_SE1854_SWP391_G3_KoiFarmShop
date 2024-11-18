@@ -14,7 +14,9 @@ namespace KoiFarmShop.Data.Repositories
             var user = _context.Users.Where( u => u.UserId == userId).FirstOrDefault();
             if (user == null) return [];
             // get kois created by that user name
-            return await _context.Kois.Where(k => k.CreatedBy == user.Username).ToListAsync();
+            return await _context.Kois.Where(k => k.CreatedBy == user.Username)
+                .AsNoTracking()
+                .ToListAsync();
         }
     }
 }

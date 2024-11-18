@@ -1,5 +1,4 @@
-﻿using KoiFarmShop.Business.Dto.KoiTypes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using static KoiFarmShop.Data.Models.Koi;
 
 namespace KoiFarmShop.Business.Dto.Kois
@@ -9,7 +8,7 @@ namespace KoiFarmShop.Business.Dto.Kois
         [Key]
         public int KoiId { get; set; }
 
-        public int? KoiTypeId {  get; set; }   
+        public int? KoiTypeId { get; set; }
 
         public string? KoiTypeName { get; set; }
 
@@ -27,7 +26,7 @@ namespace KoiFarmShop.Business.Dto.Kois
 
         public double? Price { get; set; }
 
-        public string Characteristics { get; set; }
+        public string? Characteristics { get; set; }
 
         public double? FeedingAmountPerDay { get; set; }
 
@@ -37,7 +36,7 @@ namespace KoiFarmShop.Business.Dto.Kois
 
         public bool? IsImported { get; set; }
 
-        public string Generation { get; set; }
+        public string? Generation { get; set; }
 
         public bool? IsLocal { get; set; }
 
@@ -53,6 +52,6 @@ namespace KoiFarmShop.Business.Dto.Kois
 
         public DateTime? UpdatedAt { get; set; }
 
-        public string UpdatedBy { get; set; }
+        public string? UpdatedBy { get; set; }
     }
 }

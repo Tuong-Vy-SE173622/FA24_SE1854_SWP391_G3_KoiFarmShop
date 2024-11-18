@@ -17,5 +17,6 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
         Task<ResultDto> ApproveOrRejectKoiForCareRequest(KoiApproveRequest request, string? currentUser);
         Task<ResultDto> ApproveOrRejectKoiForConsignment(KoiApproveRequest request, string? currentUser);
         Task<ResultDto> GetAllKoisCreatedByUserId(int userId);
+        Task<string> Test();
     }
 }

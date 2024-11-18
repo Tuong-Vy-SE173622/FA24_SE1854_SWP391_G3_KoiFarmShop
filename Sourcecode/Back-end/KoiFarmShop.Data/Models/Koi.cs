@@ -16,7 +16,7 @@ public partial class Koi
     public int KoiId { get; set; }
 
     [Column("koi_type_id")]
-    public int? KoiTypeId { get; set; }
+    public int KoiTypeId { get; set; }
 
     [Column("origin")]
     [StringLength(255)]
@@ -91,7 +91,7 @@ public partial class Koi
     [Column("status")]
     [StringLength(50)]
     [Unicode(false)]
-    public KoiStatus? Status { get; set; }
+    public string Status { get; set; }
 
     [ForeignKey("KoiTypeId")]
     [InverseProperty("Kois")]
@@ -99,11 +99,4 @@ public partial class Koi
 
     [InverseProperty("Koi")]
     public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
-
-    public enum KoiStatus
-    {
-        PENDING,
-        APPROVED,
-        REJECTED
-    }
 }

@@ -20,10 +20,20 @@ namespace KoiFarmShop.Business.AutoMap
                 .ForMember(dest => dest.KoiTypeName, opt => opt.MapFrom(src => src.KoiType.Name));
             CreateMap<KoiCreateDto, Koi>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
             CreateMap<KoiCreateForCustomerDto, Koi>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
-            CreateMap<KoiUpdateDto, Koi>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));        
+            CreateMap<KoiUpdateDto, Koi>().ForAllMembers(opt => opt.Condition(
+                    (src, dest, srcMember) => srcMember != null &&
+                                            !(srcMember is int && (int)srcMember == 0) &&
+                                            !(srcMember is double && (double)srcMember == 0)
+                    )
+            );        
             CreateMap<KoiType, KoiTypeDto>().ReverseMap();
             CreateMap<KoiTypeCreateDto, KoiType>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));        
-            CreateMap<KoiTypeUpdateDto, KoiType>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));      
+            CreateMap<KoiTypeUpdateDto, KoiType>().ForAllMembers(opt => opt.Condition(
+                    (src, dest, srcMember) => srcMember != null &&
+                                            !(srcMember is int && (int)srcMember == 0) &&
+                                            !(srcMember is double && (double)srcMember == 0)
+                    )
+            );      
 
             CreateMap<Order, OrderDto>().ForMember(dest => dest.Customer, opt => opt.MapFrom(src => src.Customer)).ReverseMap();
             CreateMap<Order, OrderUpdateStatusDto>().ReverseMap();

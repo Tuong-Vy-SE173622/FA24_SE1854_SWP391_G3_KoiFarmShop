@@ -44,7 +44,7 @@ namespace KoiFarmShop.Business.Dto.Kois
 
         public string? Note { get; set; }
 
-        public KoiStatus? Status { get; set; }
+        public string? Status { get; set; }
 
         public DateTime? CreatedAt { get; set; }
 

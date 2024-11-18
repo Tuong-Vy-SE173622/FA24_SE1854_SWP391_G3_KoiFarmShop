@@ -155,7 +155,9 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.IsActive).HasDefaultValue(true);
 
-            entity.HasOne(d => d.KoiType).WithMany(p => p.Kois).HasConstraintName("koi_koi_type_id_foreign");
+            entity.HasOne(d => d.KoiType).WithMany(p => p.Kois)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("koi_koi_type_id_foreign");
         });
 
         modelBuilder.Entity<KoiType>(entity =>

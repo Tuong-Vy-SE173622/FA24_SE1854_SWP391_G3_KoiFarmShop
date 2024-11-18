@@ -15,6 +15,12 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
         private readonly UnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ICloudinaryService _cloudinaryService;
+        private enum KoiStatus 
+        {
+            PENDING,
+            APPROVED,
+            REJECTED
+        }
 
         public KoiService(UnitOfWork unitOfWork, IMapper mapper, ICloudinaryService cloudinaryService)
         {
@@ -81,7 +87,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
 
             if (filterDto.Status.HasValue)
             {
-                query = query.Where(k => k.Status == filterDto.Status);
+                query = query.Where(k => k.Status == filterDto.Status.ToString());
             }
 
             if (filterDto.IsActive.HasValue)
@@ -167,7 +173,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     Generation = k.Generation,
                     IsLocal = k.IsLocal,
                     IsActive = k.IsActive,
-                    Status = k.Status ?? Koi.KoiStatus.PENDING,
+                    Status = k.Status ?? KoiStatus.PENDING.ToString(),
                     Note = k.Note,
                     CreatedAt = k.CreatedAt,
                     CreatedBy = k.CreatedBy,
@@ -196,18 +202,18 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
 
             koi.CreatedBy = currentUser;
             koi.CreatedAt = DateTime.Now;
-            koi.Status = Koi.KoiStatus.APPROVED;
+            koi.Status = KoiStatus.APPROVED.ToString();
 
             var image = koiCreateDto.Image;
             if (image != null)
             {
-                koi.Image = _cloudinaryService.UploadImageAsync(image).ToString();
+                koi.Image = await _cloudinaryService.UploadImageAsync(image);
             }
 
             var certificate = koiCreateDto.Certificate;
             if (certificate != null)
             {
-                koi.Certificate = _cloudinaryService.UploadFileAsync(certificate).ToString();
+                koi.Certificate = await _cloudinaryService.UploadFileAsync(certificate);
             }
 
             await _unitOfWork.KoiRepository.CreateAsync(koi);
@@ -229,19 +235,19 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
 
             koi.CreatedBy = currentUser;
             koi.CreatedAt = DateTime.Now;
-            koi.Status = Koi.KoiStatus.PENDING;
+            koi.Status = KoiStatus.PENDING.ToString();
             koi.IsOwnedByFarm = false;
 
             var image = koiCreateDto.Image;
             if (image != null)
             {
-                koi.Image = _cloudinaryService.UploadImageAsync(image).ToString();
+                koi.Image = await _cloudinaryService.UploadImageAsync(image);
             }
 
             var certificate = koiCreateDto.Certificate;
             if (certificate != null)
             {
-                koi.Certificate = _cloudinaryService.UploadFileAsync(certificate).ToString();
+                koi.Certificate = await _cloudinaryService.UploadFileAsync(certificate);
             }
 
             await _unitOfWork.KoiRepository.CreateAsync(koi);
@@ -269,18 +275,18 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
 
             existingKoi.UpdatedBy = currentUser;
             existingKoi.UpdatedAt = DateTime.Now;
-            existingKoi.Status = Koi.KoiStatus.APPROVED; // might need to change 
+            existingKoi.Status = KoiStatus.APPROVED.ToString(); // might need to change 
 
             var image = koiUpdateDto.Image;
             if (image != null)
             {
-                existingKoi.Image = _cloudinaryService.UploadImageAsync(image).ToString();
+                existingKoi.Image = await _cloudinaryService.UploadImageAsync(image);
             }
 
             var certificate = koiUpdateDto.Certificate;
             if (certificate != null)
             {
-                existingKoi.Certificate = _cloudinaryService.UploadFileAsync(certificate).ToString();
+                existingKoi.Certificate = await _cloudinaryService.UploadFileAsync(certificate);
             }
             return await _unitOfWork.KoiRepository.UpdateAsync(existingKoi);
         }
@@ -413,7 +419,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     Generation = k.Generation,
                     IsLocal = k.IsLocal,
                     IsActive = true,  // only unsold kois (is active = true means unsold)
-                    Status = Koi.KoiStatus.APPROVED,
+                    Status = KoiStatus.APPROVED.ToString(),
                     Note = k.Note,
                     CreatedAt = k.CreatedAt,
                     CreatedBy = k.CreatedBy,
@@ -452,9 +458,9 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 throw new NotFoundException("Koi not found");
             if (request.IsApproved == true)
             {
-                existingKoi.Status = Koi.KoiStatus.APPROVED;
+                existingKoi.Status = KoiStatus.APPROVED.ToString();
             }
-            else existingKoi.Status = Koi.KoiStatus.REJECTED;
+            else existingKoi.Status = KoiStatus.REJECTED.ToString();
             existingKoi.IsActive = false; // being in care request means the koi ain't for sale
 
             return new ResultDto
@@ -472,9 +478,9 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 throw new NotFoundException("Koi not found");
             if (request.IsApproved == true)
             {
-                existingKoi.Status = Koi.KoiStatus.APPROVED;
+                existingKoi.Status = KoiStatus.APPROVED.ToString();
             }
-            else existingKoi.Status = Koi.KoiStatus.REJECTED;
+            else existingKoi.Status = KoiStatus.REJECTED.ToString();
             existingKoi.IsActive = true; // being in consignment means the koi is for sale
 
             return new ResultDto
@@ -490,6 +496,14 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             var listKoi = await _unitOfWork.KoiRepository.GetAllKoisCreatedByUser(userId);
             result.success(listKoi);
             return result;
+        }
+
+        public async Task<string> Test()
+        {
+            var koi = await _unitOfWork.KoiRepository.GetByIdAsync(17);
+            if (koi != null)
+                return "true";
+            else return "flase";
         }
 
     }

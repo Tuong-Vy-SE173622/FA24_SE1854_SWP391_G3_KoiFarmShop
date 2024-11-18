@@ -150,6 +150,12 @@ namespace KoiFarmShop.APIService.Controllers
         {
             return await _koiService.GetAllKoisCreatedByUserId(userId);
         }
+        [AllowAnonymous]
+        [HttpGet("test")]
+        public async Task<string> test()
+        {
+            return await _koiService.Test();
+        }
     }
 }
 

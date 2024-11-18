@@ -19,14 +19,14 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateConsignmentRequest([FromBody] ConsignmentRequestCreateDto consignmentRequestCreateDto)
+        public async Task<IActionResult> CreateConsignmentRequest([FromForm] ConsignmentRequestCreateDto consignmentRequestCreateDto)
         {
             var result = await _consignmentRequestService.CreateConsignmentRequestAsync(consignmentRequestCreateDto);
             return CreatedAtAction(nameof(GetById), new { id = result.ConsignmentId }, result);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateConsignmentRequest(int id, [FromBody] ConsignmentRequestUpdateDto consignmentRequestUpdateDto)
+        public async Task<IActionResult> UpdateConsignmentRequest(int id, [FromForm] ConsignmentRequestUpdateDto consignmentRequestUpdateDto)
         {
             var result = await _consignmentRequestService.UpdateConsignmentRequestAsync(id, consignmentRequestUpdateDto);
             return Ok(result);
@@ -74,6 +74,20 @@ namespace KoiFarmShop.APIService.Controllers
             else result.error("consignment does not existed");
             return result;
         }
+        [HttpPut("approve-consignment-request")]
+        public async Task<ResultDto> ApproveConsignmentRequest( [FromForm] ConsignementApproveRequest request)
+        {
+            ResultDto result = new();
+            if (await _consignmentRequestService.ApproveConsignmentRequest(request))
+            {
+                result.success();
+                return result;
+            } else
+            {
+                result.error("Update approve info failed!");
+                return result;
+            }
+        } 
     }
 
 

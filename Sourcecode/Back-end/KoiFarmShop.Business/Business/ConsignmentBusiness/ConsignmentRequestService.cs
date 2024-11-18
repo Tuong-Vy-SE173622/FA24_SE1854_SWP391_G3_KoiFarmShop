@@ -111,6 +111,21 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             return _mapper.Map<ConsignmentTransactionDto>(transaction);
 
         }
+
+        public async Task<bool> ApproveConsignmentRequest(ConsignementApproveRequest request)
+        {
+            var consignment = await _unitOfWork.ConsignmentRequestRepository.GetByIdAsync(request.ConsignmentId);
+            if (consignment == null)
+            {
+                return false;
+            }
+            consignment.IsActive = request.IsActive;
+            consignment.Status = request.Status;
+            consignment.UpdatedAt = DateTime.Now;
+            consignment.UpdatedBy = "Admin";
+            await _unitOfWork.SaveChangesAsync();
+            return true;
+        }
     }
 
 

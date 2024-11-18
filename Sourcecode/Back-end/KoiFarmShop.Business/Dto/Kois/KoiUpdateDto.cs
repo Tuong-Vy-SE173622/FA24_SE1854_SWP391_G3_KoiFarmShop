@@ -32,17 +32,12 @@ namespace KoiFarmShop.Business.Dto.Kois
 
         [Range(0, 100, ErrorMessage = "Screening rate should be between 0 and 100.")]
         public double? ScreeningRate { get; set; }
-
-        public bool? IsOwnedByFarm { get; set; }
-
         public bool? IsImported { get; set; }
 
         [MaxLength(50, ErrorMessage = "Generation cannot exceed 50 characters.")]
         public string? Generation { get; set; }
 
         public bool? IsLocal { get; set; }
-
-        public bool? IsActive { get; set; }
 
         [MaxLength(500, ErrorMessage = "Note cannot exceed 500 characters.")]
         public string? Note { get; set; }

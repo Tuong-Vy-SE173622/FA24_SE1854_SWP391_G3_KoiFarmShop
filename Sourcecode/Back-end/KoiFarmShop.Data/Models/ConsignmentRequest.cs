@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace KoiFarmShop.Data.Models;
 
 [Table("Consignment_Request")]
+[Index("KoiId", Name = "UQ_ConsignmentRequest_Koi", IsUnique = true)]
 public partial class ConsignmentRequest
 {
     [Key]
@@ -33,7 +34,7 @@ public partial class ConsignmentRequest
     [Column("is_active")]
     public bool? IsActive { get; set; }
 
-    [Column("status")]
+    [Column("status", TypeName = "varchar(55)")]
     [StringLength(50)]
     public ConsignmentStatus Status { get; set; }
 
@@ -52,6 +53,14 @@ public partial class ConsignmentRequest
 
     [InverseProperty("Consignment")]
     public virtual ConsignmentTransaction ConsignmentTransaction { get; set; }
+
+    [ForeignKey("CustomerId")]
+    [InverseProperty("ConsignmentRequests")]
+    public virtual Customer Customer { get; set; }
+
+    [ForeignKey("KoiId")]
+    [InverseProperty("ConsignmentRequest")]
+    public virtual Koi Koi { get; set; }
 
     public enum ConsignmentStatus
     {

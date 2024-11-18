@@ -10,13 +10,25 @@ namespace KoiFarmShop.Data.Repositories
 
         public async Task<List<Koi>> GetAllKoisCreatedByUser(int userId)
         {
-            //get user with that id
-            var user = _context.Users.Where( u => u.UserId == userId).FirstOrDefault();
-            if (user == null) return [];
-            // get kois created by that user name
-            return await _context.Kois.Where(k => k.CreatedBy == user.Username)
+            var user = await _context.Users
+                .AsNoTracking() 
+                .FirstOrDefaultAsync(u => u.UserId == userId);
+
+            if (user == null)
+                return new List<Koi>(); // Return an empty list if the user doesn't exist
+
+            // Get Kois created by the specified username
+            return await _context.Kois
+                .Where(k => k.CreatedBy == user.Username) 
                 .AsNoTracking()
                 .ToListAsync();
+        }
+
+        public async Task<Koi?> GetKoiWithConsignment(int koiId)
+        {
+            return await _context.Kois.Include(k => k.ConsignmentRequest) 
+                .AsNoTracking() 
+                .FirstOrDefaultAsync(k => k.KoiId == koiId);
         }
     }
 }

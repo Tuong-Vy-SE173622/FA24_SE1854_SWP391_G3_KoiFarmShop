@@ -88,6 +88,10 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
             entity.Property(e => e.CareRequestId).ValueGeneratedNever();
 
             entity.HasOne(d => d.CarePlan).WithMany(p => p.CareRequests).HasConstraintName("FK__Care_Requ__care___2D7CBDC4");
+
+            entity.HasOne(d => d.Customer).WithMany(p => p.CareRequests).HasConstraintName("FK_CareRequest_Customer");
+
+            entity.HasOne(d => d.Koi).WithOne(p => p.CareRequest).HasConstraintName("FK_CareRequest_Koi");
         });
 
         modelBuilder.Entity<CareRequestDetail>(entity =>
@@ -113,6 +117,10 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
             entity.HasKey(e => e.ConsignmentId).HasName("PK__Consignm__3114B3D0EC8A66E7");
 
             entity.ToTable("Consignment_Request", tb => tb.HasTrigger("trg_UpdateIsActive"));
+
+            entity.HasOne(d => d.Customer).WithMany(p => p.ConsignmentRequests).HasConstraintName("FK_ConsignmentRequest_Customer");
+
+            entity.HasOne(d => d.Koi).WithOne(p => p.ConsignmentRequest).HasConstraintName("FK_ConsignmentRequest_Koi");
         });
 
         modelBuilder.Entity<ConsignmentTransaction>(entity =>

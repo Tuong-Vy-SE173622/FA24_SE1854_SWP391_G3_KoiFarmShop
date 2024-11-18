@@ -1,5 +1,6 @@
 ﻿using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Kois;
+using KoiFarmShop.Data.Models;
 
 namespace KoiFarmShop.Business.Business.KoiBusiness
 {
@@ -18,5 +19,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
         Task<ResultDto> ApproveOrRejectKoiForConsignment(KoiApproveRequest request, string? currentUser);
         Task<ResultDto> GetAllKoisCreatedByUserId(int userId);
         Task<string> Test();
+
+        Task<Koi?> GetKoiWithConsignment(int id);
     }
 }

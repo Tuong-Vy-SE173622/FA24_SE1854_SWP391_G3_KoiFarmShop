@@ -505,6 +505,10 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 return "true";
             else return "flase";
         }
+        public async Task<Koi?> GetKoiWithConsignment(int id)
+        {
+            return await _unitOfWork.KoiRepository.GetKoiWithConsignment(id);
+        }
 
     }
 }

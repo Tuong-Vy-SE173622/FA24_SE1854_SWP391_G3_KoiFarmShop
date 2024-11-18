@@ -61,6 +61,19 @@ namespace KoiFarmShop.APIService.Controllers
             result.success(consignments);
             return result;
         }
+
+        [HttpPost("{consignmentId}/create-transaction-after-consignmnet-completed")]
+        public async Task<ResultDto> CreateTransactionAfterConsignmentCompleted(int consignmentId)
+        {
+            ResultDto result = new();
+            var transaction = await _consignmentRequestService.CreateTransactionAfterConsignmentCompleted(consignmentId);
+            if (transaction != null)
+            {
+                result.success(transaction);
+            }
+            else result.error("consignment does not existed");
+            return result;
+        }
     }
 
 

@@ -1,4 +1,5 @@
-﻿using KoiFarmShop.Business.Business.KoiBusiness;
+﻿using KoiFarmShop.Business.Business.ConsignmentBusiness;
+using KoiFarmShop.Business.Business.KoiBusiness;
 using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Kois;
 using Microsoft.AspNetCore.Authorization;
@@ -13,9 +14,11 @@ namespace KoiFarmShop.APIService.Controllers
     {
         private readonly IKoiService _koiService;
 
-        public KoiController(IKoiService koiService)
+        private readonly IConsignmentRequestService _consignmentRequestService;
+        public KoiController(IKoiService koiService, IConsignmentRequestService consignmentRequestService)
         {
             _koiService = koiService;
+            _consignmentRequestService = consignmentRequestService;
 
         }
 
@@ -109,6 +112,20 @@ namespace KoiFarmShop.APIService.Controllers
             var isUpdateSuccessful = await _koiService.UpdateForListSoldKoisAsynce(list);
             if (isUpdateSuccessful)
             {
+                foreach(var id in list.ListKoiId)
+                {
+                    var koi = await _koiService.GetKoiWithConsignment(id);
+                    if (koi == null)
+                    {
+                        result.error("Update failed dued to koi id does not exist");
+                        return result;
+                    }
+                    var consignment = koi.ConsignmentRequest;
+                    if( consignment != null)
+                    {
+                        await _consignmentRequestService.CreateTransactionAfterConsignmentCompleted(consignment.ConsignmentId);
+                    }
+                }
                 result.success();
                 return result;
             }

@@ -93,6 +93,12 @@ public partial class Koi
     [Unicode(false)]
     public string Status { get; set; }
 
+    [InverseProperty("Koi")]
+    public virtual CareRequest CareRequest { get; set; }
+
+    [InverseProperty("Koi")]
+    public virtual ConsignmentRequest ConsignmentRequest { get; set; }
+
     [ForeignKey("KoiTypeId")]
     [InverseProperty("Kois")]
     public virtual KoiType KoiType { get; set; }

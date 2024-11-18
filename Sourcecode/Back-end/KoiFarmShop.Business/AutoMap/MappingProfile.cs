@@ -49,6 +49,7 @@ namespace KoiFarmShop.Business.AutoMap
             CreateMap<Promotion, DeletePromotionDto>().ReverseMap();
 
             //consignment request MAPPER
+            CreateMap<ConsignmentTransaction, ConsignmentTransactionDto>();
             CreateMap<ConsignmentRequestCreateDto, ConsignmentRequest>();
             CreateMap<ConsignmentRequestUpdateDto, ConsignmentRequest>().ForAllMembers(
                 opt => opt.Condition(

@@ -26,7 +26,7 @@ public partial class CareRequestDetail
 
     [Column("status")]
     [StringLength(50)]
-    public CareRequestDetailStatus Status { get; set; }
+    public string Status { get; set; }
 
     [Column("note")]
     public string Note { get; set; }
@@ -42,10 +42,4 @@ public partial class CareRequestDetail
     [ForeignKey("CareRequestId")]
     [InverseProperty("CareRequestDetails")]
     public virtual CareRequest CareRequest { get; set; }
-
-    public enum CareRequestDetailStatus
-    {
-        InProgress,
-        Completed
-    }
 }

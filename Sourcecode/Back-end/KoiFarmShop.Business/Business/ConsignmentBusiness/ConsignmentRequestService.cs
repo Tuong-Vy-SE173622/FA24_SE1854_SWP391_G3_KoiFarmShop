@@ -10,6 +10,7 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private const decimal COMMISSION_FEE = 0.05m;
 
         public ConsignmentRequestService(UnitOfWork unitOfWork, IMapper mapper)
         {
@@ -85,6 +86,30 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             
              var list = await _unitOfWork.ConsignmentRequestRepository.GetAllConsignmentByCustomer(customerId);
             return _mapper.Map<IEnumerable<ConsignmentRequestResponseDto>>(list);
+        }
+
+        public async Task<ConsignmentTransactionDto?> CreateTransactionAfterConsignmentCompleted(int id)
+        {
+            var consigment = await _unitOfWork.ConsignmentRequestRepository.GetByIdAsync(id);
+            if (consigment == null)
+            {
+                return null;
+            }
+
+            ConsignmentTransaction transaction = new()
+            {
+                ConsignmentId = consigment.ConsignmentId,
+                SalePrice = consigment.ArgredSalePrice,
+                CommissionFee = COMMISSION_FEE,
+                CommissionAmount = consigment.ArgredSalePrice * COMMISSION_FEE,
+                Earnings = consigment.ArgredSalePrice *(1 - COMMISSION_FEE),
+                SoldAt = DateTime.UtcNow
+            };
+
+            await _unitOfWork.ConsignmentTransactionRepository.CreateAsync(transaction);
+
+            return _mapper.Map<ConsignmentTransactionDto>(transaction);
+
         }
     }
 

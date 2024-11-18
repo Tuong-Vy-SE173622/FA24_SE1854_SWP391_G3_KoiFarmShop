@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace KoiFarmShop.Data.Models;
 
 [Table("Care_Request")]
+[Index("KoiId", Name = "UQ_CareRequest_Koi", IsUnique = true)]
 public partial class CareRequest
 {
     [Key]
@@ -49,6 +50,13 @@ public partial class CareRequest
     [InverseProperty("CareRequest")]
     public virtual ICollection<CareRequestDetail> CareRequestDetails { get; set; } = new List<CareRequestDetail>();
 
+    [ForeignKey("CustomerId")]
+    [InverseProperty("CareRequests")]
+    public virtual Customer Customer { get; set; }
+
+    [ForeignKey("KoiId")]
+    [InverseProperty("CareRequest")]
+    public virtual Koi Koi { get; set; }
     public enum CareRequestStatus
     {
         PendingApproval,

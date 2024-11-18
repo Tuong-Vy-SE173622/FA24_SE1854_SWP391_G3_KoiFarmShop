@@ -1,19 +1,20 @@
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace KoiFarmShop.Business.Dto.Kois
 {
-    public class KoiCreateForCustomerDto
+    public class KoiResponseForCustomerDto
     {
-   
-        [Required]
+
         public int KoiTypeId { get; set; }
 
-        [Required, MaxLength(100)]
         public string Origin { get; set; }
 
-        [Range(0, 1, ErrorMessage = "Gender must be 0 or 1.")]
         public int? Gender { get; set; }
 
         [Range(0, 100)]

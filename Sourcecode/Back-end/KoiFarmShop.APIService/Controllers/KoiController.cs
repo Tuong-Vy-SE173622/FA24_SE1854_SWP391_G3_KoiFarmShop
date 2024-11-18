@@ -50,19 +50,23 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateKoi([FromForm] KoiCreateDto koiCreateDto)
+        public async Task<ResultDto> CreateKoi([FromForm] KoiCreateDto koiCreateDto)
         {
             var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
             var createdId = await _koiService.CreateKoiAsync(koiCreateDto, currentUser);
-            return CreatedAtAction(nameof(GetKoiById), new { id = createdId }, koiCreateDto);
+            ResultDto result = new();
+            result.success(createdId,"New koi has been created with id : " + createdId);
+            return result;
         }
 
         [HttpPost("for-customer")]
-        public async Task<IActionResult> CreateKoiForCustomer([FromForm] KoiCreateForCustomerDto koiCreateDto)
+        public async Task<ResultDto> CreateKoiForCustomer([FromForm] KoiCreateForCustomerDto koiCreateDto)
         {
             var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
             var createdId = await _koiService.CreateKoiForCustomerAsync(koiCreateDto, currentUser);
-            return CreatedAtAction(nameof(GetKoiById), new { id = createdId }, koiCreateDto);
+            ResultDto result = new();
+            result.success(createdId, "New koi has been created with id : " + createdId);
+            return result;
         }
 
         [HttpPut("{id}")]

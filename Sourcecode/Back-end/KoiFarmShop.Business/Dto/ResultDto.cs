@@ -24,6 +24,13 @@ namespace KoiFarmShop.Business.Dto
             Data = data;
             Message = "Success";
         }
+        public void success(string message)
+        {
+            IsSuccess = true;
+            Code = 400;
+            Data = null;
+            Message = message;
+        }
 
         public void success(object data, string message) 
         {

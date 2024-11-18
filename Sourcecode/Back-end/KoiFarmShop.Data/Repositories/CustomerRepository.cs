@@ -31,5 +31,9 @@ namespace KoiFarmShop.Data.Repositories
                 .AsNoTracking()
                 .ToListAsync();
         }
+        public async Task<Customer?> GetUserIdOfCustomer(int customerId)
+        {
+            return await _context.Customers.Where(x => x.CustomerId == customerId).FirstOrDefaultAsync();
+        }
     }
 }

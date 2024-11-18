@@ -76,6 +76,16 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             var consignmentRequests = await _unitOfWork.ConsignmentRequestRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<ConsignmentRequestResponseDto>>(consignmentRequests);
         }
+
+        public async Task<IEnumerable<ConsignmentRequestResponseDto>> GetAllConsignmentsByCustomer(int customerId)
+        {
+            var customer = await _unitOfWork.CustomerRepository.GetByIdAsync(customerId);
+            if (customer == null) 
+                throw new KeyNotFoundException("customer not found");
+            
+             var list = await _unitOfWork.ConsignmentRequestRepository.GetAllConsignmentByCustomer(customerId);
+            return _mapper.Map<IEnumerable<ConsignmentRequestResponseDto>>(list);
+        }
     }
 
 

@@ -483,5 +483,13 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             };
         }
 
+        public async Task<ResultDto> GetAllKoisCreatedByUserId(int userId)
+        {
+            ResultDto result = new();
+            var listKoi = await _unitOfWork.KoiRepository.GetAllKoisCreatedByUser(userId);
+            result.success(listKoi);
+            return result;
+        }
+
     }
 }

@@ -144,6 +144,12 @@ namespace KoiFarmShop.APIService.Controllers
             }
             return await _koiService.ApproveOrRejectKoiForConsignment(request, currentUser);
         }
+
+        [HttpGet("koi-created-by-user")]
+        public async Task<ResultDto> GetAllKoisCreatedByUserId(int userId)
+        {
+            return await _koiService.GetAllKoisCreatedByUserId(userId);
+        }
     }
 }
 

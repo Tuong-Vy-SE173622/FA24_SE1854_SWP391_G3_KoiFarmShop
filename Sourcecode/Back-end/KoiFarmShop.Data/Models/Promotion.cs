@@ -52,4 +52,9 @@ public partial class Promotion
     [StringLength(255)]
     [Unicode(false)]
     public string UpdatedBy { get; set; }
+
+    [Column("promo_code")]
+    [StringLength(50)]
+    [Unicode(false)]
+    public string PromoCode { get; set; }
 }

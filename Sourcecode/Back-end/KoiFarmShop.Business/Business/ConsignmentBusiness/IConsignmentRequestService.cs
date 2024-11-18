@@ -9,6 +9,7 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
         Task DeleteConsignmentRequestAsync(int id);
         Task<ConsignmentRequestResponseDto> GetConsignmentRequestByIdAsync(int id);
         Task<IEnumerable<ConsignmentRequestResponseDto>> GetAllConsignmentRequestsAsync();
+        Task<IEnumerable<ConsignmentRequestResponseDto>> GetAllConsignmentsByCustomer(int customerId);
     }
 
 }

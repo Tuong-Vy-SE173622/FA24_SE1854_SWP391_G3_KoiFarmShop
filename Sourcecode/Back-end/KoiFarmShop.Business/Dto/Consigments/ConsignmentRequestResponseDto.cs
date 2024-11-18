@@ -3,6 +3,7 @@
     public class ConsignmentRequestResponseDto
     {
         public int? ConsignmentId { get; set; }
+
         public int? CustomerId { get; set; }
 
         public int? KoiId { get; set; }

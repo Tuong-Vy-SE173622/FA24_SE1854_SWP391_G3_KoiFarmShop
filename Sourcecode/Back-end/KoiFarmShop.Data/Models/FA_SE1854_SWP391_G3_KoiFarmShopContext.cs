@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace KoiFarmShop.Data.Models;
 
@@ -52,18 +51,6 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlServer(GetConnectionString());
-    }
-
-    private string GetConnectionString()
-    {
-        IConfiguration configuration = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json", true, true).Build();
-        return configuration["ConnectionStrings:DefaultConnection"];
-    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<BlogPost>(entity =>
@@ -114,15 +101,12 @@ public partial class FA_SE1854_SWP391_G3_KoiFarmShopContext : DbContext
             entity.HasKey(e => e.ConsignmentId).HasName("PK__Consignm__3114B3D0EC8A66E7");
 
             entity.ToTable("Consignment_Request", tb => tb.HasTrigger("trg_UpdateIsActive"));
-
-            entity.Property(e => e.ConsignmentId).ValueGeneratedNever();
         });
 
         modelBuilder.Entity<ConsignmentTransaction>(entity =>
         {
             entity.HasKey(e => e.TransactionId).HasName("PK__Consignm__85C600AFD7044212");
 
-            entity.Property(e => e.TransactionId).ValueGeneratedNever();
             entity.Property(e => e.CommissionAmount).HasComputedColumnSql("([sale_price]*(0.05))", false);
             entity.Property(e => e.Earnings).HasComputedColumnSql("([sale_price]-[commission_fee])", false);
 

@@ -1,4 +1,5 @@
 ﻿using KoiFarmShop.Business.Business.ConsignmentBusiness;
+using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Consigments;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -50,6 +51,12 @@ namespace KoiFarmShop.APIService.Controllers
         {
             var result = await _consignmentRequestService.GetAllConsignmentRequestsAsync();
             return Ok(result);
+        }
+
+        public async Task<ResultDto> GetAllConsigmentByCustomer(int customerId)
+        {
+            ResultDto result = new();
+            var consignments = await k
         }
     }
 

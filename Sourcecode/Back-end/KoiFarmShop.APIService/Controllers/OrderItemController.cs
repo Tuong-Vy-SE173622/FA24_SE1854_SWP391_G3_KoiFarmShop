@@ -1,9 +1,11 @@
 ﻿using KoiFarmShop.Business.Business.OrderBusiness;
 using KoiFarmShop.Business.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KoiFarmShop.APIService.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OrderItemController : ControllerBase

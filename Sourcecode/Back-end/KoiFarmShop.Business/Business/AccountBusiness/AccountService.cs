@@ -127,7 +127,7 @@ namespace KoiFarmShop.Business.Business.AccountBusiness
                 var customer = _mapper.Map<Customer>(model);
 
                 // Generate the next customer ID if needed
-                //customer.CustomerId = await _unitOfWork.CustomerRepository.GenerateNewCustomerId();
+                customer.CustomerId = await _unitOfWork.CustomerRepository.GenerateNewCustomerId();
 
                 // Set other properties (e.g., CreatedDate, CreatedBy, etc.)
                 customer.CreatedBy = userCreate.FindFirst("UserName")?.Value;

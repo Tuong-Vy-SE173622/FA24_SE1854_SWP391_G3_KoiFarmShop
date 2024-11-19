@@ -1,6 +1,7 @@
 ﻿ using AutoMapper;
 using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Promotion;
+using KoiFarmShop.Business.Security;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -69,6 +70,7 @@ namespace KoiFarmShop.Business.Business.PromotionBusiness
                     var promotionViewModels = p.Select(u => new PromotionDto
                     {
                         PromotionId = u.PromotionId,
+                        PromoCode = u.PromoCode,
                         Description = u.Description,
                         StartDate = u.StartDate,
                         EndDate = u.EndDate,
@@ -110,6 +112,10 @@ namespace KoiFarmShop.Business.Business.PromotionBusiness
 
                 // Generate the next user ID
                 p.PromotionId = await _unitOfWork.PromotionRepository.GenerateNewPromotionId();
+
+                //use password hash method to genete string for promo code
+                var code = PasswordHasher.HashPassword(p.PromotionId.ToString());
+                p.PromoCode = code.Length >= 8 ? code.Substring(0, 8) : code;
 
                 // Set other properties (e.g., CreatedDate, Status, etc.)
                 p.StartDate = DateTime.Now;
@@ -204,6 +210,37 @@ namespace KoiFarmShop.Business.Business.PromotionBusiness
                 result.Message = ex.Message;
                 result.IsSuccess = false;
             }
+            return result;
+        }
+
+        public async Task<ResultDto> ApplyPromotionForOrder(string promoCode, int orderId)
+        {
+            ResultDto result = new();
+            var p = _unitOfWork.PromotionRepository.Get(x => x.PromoCode == promoCode);
+            if (p == null)
+            {
+                result.error("promoCode not found");
+                return result;
+            }
+            var order = _unitOfWork.OrderRepository.GetById(orderId);
+            if (order == null)
+            {
+                result.error("order not found with id : " + orderId);
+                return result;
+            }
+            order.IsActive = true;
+            order.UpdatedAt = DateTime.UtcNow;
+            order.UpdatedBy = "System";
+            order.PromotionAmount = order.SubAmount * p.DiscountPercentage;
+            if(order.SubAmount <= 0)
+            {
+                result.error("this order does not have any order item !");
+                return result;
+            }
+            order.TotalAmount = order.SubAmount - order.PromotionAmount + order.VatAmount??0 ;
+
+            await _unitOfWork.OrderRepository.SaveAsync();
+            result.success(order, "Apply promotion successfully!");
             return result;
         }
     }

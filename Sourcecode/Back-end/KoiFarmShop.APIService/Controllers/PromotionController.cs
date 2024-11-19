@@ -1,10 +1,13 @@
-﻿using KoiFarmShop.Business.Business.PromotionBusiness;
+﻿using Azure.Core;
+using KoiFarmShop.Business.Business.PromotionBusiness;
 using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Promotion;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KoiFarmShop.APIService.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PromotionController : ControllerBase
@@ -111,6 +114,16 @@ namespace KoiFarmShop.APIService.Controllers
             var result = await _promotionService.DeletePromotion(request, currentUser);
             return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
+        #endregion
+
+        #region Apply promotion
+        [HttpPut("apply-promotion")]
+        public async Task<IActionResult> ApplyPromotionForOrder([FromForm] string promoCode, int orderId)
+        {
+            var result = await _promotionService.ApplyPromotionForOrder(promoCode, orderId);
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
+        }
+
         #endregion
     }
 }

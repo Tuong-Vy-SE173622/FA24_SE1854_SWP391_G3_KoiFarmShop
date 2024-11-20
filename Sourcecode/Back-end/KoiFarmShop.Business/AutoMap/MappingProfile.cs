@@ -66,7 +66,13 @@ namespace KoiFarmShop.Business.AutoMap
             CreateMap<CareRequest, CareRequestResponseDto>();
 
             CreateMap<CareRequestDetailCreateDto, CareRequestDetail>();
-            CreateMap<CareRequestDetailUpdateDto, CareRequestDetail>();
+            CreateMap<CareRequestDetailUpdateDto, CareRequestDetail>().ForAllMembers(
+                opt => opt.Condition(
+                    (src, dest, srcMember) => srcMember != null &&
+                                            !(srcMember is int && (int)srcMember == 0) &&
+                                            !(srcMember is double && (double)srcMember == 0)
+                    )
+                );
             CreateMap<CareRequestDetail, CareRequestDetailResponseDto>();
 
             CreateMap<OrderCreateDto, Order>();

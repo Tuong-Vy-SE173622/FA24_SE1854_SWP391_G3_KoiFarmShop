@@ -36,7 +36,7 @@ namespace KoiFarmShop.APIService.Controllers
 
         // POST api/<CareRequestDetailController>
         [HttpPost]
-        public async Task<ActionResult<CareRequestDetailResponseDto>> CreateCareRequestDetail(CareRequestDetailCreateDto createDto)
+        public async Task<ActionResult<CareRequestDetailResponseDto>> CreateCareRequestDetail([FromForm] CareRequestDetailCreateDto createDto)
         {
             var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
             var result = await _careRequestDetailService.CreateCareRequestDetailAsync(createDto, currentUser);
@@ -45,7 +45,7 @@ namespace KoiFarmShop.APIService.Controllers
 
         // PUT api/<CareRequestDetailController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<CareRequestDetailResponseDto>> UpdateCareRequestDetail(int id, CareRequestDetailUpdateDto updateDto)
+        public async Task<ActionResult<CareRequestDetailResponseDto>> UpdateCareRequestDetail(int id, [FromForm] CareRequestDetailUpdateDto updateDto)
         {
             var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
             var result = await _careRequestDetailService.UpdateCareRequestDetailAsync(id, updateDto, currentUser);
@@ -60,6 +60,16 @@ namespace KoiFarmShop.APIService.Controllers
             var deleted = await _careRequestDetailService.DeleteCareRequestDetailAsync(id);
             if (!deleted) return NotFound();
             return NoContent();
+        }
+
+        [HttpPut("mark-complete")]
+        [Authorize]
+        public async Task<ActionResult<CareRequestDetailResponseDto>> MarkCompletedCareRequestDetail(int careRequestDetailId)
+        {
+            var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
+            var result = await _careRequestDetailService.MarkCareRequestDetailAsCompletedAsync(careRequestDetailId, currentUser);
+            if (result == null) return NotFound();
+            return Ok(result);
         }
     }
 }

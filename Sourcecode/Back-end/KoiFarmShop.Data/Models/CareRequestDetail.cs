@@ -26,7 +26,7 @@ public partial class CareRequestDetail
 
     [Column("status", TypeName = "varchar(50)")]
     [StringLength(50)]
-    public CareRequestDetailStatus Status { get; set; }
+    public string Status { get; set; }
 
     [Column("note")]
     public string Note { get; set; }
@@ -44,6 +44,7 @@ public partial class CareRequestDetail
     public virtual CareRequest CareRequest { get; set; }
     public enum CareRequestDetailStatus
     {
+        [Display(Name = "In Progress")]
         InProgress,
         Completed
     }

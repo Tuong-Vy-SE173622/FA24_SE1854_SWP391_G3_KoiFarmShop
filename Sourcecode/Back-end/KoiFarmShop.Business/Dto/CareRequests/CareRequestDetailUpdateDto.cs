@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace KoiFarmShop.Business.Dto.CareRequests
 {
     public class CareRequestDetailUpdateDto
     {
-        public int? KoiImage { get; set; }
+        public IFormFile? KoiImage { get; set; }
         public string? ServiceDescription { get; set; }
         public CareRequestDetailStatus? Status { get; set; }
         public string? Note { get; set; }

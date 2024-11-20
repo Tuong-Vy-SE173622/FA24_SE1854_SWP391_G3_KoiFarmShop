@@ -45,7 +45,7 @@ namespace KoiFarmShop.APIService.Controllers
 
         // POST api/<CareRequestController>
         [HttpPost]
-        public async Task<ActionResult<CareRequestResponseDto>> CreateCareRequest([FromBody] CareRequestCreateDto createDto)
+        public async Task<ActionResult<CareRequestResponseDto>> CreateCareRequest([FromForm] CareRequestCreateDto createDto)
         {
             var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
             var result = await _careRequestService.CreateCareRequestAsync(createDto, currentUser);
@@ -54,7 +54,7 @@ namespace KoiFarmShop.APIService.Controllers
 
         // PUT api/<CareRequestController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<CareRequestResponseDto>> UpdateCareRequest(int id, [FromBody] CareRequestUpdateDto updateDto)
+        public async Task<ActionResult<CareRequestResponseDto>> UpdateCareRequest(int id, [FromForm] CareRequestUpdateDto updateDto)
         {
             var currentUser = HttpContext.User?.FindFirst("UserName")?.Value;
             var result = await _careRequestService.UpdateCareRequestAsync(id, updateDto, currentUser);
@@ -62,7 +62,7 @@ namespace KoiFarmShop.APIService.Controllers
             return Ok(result);
         }
 
-        [HttpPut("reject")]
+        [HttpPut("approve")]
         [Authorize]
         public async Task<ActionResult<CareRequestResponseDto>> ApproveCareRequest(int careRequestId)
         {
@@ -72,7 +72,7 @@ namespace KoiFarmShop.APIService.Controllers
             return Ok(result);
         }
 
-        [HttpPut("approve")]
+        [HttpPut("reject")]
         [Authorize]
         public async Task<ActionResult<CareRequestResponseDto>> RejectCareRequest(int careRequestId)
         {

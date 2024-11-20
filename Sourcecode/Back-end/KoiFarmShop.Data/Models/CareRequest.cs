@@ -30,7 +30,7 @@ public partial class CareRequest
 
     [Column("status", TypeName = "varchar(50)")]
     [StringLength(50)]
-    public CareRequestStatus Status { get; set; }
+    public string Status { get; set; }
 
     [Column("total_amount", TypeName = "decimal(10, 2)")]
     public decimal? TotalAmount { get; set; }
@@ -59,6 +59,7 @@ public partial class CareRequest
     public virtual Koi Koi { get; set; }
     public enum CareRequestStatus
     {
+        [Display(Name = "Pending Approval")]
         PendingApproval,
         Active,
         Completed,

@@ -5,6 +5,7 @@ using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
 
             if (filterDto.Status.HasValue)
             {
-                query = query.Where(cr => cr.Status == filterDto.Status);
+                query = query.Where(cr => cr.Status == filterDto.Status.ToString());
             }
             if (filterDto.IsSortedByName)
                 query = filterDto.IsAscending
@@ -102,7 +103,7 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
 
             if (currentUser == null) throw new UnauthorizedAccessException();
             careRequest.UpdatedBy = currentUser;
-            careRequest.Status = CareRequestStatus.Active;
+            careRequest.Status = CareRequestStatus.Active.ToString();
             await _unitOfWork.CareRequestRepository.UpdateAsync(careRequest);
             await _unitOfWork.SaveChangesAsync();
 
@@ -120,7 +121,7 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
 
             if (currentUser == null) throw new UnauthorizedAccessException();
             careRequest.UpdatedBy = currentUser;
-            careRequest.Status = CareRequestStatus.Rejected;
+            careRequest.Status = CareRequestStatus.Rejected.ToString();
             await _unitOfWork.CareRequestRepository.UpdateAsync(careRequest);
             await _unitOfWork.SaveChangesAsync();
 
@@ -148,6 +149,7 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
             var careRequest = _mapper.Map<CareRequest>(createDto);
 
             careRequest.CareRequestId = _unitOfWork.CareRequestRepository.GetAll().OrderByDescending(cr => cr.CareRequestId).Select(cr => cr.CareRequestId).FirstOrDefault() + 1;
+            careRequest.Status = CareRequestStatus.PendingApproval.GetDisplayName().ToString();
             if (currentUser == null) throw new UnauthorizedAccessException();
             careRequest.CreatedBy = currentUser;
             //careRequest.CreatedAt = DateTime.UtcNow;
@@ -164,6 +166,17 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
                 throw new NotFoundException($"Care request doesn't exist.");
             }
 
+            if (updateDto.Status.HasValue)
+            {
+                if(updateDto.Status == CareRequestStatus.PendingApproval)
+                {
+                    careRequest.Status = CareRequestStatus.PendingApproval.GetDisplayName().ToString();
+                }
+                else
+                {
+                    careRequest.Status = updateDto.Status.ToString();
+                }
+            }
             
             _mapper.Map(updateDto, careRequest);
             //careRequest.UpdatedAt = DateTime.UtcNow;

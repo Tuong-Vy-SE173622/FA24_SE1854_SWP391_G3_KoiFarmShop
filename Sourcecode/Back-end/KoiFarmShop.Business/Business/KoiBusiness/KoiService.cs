@@ -386,6 +386,8 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 query = query.Where(k => k.Origin.Contains(filterDto.Origin));
             }
 
+            query = query.Where(k => k.IsActive == true);
+
             // Sorting
             if (filterDto.IsSortedByPrice)
                 query = filterDto.IsAscending

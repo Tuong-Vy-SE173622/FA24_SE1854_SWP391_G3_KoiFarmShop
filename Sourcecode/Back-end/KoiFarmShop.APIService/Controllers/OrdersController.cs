@@ -34,10 +34,10 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpPut("{id}/update-order-status-after-payment")]
-        public async Task<IActionResult> UpdateOrderStatus(int id, [FromBody] OrderUpdateStatusDto orderUpdateStatusDto)
+        public async Task<IActionResult> UpdateOrderStatus(int id)
         {
-            var result = await _orderService.UpdateOrderStatusAsync(id, orderUpdateStatusDto);
-            return Ok(result);
+            await _orderService.UpdateOrderStatusAfterPaymentAsync(id);
+            return Ok(new { message = "Update Order successfully!" });
         }
 
         [HttpPut("deactivate/{id}")]

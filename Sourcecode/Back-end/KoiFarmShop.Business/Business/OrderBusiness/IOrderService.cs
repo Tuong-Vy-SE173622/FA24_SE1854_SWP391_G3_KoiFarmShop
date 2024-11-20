@@ -11,7 +11,7 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
     {
         Task<OrderResponseDto> CreateOrderAsync(OrderCreateDto createDto, string? currentUser);
         Task<OrderResponseDto> UpdateOrderAsync(int id, OrderUpdateDto updateDto, string? currentUser);
-        Task<OrderResponseDto> UpdateOrderStatusAsync(int id, OrderUpdateStatusDto updateStatusDto);
+        Task UpdateOrderStatusAfterPaymentAsync(int orderId);
         Task<OrderResponseDto> SoftDeleteOrderAsync(int id);
         Task<bool> HardDeleteOrderAsync(int id);
         Task<OrderResponseDto> GetOrderByIdAsync(int id);

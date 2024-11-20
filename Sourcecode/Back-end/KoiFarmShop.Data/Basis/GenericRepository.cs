@@ -1,5 +1,6 @@
 ﻿using KoiFarmShop.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Linq.Expressions;
 
 namespace KoiFarmShop.Data.Basis
@@ -106,6 +107,11 @@ namespace KoiFarmShop.Data.Basis
         public async Task<T> GetByIdAsync(Guid code)
         {
             return await _context.Set<T>().FindAsync(code);
+        }
+
+        public async Task<IDbContextTransaction> BeginTransactionAsync()
+        {
+            return await _context.Database.BeginTransactionAsync();
         }
 
         #endregion

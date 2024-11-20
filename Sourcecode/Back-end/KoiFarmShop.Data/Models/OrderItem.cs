@@ -16,10 +16,10 @@ public partial class OrderItem
     public int OrderItemId { get; set; }
 
     [Column("order_id")]
-    public int? OrderId { get; set; }
+    public int OrderId { get; set; }
 
     [Column("koi_id")]
-    public int? KoiId { get; set; }
+    public int KoiId { get; set; }
 
     [Column("amount")]
     public int? Amount { get; set; }
@@ -33,7 +33,7 @@ public partial class OrderItem
     [Column("note")]
     [StringLength(255)]
     [Unicode(false)]
-    public string Note { get; set; }
+    public string? Note { get; set; }
 
     [Column("created_at")]
     public DateTime? CreatedAt { get; set; }
@@ -41,7 +41,7 @@ public partial class OrderItem
     [Column("created_by")]
     [StringLength(255)]
     [Unicode(false)]
-    public string CreatedBy { get; set; }
+    public string? CreatedBy { get; set; }
 
     [Column("updated_at")]
     public DateTime? UpdatedAt { get; set; }
@@ -49,7 +49,7 @@ public partial class OrderItem
     [Column("updated_by")]
     [StringLength(255)]
     [Unicode(false)]
-    public string UpdatedBy { get; set; }
+    public string? UpdatedBy { get; set; }
 
     [InverseProperty("OrderItem")]
     public virtual ICollection<Certification> Certifications { get; set; } = new List<Certification>();

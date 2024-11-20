@@ -13,10 +13,11 @@ namespace KoiFarmShop.Data.Repositories
     {
         public OrderRepository(FA_SE1854_SWP391_G3_KoiFarmShopContext context) => _context = context;
 
-        public async Task<Order> GetOrderWithDetailsAsync(int orderId)
+        public async Task<Order?> GetOrderWithDetailsAsync(int orderId)
         {
             return await _context.Orders
-                .Include(c => c.OrderItems)
+                .Include(o => o.OrderItems)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.OrderId == orderId);
         }
 

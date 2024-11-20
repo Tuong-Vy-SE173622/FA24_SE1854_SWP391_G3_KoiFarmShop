@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using KoiFarmShop.Business.Business.OrderBusiness;
 using KoiFarmShop.Business.Config;
 using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Kois;
 using KoiFarmShop.Business.Dto.Payment;
+using KoiFarmShop.Business.ExceptionHanlder;
+using KoiFarmShop.Business.Security;
 using KoiFarmShop.Business.Utils.VNPAYAPI.Areas.VNPayAPI.Util;
 using KoiFarmShop.Data;
 using Microsoft.AspNetCore.Http;
@@ -15,14 +18,14 @@ namespace KoiFarmShop.Business.Business.VNPay
     {
         private const string RESPONSE_CODE_SUCCESS = "00";
         private readonly VnPayConfig _vnpayConfig;
-        private readonly UnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
+        private readonly IOrderService _orderService;
 
-        public VnpayService(IOptions<VnPayConfig> vnpayConfig, UnitOfWork unitOfWork, IMapper mapper)
+        private readonly string PREFIX = "_KOI_FARM_ORDER_";
+
+        public VnpayService(IOptions<VnPayConfig> vnpayConfig, UnitOfWork unitOfWork, IOrderService orderService)
         {
             _vnpayConfig = vnpayConfig.Value;
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            _orderService = orderService;
         }
         //TODO: save into order in database 
 
@@ -30,6 +33,8 @@ namespace KoiFarmShop.Business.Business.VNPay
         public string GeneratePaymentUrl(PaymentRequest request)
         {
             var pay = new PayLib();
+            Random rnd = new();
+            request.OrderId += PREFIX + rnd.Next(1, 1001).ToString() + "_" + rnd.Next(1, 1001).ToString();
             AddRequestData(pay, request);
             return pay.CreateRequestUrl(_vnpayConfig.Url, _vnpayConfig.HashSecret);
         }
@@ -60,65 +65,47 @@ namespace KoiFarmShop.Business.Business.VNPay
         // Verify Payment Response
         public async Task<PaymentResponse?> VerifyPaymentResponseAsync(QueryString queryString)
         {
-            if (queryString.HasValue)
+            if (!queryString.HasValue) return null;
+
+            var json = HttpUtility.ParseQueryString(queryString.Value);
+
+            string _orderId = json["vnp_TxnRef"]?.ToString();
+            if (string.IsNullOrEmpty(_orderId)) return null;
+
+            int orderId = int.Parse(_orderId.Split(new[] { PREFIX }, StringSplitOptions.None)[0]);
+            string orderInfo = json["vnp_OrderInfo"]?.ToString();
+            long vnpayTranId = Convert.ToInt64(json["vnp_TransactionNo"]);
+            string vnp_ResponseCode = json["vnp_ResponseCode"]?.ToString();
+            string vnp_SecureHash = json["vnp_SecureHash"]?.ToString();
+            var pos = queryString.Value.IndexOf("&vnp_SecureHash");
+
+            // Validate signature and TMN code
+            bool isSignatureValid = ValidateSignature(queryString.Value.Substring(1, pos - 1), vnp_SecureHash, _vnpayConfig.HashSecret);
+            bool isTmnCodeValid = _vnpayConfig.TmnCode == json["vnp_TmnCode"]?.ToString();
+
+            if (isSignatureValid && isTmnCodeValid && vnp_ResponseCode.Equals(RESPONSE_CODE_SUCCESS))
             {
-                var json = HttpUtility.ParseQueryString(queryString.Value);
-
-                long orderId = Convert.ToInt64(json["vnp_TxnRef"]);
-                string orderInfo = json["vnp_OrderInfo"].ToString();
-                long vnpayTranId = Convert.ToInt64(json["vnp_TransactionNo"]);
-                string vnp_ResponseCode = json["vnp_ResponseCode"].ToString();
-                string vnp_SecureHash = json["vnp_SecureHash"].ToString();
-                var pos = queryString.Value.IndexOf("&vnp_SecureHash");
-
-
-                bool checkSignature = ValidateSignature(queryString.Value.Substring(1, pos - 1), vnp_SecureHash, _vnpayConfig.HashSecret); //check signature
-                bool checkTmnCode = _vnpayConfig.TmnCode == json["vnp_TmnCode"].ToString();
-
-                var isSuccessful = false;
-
-                if (checkSignature && checkTmnCode && vnp_ResponseCode.Equals(RESPONSE_CODE_SUCCESS))
-                {
-                    var order = _unitOfWork.OrderRepository.GetById( (int) orderId);
-                    //check order exist
-                    if (order == null)
-                    {
-                        throw new Exception("Order does not exist at server!");
-                    }
-
-                    //update order status
-                    var orderUpdateStatus = new OrderUpdateStatusDto()
-                    {
-                        PaymentStatus = "Paid",
-                        IsActive = true,
-                        Status = "",
-                    };
-                    _mapper.Map(orderUpdateStatus, order);
-
-                    foreach (var orderItem in order.OrderItems)
-                    {
-                        var koi = _unitOfWork.KoiRepository.GetById((int)orderItem.KoiId);
-                        var koiStatusUpdate = new KoiStatusUpdateDto()
-                        {
-                            IsActive = false
-                        };
-                        _mapper.Map(koiStatusUpdate, koi);
-                    }
-                    await _unitOfWork.SaveChangesAsync();
-                    isSuccessful = true;
-                } 
-
+                //await _orderService.UpdateOrderStatusAfterPaymentAsync(orderId); it's got error since i added this line of code and idk any fuking way :D
                 return new PaymentResponse()
                 {
                     OrderId = orderId,
                     OrderInfo = orderInfo,
-                    checkSignature = checkSignature,
-                    checkTmnCode = checkTmnCode,
+                    checkSignature = isSignatureValid,
+                    checkTmnCode = isTmnCodeValid,
                     ResponseCode = vnp_ResponseCode,
-                    isSuccessful = isSuccessful
+                    isSuccessful = true
                 };
             }
-            return null;
+
+            return new PaymentResponse()
+            {
+                OrderId = orderId,
+                OrderInfo = orderInfo,
+                checkSignature = isSignatureValid,
+                checkTmnCode = isTmnCodeValid,
+                ResponseCode = vnp_ResponseCode,
+                isSuccessful = false
+            };
         }
 
         public bool ValidateSignature(string rspraw, string inputHash, string secretKey)

@@ -75,32 +75,34 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
             return _mapper.Map<OrderResponseDto>(order);
         }
 
-        public async Task<OrderResponseDto> UpdateOrderStatusAsync(int id, OrderUpdateStatusDto updateStatusDto)
+        public async Task UpdateOrderStatusAfterPaymentAsync(int orderId)
         {
-            var order = await _unitOfWork.OrderRepository.GetOrderWithDetailsAsync(id);
-            if (order == null)
+            using var transaction = await _unitOfWork.OrderRepository.BeginTransactionAsync();
+            try
             {
-                throw new NotFoundException("Order not found.");
-            }
-            _mapper.Map(updateStatusDto, order);
-            if(order.PaymentStatus == "Paid")
-            {
+                var order = await _unitOfWork.OrderRepository.GetOrderWithDetailsAsync(orderId)
+                    ?? throw new NotFoundException("Order does not exist!");
+
+                // Update order status
+                order.IsActive = true;
+                order.PaymentStatus = "Paid";
+                order.Status = "Completed";
+
+                // Update related koi statuses
                 foreach (var orderItem in order.OrderItems)
                 {
-                    var koi = _unitOfWork.KoiRepository.GetById((int)orderItem.KoiId);
-                    //var koiStatusUpdate = new KoiStatusUpdateDto()
-                    //{
-                    //    IsActive = false
-                    //};
-                    //_mapper.Map(koiStatusUpdate, koi);
+                    var koi = await _unitOfWork.KoiRepository.GetByIdAsync(orderItem.KoiId);
                     koi.IsActive = false;
-                    await _unitOfWork.KoiRepository.UpdateAsync(koi);
-
                 }
-            }
-            await _unitOfWork.SaveChangesAsync();
 
-            return _mapper.Map<OrderResponseDto>(order);
+                await _unitOfWork.SaveChangesAsync();
+                await transaction.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                throw new ApplicationException("Failed to update order status.", ex);
+            }
         }
 
         public async Task<OrderResponseDto> SoftDeleteOrderAsync(int id)

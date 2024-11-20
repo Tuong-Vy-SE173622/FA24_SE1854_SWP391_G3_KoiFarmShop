@@ -1,4 +1,5 @@
-﻿using KoiFarmShop.Business.Business.VNPay;
+﻿using KoiFarmShop.Business.Business.OrderBusiness;
+using KoiFarmShop.Business.Business.VNPay;
 using KoiFarmShop.Business.Dto.Payment;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +10,12 @@ namespace KoiFarmShop.APIService.Controllers
     public class PaymentController : ControllerBase
     {
         private readonly IVnPayService _vnpayService;
+        private readonly IOrderService _orderService;
 
-        public PaymentController(IVnPayService vnpayService)
+        public PaymentController(IVnPayService vnpayService, IOrderService orderService)
         {
             _vnpayService = vnpayService;
+            _orderService = orderService;
         }
 
         // Generate VNPAY Payment URL
@@ -27,14 +30,21 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpGet("vnpay-return")]
-        public IActionResult VnpayReturn()
+        public async Task<IActionResult> VnPayCallback()
         {
             if (Request.QueryString.HasValue)
             {
-                var response = _vnpayService.VerifyPaymentResponseAsync(Request.QueryString);
-                return Ok(response);
+                var response = await _vnpayService.VerifyPaymentResponseAsync(Request.QueryString);
+
+                if (response != null && response.isSuccessful == true)
+                {
+                    await _orderService.UpdateOrderStatusAfterPaymentAsync(response.OrderId);
+                    return Ok(new { message = "Payment processed successfully." });
+                }
+                else
+                    return Ok(new { message = "Payment processed failed." });
             }
-            return NoContent();
+            else return BadRequest("not get the response");        
         }
     }
 }

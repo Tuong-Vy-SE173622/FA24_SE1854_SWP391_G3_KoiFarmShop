@@ -2,7 +2,7 @@
 {
     public class PaymentResponse
     {
-        public long OrderId { get; set; }
+        public int OrderId { get; set; }
         public string OrderInfo { get; set; }
         public bool checkSignature { get; set; }
         public bool checkTmnCode { get; set; }

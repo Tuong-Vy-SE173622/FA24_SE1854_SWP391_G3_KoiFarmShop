@@ -11,6 +11,7 @@ namespace KoiFarmShop.APIService.Controllers
     {
         private readonly IVnPayService _vnpayService;
         private readonly IOrderService _orderService;
+        private const string REDIRECT_URL = "http://localhost:5001/dashboard/purchase";
 
         public PaymentController(IVnPayService vnpayService, IOrderService orderService)
         {
@@ -39,7 +40,7 @@ namespace KoiFarmShop.APIService.Controllers
                 if (response != null && response.isSuccessful == true)
                 {
                     await _orderService.UpdateOrderStatusAfterPaymentAsync(response.OrderId);
-                    return Ok(response);
+                    return Redirect(REDIRECT_URL);
                 }
                 else
                     return Ok(new { message = "Payment processed failed." });

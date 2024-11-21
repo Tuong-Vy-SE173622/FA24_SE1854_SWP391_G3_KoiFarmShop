@@ -74,6 +74,8 @@ namespace KoiFarmShop.APIService.Controllers
             else result.error("consignment does not existed");
             return result;
         }
+
+        public async Task<ResultDto> GetAllTrn
         [HttpPut("approve-consignment-request")]
         public async Task<ResultDto> ApproveConsignmentRequest( [FromForm] ConsignementApproveRequest request)
         {

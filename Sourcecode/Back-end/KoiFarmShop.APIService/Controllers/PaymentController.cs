@@ -1,6 +1,7 @@
 ﻿using KoiFarmShop.Business.Business.CarePlanBusiness;
 using KoiFarmShop.Business.Business.CareRequestBusiness;
 using KoiFarmShop.Business.Business.ConsignmentBusiness;
+using KoiFarmShop.Business.Business.KoiBusiness;
 using KoiFarmShop.Business.Business.OrderBusiness;
 using KoiFarmShop.Business.Business.VNPay;
 using KoiFarmShop.Business.Dto.Payment;
@@ -17,7 +18,7 @@ namespace KoiFarmShop.APIService.Controllers
         private readonly IConsignmentRequestService _consignmentRequestService;
         private readonly ICareRequestService _careRequestService;
         private const string REDIRECT_URL = "http://localhost:5001/dashboard/purchase";
-        private const string ORDER_TYPE_CONSIGNMENT = "consignment";
+        //private const string ORDER_TYPE_CONSIGNMENT = "consignment";
         private const string ORDER_TYPE_CARE = "care-request";
 
         public PaymentController(IVnPayService vnpayService, IOrderService orderService, IConsignmentRequestService consignmentRequestService, ICareRequestService careRequestService)
@@ -38,21 +39,21 @@ namespace KoiFarmShop.APIService.Controllers
             var paymentUrl = _vnpayService.GeneratePaymentUrl(request);
             return Ok(new { paymentUrl });
         }
-        [HttpPost("create-payment-for-consignment")]
-        public IActionResult CreatePayment([FromForm] PaymentRequestForConsignment request)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+        //[HttpPost("create-payment-for-consignment")]
+        //public IActionResult CreatePayment([FromForm] PaymentRequestForConsignment request)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState);
 
-            PaymentRequest paymentRequest = new()
-            {
-                OrderId = request.ConsignmentId,
-                Amount = request.Amount,
-                OrderDescription = ORDER_TYPE_CONSIGNMENT
-            };
-            var paymentUrl = _vnpayService.GeneratePaymentUrl(paymentRequest);
-            return Ok(new { paymentUrl });
-        }
+        //    PaymentRequest paymentRequest = new()
+        //    {
+        //        OrderId = request.ConsignmentId,
+        //        Amount = request.Amount,
+        //        OrderDescription = ORDER_TYPE_CONSIGNMENT
+        //    };
+        //    var paymentUrl = _vnpayService.GeneratePaymentUrl(paymentRequest);
+        //    return Ok(new { paymentUrl });
+        //}
 
         [HttpPost("create-payment-for-care-request")]
         public IActionResult CreatePayment([FromForm] PaymentRequestForCare request)
@@ -79,18 +80,18 @@ namespace KoiFarmShop.APIService.Controllers
 
                 if (response != null && response.isSuccessful == true)
                 {
-                    if(response.OrderInfo == ORDER_TYPE_CONSIGNMENT)
-                    {
-                        await _consignmentRequestService.UpdateConsignmentStatusAfterPaymentAsync(response.OrderId);
-                        return Redirect(REDIRECT_URL);
-                    }
-                    if(response.OrderInfo == ORDER_TYPE_CONSIGNMENT)
+                    //if(response.OrderInfo == ORDER_TYPE_CONSIGNMENT)
+                    //{
+                    //    await _consignmentRequestService.UpdateConsignmentStatusAfterPaymentAsync(response.OrderId);
+                    //    return Redirect(REDIRECT_URL);
+                    //}
+                    if (response.OrderInfo == ORDER_TYPE_CARE)
                     {
                         await _careRequestService.UpdateCareRequestStatusAfterPaymentAsync(response.OrderId);
                         return Redirect(REDIRECT_URL);
                     }
 
-                    await _orderService.UpdateOrderStatusAfterPaymentAsync(response.OrderId);
+                    await _orderService.UpdateOrderStatusAfterPaymentAsync(response.OrderId); 
                     return Redirect(REDIRECT_URL);
                 }
                 else
@@ -98,5 +99,7 @@ namespace KoiFarmShop.APIService.Controllers
             }
             else return BadRequest("not get the response");        
         }
+
+
     }
 }

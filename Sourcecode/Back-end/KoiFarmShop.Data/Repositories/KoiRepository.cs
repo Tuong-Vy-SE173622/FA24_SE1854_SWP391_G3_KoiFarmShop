@@ -60,7 +60,6 @@ namespace KoiFarmShop.Data.Repositories
         public async Task<Koi?> GetKoiWithConsignment(int koiId)
         {
             return await _context.Kois.Include(k => k.ConsignmentRequest) 
-                .AsNoTracking() 
                 .FirstOrDefaultAsync(k => k.KoiId == koiId);
         }
 

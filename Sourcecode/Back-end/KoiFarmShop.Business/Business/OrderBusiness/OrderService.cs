@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using KoiFarmShop.Business.Business.KoiBusiness;
 using KoiFarmShop.Business.Dto;
 using KoiFarmShop.Business.Dto.Consigments;
 using KoiFarmShop.Business.Dto.Kois;
@@ -20,11 +21,13 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IKoiService _koiService;
 
-        public OrderService(UnitOfWork unitOfWork, IMapper mapper)
+        public OrderService(UnitOfWork unitOfWork, IMapper mapper, IKoiService koiService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _koiService = koiService;
         }
 
         public async Task<OrderResponseDto> CreateOrderAsync(OrderCreateDto createDto, string? currentUser)
@@ -89,11 +92,10 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
                 order.PaymentStatus = "Paid";
                 order.Status = "Completed";
 
-                // Update related koi statuses
+                // Update related koi statuses and consignment koi
                 foreach (var orderItem in order.OrderItems)
-                {
-                    var koi = await _unitOfWork.KoiRepository.GetByIdAsync(orderItem.KoiId);
-                    koi.IsActive = false;
+                {     
+                    await _koiService.UpdateKoiAsSoldAsync(orderItem.KoiId);
                 }
 
                 await _unitOfWork.SaveChangesAsync();

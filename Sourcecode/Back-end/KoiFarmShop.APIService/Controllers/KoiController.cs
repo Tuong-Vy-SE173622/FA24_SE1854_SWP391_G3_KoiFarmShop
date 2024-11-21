@@ -113,7 +113,7 @@ namespace KoiFarmShop.APIService.Controllers
                 result.error("Empty List of Koi ids !");
                 return result;
             }
-            var isUpdateSuccessful = await _koiService.UpdateForListSoldKoisAsynce(list);
+            var isUpdateSuccessful = await _koiService.UpdateForListSoldKoisAsync(list);
             if (isUpdateSuccessful)
             {
                 foreach(var id in list.ListKoiId)

@@ -15,6 +15,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
         private readonly UnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ICloudinaryService _cloudinaryService;
+        private const decimal COMMISSION_FEE = 0.05m;
         private enum KoiStatus 
         {
             PENDING,
@@ -302,33 +303,96 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             return false;
         }
 
-        public async Task<bool> UpdateForSoldKoiAsync(int id)
+        public async Task<bool> UpdateKoiAsSoldAsync(int koiId)
         {
-            var koi = await _unitOfWork.KoiRepository.GetByIdAsync(id);
+            bool result = true;
+            var koi = await _unitOfWork.KoiRepository.GetKoiWithConsignment(koiId);
+
             if (koi != null)
             {
                 koi.IsActive = false;
+                await CreateConsignmentTransactionAsync(koi);
                 await _unitOfWork.KoiRepository.UpdateAsync(koi);
-                return true;
             }
-            return false;
-        }
-
-        public async Task<bool> UpdateForListSoldKoisAsynce(ListSoldKois list)
-        {
-            var isUpdateSuccessful = true;
-            foreach (var koiId in list.ListKoiId)
+            else
             {
-                var koi = await _unitOfWork.KoiRepository.GetByIdAsync(koiId);
-                if (koi != null)
-                {
-                    koi.IsActive = false;
-                    await _unitOfWork.KoiRepository.UpdateAsync(koi);
-                }
-                else return isUpdateSuccessful = false;
+                result = false;
             }
             await _unitOfWork.SaveChangesAsync();
-            return isUpdateSuccessful;
+            return result;
+        }
+
+        private async Task CreateConsignmentTransactionAsync(Koi koi)
+        {
+            var consignment = koi.ConsignmentRequest;
+            if (consignment != null)
+            {
+                ConsignmentTransaction transaction = new()
+                {
+                    ConsignmentId = consignment.ConsignmentId,
+                    SalePrice = consignment.ArgredSalePrice,
+                    CommissionFee = COMMISSION_FEE,
+                    CommissionAmount = consignment.ArgredSalePrice * COMMISSION_FEE,
+                    Earnings = consignment.ArgredSalePrice * (1 - COMMISSION_FEE),
+                    SoldAt = DateTime.UtcNow
+                };
+
+                await _unitOfWork.ConsignmentTransactionRepository.CreateAsync(transaction);
+            }
+        }
+
+        public async Task<bool> UpdateForListSoldKoisAsync(ListSoldKois list)
+        {
+            bool result = true;
+
+            using (var transaction = await _unitOfWork.KoiRepository.BeginTransactionAsync())
+            {
+                try
+                {
+                    foreach (var koiId in list.ListKoiId)
+                    {
+                        var koi = await _unitOfWork.KoiRepository.GetKoiWithConsignment(koiId);
+
+                        if (koi != null)
+                        {
+                            koi.IsActive = false;
+
+                            var consignment = koi.ConsignmentRequest;
+                            if (consignment != null)
+                            {
+                                ConsignmentTransaction tran = new()
+                                {
+                                    ConsignmentId = consignment.ConsignmentId,
+                                    SalePrice = consignment.ArgredSalePrice,
+                                    CommissionFee = COMMISSION_FEE,
+                                    CommissionAmount = consignment.ArgredSalePrice * COMMISSION_FEE,
+                                    Earnings = consignment.ArgredSalePrice - consignment.ArgredSalePrice * COMMISSION_FEE,
+                                    SoldAt = DateTime.UtcNow
+                                };
+
+                                await _unitOfWork.ConsignmentTransactionRepository.CreateAsync(tran);
+                            }
+                            await _unitOfWork.KoiRepository.UpdateAsync(koi);
+                        }
+                        else
+                        {
+                            result = false;
+                            
+                        }
+                    }
+
+                    await _unitOfWork.SaveChangesAsync();
+                    await transaction.CommitAsync();
+                }
+                catch (Exception)
+                {
+                    // Log the exception
+                    await transaction.RollbackAsync();
+                    result = false;
+                }
+            }
+
+            return result;
         }
 
         public async Task<PaginatedResult<KoiDto>> GetAllKoisAsync(KoiFilterDto filterDto)

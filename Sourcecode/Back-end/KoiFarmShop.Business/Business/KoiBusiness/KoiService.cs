@@ -421,7 +421,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                     Generation = k.Generation,
                     IsLocal = k.IsLocal,
                     IsActive = true,  // only unsold kois (is active = true means unsold)
-                    Status = KoiStatus.APPROVED.ToString(),
+                    Status = k.Status,
                     Note = k.Note,
                     CreatedAt = k.CreatedAt,
                     CreatedBy = k.CreatedBy,

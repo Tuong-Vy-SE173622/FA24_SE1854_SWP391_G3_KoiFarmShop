@@ -39,7 +39,7 @@ namespace KoiFarmShop.APIService.Controllers
                 if (response != null && response.isSuccessful == true)
                 {
                     await _orderService.UpdateOrderStatusAfterPaymentAsync(response.OrderId);
-                    return Ok(new { message = "Payment processed successfully." });
+                    return Ok(response);
                 }
                 else
                     return Ok(new { message = "Payment processed failed." });

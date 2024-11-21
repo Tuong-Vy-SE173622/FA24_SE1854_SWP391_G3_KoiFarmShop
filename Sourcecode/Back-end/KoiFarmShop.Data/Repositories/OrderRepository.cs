@@ -17,7 +17,6 @@ namespace KoiFarmShop.Data.Repositories
         {
             return await _context.Orders
                 .Include(o => o.OrderItems)
-                .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.OrderId == orderId);
         }
 

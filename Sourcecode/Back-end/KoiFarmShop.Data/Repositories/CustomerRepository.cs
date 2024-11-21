@@ -35,5 +35,6 @@ namespace KoiFarmShop.Data.Repositories
         {
             return await _context.Customers.Where(x => x.CustomerId == customerId).FirstOrDefaultAsync();
         }
+        public async Task<int> CountAllCustomersAsync() { return await _context.Customers.CountAsync(); }
     }
 }

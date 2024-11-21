@@ -62,7 +62,7 @@ namespace KoiFarmShop.APIService.Controllers
             return result;
         }
 
-        [HttpPost("{consignmentId}/create-transaction-after-consignmnet-completed")]
+        [HttpPost("{consignmentId}/create-transaction-after-consignment-completed")]
         public async Task<ResultDto> CreateTransactionAfterConsignmentCompleted(int consignmentId)
         {
             ResultDto result = new();

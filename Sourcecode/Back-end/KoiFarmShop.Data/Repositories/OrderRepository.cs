@@ -26,5 +26,6 @@ namespace KoiFarmShop.Data.Repositories
                 .Where(item => item.OrderId == orderId)
                 .SumAsync(item => item.Price * item.Amount);
         }
+        public async Task<int> CountAllOrdersAsync() { return await _context.Orders.CountAsync(); }
     }
 }

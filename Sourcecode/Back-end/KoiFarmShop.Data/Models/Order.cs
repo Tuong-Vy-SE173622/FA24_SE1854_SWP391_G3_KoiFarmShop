@@ -19,7 +19,7 @@ public partial class Order
     public int? CustomerId { get; set; }
 
     [Column("order_date")]
-    public DateTime? OrderDate { get; set; }
+    public DateTime OrderDate { get; set; }
 
     [Column("sub_amount")]
     public double? SubAmount { get; set; }

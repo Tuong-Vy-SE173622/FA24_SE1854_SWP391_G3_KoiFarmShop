@@ -5,6 +5,7 @@ using KoiFarmShop.Business.Dto.Kois;
 using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -155,6 +156,38 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
         {
             var order = await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
             return order != null ? _mapper.Map<OrderStatusResponseDto>(order) : null;
+        }
+
+        public async Task<Dictionary<string, double>> GetMonthlySubAmountAsync(DateTime startDate, DateTime endDate)
+        {
+
+            var orders = await _unitOfWork.OrderRepository.GetQueryable()
+                .Where(order => order.PaymentStatus == "Paid" &&
+                                order.OrderDate >= startDate &&
+                                order.OrderDate <= endDate)
+                .GroupBy(order => new { order.OrderDate.Year, order.OrderDate.Month })
+                .Select(group => new
+                {
+                    Month = $"{group.Key.Month:D2}-{group.Key.Year}", 
+                    SubAmount = group.Sum(order => order.SubAmount ?? 0) 
+                })
+                .ToListAsync();
+
+            return orders.ToDictionary(o => o.Month, o => o.SubAmount);
+        }
+        
+        public async Task<StatsForDashBoard> GetStatsForDashBoardAsync(DateTime startDate, DateTime endDate)
+        {
+            var totalCustomers = await _unitOfWork.CustomerRepository.CountAllCustomersAsync();
+            var totalOrders = await _unitOfWork.OrderRepository.CountAllOrdersAsync();
+            var revenue = await GetMonthlySubAmountAsync(startDate, endDate);
+
+            return new StatsForDashBoard
+            {
+                totalCustomers = totalCustomers,
+                totalOrders = totalOrders,
+                Revenue = revenue
+            };
         }
       
     }

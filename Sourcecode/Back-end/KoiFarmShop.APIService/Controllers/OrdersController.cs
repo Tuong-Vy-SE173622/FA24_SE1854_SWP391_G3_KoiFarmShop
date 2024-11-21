@@ -81,6 +81,13 @@ namespace KoiFarmShop.APIService.Controllers
             var result = await _orderService.GetOrderStatusByIdAsync(orderId);
             return Ok(result);
         }
+        [AllowAnonymous]
+        [HttpGet("dashboard-stats")]
+        public async Task<IActionResult> GetStatsForDashBoardAsync(DateTime startDate, DateTime endDate)
+        {
+            var stats = await _orderService.GetStatsForDashBoardAsync(startDate, endDate);
+            return Ok(stats);
+        }
 
     }
 }

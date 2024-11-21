@@ -18,5 +18,6 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
         Task<IEnumerable<OrderResponseDto>> GetAllOrderAsync();
         Task<IEnumerable<OrderResponseDto>> GetAllActiveOrderByIdAsync(int customerId);
         Task<OrderStatusResponseDto> GetOrderStatusByIdAsync(int orderId);
+        Task<StatsForDashBoard> GetStatsForDashBoardAsync(DateTime startDate, DateTime endDate);
     }
 }

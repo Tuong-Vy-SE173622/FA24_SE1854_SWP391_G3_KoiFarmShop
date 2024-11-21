@@ -1,6 +1,7 @@
 ﻿using KoiFarmShop.Data.Models;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Numerics;
 
 namespace KoiFarmShop.Business.Dto
 {
@@ -118,4 +119,12 @@ namespace KoiFarmShop.Business.Dto
 
         public string? Status { get; set; }
     }
+
+    public class StatsForDashBoard
+    {
+        public int totalCustomers { get; set; }
+        public int totalOrders { get; set; }
+        public Dictionary<string, double> Revenue { get; set; }
+    }
+
 }

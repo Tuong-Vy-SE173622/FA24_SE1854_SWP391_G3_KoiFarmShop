@@ -18,5 +18,6 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
         Task<CareRequestResponseDto> ApproveCareRequestAsync(int careRequestId, string? currentUser);
         Task<CareRequestResponseDto> RejectCareRequestAsync(int careRequestId, string? currentUser);
         Task<bool> DeleteCareRequestAsync(int id);
+        Task<CareRequestDto> UpdateCareRequestStatusAfterPaymentAsync(int careRequestId);
     }
 }

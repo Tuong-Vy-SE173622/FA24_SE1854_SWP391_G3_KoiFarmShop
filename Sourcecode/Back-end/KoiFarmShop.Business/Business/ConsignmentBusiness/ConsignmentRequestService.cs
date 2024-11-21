@@ -3,6 +3,7 @@ using KoiFarmShop.Business.Dto.Consigments;
 using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
+using static KoiFarmShop.Data.Models.ConsignmentRequest;
 
 namespace KoiFarmShop.Business.Business.ConsignmentBusiness
 {
@@ -126,6 +127,45 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             await _unitOfWork.SaveChangesAsync();
             return true;
         }
+
+        public async Task<ConsignmentTransactionDto> UpdateConsignmentStatusAfterPaymentAsync(int consignmentId)
+        {
+            using var transaction = await _unitOfWork.ConsignmentRequestRepository.BeginTransactionAsync();
+            try
+            {
+                var consignment = await _unitOfWork.ConsignmentRequestRepository.GetByIdAsync(consignmentId)
+                    ?? throw new NotFoundException("Consignment does not exist!");
+
+                // Update consignment status
+                consignment.IsActive = true;
+                consignment.Status = ConsignmentStatus.complete;
+                consignment.UpdatedAt = DateTime.Now;
+                consignment.UpdatedBy = "System";
+
+                // Create consignment transaction
+                ConsignmentTransaction trans = new()
+                {
+                    ConsignmentId = consignment.ConsignmentId,
+                    SalePrice = consignment.ArgredSalePrice,
+                    CommissionFee = COMMISSION_FEE,
+                    CommissionAmount = consignment.ArgredSalePrice * COMMISSION_FEE,
+                    Earnings = consignment.ArgredSalePrice * (1 - COMMISSION_FEE),
+                    SoldAt = DateTime.UtcNow
+                };
+
+                await _unitOfWork.ConsignmentTransactionRepository.CreateAsync(trans);
+                await _unitOfWork.SaveChangesAsync();
+                await transaction.CommitAsync();
+                return _mapper.Map<ConsignmentTransactionDto>(transaction);
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                throw new ApplicationException("Failed to update consignment status.", ex);
+            }
+        }
+
+        
     }
 
 

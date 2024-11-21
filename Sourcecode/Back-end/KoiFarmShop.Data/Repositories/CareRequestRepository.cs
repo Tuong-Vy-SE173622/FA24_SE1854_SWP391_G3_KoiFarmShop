@@ -13,7 +13,7 @@ namespace KoiFarmShop.Data.Repositories
     {
         public CareRequestRepository(FA_SE1854_SWP391_G3_KoiFarmShopContext context) => _context = context;
 
-        public async Task<CareRequest> GetCareRequestWithDetailsAsync(int careId)
+        public async Task<CareRequest?> GetCareRequestWithDetailsAsync(int careId)
         {
             return await _context.CareRequests
                 .Include(c => c.CareRequestDetails)

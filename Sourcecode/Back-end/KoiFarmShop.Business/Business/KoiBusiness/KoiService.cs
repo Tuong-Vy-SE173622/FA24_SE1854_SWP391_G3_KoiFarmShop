@@ -327,6 +327,7 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 }
                 else return isUpdateSuccessful = false;
             }
+            await _unitOfWork.SaveChangesAsync();
             return isUpdateSuccessful;
         }
 
@@ -463,8 +464,10 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 existingKoi.Status = KoiStatus.APPROVED.ToString();
             }
             else existingKoi.Status = KoiStatus.REJECTED.ToString();
+
             existingKoi.IsActive = false; // being in care request means the koi ain't for sale
 
+            await _unitOfWork.SaveChangesAsync();
             return new ResultDto
             {
                 IsSuccess = true,
@@ -483,7 +486,10 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
                 existingKoi.Status = KoiStatus.APPROVED.ToString();
             }
             else existingKoi.Status = KoiStatus.REJECTED.ToString();
+
             existingKoi.IsActive = true; // being in consignment means the koi is for sale
+
+            await _unitOfWork.SaveChangesAsync();
 
             return new ResultDto
             {

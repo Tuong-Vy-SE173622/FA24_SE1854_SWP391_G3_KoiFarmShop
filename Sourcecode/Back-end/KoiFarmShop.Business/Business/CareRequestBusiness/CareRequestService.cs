@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KoiFarmShop.Business.Dto.CareRequests;
+using KoiFarmShop.Business.Dto.Consigments;
 using KoiFarmShop.Business.Dto.Kois;
 using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
@@ -12,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static KoiFarmShop.Data.Models.CareRequest;
+using static KoiFarmShop.Data.Models.ConsignmentRequest;
 
 namespace KoiFarmShop.Business.Business.CareRequestBusiness
 {
@@ -197,6 +199,29 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
             await _unitOfWork.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<CareRequestDto> UpdateCareRequestStatusAfterPaymentAsync(int careRequestId)
+        {
+            using var transaction = await _unitOfWork.ConsignmentRequestRepository.BeginTransactionAsync();
+            try
+            {
+                var request = await _unitOfWork.CareRequestRepository.GetByIdAsync(careRequestId)
+                    ?? throw new NotFoundException("Care request does not exist!");
+
+                // Update care request status
+                request.Status = CareRequestStatus.Active.ToString();
+                request.UpdatedBy = "System";
+                
+                await _unitOfWork.SaveChangesAsync();
+                await transaction.CommitAsync();
+                return _mapper.Map<CareRequestDto>(request);
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                throw new ApplicationException("Failed to update care request status.", ex);
+            }
         }
     }
 }

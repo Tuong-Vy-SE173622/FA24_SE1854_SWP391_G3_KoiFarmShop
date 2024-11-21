@@ -18,7 +18,7 @@ import AdminDashboardPage from "../pages/Dashboard/AdminDashboard/AdminDashboard
 import KoiPage from "../pages/Dashboard/AdminDashboard/KoiPage.jsx/KoiPage";
 import KoiTypePage from "../pages/Dashboard/AdminDashboard/KoiTypePage/KoiTypePage";
 import PromotionPage from "../pages/Dashboard/AdminDashboard/PromotionPage/PromotionPage";
-import AccountPage from "../pages/Dashboard/AdminDashboard/AccountPage/AccountPage";
+// import AccountPage from "../pages/Dashboard/AdminDashboard/AccountPage/AccountPage";
 import ProfilePage from "../pages/Dashboard/ProfilePage/ProfilePage";
 import CareRequest from "../pages/Dashboard/CustomerDashboard/CareRequestForm/CareRequestForm";
 import ConsignmentRequestForm from "../pages/Dashboard/CustomerDashboard/ConsignmentRequestForm/ConsignmentRequestForm";
@@ -28,6 +28,10 @@ import CareRequestDetailForm from "../pages/Dashboard/CustomerDashboard/CareRequ
 // import { CartProvider } from "../contexts/CartContext";
 import CartPage from "../pages/CartPage/CartPage";
 import { CartProvider } from "../contexts/CartContext";
+import UserPage from "../pages/Dashboard/AdminDashboard/UserPage/UserPage";
+import Test from "../pages/test";
+import ProtectedRoute from "./ProtectedRoute";
+import NotAuthorized from "../pages/NotAuthorized/NotAuthorized";
 
 export const router = createBrowserRouter([
   {
@@ -73,17 +77,27 @@ export const router = createBrowserRouter([
         path: "/cart",
         element: <CartPage />,
       },
+      {
+        path: "/cart",
+        element: <CartPage />,
+      },
+      {
+        path: "/test",
+        element: <Test />,
+      },
     ],
   },
   {
     path: "/dashboard",
     element: (
       <>
-        <CartProvider>
-          <ScrollToTop />
-          <Header />
-          <CustomerDashboardLayout />
-        </CartProvider>
+        <ProtectedRoute allowedRoles={"Customer"}>
+          <CartProvider>
+            <ScrollToTop />
+            <Header />
+            <CustomerDashboardLayout />
+          </CartProvider>
+        </ProtectedRoute>
       </>
     ),
     children: [
@@ -115,7 +129,13 @@ export const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminDashboardLayout />,
+    element: (
+      <>
+        <ProtectedRoute allowedRoles={"Admin"}>
+          <AdminDashboardLayout />
+        </ProtectedRoute>
+      </>
+    ),
     children: [
       {
         path: "dashboard",
@@ -138,8 +158,8 @@ export const router = createBrowserRouter([
         element: <PromotionPage />,
       },
       {
-        path: "accounts",
-        element: <AccountPage />,
+        path: "users",
+        element: <UserPage />,
       },
     ],
   },
@@ -151,4 +171,5 @@ export const router = createBrowserRouter([
     path: "/register",
     element: <RegisterPage />,
   },
+  { path: "/not-authorized", element: <NotAuthorized /> },
 ]);

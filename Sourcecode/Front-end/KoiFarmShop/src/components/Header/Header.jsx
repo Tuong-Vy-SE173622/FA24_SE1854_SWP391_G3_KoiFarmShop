@@ -5,7 +5,7 @@ import { IoSearch } from "react-icons/io5";
 import { Badge, Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../services/authService";
-import { getAllKoiType } from "../../services/KoiTypeService";
+import { getAllKoiType, getKoiType } from "../../services/KoiTypeService";
 import { CartContext } from "../../contexts/CartContext";
 
 function Header() {
@@ -86,7 +86,7 @@ function Header() {
   useEffect(() => {
     const fetchKoiType = async () => {
       try {
-        const data = await getAllKoiType();
+        const data = await getKoiType();
         setKoiTypeLs(data);
       } catch (err) {
         console.error("Failed to fetch Koi types", err);

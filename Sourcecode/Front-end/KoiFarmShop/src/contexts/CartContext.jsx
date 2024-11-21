@@ -66,7 +66,7 @@ export function CartProvider({ children }) {
       {/* Modal cảnh báo khi sản phẩm đã tồn tại trong giỏ hàng */}
       <Modal
         title="Cảnh báo"
-        visible={showWarning}
+        open={showWarning}
         onCancel={closeWarning}
         onOk={closeWarning}
         cancelButtonProps={{ style: { display: "none" } }} // Ẩn nút hủy

@@ -29,7 +29,7 @@ function AdminDashboardLayout() {
       label: "Promotion",
       icon: <RiDiscountPercentLine />,
     },
-    { path: "/admin/accounts", label: "Account", icon: <LuUsers2 /> },
+    { path: "/admin/users", label: "Account", icon: <LuUsers2 /> },
   ];
 
   const currentMenuItem = menuItems.find((item) => item.path === pathname);

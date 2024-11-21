@@ -63,8 +63,8 @@ const SearchPage = () => {
 
   const fetchKoiType = async () => {
     try {
-      const data = await getAllKoiType();
-      setKoiTypeLs(data);
+      const data = await getAllKoiType(1, 100);
+      setKoiTypeLs(data.data);
     } catch (err) {
       console.error("Failed to fetch Koi types", err);
     }

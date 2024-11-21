@@ -190,7 +190,7 @@ function KoiDetailPage() {
                   <p style={{ fontSize: 18.5 }}>{koi.origin}</p>
                 </Col>
               </Row>
-              <Row gutter={16}>
+              {/* <Row gutter={16}>
                 <Col span={7}>
                   <p style={{ fontSize: 18.5, fontWeight: 600 }}>Người bán:</p>
                 </Col>
@@ -199,7 +199,7 @@ function KoiDetailPage() {
                     {koi.isOwnedByFarm ? "Koi Farm shop" : "Trại khác"}
                   </p>
                 </Col>
-              </Row>
+              </Row> */}
             </div>
             <p className="koi-detai-page-price" style={{ fontSize: 27 }}>
               {new Intl.NumberFormat("vi-VN").format(koi.price)}đ

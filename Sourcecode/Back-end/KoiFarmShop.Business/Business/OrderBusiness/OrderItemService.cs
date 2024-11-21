@@ -81,6 +81,11 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
 
             // Update the order's SubAmount
             order.SubAmount = (order.SubAmount ?? 0) + totalAddedAmount;
+            order.Vat = Constants.VAT;
+            order.VatAmount = order.SubAmount * order.Vat;
+            order.TotalAmount = order.SubAmount - order.VatAmount - order.PromotionAmount??0;
+            order.UpdatedAt = DateTime.UtcNow;
+            order.UpdatedBy = "System";
             _unitOfWork.OrderRepository.Update(order);
 
             await _unitOfWork.SaveChangesAsync();

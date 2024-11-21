@@ -109,3 +109,23 @@ export const getKoiByCustomerId = async (userId) => {
     throw err;
   }
 };
+
+export const approveKoiRequest = async (koiId, isApproved) => {
+  try {
+    const token = localStorage.getItem("accessToken");
+    const formData = new FormData();
+    formData.append("KoiId", koiId);
+    formData.append("IsApproved", isApproved);
+
+    const res = await api.put("/api/Koi/approve-for-care-request", formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.error("Error approving/rejecting koi:", err);
+    throw err;
+  }
+};

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal, Form, Input, InputNumber, Select, Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { createKoi } from "../../services/KoiService";
-import { getAllKoiType } from "../../services/KoiTypeService";
+import { getAllKoiType, getKoiType } from "../../services/KoiTypeService";
 
 const { Option } = Select;
 
@@ -15,7 +15,7 @@ const CreateKoiForm = ({ visible, onCancel, onSuccess }) => {
   useEffect(() => {
     const fetchKoiTypes = async () => {
       try {
-        const response = await getAllKoiType();
+        const response = await getKoiType();
         if (response && Array.isArray(response)) {
           console.log("Fetched Koi Types:", response); // Debug dữ liệu
           setKoiTypes(response);
@@ -30,7 +30,7 @@ const CreateKoiForm = ({ visible, onCancel, onSuccess }) => {
         });
       }
     };
-  
+
     fetchKoiTypes();
   }, []);
 
@@ -74,19 +74,17 @@ const CreateKoiForm = ({ visible, onCancel, onSuccess }) => {
   };
 
   return (
-    <Modal
-      visible={visible}
-      title="Tạo Cá Koi"
-      onCancel={onCancel}
-      footer={null}
-    >
+    <Modal open={visible} title="Tạo Cá Koi" onCancel={onCancel} footer={null}>
       <Form form={form} layout="vertical" onFinish={handleSubmit}>
         <Form.Item
           label="Loại Cá Koi (KoiTypeId)"
           name="koiTypeId"
           rules={[{ required: true, message: "Vui lòng chọn loại cá Koi" }]}
         >
-          <Select placeholder="Chọn loại cá Koi" loading={koiTypes.length === 0}>
+          <Select
+            placeholder="Chọn loại cá Koi"
+            loading={koiTypes.length === 0}
+          >
             {koiTypes.map((type) => (
               <Option key={type.koiTypeId} value={type.koiTypeId}>
                 {type.name}
@@ -132,10 +130,7 @@ const CreateKoiForm = ({ visible, onCancel, onSuccess }) => {
         >
           <InputNumber min={0} style={{ width: "100%" }} />
         </Form.Item>
-        <Form.Item
-          label="Đặc Điểm (Characteristics)"
-          name="characteristics"
-        >
+        <Form.Item label="Đặc Điểm (Characteristics)" name="characteristics">
           <Input placeholder="Nhập đặc điểm cá" />
         </Form.Item>
         <Form.Item label="Nhập Khẩu (IsImported)" name="isImported">

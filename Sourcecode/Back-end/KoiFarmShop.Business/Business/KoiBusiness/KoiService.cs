@@ -492,10 +492,10 @@ namespace KoiFarmShop.Business.Business.KoiBusiness
             };
         }
 
-        public async Task<ResultDto> GetAllKoisCreatedByUserId(int userId)
+        public async Task<ResultDto> GetAllKoisCreatedByUserId(int userId, bool isInConsignment, bool isInCareRequest)
         {
             ResultDto result = new();
-            var listKoi = await _unitOfWork.KoiRepository.GetAllKoisCreatedByUser(userId);
+            var listKoi = await _unitOfWork.KoiRepository.GetAllKoisCreatedByUser(userId, isInConsignment, isInCareRequest);
             result.success(listKoi);
             return result;
         }

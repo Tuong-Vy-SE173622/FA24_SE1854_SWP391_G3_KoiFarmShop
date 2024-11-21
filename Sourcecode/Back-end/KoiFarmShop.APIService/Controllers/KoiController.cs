@@ -167,9 +167,9 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpGet("koi-created-by-user")]
-        public async Task<ResultDto> GetAllKoisCreatedByUserId(int userId)
+        public async Task<ResultDto> GetAllKoisCreatedByUserId([FromQuery] int userId, bool isInConsignment, bool isInCareRequest)
         {
-            return await _koiService.GetAllKoisCreatedByUserId(userId);
+            return await _koiService.GetAllKoisCreatedByUserId(userId, isInConsignment, isInCareRequest);
         }
         [AllowAnonymous]
         [HttpGet("test")]

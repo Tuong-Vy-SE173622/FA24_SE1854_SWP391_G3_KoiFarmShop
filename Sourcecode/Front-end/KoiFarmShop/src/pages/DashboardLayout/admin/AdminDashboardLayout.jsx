@@ -9,6 +9,7 @@ import {
 import { CgMenuGridO, CgProfile } from "react-icons/cg";
 import { LuFish, LuUsers2 } from "react-icons/lu";
 import { GiCirclingFish } from "react-icons/gi";
+import { TbBellRinging } from "react-icons/tb";
 
 function AdminDashboardLayout() {
   const navigate = useNavigate();
@@ -17,10 +18,15 @@ function AdminDashboardLayout() {
 
   const menuItems = [
     { path: "/admin/dashboard", label: "Dashboard", icon: <RiDashboardFill /> },
+    // {
+    //   path: `/admin/profile/${account.username}`,
+    //   label: "Profile",
+    //   icon: <CgProfile />,
+    // },
     {
-      path: `/admin/profile/${account.username}`,
-      label: "Profile",
-      icon: <CgProfile />,
+      path: "/admin/notification",
+      label: "Notification",
+      icon: <TbBellRinging />,
     },
     { path: "/admin/koi-types", label: "Koi Type", icon: <GiCirclingFish /> },
     { path: "/admin/kois", label: "Koi", icon: <LuFish /> },

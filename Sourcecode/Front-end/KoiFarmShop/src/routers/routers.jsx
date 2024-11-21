@@ -32,6 +32,7 @@ import UserPage from "../pages/Dashboard/AdminDashboard/UserPage/UserPage";
 import Test from "../pages/test";
 import ProtectedRoute from "./ProtectedRoute";
 import NotAuthorized from "../pages/NotAuthorized/NotAuthorized";
+import NotificationPage from "../pages/Dashboard/AdminDashboard/NotificationPage/NotificationPage";
 
 export const router = createBrowserRouter([
   {
@@ -160,6 +161,10 @@ export const router = createBrowserRouter([
       {
         path: "users",
         element: <UserPage />,
+      },
+      {
+        path: "notification",
+        element: <NotificationPage />,
       },
     ],
   },

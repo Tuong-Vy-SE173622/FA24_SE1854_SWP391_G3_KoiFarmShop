@@ -166,6 +166,7 @@ function HomePage() {
 
   const fetchKoi = async (page) => {
     const params = {
+      IsActive: true,
       PageNumber: 1,
       PageSize: 8,
     };

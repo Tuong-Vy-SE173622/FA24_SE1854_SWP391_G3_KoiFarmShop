@@ -2,7 +2,12 @@ import api from "../config/axios";
 
 export const getPromotion = async () => {
   try {
-    const res = await api.get("/api/Promotion");
+    const token = localStorage.getItem("accessToken");
+    const res = await api.get("/api/Promotion", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return res.data; // Điều chỉnh nếu cần
   } catch (err) {
     console.error("Error during get Promotion: ", err);

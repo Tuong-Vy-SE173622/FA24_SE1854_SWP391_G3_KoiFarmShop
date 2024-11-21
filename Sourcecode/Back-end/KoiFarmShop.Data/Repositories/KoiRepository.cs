@@ -30,5 +30,7 @@ namespace KoiFarmShop.Data.Repositories
                 .AsNoTracking() 
                 .FirstOrDefaultAsync(k => k.KoiId == koiId);
         }
+
+        public async Task<int> CountAllKoisAsync() { return await _context.Kois.CountAsync(); }
     }
 }

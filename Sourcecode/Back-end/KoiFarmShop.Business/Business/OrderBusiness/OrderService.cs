@@ -180,12 +180,14 @@ namespace KoiFarmShop.Business.Business.OrderBusiness
         {
             var totalCustomers = await _unitOfWork.CustomerRepository.CountAllCustomersAsync();
             var totalOrders = await _unitOfWork.OrderRepository.CountAllOrdersAsync();
+            var totalKois = await _unitOfWork.KoiRepository.CountAllKoisAsync();
             var revenue = await GetMonthlySubAmountAsync(startDate, endDate);
 
             return new StatsForDashBoard
             {
                 totalCustomers = totalCustomers,
                 totalOrders = totalOrders,
+                totalKois = totalKois,
                 Revenue = revenue
             };
         }

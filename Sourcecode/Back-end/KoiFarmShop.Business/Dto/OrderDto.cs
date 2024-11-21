@@ -124,6 +124,7 @@ namespace KoiFarmShop.Business.Dto
     {
         public int totalCustomers { get; set; }
         public int totalOrders { get; set; }
+        public int totalKois { get; set; }
         public Dictionary<string, double> Revenue { get; set; }
     }
 

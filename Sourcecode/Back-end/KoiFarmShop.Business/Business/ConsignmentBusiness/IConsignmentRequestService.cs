@@ -11,6 +11,7 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
         Task<IEnumerable<ConsignmentRequestResponseDto>> GetAllConsignmentRequestsAsync();
         Task<IEnumerable<ConsignmentRequestResponseDto>> GetAllConsignmentsByCustomer(int customerId);
         Task<ConsignmentTransactionDto?> CreateTransactionAfterConsignmentCompleted(int id);
+        Task<List<ConsignmentTransactionDto>> GetAllConsignmentTransaction(int pageNumber, int pageSize);
         Task<bool> ApproveConsignmentRequest(ConsignementApproveRequest request);
         Task<ConsignmentTransactionDto> UpdateConsignmentStatusAfterPaymentAsync(int consignmentId);
     }

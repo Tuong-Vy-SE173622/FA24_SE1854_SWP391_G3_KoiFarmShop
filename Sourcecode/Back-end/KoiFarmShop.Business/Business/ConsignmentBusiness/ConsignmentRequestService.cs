@@ -3,6 +3,7 @@ using KoiFarmShop.Business.Dto.Consigments;
 using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
+using System.Collections.Generic;
 using static KoiFarmShop.Data.Models.ConsignmentRequest;
 
 namespace KoiFarmShop.Business.Business.ConsignmentBusiness
@@ -111,6 +112,12 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
 
             return _mapper.Map<ConsignmentTransactionDto>(transaction);
 
+        }
+
+        public async Task<List<ConsignmentTransactionDto>> GetAllConsignmentTransaction(int pageNumber, int pageSize)
+        {
+            var trans = await _unitOfWork.ConsignmentTransactionRepository.GetAllAsync(pageNumber,pageSize);
+            return _mapper.Map<List<ConsignmentTransactionDto>>(trans);
         }
 
         public async Task<bool> ApproveConsignmentRequest(ConsignementApproveRequest request)

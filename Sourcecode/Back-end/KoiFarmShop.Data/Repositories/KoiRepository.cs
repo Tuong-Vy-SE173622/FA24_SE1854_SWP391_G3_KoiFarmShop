@@ -8,33 +8,53 @@ namespace KoiFarmShop.Data.Repositories
     {
         public KoiRepository(FA_SE1854_SWP391_G3_KoiFarmShopContext context) => _context = context;
 
-        public async Task<List<Koi>> GetAllKoisCreatedByUser(int userId, bool isInConsignment, bool isInCareRequest)
+        public async Task<List<Koi>> GetAllKoisCreatedByUser(int userId, bool? isInConsignment, bool? isInCareRequest)
         {
             var user = await _context.Users
-                .AsNoTracking() 
-                .FirstOrDefaultAsync(u => u.UserId == userId);
+        .AsNoTracking()
+        .FirstOrDefaultAsync(u => u.UserId == userId);
 
             if (user == null)
-                return []; // Return an empty list if the user doesn't exist
+                return []; 
 
-            // Query to get Koi created by the user
+            
             var koiQuery = _context.Kois
                 .AsNoTracking()
-                .Where(k => k.CreatedBy == user.Username);
+                .Where(k => k.CreatedBy == user.Username); 
 
-            if (isInConsignment)
+            // Apply consignment filter if isInConsignment is not null
+            if (isInConsignment.HasValue)
             {
-                koiQuery = koiQuery.Where(k => _context.ConsignmentRequests
-                    .Any(cd => cd.KoiId == k.KoiId));
+                if (isInConsignment.Value)
+                {
+                    koiQuery = koiQuery.Where(k => _context.ConsignmentRequests
+                        .Any(cr => cr.KoiId == k.KoiId)); 
+                }
+                else
+                {
+                    koiQuery = koiQuery.Where(k => !_context.ConsignmentRequests
+                        .Any(cr => cr.KoiId == k.KoiId)); 
+                }
             }
 
-            if (isInCareRequest)
+            // Apply care request filter if isInCareRequest is not null
+            if (isInCareRequest.HasValue)
             {
-                koiQuery = koiQuery.Where(k => _context.CareRequests
-                    .Any(crd => crd.KoiId == k.KoiId));
+                if (isInCareRequest.Value)
+                {
+                    koiQuery = koiQuery.Where(k => _context.CareRequests
+                        .Any(cr => cr.KoiId == k.KoiId)); 
+                }
+                else
+                {
+                    koiQuery = koiQuery.Where(k => !_context.CareRequests
+                        .Any(cr => cr.KoiId == k.KoiId)); 
+                }
             }
 
+            // Return the filtered list of Kois
             return await koiQuery.ToListAsync();
+
         }
 
         public async Task<Koi?> GetKoiWithConsignment(int koiId)

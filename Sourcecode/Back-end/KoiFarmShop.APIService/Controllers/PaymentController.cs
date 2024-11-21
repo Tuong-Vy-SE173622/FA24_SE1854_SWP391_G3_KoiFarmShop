@@ -44,7 +44,7 @@ namespace KoiFarmShop.APIService.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            PaymentRequest paymentRequest = new PaymentRequest
+            PaymentRequest paymentRequest = new()
             {
                 OrderId = request.ConsignmentId,
                 Amount = request.Amount,
@@ -60,7 +60,7 @@ namespace KoiFarmShop.APIService.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            PaymentRequest paymentRequest = new PaymentRequest
+            PaymentRequest paymentRequest = new()
             {
                 OrderId = request.Care_Request_Id,
                 Amount = request.Amount,

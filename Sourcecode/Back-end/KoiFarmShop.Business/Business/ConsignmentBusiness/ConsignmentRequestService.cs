@@ -104,7 +104,7 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
 
             if (filterDto.IsActive.HasValue)
             {
-                query = query.Where(c => c.IsActive == filterDto.IsActive);
+                query = query.Where(c => c.IsActive ?? false == filterDto.IsActive);
             }
 
             if (filterDto.Status.HasValue) 

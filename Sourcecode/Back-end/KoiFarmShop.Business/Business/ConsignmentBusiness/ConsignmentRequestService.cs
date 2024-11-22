@@ -3,6 +3,7 @@ using KoiFarmShop.Business.Dto.Consigments;
 using KoiFarmShop.Business.ExceptionHanlder;
 using KoiFarmShop.Data;
 using KoiFarmShop.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using static KoiFarmShop.Data.Models.ConsignmentRequest;
 
@@ -31,6 +32,7 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             var consignmentRequest = _mapper.Map<ConsignmentRequest>(consignmentRequestCreateDto);
 
             consignmentRequest.CreatedAt = DateTime.Now;
+            consignmentRequest.IsActive = false;
 
             await _unitOfWork.ConsignmentRequestRepository.CreateAsync(consignmentRequest);
             await _unitOfWork.SaveChangesAsync();
@@ -74,10 +76,74 @@ namespace KoiFarmShop.Business.Business.ConsignmentBusiness
             return _mapper.Map<ConsignmentRequestResponseDto>(consignmentRequest);
         }
 
-        public async Task<IEnumerable<ConsignmentRequestResponseDto>> GetAllConsignmentRequestsAsync()
+        public async Task<PaginatedResult<ConsignmentRequestResponseDto>> GetAllConsignmentRequestsAsync(ConsignmentFilterDto filterDto)
         {
-            var consignmentRequests = await _unitOfWork.ConsignmentRequestRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<ConsignmentRequestResponseDto>>(consignmentRequests);
+            // Start with a queryable source
+            var query = _unitOfWork.ConsignmentRequestRepository.GetQueryable();
+
+            // Apply filters
+            if (filterDto.CustomerId.HasValue)
+            {
+                query = query.Where(c => c.CustomerId == filterDto.CustomerId);
+            }
+
+            if (filterDto.ArgredSalePrice.HasValue)
+            {
+                query = query.Where(c => c.ArgredSalePrice == filterDto.ArgredSalePrice);
+            }
+
+            if (filterDto.StartDate.HasValue)
+            {
+                query = query.Where(c => c.StartDate >= filterDto.StartDate);
+            }
+
+            if (filterDto.EndDate.HasValue)
+            {
+                query = query.Where(c => c.EndDate <= filterDto.EndDate);
+            }
+
+            if (filterDto.IsActive.HasValue)
+            {
+                query = query.Where(c => c.IsActive == filterDto.IsActive);
+            }
+
+            if (filterDto.Status.HasValue) 
+            {
+                query = query.Where(c => c.Status == filterDto.Status);
+            }
+
+            // Default sorting by creation date descending
+            query = query.OrderByDescending(c => c.StartDate);
+
+            // Count total records
+            var totalRecords = await query.CountAsync();
+
+            // Apply pagination
+            var paginatedConsignments = await query
+                .Skip((filterDto.PageNumber - 1) * filterDto.PageSize)
+                .Take(filterDto.PageSize)
+                .Select(c => new ConsignmentRequestResponseDto
+                {
+                    ConsignmentId = c.ConsignmentId,
+                    CustomerId = c.CustomerId,
+                    KoiId = c.KoiId,                   
+                    ArgredSalePrice = c.ArgredSalePrice,
+                    StartDate = c.StartDate,
+                    EndDate = c.EndDate,
+                    IsActive = c.IsActive,
+                    Note = c.Note,
+                    Status = c.Status.ToString()
+                })
+                .ToListAsync();
+
+            // Return the paginated result
+            return new PaginatedResult<ConsignmentRequestResponseDto>
+            {
+                Data = paginatedConsignments,
+                TotalRecords = totalRecords,
+                PageNumber = filterDto.PageNumber,
+                PageSize = filterDto.PageSize
+            };
         }
 
         public async Task<IEnumerable<ConsignmentRequestResponseDto>> GetAllConsignmentsByCustomer(int customerId)

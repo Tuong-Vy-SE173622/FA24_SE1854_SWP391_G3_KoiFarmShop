@@ -47,9 +47,9 @@ namespace KoiFarmShop.APIService.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] ConsignmentFilterDto filterDto)
         {
-            var result = await _consignmentRequestService.GetAllConsignmentRequestsAsync();
+            var result = await _consignmentRequestService.GetAllConsignmentRequestsAsync(filterDto);
             return Ok(result);
         }
 

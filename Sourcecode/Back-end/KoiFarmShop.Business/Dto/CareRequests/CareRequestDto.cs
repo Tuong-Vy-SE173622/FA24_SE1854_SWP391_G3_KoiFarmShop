@@ -19,6 +19,8 @@ namespace KoiFarmShop.Business.Dto.CareRequests
 
         public int? KoiId { get; set; }
 
+        public string? KoiTypeName { get; set; }    
+
         public int? CarePlanId { get; set; }
 
         public DateTime? StartDate { get; set; }

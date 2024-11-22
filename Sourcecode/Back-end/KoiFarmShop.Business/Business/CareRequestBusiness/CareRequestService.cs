@@ -59,7 +59,8 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
                 {
                     CareRequestId = cr.CareRequestId,
                     CustomerId = cr.CustomerId,
-                    KoiId = cr.CustomerId,
+                    KoiId = cr.KoiId,
+                    KoiTypeName = cr.Koi.KoiType.Name,
                     CarePlanId = cr.CarePlanId,
                     StartDate = cr.StartDate,
                     Status = CareRequestStatus.PendingApproval,
@@ -210,7 +211,7 @@ namespace KoiFarmShop.Business.Business.CareRequestBusiness
                     ?? throw new NotFoundException("Care request does not exist!");
 
                 // Update care request status
-                request.Status = CareRequestStatus.Active.ToString();
+                request.Status = CareRequestStatus.Completed.ToString();
                 request.UpdatedBy = "System";
                 
                 await _unitOfWork.SaveChangesAsync();

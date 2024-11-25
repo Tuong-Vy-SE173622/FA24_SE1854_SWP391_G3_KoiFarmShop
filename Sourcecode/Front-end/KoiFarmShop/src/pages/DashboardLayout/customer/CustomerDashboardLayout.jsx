@@ -6,6 +6,7 @@ import Footer from "../../../components/Footer/Footer";
 import { CgProfile } from "react-icons/cg";
 import { PiHandDepositFill } from "react-icons/pi";
 import { BiPurchaseTagAlt } from "react-icons/bi";
+import { FaHeartCirclePlus } from "react-icons/fa6";
 
 function CustomerDashboardLayout() {
   const navigate = useNavigate();
@@ -23,10 +24,20 @@ function CustomerDashboardLayout() {
       icon: <BiPurchaseTagAlt />,
     },
     {
-      path: "/dashboard/deposite",
-      label: "Koi ký gửi",
-      icon: <PiHandDepositFill />,
+      path: "/dashboard/care-request",
+      label: "Yêu cầu chăm sóc",
+      icon: <FaHeartCirclePlus />,
     },
+    {
+      path: "/dashboard/consignment-request",
+      label: "Yêu cầu ký gửi",
+      icon: <FaHeartCirclePlus />,
+    },
+    // {
+    //   path: "/dashboard/deposite",
+    //   label: "Chi tiết ký gửi",
+    //   icon: <PiHandDepositFill />,
+    // },
   ];
 
   // const currentMenuItem = menuItems.find((item) =>

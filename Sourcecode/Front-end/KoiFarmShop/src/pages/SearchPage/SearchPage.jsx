@@ -12,6 +12,7 @@ const SearchPage = () => {
     Origin: [],
     Gender: [],
   });
+  const [queryParams, setQueryParams] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const [koiTypeLs, setKoiTypeLs] = useState([]);
   const [koiLs, setKoiLs] = useState([]);
@@ -62,8 +63,8 @@ const SearchPage = () => {
 
   const fetchKoiType = async () => {
     try {
-      const data = await getAllKoiType();
-      setKoiTypeLs(data);
+      const data = await getAllKoiType(1, 100);
+      setKoiTypeLs(data.data);
     } catch (err) {
       console.error("Failed to fetch Koi types", err);
     }
@@ -71,6 +72,7 @@ const SearchPage = () => {
 
   const fetchKoi = async (page) => {
     const params = {
+      SearchByTypeName: queryParams.searchData,
       PageNumber: page,
       PageSize: pageSize,
       IsSortedByPrice: sortOption.includes("price"),
@@ -84,27 +86,30 @@ const SearchPage = () => {
 
     try {
       const result = await getAllKoi(params);
+      console.log("koi search", result);
+
       setKoiLs(result.data);
+      setTotalKoiCount(result.totalRecords);
     } catch (err) {
       console.error("Failed to fetch Koi data", err);
     }
   };
 
-  const fetchNumberKoi = async () => {
-    try {
-      const result = await getAllKoi({
-        PageSize: 100,
-        KoiTypeName: selectedFilters.Type.join(","),
-        Gender: selectedFilters.Gender.length
-          ? selectedFilters.Gender[0]
-          : undefined,
-        Origin: selectedFilters.Origin.join(","),
-      });
-      setTotalKoiCount(result.data.length);
-    } catch (err) {
-      console.error("Failed to fetch Koi data", err);
-    }
-  };
+  // const fetchNumberKoi = async () => {
+  //   try {
+  //     const result = await getAllKoi({
+  //       PageSize: 100,
+  //       KoiTypeName: selectedFilters.Type.join(","),
+  //       Gender: selectedFilters.Gender.length
+  //         ? selectedFilters.Gender[0]
+  //         : undefined,
+  //       Origin: selectedFilters.Origin.join(","),
+  //     });
+  //     setTotalKoiCount(result.data.length);
+  //   } catch (err) {
+  //     console.error("Failed to fetch Koi data", err);
+  //   }
+  // };
 
   const fetchKoiOrigins = async () => {
     try {
@@ -116,17 +121,31 @@ const SearchPage = () => {
   };
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const queryObj = {};
+
+    // Duyệt qua các tham số và lưu vào queryObj
+    params.forEach((value, key) => {
+      queryObj[key] = value;
+    });
+
+    // Cập nhật state với các tham số từ URL
+    setQueryParams(queryObj);
+    console.log("Các tham số từ URL:", queryObj);
+
     fetchKoiType();
     fetchKoi(currentPage);
-    fetchNumberKoi();
+
+    // fetchNumberKoi();
     fetchKoiOrigins();
   }, []); // Run once on mount
 
   useEffect(() => {
     fetchKoi(currentPage);
-    fetchNumberKoi();
-  }, [currentPage, sortOption, selectedFilters]);
+    // fetchNumberKoi();
+  }, [currentPage, sortOption, selectedFilters, queryParams.searchData]);
 
+  // console.log("koi", koiLs);
   return (
     <div style={{ marginTop: 100 }} className="search-page-container">
       <div className="filter-container">

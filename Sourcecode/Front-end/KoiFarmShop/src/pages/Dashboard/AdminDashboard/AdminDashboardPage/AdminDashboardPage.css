@@ -1,0 +1,102 @@
+.sd-achievements {
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: flex-end; */
+  margin: 1rem 0;
+  border-radius: 15px;
+}
+
+.sd-achievements .sd-achievement-item {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 1rem;
+  background-color: white;
+  height: 150px;
+}
+
+.sd-achievements .sd-achievement-item .achievement-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding: 0.3rem;
+}
+
+.sd-achievements .sd-achievement-item .achievement-icon-goals {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  gap: 2%;
+}
+
+.sd-achievements .sd-achievement-item .achievement-icon-goals img {
+  width: 50%;
+  object-fit: cover;
+}
+
+.sd-achievements .sd-achievement-item .achievement-icon-goals .not-achievement {
+  filter: grayscale(100%);
+}
+
+.sd-achievements .sd-achievement-item .achievement-icon-goals p {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.sd-achievements .sd-achievement-item .achievement-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: auto;
+  align-items: center;
+}
+
+.sd-achievements .sd-achievement-item .achievement-info .achievement-info-left {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin-left: 1rem;
+}
+
+.sd-achievements
+  .sd-achievement-item
+  .achievement-info
+  .achievement-info-left
+  .achievement-number {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-left: 10px;
+}
+
+.sd-achievements
+  .sd-achievement-item
+  .achievement-info
+  .achievement-info-left
+  span {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  width: fit-content;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.sd-achievements .sd-achievement-item .achievement-info .achievement-icon {
+  width: 35%;
+  display: flex;
+  justify-content: center;
+}
+
+.sd-achievements .sd-achievement-item .achievement-info .achievement-icon img {
+  width: 80%;
+  object-fit: cover;
+  object-position: center;
+}

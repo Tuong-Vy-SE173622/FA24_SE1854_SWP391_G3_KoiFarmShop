@@ -9,6 +9,7 @@ import {
 import { CgMenuGridO, CgProfile } from "react-icons/cg";
 import { LuFish, LuUsers2 } from "react-icons/lu";
 import { GiCirclingFish } from "react-icons/gi";
+import { TbBellRinging } from "react-icons/tb";
 
 function AdminDashboardLayout() {
   const navigate = useNavigate();
@@ -17,10 +18,15 @@ function AdminDashboardLayout() {
 
   const menuItems = [
     { path: "/admin/dashboard", label: "Dashboard", icon: <RiDashboardFill /> },
+    // {
+    //   path: `/admin/profile/${account.username}`,
+    //   label: "Profile",
+    //   icon: <CgProfile />,
+    // },
     {
-      path: `/admin/profile/${account.username}`,
-      label: "Profile",
-      icon: <CgProfile />,
+      path: "/admin/notification",
+      label: "Notification",
+      icon: <TbBellRinging />,
     },
     { path: "/admin/koi-types", label: "Koi Type", icon: <GiCirclingFish /> },
     { path: "/admin/kois", label: "Koi", icon: <LuFish /> },
@@ -29,10 +35,11 @@ function AdminDashboardLayout() {
       label: "Promotion",
       icon: <RiDiscountPercentLine />,
     },
-    { path: "/admin/accounts", label: "Account", icon: <LuUsers2 /> },
+    { path: "/admin/users", label: "Account", icon: <LuUsers2 /> },
   ];
 
   const currentMenuItem = menuItems.find((item) => item.path === pathname);
+  const handleHome = () => navigate("/");
 
   useEffect(() => {
     const isAuthenticated = localStorage.getItem("accessToken");
@@ -44,7 +51,12 @@ function AdminDashboardLayout() {
   return (
     <div className="adl-layout-container-l1">
       <div className="adl-sidebar-wrapper">
-        <img src="/logo-web/logo3.png" alt="logo" />
+        <img
+          src="/logo-web/logo3.png"
+          alt="logo"
+          style={{ cursor: "pointer" }}
+          onClick={handleHome}
+        />
         <div className="adl-menu">
           {menuItems.map(({ path, label, icon }) => (
             <div

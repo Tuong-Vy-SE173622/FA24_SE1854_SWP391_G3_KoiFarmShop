@@ -9,7 +9,7 @@ import SearchPage from "../pages/SearchPage/SearchPage";
 // import ProfilePage from "../pages/Dashboard/CustomerDashboard/ProfilePage/ProfilePage";
 import CustomerDashboardLayout from "../pages/DashboardLayout/customer/CustomerDashboardLayout";
 import KoiBoughtPage from "../pages/Dashboard/CustomerDashboard/KoiBoughtPage/KoiBoughtPage";
-import DepositedKoiPage from "../pages/Dashboard/CustomerDashboard/DepositedKoiPage/DepositedKoiPage";
+// import DepositedKoiPage from "../pages/Dashboard/CustomerDashboard/DepositedKoiPage/DepositedKoiPage";
 import ScrollToTop from "../components/ScrollTop/ScrollToTop";
 import CompareBar from "../components/CompareBar/CompareBar";
 import ComparePage from "../pages/ComparePage/ComparePage";
@@ -18,18 +18,33 @@ import AdminDashboardPage from "../pages/Dashboard/AdminDashboard/AdminDashboard
 import KoiPage from "../pages/Dashboard/AdminDashboard/KoiPage.jsx/KoiPage";
 import KoiTypePage from "../pages/Dashboard/AdminDashboard/KoiTypePage/KoiTypePage";
 import PromotionPage from "../pages/Dashboard/AdminDashboard/PromotionPage/PromotionPage";
-import AccountPage from "../pages/Dashboard/AdminDashboard/AccountPage/AccountPage";
+// import AccountPage from "../pages/Dashboard/AdminDashboard/AccountPage/AccountPage";
 import ProfilePage from "../pages/Dashboard/ProfilePage/ProfilePage";
+import CareRequest from "../pages/Dashboard/CustomerDashboard/CareRequestForm/CareRequestForm";
+import ConsignmentRequestForm from "../pages/Dashboard/CustomerDashboard/ConsignmentRequestForm/ConsignmentRequestForm";
+import ConsignmentDetail from "../pages/Dashboard/CustomerDashboard/ConsignmentDetail/ConsignmentDetail";
+import CareRequestForm from "../pages/Dashboard/CustomerDashboard/CareRequestForm/CareRequestForm";
+import CareRequestDetailForm from "../pages/Dashboard/CustomerDashboard/CareRequestDetailForm/CareRequestDetailForm";
+// import { CartProvider } from "../contexts/CartContext";
+import CartPage from "../pages/CartPage/CartPage";
+import { CartProvider } from "../contexts/CartContext";
+import UserPage from "../pages/Dashboard/AdminDashboard/UserPage/UserPage";
+import Test from "../pages/test";
+import ProtectedRoute from "./ProtectedRoute";
+import NotAuthorized from "../pages/NotAuthorized/NotAuthorized";
+import NotificationPage from "../pages/Dashboard/AdminDashboard/NotificationPage/NotificationPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
-        <ScrollToTop />
-        <Header />
-        <Outlet />
-        <Footer />
+        <CartProvider>
+          <ScrollToTop />
+          <Header />
+          <Outlet />
+          <Footer />
+        </CartProvider>
       </>
     ),
     children: [
@@ -43,7 +58,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/koi-detail/:id",
+        path: "/koi-detail/:KoiID",
         element: <KoiDetailPage />,
       },
       {
@@ -59,15 +74,31 @@ export const router = createBrowserRouter([
         path: "/compare",
         element: <ComparePage />,
       },
+      {
+        path: "/cart",
+        element: <CartPage />,
+      },
+      {
+        path: "/cart",
+        element: <CartPage />,
+      },
+      {
+        path: "/test",
+        element: <Test />,
+      },
     ],
   },
   {
     path: "/dashboard",
     element: (
       <>
-        <ScrollToTop />
-        <Header />
-        <CustomerDashboardLayout />
+        <ProtectedRoute allowedRoles={"Customer"}>
+          <CartProvider>
+            <ScrollToTop />
+            <Header />
+            <CustomerDashboardLayout />
+          </CartProvider>
+        </ProtectedRoute>
       </>
     ),
     children: [
@@ -80,14 +111,32 @@ export const router = createBrowserRouter([
         element: <KoiBoughtPage />,
       },
       {
-        path: "deposite",
-        element: <DepositedKoiPage />,
+        path: "care-request",
+        element: <CareRequestForm />,
+      },
+      {
+        path: "care-request-detail/:careRequestID",
+        element: <CareRequestDetailForm />,
+      },
+      {
+        path: "consignment-request",
+        element: <ConsignmentRequestForm />,
+      },
+      {
+        path: "consignment-detail/:consignmentId",
+        element: <ConsignmentDetail />,
       },
     ],
   },
   {
     path: "/admin",
-    element: <AdminDashboardLayout />,
+    element: (
+      <>
+        <ProtectedRoute allowedRoles={"Admin"}>
+          <AdminDashboardLayout />
+        </ProtectedRoute>
+      </>
+    ),
     children: [
       {
         path: "dashboard",
@@ -110,8 +159,12 @@ export const router = createBrowserRouter([
         element: <PromotionPage />,
       },
       {
-        path: "accounts",
-        element: <AccountPage />,
+        path: "users",
+        element: <UserPage />,
+      },
+      {
+        path: "notification",
+        element: <NotificationPage />,
       },
     ],
   },
@@ -123,4 +176,5 @@ export const router = createBrowserRouter([
     path: "/register",
     element: <RegisterPage />,
   },
+  { path: "/not-authorized", element: <NotAuthorized /> },
 ]);

@@ -166,6 +166,7 @@ function HomePage() {
 
   const fetchKoi = async (page) => {
     const params = {
+      IsActive: true,
       PageNumber: 1,
       PageSize: 8,
     };
@@ -375,44 +376,6 @@ function HomePage() {
             </div>
           ))}
         </div>
-        {/* <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 "
-          style={{
-            marginTop: "1.5rem",
-            width: "65%",
-          }}
-        >
-          {posts.map((post) => (
-            <div
-              key={post.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden"
-            >
-              <img
-                src={post.image}
-                alt={post.title}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
-                <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                <div className="flex justify-between items-center text-sm text-gray-500">
-                  <span>{post.author}</span>
-                  <span>{post.date}</span>
-                </div>
-                <div className="mt-4 flex justify-between items-center">
-                  <button className="text-blue-600 hover:text-blue-800">
-                    Read More
-                  </button>
-                  <div className="flex space-x-2">
-                    <button className="text-gray-600 hover:text-blue-600">
-                      <FaShare />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div> */}
       </section>
     </main>
   );

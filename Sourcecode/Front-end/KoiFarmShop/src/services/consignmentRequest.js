@@ -94,3 +94,44 @@ export const createConsignmentRequest = async (requestData) => {
     throw error;
   }
 };
+
+export const approveConsignmentRequest = async (consignmentId, isApproved) => {
+  const formData = new FormData();
+  formData.append("ConsignmentId", consignmentId);
+  formData.append("IsActive", isApproved ? "true" : "false");
+  formData.append("Status", isApproved ? "approved" : "rejected");
+
+  try {
+    const token = localStorage.getItem("accessToken");
+    const res = await api.put(
+      "/api/ConsignmentRequest/approve-consignment-request",
+      formData,
+      {
+        headers: {
+          accept: "text/plain",
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return res.data;
+  } catch (error) {
+    console.error("API call failed:", error);
+    return null;
+  }
+};
+
+export const getConsignmentRequestPending = async () => {
+  try {
+    const token = localStorage.getItem("accessToken");
+    const res = await api.get("/api/ConsignmentRequest?Status=pending", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.error("Error fetching Consignment Request Pending data:", err);
+    throw err;
+  }
+};

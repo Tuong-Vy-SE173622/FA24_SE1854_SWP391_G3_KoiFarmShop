@@ -295,7 +295,7 @@ function ConsignmentRequestForm() {
     console.log("Fetching koi list...");
     setLoading(true);
     try {
-      const userId = localStorage.getItem("customerId");
+      const userId = localStorage.getItem("userID");
       console.log("User ID:", userId);
 
       const response = await getKoiByCustomerId(userId);

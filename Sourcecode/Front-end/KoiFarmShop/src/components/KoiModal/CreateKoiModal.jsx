@@ -105,8 +105,8 @@ const CreateKoiForm = ({ visible, onCancel, onSuccess }) => {
           rules={[{ required: true, message: "Vui lòng chọn giới tính" }]}
         >
           <Select placeholder="Chọn giới tính">
-            <Option value={1}>Đực</Option>
-            <Option value={2}>Cái</Option>
+            <Option value={0}>Đực</Option>
+            <Option value={1}>Cái</Option>
           </Select>
         </Form.Item>
         <Form.Item

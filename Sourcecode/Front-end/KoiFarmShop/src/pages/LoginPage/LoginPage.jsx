@@ -175,7 +175,8 @@ function LoginPage() {
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
       localStorage.setItem("roles", JSON.stringify(userRole));
-      localStorage.setItem("account", JSON.stringify(userData)); // Lưu role đã chuyển đổi
+      localStorage.setItem("account", JSON.stringify(userData));
+      localStorage.setItem("userID", JSON.stringify(userData.userId)); // Lưu role đã chuyển đổi
 
       // Modal.success({
       //   title: "Đăng nhập thành công!",

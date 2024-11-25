@@ -50,26 +50,48 @@ export const getKoiPending = async () => {
   }
 };
 
-export const createKoi = async (koiData) => {
+// export const createKoi = async (koiData) => {
+//   try {
+//     const token = localStorage.getItem("accessToken");
+//     if (!token) {
+//       throw new Error("Access token not found. Please login first.");
+//     }
+
+//     const formData = new FormData();
+//     formData.append("Size", koiData.size);
+//     formData.append("Gender", koiData.gender);
+//     formData.append("Origin", koiData.origin);
+//     formData.append("Price", koiData.price);
+//     formData.append("IsImported", koiData.isImported || "");
+//     formData.append("Note", koiData.note || "");
+//     formData.append("Certificate", koiData.certificate); // Dữ liệu tệp
+//     formData.append("Generation", koiData.generation || "");
+//     formData.append("Characteristics", koiData.characteristics || "");
+//     formData.append("KoiTypeId", koiData.KoiTypeId);
+//     formData.append("Image", koiData.image); // Dữ liệu ảnh
+//     formData.append("Age", koiData.age);
+
+//     const res = await api.post("/api/Koi/for-customer", formData, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//         "Content-Type": "multipart/form-data",
+//       },
+//     });
+
+//     console.log("Koi created successfully:", res.data);
+//     return res.data;
+//   } catch (err) {
+//     console.error("Error creating koi:", err.response?.data || err.message);
+//     throw err;
+//   }
+// };
+
+export const createKoi = async (formData) => {
   try {
     const token = localStorage.getItem("accessToken");
     if (!token) {
       throw new Error("Access token not found. Please login first.");
     }
-
-    const formData = new FormData();
-    formData.append("Size", koiData.size);
-    formData.append("Gender", koiData.gender);
-    formData.append("Origin", koiData.origin);
-    formData.append("Price", koiData.price);
-    formData.append("IsImported", koiData.isImported || "");
-    formData.append("Note", koiData.note || "");
-    formData.append("Certificate", koiData.certificate); // Dữ liệu tệp
-    formData.append("Generation", koiData.generation || "");
-    formData.append("Characteristics", koiData.characteristics || "");
-    formData.append("KoiTypeId", koiData.KoiTypeId);
-    formData.append("Image", koiData.image); // Dữ liệu ảnh
-    formData.append("Age", koiData.age);
 
     const res = await api.post("/api/Koi/for-customer", formData, {
       headers: {

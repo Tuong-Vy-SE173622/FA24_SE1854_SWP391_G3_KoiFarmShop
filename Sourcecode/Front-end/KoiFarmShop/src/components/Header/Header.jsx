@@ -324,18 +324,18 @@ function Header() {
     }
   };
 
-  useEffect(() => {
-    const fetchKoiType = async () => {
-      try {
-        const data = await getAllKoiType();
-        setKoiTypeLs(data);
-      } catch (err) {
-        console.error("Failed to fetch Koi types", err);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchKoiType = async () => {
+  //     try {
+  //       const data = await getAllKoiType();
+  //       setKoiTypeLs(data);
+  //     } catch (err) {
+  //       console.error("Failed to fetch Koi types", err);
+  //     }
+  //   };
 
-    fetchKoiType();
-  }, []);
+  //   fetchKoiType();
+  // }, []);
 
   return (
     <header>
@@ -366,7 +366,7 @@ function Header() {
                 </ul>
               )}
             </div>
-            <div
+            {/* <div
               className="header-item"
               onMouseEnter={() => handleMouseEnter("koi")}
               onMouseLeave={handleMouseLeave}
@@ -381,7 +381,7 @@ function Header() {
                   ))}
                 </ul>
               )}
-            </div>
+            </div> */}
           </div>
           <div className="header-search">
             <div className={`search ${isInputVisible ? "show-input" : ""}`}>
